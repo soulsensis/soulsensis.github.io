@@ -1,23 +1,84 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>soulsensis</title>
-<style>body{margin:0;background:#000;color:#F5F2EA;font:17px/1.6 Montserrat,Helvetica,Arial,sans-serif}
-main{max-width:640px;margin:0 auto;padding:72px 20px}h1{font-weight:300;letter-spacing:.06em;margin:0 0 4px}
-.rule{width:48px;height:2px;background:#E63946;margin:18px 0 28px}a{color:#E63946}
-.links{display:flex;flex-direction:column;gap:12px;margin:28px 0 36px}
-.link{display:block;padding:16px 20px;border:1px solid #F5F2EA;border-radius:10px;color:#F5F2EA!important;text-decoration:none;text-align:center;letter-spacing:.04em}
-.link:hover{border-color:#E63946;color:#E63946!important}
-.small{font-size:14px}</style></head>
+<meta name="description" content="Narrated philosophical essays on attention, wanting, letting go and becoming yourself. Written by a human.">
+<meta property="og:title" content="soulsensis">
+<meta property="og:description" content="Essays on attention, wanting, letting go and becoming yourself. Written by a human, read aloud.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--paper:#F5F2EA;--muted:rgba(245,242,234,.62);--red:#E63946;--line:rgba(245,242,234,.18)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--paper)}
+body{font:400 17px/1.65 Montserrat,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(230,57,70,.10),transparent 70%),var(--ink)}
+main{max-width:560px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mark{width:148px;height:148px;margin:0 auto 28px;display:block}
+.mark .petals{transform-origin:360px 360px;animation:turn 90s linear infinite}
+.mark .dots circle{animation:breathe 6s ease-in-out infinite}
+.mark .dots circle:nth-child(2n){animation-delay:3s}
+@keyframes turn{to{transform:rotate(360deg)}}
+@keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mark .petals,.mark .dots circle{animation:none}}
+h1{font-weight:300;font-size:46px;letter-spacing:.08em;margin:0;line-height:1.1}
+.rule{width:44px;height:2px;background:var(--red);margin:22px auto 26px}
+.lead{font-size:21px;font-weight:300;line-height:1.5;margin:0 0 10px}
+.lead em{font-style:normal;color:var(--red)}
+.sub{color:var(--muted);margin:0 0 36px;font-size:15px;letter-spacing:.02em}
+.links{display:flex;flex-direction:column;gap:12px;margin:0 0 44px}
+.link{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid var(--line);border-radius:14px;
+  color:var(--paper);text-decoration:none;text-align:left;background:rgba(245,242,234,.03);
+  transition:border-color .2s,background .2s,transform .2s}
+.link:hover,.link:focus-visible{border-color:var(--red);background:rgba(230,57,70,.08);transform:translateY(-1px);outline:none}
+.link svg{flex:none;width:26px;height:26px}
+.link b{display:block;font-weight:500;letter-spacing:.02em}
+.link span{display:block;font-size:14px;color:var(--muted)}
+.link .go{margin-left:auto;color:var(--red);font-size:20px}
+.themes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 44px;padding:0;list-style:none}
+.themes li{font-size:13px;letter-spacing:.04em;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+footer{font-size:13px;color:var(--muted);line-height:2}
+footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--red);border-color:var(--red)}
+@media (max-width:420px){h1{font-size:38px}.lead{font-size:19px}}
+</style></head>
 <body><main>
+
+<svg class="mark" viewBox="0 0 720 720" role="img" aria-label="soulsensis mark">
+<g class="petals" fill="none" stroke="#F5F2EA" stroke-width="5">
+<circle cx="360" cy="360" r="169.2"/><circle cx="360" cy="190.8" r="169.2"/><circle cx="506.53" cy="275.4" r="169.2"/>
+<circle cx="506.53" cy="444.6" r="169.2"/><circle cx="360" cy="529.2" r="169.2"/><circle cx="213.47" cy="444.6" r="169.2"/>
+<circle cx="213.47" cy="275.4" r="169.2"/>
+<g class="dots" fill="#E63946" stroke="none">
+<circle cx="653.06" cy="360" r="22"/><circle cx="506.53" cy="613.8" r="22"/><circle cx="213.47" cy="613.8" r="22"/>
+<circle cx="66.94" cy="360" r="22"/><circle cx="213.47" cy="106.2" r="22"/><circle cx="506.53" cy="106.2" r="22"/>
+</g></g></svg>
+
 <h1>soulsensis</h1>
 <div class="rule"></div>
-<p>Narrated philosophical essays, written by a human, on attention, wanting, letting go and becoming yourself.</p>
-<p>soulsensis studio is the writer's own small production tool. It turns finished essays into videos and posts them to the soulsensis YouTube and Instagram accounts. It is not offered to anyone else.</p>
-<nav class="links">
-<a class="link" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA">YouTube — full essays</a>
-<a class="link" href="https://www.instagram.com/soulsensis/">Instagram</a>
-<a class="link" href="https://medium.com/@soulsensis">Medium — the essays in writing</a>
+<p class="lead">Essays on attention, wanting, letting go and <em>becoming yourself</em>.</p>
+<p class="sub">Written by a human. Read aloud, slowly.</p>
+
+<nav class="links" aria-label="Where to find soulsensis">
+<a class="link" href="https://www.youtube.com/@soulsensis">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#E63946" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z"/><path fill="#000" d="M9.8 15.3 15.6 12 9.8 8.7z"/></svg>
+<div><b>Watch on YouTube</b><span>The full essays, narrated</span></div><span class="go">→</span></a>
+<a class="link" href="https://www.instagram.com/soulsensis/">
+<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="#E63946" stroke="none"/></svg>
+<div><b>Instagram</b><span>Short reflections and Reels</span></div><span class="go">→</span></a>
+<a class="link" href="https://medium.com/@soulsensis">
+<svg viewBox="0 0 24 24" aria-hidden="true" fill="#F5F2EA"><ellipse cx="7" cy="12" rx="6" ry="6.2"/><ellipse cx="17" cy="12" rx="3" ry="5.8"/><ellipse cx="22" cy="12" rx="1.1" ry="5.2"/></svg>
+<div><b>Read on Medium</b><span>The essays in writing</span></div><span class="go">→</span></a>
 </nav>
-<p class="small"><a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms</a></p>
-<p>Contact: soulsensis@gmail.com</p>
+
+<p class="label">What the essays explore</p>
+<ul class="themes">
+<li>perception &amp; attention</li><li>responsibility, not blame</li><li>letting go</li><li>the shadow</li>
+<li>heart over mind</li><li>simplicity &amp; stillness</li><li>soul &amp; meaning</li><li>the courage to begin</li><li>gratitude</li>
+</ul>
+
+<footer>
+<a href="mailto:soulsensis@gmail.com">soulsensis@gmail.com</a><br>
+<a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="studio.html">Studio</a>
+</footer>
 </main></body></html>
