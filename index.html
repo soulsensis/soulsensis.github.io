@@ -55,6 +55,13 @@ h1 { margin: 0; font-weight: 200; font-size: clamp(56px, 11vw, 148px); line-heig
 .btn.primary { background: var(--heart); color: #fff; box-shadow: 0 0 0 0 rgba(230,57,70,.5); }
 .btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
 .btn.quiet { border: 1px solid #3a3a42; }
+.signup { display: flex; gap: 10px; width: min(460px, 100%); padding: 6px; border: 1px solid #3a3a42; border-radius: 999px; background: rgba(10,10,12,.7); transition: border-color .25s ease; }
+.signup:focus-within { border-color: var(--ink); }
+.signup input { flex: 1; min-width: 0; background: none; border: 0; color: var(--ink); font: inherit; font-size: 16px; padding: 0 18px; outline: none; }
+.signup input::placeholder { color: var(--muted); }
+.signup .btn { min-height: 46px; flex: none; }
+.fine { margin: 0; font-size: 12px; color: var(--muted); letter-spacing: .02em; text-align: center; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .btn.quiet:hover { border-color: var(--ink); }
 .scroll { position: absolute; bottom: calc(26px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); width: 1px; height: 46px; background: linear-gradient(var(--ink), transparent); opacity: .5; animation: drip 2.4s ease-in-out infinite; }
 @keyframes drip { 0%,100% { transform: translateX(-50%) scaleY(.4); transform-origin: top; } 50% { transform: translateX(-50%) scaleY(1); transform-origin: top; } }
@@ -116,7 +123,7 @@ footer { border-top: 1px solid var(--line); padding-block: 36px calc(36px + env(
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 
-.rise { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.rise { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
 .rise.on { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .draw *, .rise, .slow, .scroll, .cover img, .typed::after { transition: none !important; animation: none !important; }
@@ -173,8 +180,13 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
       <p class="soon rise">Coming soon</p>
       <h2 class="rise">Ask soulsensis</h2>
       <p class="bubble rise"><span id="typed" class="typed"></span></p>
-      <p class="reading rise" style="text-align:center;max-width:46ch">An AI version of the creator, built from his own writing. Tell it what's going on; it names the real problem and tells you straight what to do. Private by design. A$5 a month.</p>
-      <a class="btn quiet rise" href="https://soulsensis.substack.com">Be first in: join the letters</a>
+      <p class="reading rise" style="text-align:center;max-width:46ch">An AI version of the creator, built from the creator's own writing. Tell it what's going on; it names the real problem and tells you straight what to do. Private by design. A$5 a month.</p>
+      <form class="signup rise" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post" target="_blank">
+        <label for="email" class="vh">Your email</label>
+        <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email">
+        <button class="btn primary" type="submit">Be first in</button>
+      </form>
+      <p class="fine rise">One essay a week, and first access to Ask soulsensis. Free. Unsubscribe any time.</p>
     </div>
   </section>
 
@@ -211,7 +223,7 @@ for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) li
 pts.forEach((p) => circle(M, p[0], p[1], mr));
 
 // reveal on scroll: draw the geometry, raise the text
-const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: 0.18 });
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: 0, rootMargin: "0px 0px -6% 0px" });
 document.querySelectorAll(".draw, .rise").forEach((el) => io.observe(el));
 // the hero draws immediately
 requestAnimationFrame(() => document.querySelectorAll(".hero .draw, .hero .rise").forEach((el, i) => setTimeout(() => el.classList.add("on"), i * 90)));
