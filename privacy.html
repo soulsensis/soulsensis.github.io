@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Privacy · soulsensis</title>
-<meta name="description" content="How soulsensis.com, the letters, Ask soulsensis and the soulsensis studio tool handle your data. No cookies, no tracking, nothing sold.">
+<meta name="description" content="How soulsensis.com, the letters, Ask soulsensis and the soulsensis studio tool, including its YouTube, TikTok, Instagram and Facebook connections, handle your data. No cookies, no tracking, nothing sold.">
 <link rel="canonical" href="https://soulsensis.com/privacy.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="soulsensis">
 <meta property="og:url" content="https://soulsensis.com/privacy.html">
 <meta property="og:title" content="Privacy · soulsensis">
-<meta property="og:description" content="How soulsensis.com, the letters, Ask soulsensis and the soulsensis studio tool handle your data. No cookies, no tracking, nothing sold.">
+<meta property="og:description" content="How soulsensis.com, the letters, Ask soulsensis and the soulsensis studio tool, including its YouTube, TikTok, Instagram and Facebook connections, handle your data. No cookies, no tracking, nothing sold.">
 <meta property="og:image" content="https://soulsensis.com/book-cover.jpg">
 <meta property="og:image:alt" content="The cover of Sit Still Enough to Hear It, by soulsensis">
 <meta name="twitter:card" content="summary">
@@ -78,7 +78,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 <a class="skip" href="#main">Skip to the text</a>
 <nav id="nav" class="g" aria-label="Main"><div class="wrap">
   <a class="mark" href="index.html" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="4"><circle r="20"/><circle cx="20" r="20"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/></g><circle r="5" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="index.html#book">The book</a><a href="essays.html">Essays</a><a class="far" href="index.html#ask">Ask</a><a class="far" href="index.html#ways">Watch</a></div>
+  <div class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a class="far" href="index.html#ask">Ask</a><a class="far" href="index.html#ways">Watch</a></div>
 </div></nav>
 
 <main id="main">
@@ -88,35 +88,39 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
       <p class="label rise">Privacy</p>
       <h1 class="rise">Nothing about you is kept that doesn't need to be</h1>
       <p class="lede rise">No cookies, no tracking, no selling. What little is collected, and why, in plain words.</p>
-      <p class="date rise">Last updated 24 October 2026</p>
+      <p class="date rise">Last updated 25 October 2026 (draft)</p>
     </div></div>
   </header>
   <section class="prose g"><div class="wrap"><div class="text">
 <h2>This website</h2>
 <p>soulsensis.com is a plain website. It sets no cookies and runs no analytics or tracking. The only thing it ever asks of you is an email address, if you choose to sign up for the letters. That form goes to Substack, which sends the emails and keeps the list; Substack's own <a href="https://substack.com/privacy">privacy policy</a> covers how they handle it. Every email has an unsubscribe link, and unsubscribing removes you from the list.</p>
-<p>Ask soulsensis, the chat at soulsensis.com/ask, has its own <a href="ask/privacy.html">privacy page</a>. The short version: no name, no email, encrypted conversations that nobody reads, and a delete-everything button.</p>
+<p>Ask soulsensis, the chat coming to soulsensis.com/ask, will have its own privacy page when it opens. The short version: no name, no email, encrypted conversations that nobody reads, and a delete-everything button.</p>
 <h2>soulsensis studio</h2>
-<p>soulsensis studio is a private desktop tool used only by the soulsensis writer to publish their own videos to their own YouTube channel and Instagram account. It has no other users.</p>
+<p>soulsensis studio is a private desktop tool used by the soulsensis writer, one person, to publish their own videos and Shorts, after approving each one, to their own accounts: the soulsensis YouTube channel, the soulsensis TikTok account, and the soulsensis Instagram and Facebook accounts. It has no other users, no public sign-up and no advertising. This page covers the tool and every account it connects to.</p>
 <h2>YouTube API Services</h2>
 <p>soulsensis studio uses YouTube API Services. By using it, its user agrees to be bound by the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>, and Google's handling of data is described in the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
-<h2>What it accesses</h2>
-<p>With the account owner's permission (Google sign-in), the tool uses the YouTube Data API to upload the owner's videos, set their titles, descriptions, thumbnails, captions and playlists, schedule when they go public, and post the first comment on them. It reads only what it needs to do this, such as the channel's own playlists.</p>
+<h2>What the tool accesses</h2>
+<p><strong>YouTube.</strong> With the account owner's permission (Google sign-in) the tool uploads the owner's own videos, sets their titles, descriptions, thumbnails, captions and playlists, schedules when they go public, and posts the first comment on them. It reads the channel's own playlists and the channel's own view and retention figures for the owner's videos. Scopes: youtube.upload, youtube.readonly and youtube.force-ssl.</p>
+<p><strong>TikTok.</strong> With the account owner's permission (TikTok sign-in) the tool sends the owner's own Short to the owner's own TikTok account, as a draft in the TikTok inbox or as a post the owner has just approved. It reads the account's display name and the posting options TikTok offers it. It does not read the owner's feed, messages, followers or any other person's data.</p>
+<p><strong>Instagram and Facebook.</strong> With the account owner's permission the tool publishes the owner's own Reels and Shorts to the owner's own Instagram professional account and Facebook Page, and nothing else.</p>
 <h2>What it stores</h2>
-<p>The sign-in token is stored only on the owner's own computer, in a private settings file. Nothing is sent to any server run by soulsensis. No data about viewers or any other person is collected, stored, sold or shared.</p>
+<p>Sign-in tokens are stored only on the owner's own computer, in a private settings file. The tool keeps the ids and links of the videos and posts it created on the owner's own accounts (so later videos join the same playlists and each Short can link to its full essay), and a log of what was sent and when. Nothing is sent to any server run by soulsensis. No data about viewers or any other person is collected, stored, sold or shared. The tool shows no advertising and builds no profile of anyone.</p>
 <h2>Google user data</h2>
-<p>soulsensis studio's use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. The data is used only to publish the owner's own content, never for advertising, and is never transferred to anyone else.</p>
+<p>soulsensis studio's use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. The data is used only to publish the owner's own content, never for advertising, never to train generalised AI or machine-learning models, and is never transferred to anyone else.</p>
+<h2>TikTok and Meta data</h2>
+<p>Information received from TikTok, Instagram and Facebook is used only to publish the owner's own content to the owner's own accounts and to show whether a post went through. It is not sold, shared or used for advertising. Use of those services is subject to their own terms and policies: the <a href="https://www.tiktok.com/legal/page/global/terms-of-service/en">TikTok Terms of Service</a> and <a href="https://www.tiktok.com/legal/page/global/privacy-policy/en">Privacy Policy</a>, and the <a href="https://privacycenter.instagram.com/policy">Instagram</a> and <a href="https://www.facebook.com/privacy/policy/">Facebook</a> privacy policies.</p>
 <h2>Cookies</h2>
-<p>soulsensis studio is a desktop tool; it places no cookies and uses no tracking of any kind.</p>
+<p>soulsensis studio is a desktop tool; it places no cookies and uses no tracking of any kind. This website sets none either.</p>
 <h2>Removing access and deleting data</h2>
-<p>Access can be removed at any time at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>; the stored token can then no longer be used. The token can also be deleted at any time by removing it from the tool's settings file on the owner's computer. Besides the token, the tool keeps only the ids and links of the videos and playlists it created on the owner's own channel (so later videos join the same playlists and each Short can link to its full essay); deleting the tool's data folder deletes them.</p>
+<p>Access can be removed at any time: Google at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>, TikTok under Settings and privacy, Security and permissions, Apps and services, and Instagram and Facebook under Settings, Apps and websites. Once access is removed the stored token can no longer be used, and the tool deletes data it received from that service within seven days. The token can also be deleted at any time by removing it from the tool's settings file on the owner's computer, and deleting the tool's data folder deletes everything else it keeps. To ask for deletion, write to the address below; it is done within seven days. Deleting the tool's data does not delete the videos already published on the platforms themselves.</p>
 <h2>Contact</h2>
-<p><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> or <a href="mailto:soulsensis@gmail.com">soulsensis@gmail.com</a></p>
+<p>Questions about privacy: <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a>, or through the <a href="https://soulsensis.substack.com" rel="noopener">soulsensis letters on Substack</a>.</p>
   </div></div></section>
 </main>
 
 <footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span><a href="essays.html">Essays</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+  <span><a href="book.html">The book</a> · <a href="essays.html">Essays</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters on Substack</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
 </div></footer>
 <script>
 const NS = "http://www.w3.org/2000/svg";
