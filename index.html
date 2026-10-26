@@ -391,5 +391,20 @@ if (matchMedia("(prefers-reduced-motion: reduce)").matches) typed.textContent = 
 // video: load the player only when asked (no YouTube cookies before a click)
 document.querySelectorAll("a.video[data-id]").forEach((a) => a.addEventListener("click", (ev) => { ev.preventDefault(); const f = document.createElement("iframe"); f.src = "https://www.youtube-nocookie.com/embed/" + a.dataset.id + "?autoplay=1&rel=0"; f.title = a.getAttribute("aria-label") || "Video"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true; a.replaceChildren(f); a.removeAttribute("href"); }));
 </script>
+<script>
+// Send each reader to their own Amazon (local price, local printing and shipping). Same ASINs everywhere.
+(function () {
+  var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""), l = (navigator.language || "").toLowerCase(), s = "";
+  if (tz.indexOf("Australia/") === 0) s = "com.au";
+  else if (tz === "Pacific/Auckland") s = "com.au";
+  else if (tz === "Europe/London" || l === "en-gb") s = "co.uk";
+  else if (tz.indexOf("America/") === 0 && /toronto|vancouver|edmonton|winnipeg|halifax|regina|st_johns/i.test(tz)) s = "ca";
+  else if (l.indexOf("de") === 0) s = "de";
+  if (!s) return;
+  document.querySelectorAll('a[href*="amazon.com/dp/"], [data-amazon-url*="amazon.com/dp/"]').forEach(function (a) {
+    ["href", "data-amazon-url"].forEach(function (k) { var v = a.getAttribute(k); if (v) a.setAttribute(k, v.replace("amazon.com/dp/", "amazon." + s + "/dp/")); });
+  });
+})();
+</script>
 </body>
 </html>

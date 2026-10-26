@@ -27,7 +27,7 @@
 <link rel="alternate" type="application/rss+xml" title="soulsensis essays" href="https://soulsensis.com/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
 <link rel="stylesheet" href="/site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The simplest things", "description": "The simplest things are the most complex things to do. I learned that in the dark stretch, when I could not see a way out.", "url": "https://soulsensis.com/essays/the-simplest-things/", "image": "https://soulsensis.com/og/the-simplest-things.jpg", "inLanguage": "en", "author": {"@type": "Person", "@id": "https://soulsensis.com/#author", "name": "soulsensis", "url": "https://soulsensis.com/", "sameAs": ["https://www.youtube.com/@soulsensis", "https://www.instagram.com/soulsensis/", "https://soulsensis.substack.com", "https://medium.com/@soulsensis"]}, "isPartOf": {"@type": "Book", "name": "Sit Still Enough to Hear It", "url": "https://soulsensis.com/book.html"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The simplest things", "description": "The simplest things are the most complex things to do. I learned that in the dark stretch, when I could not see a way out.", "url": "https://soulsensis.com/essays/the-simplest-things/", "image": "https://soulsensis.com/og/the-simplest-things.jpg", "inLanguage": "en", "author": {"@type": "Person", "@id": "https://soulsensis.com/#author", "name": "soulsensis", "url": "https://soulsensis.com/", "sameAs": ["https://www.youtube.com/@soulsensis", "https://www.instagram.com/soulsensis/", "https://soulsensis.substack.com", "https://www.facebook.com/profile.php?id=61595689450014", "https://www.pinterest.com/soulsensis/", "https://medium.com/@soulsensis"]}, "isPartOf": {"@type": "Book", "name": "Sit Still Enough to Hear It", "url": "https://soulsensis.com/book.html"}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the reading</a>
@@ -70,8 +70,23 @@
 </main>
 <footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span><a href="/essays.html">Read</a> · <a href="/book.html">The book</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="/app.html">Get the app</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
+  <span><a href="/essays.html">Read</a> · <a href="/book.html">The book</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="/app.html">Get the app</a> · <a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61595689450014" rel="noopener">Facebook</a> · <a href="https://www.pinterest.com/soulsensis/" rel="noopener">Pinterest</a> · <a href="https://medium.com/@soulsensis" rel="noopener">Medium</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
 </div></footer>
+<script>
+// Send each reader to their own Amazon (local price, local printing and shipping). Same ASINs everywhere.
+(function () {
+  var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""), l = (navigator.language || "").toLowerCase(), s = "";
+  if (tz.indexOf("Australia/") === 0) s = "com.au";
+  else if (tz === "Pacific/Auckland") s = "com.au";
+  else if (tz === "Europe/London" || l === "en-gb") s = "co.uk";
+  else if (tz.indexOf("America/") === 0 && /toronto|vancouver|edmonton|winnipeg|halifax|regina|st_johns/i.test(tz)) s = "ca";
+  else if (l.indexOf("de") === 0) s = "de";
+  if (!s) return;
+  document.querySelectorAll('a[href*="amazon.com/dp/"], [data-amazon-url*="amazon.com/dp/"]').forEach(function (a) {
+    ["href", "data-amazon-url"].forEach(function (k) { var v = a.getAttribute(k); if (v) a.setAttribute(k, v.replace("amazon.com/dp/", "amazon." + s + "/dp/")); });
+  });
+})();
+</script>
 <script>
 document.querySelectorAll("a.video[data-id]").forEach((a) => a.addEventListener("click", (ev) => {
   ev.preventDefault(); const f = document.createElement("iframe");
