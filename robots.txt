@@ -1,24 +1,34 @@
 User-agent: *
 Allow: /
+Disallow: /free/
 
 # AI assistants and AI search: welcome to read and cite the essays.
 User-agent: GPTBot
 Allow: /
+Disallow: /free/
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /free/
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /free/
 User-agent: ClaudeBot
 Allow: /
+Disallow: /free/
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /free/
 User-agent: PerplexityBot
 Allow: /
+Disallow: /free/
 User-agent: Google-Extended
 Allow: /
+Disallow: /free/
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /free/
 User-agent: Bingbot
 Allow: /
+Disallow: /free/
 
 Sitemap: https://soulsensis.com/sitemap.xml
