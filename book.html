@@ -37,14 +37,14 @@
    "genre": ["Essays", "Philosophy", "Personal growth"],
    "abstract": "Twenty-three pieces in six chapters, written from inside the experience and not from above it: comparison, wanting, the job that hollows you out, the shadow, blame, attention, and the quiet work of becoming yourself. It never tells you that you are broken. It argues the opposite.",
    "workExample": [
-    { "@type": "Book", "bookFormat": "https://schema.org/EBook", "name": "Sit Still Enough to Hear It (Kindle)",
+    { "@type": "Book", "bookFormat": "https://schema.org/EBook", "name": "Sit Still Enough to Hear It (Kindle)", "url": "https://www.amazon.com/dp/B0HN3111SJ", "identifier": {"@type": "PropertyValue", "propertyID": "ASIN", "value": "B0HN3111SJ"},
       "offers": [
-       { "@type": "Offer", "price": "9.99", "priceCurrency": "AUD", "availability": "https://schema.org/PreOrder" },
-       { "@type": "Offer", "price": "6.99", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } ] },
-    { "@type": "Book", "bookFormat": "https://schema.org/Paperback", "isbn": "9798164528553", "name": "Sit Still Enough to Hear It (paperback)",
+       { "@type": "Offer", "price": "9.99", "priceCurrency": "AUD", "availability": "https://schema.org/InStock" },
+       { "@type": "Offer", "price": "6.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock" } ] },
+    { "@type": "Book", "bookFormat": "https://schema.org/Paperback", "isbn": "9798164528553", "name": "Sit Still Enough to Hear It (paperback)", "url": "https://www.amazon.com/dp/B0HP7RTGMH",
       "offers": [
-       { "@type": "Offer", "price": "24.99", "priceCurrency": "AUD", "availability": "https://schema.org/PreOrder" },
-       { "@type": "Offer", "price": "14.99", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" } ] }
+       { "@type": "Offer", "price": "24.99", "priceCurrency": "AUD", "availability": "https://schema.org/InStock" },
+       { "@type": "Offer", "price": "14.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock" } ] }
    ]
   },
   {
@@ -337,7 +337,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
       <div class="format rise" id="kindle">
         <div class="head"><h3>Kindle</h3><div class="price">A$9.99<small>US$6.99</small></div></div>
         <p>The whole book on your phone, Kindle or tablet. Buy it on your own country's Amazon; the price is set in your currency.</p>
-        <div class="act"><a class="btn primary" href="#letters" data-amazon-url="" data-live="Buy on Amazon" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Amazon</span></div>
+        <div class="act"><a class="btn primary" href="#letters" data-amazon-url="https://www.amazon.com/dp/B0HN3111SJ" data-live="Buy on Amazon" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Amazon</span></div>
       </div>
       <div class="format rise" id="paperback">
         <div class="head"><h3>Paperback</h3><div class="price">A$24.99<small>US$14.99</small></div></div>
@@ -398,7 +398,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 <script>
 // Buy links. Fill the data-amazon-url / data-ls-url attributes (or LINKS below) the day the pages are live;
 // until then every button leads to the email sign-up, so nothing links to a dead page.
-const LINKS = { amazon: "", ls_journal: "", ls_bundle: "" };
+const LINKS = { amazon: "https://www.amazon.com/dp/B0HP7RTGMH", ls_journal: "", ls_bundle: "" };
 document.querySelectorAll("[data-amazon-url], [data-ls-url]").forEach((a) => {
   const own = a.dataset.amazonUrl || a.dataset.lsUrl;
   const fallback = a.hasAttribute("data-amazon-url") ? LINKS.amazon : (a.closest("#bundle") ? LINKS.ls_bundle : LINKS.ls_journal);
