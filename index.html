@@ -239,7 +239,7 @@ nav .links a.letters-btn { color: #fff; background: var(--heart); border-radius:
 <a class="skip" href="#today">Skip to today's essay</a>
 <nav id="nav" class="g" aria-label="Main"><div class="wrap">
   <a class="mark" href="#top" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="4"><circle r="20"/><circle cx="20" r="20"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/></g><circle r="5" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="essays.html">Read</a><a class="far" href="book.html">The book</a><a class="far" href="#ways">Watch</a><a class="letters-btn" href="#letters">Free letters</a></div>
+  <div class="links"><a href="essays.html">Read</a><a class="far" href="book.html">The book</a><a class="far" href="#ways">Watch</a><a class="far" href="#question">Ask, free</a><a class="letters-btn" href="#letters">Free letters</a></div>
 </div></nav>
 
 <main id="top">
@@ -255,13 +255,9 @@ nav .links a.letters-btn { color: #fff; background: var(--heart); border-radius:
       <p class="eyebrow rise">Essays · narrated films · a book</p>
       <h1 class="rise">soulsensis</h1>
       <p class="lede rise">Essays on the tiredness of performing a life, and the way home to contentment.</p>
-      <form id="letters" class="signup rise" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post" target="_blank">
-        <label for="email" class="vh">Your email</label>
-        <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email">
-        <button class="btn primary" type="submit">Get the first chapter free</button>
-      </form>
-      <p class="fine rise">Join the letters and the first chapter of the book arrives in your welcome email. One essay a week, free. Or bookmark this page: a new essay lands here most days.</p>
-      <div class="ctas rise"><a class="btn quiet" href="#today">Today's essay ↓</a><a class="btn quiet" href="#start">Start here: 3 essays</a></div>
+      <div id="letters" class="signup rise embed"><iframe src="https://soulsensis.substack.com/embed" title="Get new essays by email" height="150" style="width:100%;max-width:480px;border:0;background:transparent" frameborder="0" scrolling="no" loading="lazy"></iframe></div>
+      <p class="fine rise">New essays in your inbox the day they are written. Free, unsubscribe any time. Or bookmark this page: a new essay lands here most days.</p>
+      <div class="ctas rise"><a class="btn quiet" href="#today">Today's essay ↓</a><a class="btn quiet" href="#start">Start here: 3 essays</a><a class="btn quiet" href="#question">Leave your question</a></div>
     </div></div>
     <div class="scroll" aria-hidden="true"></div>
   </div>
@@ -292,7 +288,7 @@ nav .links a.letters-btn { color: #fff; background: var(--heart); border-radius:
       <h2 class="rise">Sit Still Enough to Hear It</h2>
       <p class="reading rise">Twenty essays written from inside the experience, not from above it. Comparison, wanting, grief, the job that hollows you out, the quiet work of becoming yourself. It never tells you you're broken. It argues the opposite.</p>
       <div class="buy rise">
-        <a class="buyrow" data-buy="book" href="#letters"><div><b>The book: coming soon</b><br><span>Join the letters and get the first chapter free</span></div><span class="tag">Notify me</span></a>
+        <a class="buyrow" data-buy="book" href="#letters"><div><b>The book: coming soon</b><br><span>Join the letters to hear the day it launches</span></div><span class="tag">Notify me</span></a>
         <a class="buyrow" data-buy="bundle" href="#letters"><div><div><b>PDF + the guided journal</b><br><span>A$25 · arrives with the book</span></div><span class="tag">Notify me</span></a>
         <a class="buyrow" data-buy="journal" href="#letters"><div><div><b>The guided journal on its own</b><br><span>A$12 · the questions, with room to answer</span></div><span class="tag">Notify me</span></a>
       </div>
@@ -303,22 +299,85 @@ nav .links a.letters-btn { color: #fff; background: var(--heart); border-radius:
   <section class="g" aria-labelledby="praise-h" style="padding:56px 0"><div class="wrap" style="max-width:1040px;margin:0 auto;padding:0 16px"><p class="label" id="praise-h" style="margin:0 0 20px">What readers have said</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px"><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“This actually got to me this morning… thank you.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure></div></div></section>
   <section class="words g"><div class="wrap"><p id="words">You do not get what you want. You get who you are.</p></div></section>
 
-  <section id="ask" class="ask g">
-    <div class="art" aria-hidden="true"><svg viewBox="-460 -460 920 920"><g class="draw" id="metatron" fill="none" stroke="#F5F2EA" stroke-width="1" opacity=".5"></g></svg></div>
-    <div class="wrap inner">
-      <p class="soon rise">Coming soon</p>
-      <h2 class="rise">Ask soulsensis</h2>
-      <p class="bubble rise" aria-hidden="true"><span id="typed" class="typed"></span></p>
-      <p class="reading rise" style="text-align:center;max-width:46ch">An AI version of the writer, built from years of the writer's own words. Tell it what's going on; it names the real problem and tells you straight what to do. Private by design. A$5 a month.</p>
-      <form class="signup rise" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post" target="_blank">
-        <label for="email2" class="vh">Your email</label>
-        <input id="email2" type="email" name="email" required placeholder="Your email" autocomplete="email">
-        <button class="btn primary" type="submit">Be first in</button>
-      </form>
-      <p class="fine rise">One essay a week, and first access to Ask soulsensis. Free. Unsubscribe any time.</p>
-    </div>
-  </section>
-
+  <!--QUESTION--><style>
+.qbox{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.qbox .col{max-width:640px;margin:0 auto;padding:0 16px}
+.qbox h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.qbox p.why{margin:0 0 22px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform{display:grid;gap:14px}
+.qform label{font-size:13px;color:var(--muted);display:grid;gap:8px}
+.qform textarea,.qform input[type=email]{width:100%;box-sizing:border-box;background:#0b0b0e;border:1px solid #3a3a42;border-radius:8px;color:var(--ink);font:400 17px/1.6 var(--serif);padding:14px 16px;outline:none}
+.qform textarea{min-height:150px;resize:vertical}
+.qform input[type=email]{font:400 16px var(--sans);min-height:48px}
+.qform textarea:focus,.qform input:focus{border-color:var(--ink)}
+.qform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.qform .row{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between}
+.qform .count{font-size:12px;color:var(--muted)}
+.qform .fine{margin:0;text-align:left;font-size:13px;line-height:1.6;color:var(--muted)}
+.qform button{border:0;cursor:pointer;font-family:inherit}
+.qform .done{margin:0;padding:16px 18px;border:1px solid var(--line);border-radius:8px;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform .err{margin:0;color:#f19aa1;font-size:14px}
+.coach{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.coach .col{max-width:640px;margin:0 auto;padding:0 16px}
+.coach h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.coach p{margin:0 0 16px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.coach ul{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;color:var(--muted)}
+.coach li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--heart);margin:0 10px 2px 0}
+.coach .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.coach .fine{font-family:var(--sans);font-size:13px;color:var(--muted);margin:16px 0 0}
+.coach .fine a,.qbox a{color:var(--ink);text-underline-offset:4px;text-decoration-color:var(--heart)}
+</style><section class="qbox g" id="question" aria-labelledby="home-q-h"><div class="col">
+  <p class="label">Leave your question · free</p>
+  <h2 id="home-q-h">What’s blocking you from feeling your soul, or your purpose?</h2>
+  <p class="why">Ask, free. A person reads every question, not an AI. Some I answer in public, as an essay or a video, with anything that could identify you taken out. I can’t promise a personal reply, but I’ll do my best.</p>
+  <form class="qform" data-src="home" novalidate>
+    <label>Your question<textarea name="question" maxlength="2000" required placeholder="Write it the way you’d say it to a friend."></textarea></label>
+    <label>Your email, if I write back (optional)<input type="email" name="email" autocomplete="email" maxlength="254" placeholder="you@example.com"></label>
+    <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <p class="fine">By sending it, you agree your question may be used, anonymised, in future essays, videos or other writing. Your email is only ever used to reply, never for anything else.</p>
+    <div class="row"><button class="btn primary" type="submit">Send my question</button><span class="count" aria-live="polite">2,000 characters</span></div>
+    <p class="err" role="alert" hidden></p>
+  </form>
+</div></section>
+<!--/QUESTION-->
+  <!--COACHING--><style>
+.qbox{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.qbox .col{max-width:640px;margin:0 auto;padding:0 16px}
+.qbox h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.qbox p.why{margin:0 0 22px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform{display:grid;gap:14px}
+.qform label{font-size:13px;color:var(--muted);display:grid;gap:8px}
+.qform textarea,.qform input[type=email]{width:100%;box-sizing:border-box;background:#0b0b0e;border:1px solid #3a3a42;border-radius:8px;color:var(--ink);font:400 17px/1.6 var(--serif);padding:14px 16px;outline:none}
+.qform textarea{min-height:150px;resize:vertical}
+.qform input[type=email]{font:400 16px var(--sans);min-height:48px}
+.qform textarea:focus,.qform input:focus{border-color:var(--ink)}
+.qform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.qform .row{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between}
+.qform .count{font-size:12px;color:var(--muted)}
+.qform .fine{margin:0;text-align:left;font-size:13px;line-height:1.6;color:var(--muted)}
+.qform button{border:0;cursor:pointer;font-family:inherit}
+.qform .done{margin:0;padding:16px 18px;border:1px solid var(--line);border-radius:8px;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform .err{margin:0;color:#f19aa1;font-size:14px}
+.coach{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.coach .col{max-width:640px;margin:0 auto;padding:0 16px}
+.coach h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.coach p{margin:0 0 16px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.coach ul{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;color:var(--muted)}
+.coach li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--heart);margin:0 10px 2px 0}
+.coach .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.coach .fine{font-family:var(--sans);font-size:13px;color:var(--muted);margin:16px 0 0}
+.coach .fine a,.qbox a{color:var(--ink);text-underline-offset:4px;text-decoration-color:var(--heart)}
+</style><section class="coach g" id="coaching" aria-labelledby="coach-h"><div class="col">
+  <p class="label">A conversation</p>
+  <h2 id="coach-h">A conversation with the founder</h2>
+  <p>Some blockages clear faster when you talk them through with someone who has sat in the same place. I keep a small number of private conversations each week: an hour and a half, just you and me, on whatever is in the way of you feeling your own life.</p>
+  <p>soulsensis stays anonymous, so it’s voice or text only: a voice call, voice notes, or writing back and forth. No video, no face, no real names. You don’t have to give yours either.</p>
+  <ul><li>1.5 hours, one to one</li><li>Voice or text, never video</li><li>A$300 a session · a few each week</li></ul>
+  <div class="acts"><a class="btn primary" href="/#coaching" data-checkout="">Book a conversation</a><a class="btn quiet" href="/question/">Or leave a question, free</a></div>
+  <p class="fine">Not sure it’s for you? Start with a question. It costs nothing, and I read every one.</p>
+</div></section>
+<!--/COACHING-->
+  <section id="ask" class="g" style="padding:28px 0 8px"><div class="wrap" style="padding:0 16px"><p class="fine" style="text-align:left;max-width:60ch;margin:0;color:var(--muted);font-size:13px;line-height:1.7">Later there will also be Ask soulsensis, an AI built from the writing, for a quick answer at any hour. It will always come second: the essays, and the questions I answer myself, come first.</p></div></section>
   <section id="ways" class="g"><div class="wrap">
     <p class="label rise">Watch</p>
     <div class="watch rise"><!--WATCH--><a class="video" href="https://youtu.be/IRdnuoH97Gk" data-id="IRdnuoH97Gk" aria-label="Play: Half alive, half dead" rel="noopener"><img src="https://i.ytimg.com/vi/IRdnuoH97Gk/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360"><span class="play" aria-hidden="true"></span><span class="cap">Latest: Half alive, half dead</span></a><!--/WATCH--></div>
@@ -333,7 +392,7 @@ nav .links a.letters-btn { color: #fff; background: var(--heart); border-radius:
 
 <footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span><a href="essays.html">Read</a> · <a href="book.html">The book</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters on Substack</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+  <span><a href="essays.html">Read</a> · <a href="book.html">The book</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters on Substack</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="/question/">Leave a question</a> · <a href="#coaching">A conversation</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
 </div></footer>
 
 <script>
@@ -379,11 +438,6 @@ const spans = [...W.children];
 function light() { const r = W.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (innerHeight * .85 - r.top) / (innerHeight * .6))); spans.forEach((s, i) => s.classList.toggle("lit", i < Math.round(p * spans.length))); }
 addEventListener("scroll", light, { passive: true }); light();
 
-// Ask soulsensis: a real-sounding opener types itself out
-const lines = ["So your problem right now isn't the job. It's that you've stopped believing you're allowed to leave it.", "So your problem right now isn't time. It's that you keep waiting to feel ready.", "So your problem right now is comparison. Their path is theirs. Yours is yours."];
-const typed = document.getElementById("typed"); let li = 0;
-function type(s, i = 0) { typed.textContent = s.slice(0, i); if (i < s.length) setTimeout(() => type(s, i + 1), 28); else setTimeout(() => { li = (li + 1) % lines.length; type(lines[li]); }, 3200); }
-if (matchMedia("(prefers-reduced-motion: reduce)").matches) typed.textContent = lines[0]; else new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { type(lines[0]); o.disconnect(); } }).observe(typed);
 // video: load the player only when asked (no YouTube cookies before a click)
 document.querySelectorAll("a.video[data-id]").forEach((a) => a.addEventListener("click", (ev) => { ev.preventDefault(); const f = document.createElement("iframe"); f.src = "https://www.youtube-nocookie.com/embed/" + a.dataset.id + "?autoplay=1&rel=0"; f.title = a.getAttribute("aria-label") || "Video"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true; a.replaceChildren(f); a.removeAttribute("href"); }));
 </script>
@@ -402,5 +456,42 @@ document.querySelectorAll("a.video[data-id]").forEach((a) => a.addEventListener(
   });
 })();
 </script>
+<!--QJS--><script>
+(function () {
+  var API = "", MAIL = "hello@soulsensis.com", t0 = Date.now();
+  document.querySelectorAll("form.qform").forEach(function (f) {
+    var ta = f.querySelector("textarea"), cnt = f.querySelector(".count"), err = f.querySelector(".err"), btn = f.querySelector("button");
+    var src = f.dataset.src + (/[?&]src=([\w-]+)/.exec(location.search) ? ":" + /[?&]src=([\w-]+)/.exec(location.search)[1] : "");
+    ta.addEventListener("input", function () { var n = 2000 - ta.value.length; cnt.textContent = n.toLocaleString() + " characters left"; });
+    function done(html) { var p = document.createElement("p"); p.className = "done"; p.innerHTML = html; f.replaceChildren(p); }
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault(); err.hidden = true;
+      var q = ta.value.trim(), em = f.email.value.trim();
+      if (q.length < 10) { err.textContent = "Write a little more, so the question can be answered."; err.hidden = false; ta.focus(); return; }
+      if (em && !/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(em)) { err.textContent = "That email doesn't look right. Leave it empty if you'd rather not give one."; err.hidden = false; return; }
+      if (!API) {
+        location.href = "mailto:" + MAIL + "?subject=" + encodeURIComponent("A question") + "&body=" + encodeURIComponent(q + "\n\n(" + "sent from soulsensis.com, " + src + ")");
+        done("Your email app should open with your question in it. Send it from there and it comes straight to me. If nothing opened, write to <a href=\"mailto:" + MAIL + "\">" + MAIL + "</a>.");
+        return;
+      }
+      btn.disabled = true; btn.textContent = "Sending…";
+      fetch(API + "/api/question", { method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ question: q, email: em, website: f.website.value, ms: Date.now() - t0, src: src, consent: true }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return [r.status, j]; }); })
+        .then(function (x) {
+          if (x[0] === 200) return done("Thank you. Your question is with me now. I read every one" + (em ? ", and if I write back it will be to the email you gave." : "."));
+          err.textContent = x[0] === 429 ? "That's a few questions today already. Try again tomorrow." : (x[1].error || "It didn't send. Try again in a minute.");
+          err.hidden = false; btn.disabled = false; btn.textContent = "Send my question";
+        })
+        .catch(function () { err.textContent = "It didn't send. Check your connection and try again."; err.hidden = false; btn.disabled = false; btn.textContent = "Send my question"; });
+    });
+  });
+  document.querySelectorAll("a[data-checkout]").forEach(function (a) {
+    var c = a.getAttribute("data-checkout");
+    a.href = c ? c : "mailto:" + MAIL + "?subject=" + encodeURIComponent("A conversation") + "&body=" + encodeURIComponent("I'd like to book a conversation. What's in the way for me, in a sentence or two:\n\n");
+  });
+})();
+</script>
+<!--/QJS-->
 </body>
 </html>

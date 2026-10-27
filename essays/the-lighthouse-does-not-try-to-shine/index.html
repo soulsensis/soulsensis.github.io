@@ -33,7 +33,7 @@
 <a class="skip" href="#main">Skip to the reading</a>
 <nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="4"><circle r="20"/><circle cx="20" r="20" transform="rotate(0)"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/></g><circle r="5" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="/essays.html">Read</a><a class="far" href="/book.html">The book</a><a class="buy" href="#letters">Free letters</a></div>
+  <div class="links"><a href="/essays.html">Read</a><a class="far" href="/book.html">The book</a><a class="far" href="/question/">Ask, free</a><a class="buy" href="#letters">Free letters</a></div>
 </div></nav>
 
 <main id="main"><article>
@@ -46,7 +46,7 @@
 <div class="prose opening"><p>For years I had more ideas than I could write down and not the nerve to put a single one into the world. I called it not being ready yet. It was something else: the particular tiredness that comes from living a life that is not yours.</p></div>
 <aside class="inbook" aria-label="Finish it in the book"><img src="/book-cover.jpg" width="600" height="900" alt="The cover of Sit Still Enough to Hear It" loading="lazy">
 <div><h2>The rest of this essay is in chapter 5 of the book.</h2><p>Sit Still Enough to Hear It: twenty essays, in six chapters. The book is being finished. Join the letters to hear the day it&#x27;s out.</p>
-<div class="acts"><a class="btn primary" href="#letters">Get the first chapter free</a><a class="btn quiet" href="/book.html">About the book</a></div></div></aside>
+<div class="acts"><a class="btn primary" href="#letters">Get new essays by email</a><a class="btn quiet" href="/book.html">About the book</a></div></div></aside>
 <svg class="orn" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="1.2"><circle r="20"/><circle cx="20" r="20" transform="rotate(0)"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/><circle r="40"/></g><circle r="2.6" fill="#E63946"/></svg>
 <nav class="next" aria-label="Keep reading">
 <a href="/essays/the-step-aside/"><div><small>Next in this topic · The opening</small><b>The step aside</b></div><span class="arrow" aria-hidden="true">→</span></a>
@@ -55,24 +55,61 @@
 </div></div>
 </article>
 
+<style>
+.qbox{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.qbox .col{max-width:640px;margin:0 auto;padding:0 16px}
+.qbox h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.qbox p.why{margin:0 0 22px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform{display:grid;gap:14px}
+.qform label{font-size:13px;color:var(--muted);display:grid;gap:8px}
+.qform textarea,.qform input[type=email]{width:100%;box-sizing:border-box;background:#0b0b0e;border:1px solid #3a3a42;border-radius:8px;color:var(--ink);font:400 17px/1.6 var(--serif);padding:14px 16px;outline:none}
+.qform textarea{min-height:150px;resize:vertical}
+.qform input[type=email]{font:400 16px var(--sans);min-height:48px}
+.qform textarea:focus,.qform input:focus{border-color:var(--ink)}
+.qform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.qform .row{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between}
+.qform .count{font-size:12px;color:var(--muted)}
+.qform .fine{margin:0;text-align:left;font-size:13px;line-height:1.6;color:var(--muted)}
+.qform button{border:0;cursor:pointer;font-family:inherit}
+.qform .done{margin:0;padding:16px 18px;border:1px solid var(--line);border-radius:8px;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform .err{margin:0;color:#f19aa1;font-size:14px}
+.coach{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.coach .col{max-width:640px;margin:0 auto;padding:0 16px}
+.coach h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.coach p{margin:0 0 16px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.coach ul{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;color:var(--muted)}
+.coach li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--heart);margin:0 10px 2px 0}
+.coach .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.coach .fine{font-family:var(--sans);font-size:13px;color:var(--muted);margin:16px 0 0}
+.coach .fine a,.qbox a{color:var(--ink);text-underline-offset:4px;text-decoration-color:var(--heart)}
+</style><section class="qbox g" id="question" aria-labelledby="q-h"><div class="col">
+  <p class="label">Leave your question · free</p>
+  <h2 id="q-h">What’s blocking you from feeling your soul, or your purpose?</h2>
+  <p class="why">Ask, free. A person reads every question, not an AI. Some I answer in public, as an essay or a video, with anything that could identify you taken out. I can’t promise a personal reply, but I’ll do my best.</p>
+  <form class="qform" data-src="essay:the-lighthouse-does-not-try-to-shine" novalidate>
+    <label>Your question<textarea name="question" maxlength="2000" required placeholder="Write it the way you’d say it to a friend."></textarea></label>
+    <label>Your email, if I write back (optional)<input type="email" name="email" autocomplete="email" maxlength="254" placeholder="you@example.com"></label>
+    <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <p class="fine">By sending it, you agree your question may be used, anonymised, in future essays, videos or other writing. Your email is only ever used to reply, never for anything else.</p>
+    <div class="row"><button class="btn primary" type="submit">Send my question</button><span class="count" aria-live="polite">2,000 characters</span></div>
+    <p class="err" role="alert" hidden></p>
+  </form>
+</div></section>
+
 <section class="g" aria-labelledby="praise-h" style="padding:56px 0"><div class="wrap" style="max-width:1040px;margin:0 auto;padding:0 16px"><p class="label" id="praise-h" style="margin:0 0 20px">What readers have said</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px"><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“This actually got to me this morning… thank you.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure></div></div></section>
 <section class="letters g" id="letters" aria-labelledby="letters-h"><div class="col">
   <p class="label">The letters</p>
   <h2 id="letters-h">One essay a week, free</h2>
-  <p class="offer"><strong>Get the first chapter free.</strong> Join the letters and the opening chapter of the book, as a designed PDF, arrives in your welcome email.</p>
-  <p>The newest essay in your inbox before it is anywhere else. No noise, nothing to buy. Unsubscribe any time.</p>
-  <form class="signup" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post" target="_blank">
-    <label for="email" class="vh">Your email</label>
-    <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email">
-    <button class="btn primary" type="submit">Send me the first chapter</button>
-  </form>
+  <p class="offer"><strong>New essays by email.</strong> Each one in your inbox the day it is written, before it is narrated, and you hear first when the book launches.</p>
+  <p>No noise, nothing to buy. Unsubscribe any time.</p>
+  <div class="signup embed"><iframe src="https://soulsensis.substack.com/embed" title="Get new essays by email" height="150" style="width:100%;max-width:480px;border:0;background:transparent" frameborder="0" scrolling="no" loading="lazy"></iframe></div>
   <p class="fine">Or keep this page: soulsensis.com has today's essay, every day.</p>
 </div></section>
 
 </main>
 <footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span><a href="/essays.html">Read</a> · <a href="/book.html">The book</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="/app.html">Get the app</a> · <a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61595689450014" rel="noopener">Facebook</a> · <a href="https://www.pinterest.com/soulsensis/" rel="noopener">Pinterest</a> · <a href="https://medium.com/@soulsensis" rel="noopener">Medium</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
+  <span><a href="/essays.html">Read</a> · <a href="/book.html">The book</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters</a> · <a href="/question/">Leave a question</a> · <a href="/#coaching">A conversation</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="/app.html">Get the app</a> · <a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61595689450014" rel="noopener">Facebook</a> · <a href="https://www.pinterest.com/soulsensis/" rel="noopener">Pinterest</a> · <a href="https://medium.com/@soulsensis" rel="noopener">Medium</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
 </div></footer>
 <script>
 // Send each reader to their own Amazon (local price, local printing and shipping). Same ASINs everywhere.
@@ -96,6 +133,42 @@ document.querySelectorAll("a.video[data-id]").forEach((a) => a.addEventListener(
   f.title = a.getAttribute("aria-label") || "Video"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
   a.replaceChildren(f); a.removeAttribute("href");
 }));
+</script>
+<script>
+(function () {
+  var API = "", MAIL = "hello@soulsensis.com", t0 = Date.now();
+  document.querySelectorAll("form.qform").forEach(function (f) {
+    var ta = f.querySelector("textarea"), cnt = f.querySelector(".count"), err = f.querySelector(".err"), btn = f.querySelector("button");
+    var src = f.dataset.src + (/[?&]src=([\w-]+)/.exec(location.search) ? ":" + /[?&]src=([\w-]+)/.exec(location.search)[1] : "");
+    ta.addEventListener("input", function () { var n = 2000 - ta.value.length; cnt.textContent = n.toLocaleString() + " characters left"; });
+    function done(html) { var p = document.createElement("p"); p.className = "done"; p.innerHTML = html; f.replaceChildren(p); }
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault(); err.hidden = true;
+      var q = ta.value.trim(), em = f.email.value.trim();
+      if (q.length < 10) { err.textContent = "Write a little more, so the question can be answered."; err.hidden = false; ta.focus(); return; }
+      if (em && !/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(em)) { err.textContent = "That email doesn't look right. Leave it empty if you'd rather not give one."; err.hidden = false; return; }
+      if (!API) {
+        location.href = "mailto:" + MAIL + "?subject=" + encodeURIComponent("A question") + "&body=" + encodeURIComponent(q + "\n\n(" + "sent from soulsensis.com, " + src + ")");
+        done("Your email app should open with your question in it. Send it from there and it comes straight to me. If nothing opened, write to <a href=\"mailto:" + MAIL + "\">" + MAIL + "</a>.");
+        return;
+      }
+      btn.disabled = true; btn.textContent = "Sending…";
+      fetch(API + "/api/question", { method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ question: q, email: em, website: f.website.value, ms: Date.now() - t0, src: src, consent: true }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return [r.status, j]; }); })
+        .then(function (x) {
+          if (x[0] === 200) return done("Thank you. Your question is with me now. I read every one" + (em ? ", and if I write back it will be to the email you gave." : "."));
+          err.textContent = x[0] === 429 ? "That's a few questions today already. Try again tomorrow." : (x[1].error || "It didn't send. Try again in a minute.");
+          err.hidden = false; btn.disabled = false; btn.textContent = "Send my question";
+        })
+        .catch(function () { err.textContent = "It didn't send. Check your connection and try again."; err.hidden = false; btn.disabled = false; btn.textContent = "Send my question"; });
+    });
+  });
+  document.querySelectorAll("a[data-checkout]").forEach(function (a) {
+    var c = a.getAttribute("data-checkout");
+    a.href = c ? c : "mailto:" + MAIL + "?subject=" + encodeURIComponent("A conversation") + "&body=" + encodeURIComponent("I'd like to book a conversation. What's in the way for me, in a sentence or two:\n\n");
+  });
+})();
 </script>
 </body>
 </html>
