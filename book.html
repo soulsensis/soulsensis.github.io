@@ -53,18 +53,20 @@
 }
 </script>
 <meta name="theme-color" content="#000000">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="soulsensis">
 <script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js"));</script>
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-60 -60 120 120'%3E%3Crect x='-60' y='-60' width='120' height='120' fill='%23000'/%3E%3Cg fill='none' stroke='%23F5F2EA' stroke-width='5'%3E%3Ccircle r='20'/%3E%3Ccircle cx='20' r='20'/%3E%3Ccircle cx='20' r='20' transform='rotate(60)'/%3E%3Ccircle cx='20' r='20' transform='rotate(120)'/%3E%3Ccircle cx='20' r='20' transform='rotate(180)'/%3E%3Ccircle cx='20' r='20' transform='rotate(240)'/%3E%3Ccircle cx='20' r='20' transform='rotate(300)'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='-60%20-60%20120%20120'%3E%3Crect%20x='-60'%20y='-60'%20width='120'%20height='120'%20fill='%23000'/%3E%3Cg%20fill='none'%20stroke='%23F5F2EA'%20stroke-width='5'%3E%3Ccircle%20r='20'/%3E%3Ccircle%20cx='20'%20r='20'/%3E%3Ccircle%20cx='20'%20r='20'%20transform='rotate(60)'/%3E%3Ccircle%20cx='20'%20r='20'%20transform='rotate(120)'/%3E%3Ccircle%20cx='20'%20r='20'%20transform='rotate(180)'/%3E%3Ccircle%20cx='20'%20r='20'%20transform='rotate(240)'/%3E%3Ccircle%20cx='20'%20r='20'%20transform='rotate(300)'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preload" as="image" href="book-cover.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap"></noscript>
 <style>
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #a8a49b; --line: #24242a; --heart: #E63946;
+:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #a8a49b; --line: #24242a; --heart: #E63946; --heart-fill: #D63440;
   --sans: "Montserrat", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", Georgia, serif; color-scheme: dark; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -103,7 +105,7 @@ h1 { margin: 0; font-weight: 200; font-size: clamp(40px, 6vw, 84px); line-height
 .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
 .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform .15s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease; cursor: pointer; }
 .btn:active { transform: scale(.97); }
-.btn.primary { background: var(--heart); color: #fff; box-shadow: 0 0 0 0 rgba(230,57,70,.5); border: 0; }
+.btn.primary { background: var(--heart-fill); color: #fff; box-shadow: 0 0 0 0 rgba(230,57,70,.5); border: 0; }
 .btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
 .btn.quiet { border: 1px solid #3a3a42; background: none; color: var(--ink); }
 .btn.quiet:hover { border-color: var(--ink); }
@@ -211,7 +213,7 @@ h3 { margin: 0; font-weight: 400; font-size: 18px; line-height: 1.4; }
 /* words + letters */
 .words { text-align: center; padding-block: clamp(40px, 6vw, 80px); }
 .words p { font-family: var(--serif); font-size: clamp(28px, 4.6vw, 54px); line-height: 1.2; max-width: 22ch; margin: 0 auto; }
-.words p span { display: inline-block; opacity: .12; transition: opacity .5s ease; }
+.words p span { display: inline-block; opacity: .4; transition: opacity .5s ease; }
 .words p span.lit { opacity: 1; }
 .letters { text-align: center; overflow: hidden; }
 .letters .art { position: absolute; left: 50%; top: 50%; width: min(900px, 140vw); aspect-ratio: 1; transform: translate(-50%, -50%); opacity: .28; pointer-events: none; }
@@ -241,7 +243,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 <a class="skip" href="#formats">Skip to the formats</a>
 <nav id="nav" class="g" aria-label="Main"><div class="wrap">
   <a class="mark" href="index.html" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="4"><circle r="20"/><circle cx="20" r="20"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/></g><circle r="5" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="book.html" aria-current="page">The book</a><a href="essays.html">Essays</a><a class="far" href="index.html#ask">Ask</a><a class="far" href="index.html#ways">Watch</a></div>
+  <div class="links"><a href="book.html" aria-current="page">The book</a><a href="essays.html">Essays</a><a class="far" href="/question/">Ask, free</a><a class="far" href="index.html#ways">Watch</a></div>
 </div></nav>
 
 <main id="top">
@@ -270,21 +272,21 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
     <h2 class="rise">Read it the way it was written: slowly.</h2>
     <div class="passages">
       <figure class="passage rise">
-        <svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle cx="-14" r="30" pathLength="1"/><circle cx="14" r="30" pathLength="1"/></g><circle class="dot" r="3" fill="#E63946"/></svg>
+        <svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle cx="-14" r="30"/><circle cx="14" r="30"/></g><circle class="dot" r="3" fill="#E63946"/></svg>
         <blockquote>
           <p>There is a particular kind of tiredness that lives at the edge of a life that has not yet committed to itself. It is not the tiredness of the body. It is the tiredness of waiting. Waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is. I have come to understand that this waiting is the wound. Not the thing waited for, but the waiting itself. And the only way through is to stop.</p>
           <cite>Chapter 1 <span>·</span> The receptiveness I was waiting for</cite>
         </blockquote>
       </figure>
       <figure class="passage rise">
-        <svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="18" pathLength="1"/><circle cx="18" r="18" pathLength="1"/><circle cx="-18" r="18" pathLength="1"/><circle cy="18" r="18" pathLength="1"/><circle cy="-18" r="18" pathLength="1"/></g><circle class="dot" r="3" fill="#E63946"/></svg>
+        <svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="18"/><circle cx="18" r="18"/><circle cx="-18" r="18"/><circle cy="18" r="18"/><circle cy="-18" r="18"/></g><circle class="dot" r="3" fill="#E63946"/></svg>
         <blockquote>
           <p>Blame asks whose fault this is. Responsibility asks what is mine to do now. The first question keeps me standing in the wreckage, waiting for an apology that may never come. The second hands me the next move, even when the harm was never mine.</p>
           <cite>Chapter 3 <span>·</span> Blame and responsibility</cite>
         </blockquote>
       </figure>
       <figure class="passage rise">
-        <svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="44" pathLength="1"/><circle r="30" pathLength="1"/><circle r="16" pathLength="1"/></g><circle class="dot" r="3" fill="#E63946"/></svg>
+        <svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="44"/><circle r="30"/><circle r="16"/></g><circle class="dot" r="3" fill="#E63946"/></svg>
         <blockquote>
           <p>A lighthouse does not try to shine. It does not strategise about how to be most visible. It does not wonder whether the ships out at sea will appreciate its presence. It simply lights, continuously, as its only task. And because it lights, the ships that need the light find it. A lighthouse that spends its energy questioning whether it is bright enough or positioned correctly or worthy of the task serves no one. It is only by accepting the simple fact of what it is that the lighthouse becomes useful. The accepting is the work.</p>
           <cite>Chapter 5 <span>·</span> The lighthouse does not try to shine</cite>
@@ -368,16 +370,16 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
     </div>
   </div></section>
 
-  <section class="words g"><div class="wrap"><p id="words">You do not get what you want. You get who you are.</p></div></section>
+  <div class="words g"><div class="wrap"><p id="words">You do not get what you want. You get who you are.</p></div></div>
 
-  <section class="g" aria-labelledby="praise-h" style="padding:56px 0"><div class="wrap" style="max-width:1040px;margin:0 auto;padding:0 16px"><p class="label" id="praise-h" style="margin:0 0 20px">What readers have said</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px"><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“This actually got to me this morning… thank you.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure></div></div></section>
+  <section class="g" aria-labelledby="praise-h" style="padding:56px 0"><div class="wrap" style="max-width:1040px;margin:0 auto;padding:0 16px"><h2 class="label" id="praise-h" style="margin:0 0 20px;font-weight:400;line-height:1.5">What readers have said</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px"><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“This actually got to me this morning… thank you.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure></div></div></section>
   <section id="letters-section" class="letters g">
     <div class="art" aria-hidden="true"><svg viewBox="-460 -460 920 920"><g class="draw" id="metatron" fill="none" stroke="#F5F2EA" stroke-width="1" opacity=".5"></g></svg></div>
     <div class="wrap inner">
       <p class="label rise" style="margin:0">Letters</p>
       <h2 class="rise" style="margin:0">Get told the day it's out.</h2>
       <p class="reading rise" style="text-align:center;max-width:44ch">One essay a week in your inbox, free, before it is narrated, and the first word when the book and the journal go live.</p>
-      <div id="letters" class="signup rise embed"><iframe src="https://soulsensis.substack.com/embed" title="Get new essays by email" height="150" style="width:100%;max-width:480px;border:0;background:transparent" frameborder="0" scrolling="no" loading="lazy"></iframe></div>
+      <div id="letters" class="signup rise embed"><iframe src="https://soulsensis.substack.com/embed" title="Get new essays by email" height="150" style="width:100%;max-width:480px;border:0;background:transparent" scrolling="no" loading="lazy"></iframe></div>
       <p class="fine rise">Free, by email. Unsubscribe any time. <a class="tell" href="https://soulsensis.substack.com" rel="noopener">Or read the letters first →</a></p>
     </div>
   </section>
@@ -414,6 +416,7 @@ const M = document.getElementById("metatron"); const mr = 62, pts = [[0, 0]];
 for (let k = 0; k < 6; k++) pts.push(pol(2 * mr, 30 + k * 60)); for (let k = 0; k < 6; k++) pts.push(pol(4 * mr, 30 + k * 60));
 for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) line(M, pts[i], pts[j]);
 pts.forEach((p) => circle(M, p[0], p[1], mr));
+document.querySelectorAll(".draw circle").forEach((c) => c.setAttribute("pathLength", "1"));
 
 // reveal on scroll
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: 0, rootMargin: "0px 0px -6% 0px" });

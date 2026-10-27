@@ -1,5 +1,5 @@
 /* soulsensis: shared styles for the reading pages (essays.html and essays/<slug>/). Generated pages link this file. */
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946;
+:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D63440;
   --sans: "Montserrat", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", Georgia, serif; color-scheme: dark; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -20,13 +20,13 @@ nav.top .wrap { display: flex; justify-content: space-between; align-items: cent
 .mark { display: flex; align-items: center; gap: 10px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 15px; flex: none; }
 nav.top .links { display: flex; align-items: center; gap: 22px; font-size: 13px; color: var(--muted); }
 nav.top .links a { text-decoration: none; transition: color .2s; white-space: nowrap; } nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
-nav.top .links a.buy { color: #fff; background: var(--heart); border-radius: 999px; padding: 8px 14px; font-weight: 500; }
+nav.top .links a.buy { color: #fff; background: var(--heart-fill); border-radius: 999px; padding: 8px 14px; font-weight: 500; }
 @media (max-width: 520px) { nav.top .links { gap: 14px; } nav.top .links a.far { display: none; } .mark { letter-spacing: .14em; } }
 
 /* buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border-radius: 999px; font-weight: 500; font-size: 15px; text-decoration: none; border: 0; cursor: pointer; font-family: inherit; transition: transform .15s ease, box-shadow .25s ease, border-color .25s ease; }
 .btn:active { transform: scale(.97); }
-.btn.primary { background: var(--heart); color: #fff; } .btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
+.btn.primary { background: var(--heart-fill); color: #fff; } .btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
 .btn.quiet { border: 1px solid #3a3a42; color: var(--ink); background: none; } .btn.quiet:hover { border-color: var(--ink); }
 .label { font-size: 11px; letter-spacing: .32em; color: var(--muted); text-transform: uppercase; margin: 0 0 14px; }
 
@@ -128,3 +128,31 @@ footer { border-top: 1px solid var(--line); padding-block: 36px calc(36px + env(
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* leave your question + a conversation */
+.qbox{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.qbox .col{max-width:640px;margin:0 auto;padding:0 16px}
+.qbox h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.qbox p.why{margin:0 0 22px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform{display:grid;gap:14px}
+.qform label{font-size:13px;color:var(--muted);display:grid;gap:8px}
+.qform textarea,.qform input[type=email]{width:100%;box-sizing:border-box;background:#0b0b0e;border:1px solid #3a3a42;border-radius:8px;color:var(--ink);font:400 17px/1.6 var(--serif);padding:14px 16px;outline:none}
+.qform textarea{min-height:150px;resize:vertical}
+.qform input[type=email]{font:400 16px var(--sans);min-height:48px}
+.qform textarea:focus,.qform input:focus{border-color:var(--ink)}
+.qform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.qform .row{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between}
+.qform .count{font-size:12px;color:var(--muted)}
+.qform .fine{margin:0;text-align:left;font-size:13px;line-height:1.6;color:var(--muted)}
+.qform button{border:0;cursor:pointer;font-family:inherit}
+.qform .done{margin:0;padding:16px 18px;border:1px solid var(--line);border-radius:8px;font-family:var(--serif);font-size:18px;line-height:1.6}
+.qform .err{margin:0;color:#f19aa1;font-size:14px}
+.coach{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px)}
+.coach .col{max-width:640px;margin:0 auto;padding:0 16px}
+.coach h2{margin:0 0 14px;font-weight:200;font-size:clamp(28px,4.2vw,42px);line-height:1.15}
+.coach p{margin:0 0 16px;color:#c9c5bb;font-family:var(--serif);font-size:18px;line-height:1.6}
+.coach ul{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;color:var(--muted)}
+.coach li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--heart);margin:0 10px 2px 0}
+.coach .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.coach .fine{font-family:var(--sans);font-size:13px;color:var(--muted);margin:16px 0 0}
+.coach .fine a,.qbox a{color:var(--ink);text-underline-offset:4px;text-decoration-color:var(--heart)}
