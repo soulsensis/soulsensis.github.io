@@ -407,7 +407,7 @@ const F = document.getElementById("flower"); const fr = 64; circle(F, 0, 0, fr);
 for (let k = 0; k < 6; k++) { circle(F, ...pol(fr, k * 60), fr); circle(F, ...pol(2 * fr, k * 60), fr); circle(F, ...pol(fr * Math.sqrt(3), 30 + k * 60), fr); }
 circle(F, 0, 0, 3 * fr); circle(F, 0, 0, 3 * fr + 18); for (let k = 0; k < 12; k++) circle(F, ...pol(3 * fr, k * 30), fr);
 // Metatron's cube: 13 circles, every centre joined
-const M = document.getElementById("metatron"); const mr = 62, pts = [[0, 0]];
+const M = document.getElementById("metatron") || document.createElementNS(NS, "g"); const mr = 62, pts = [[0, 0]];   // the Ask section that held it is gone (27 Oct)
 for (let k = 0; k < 6; k++) pts.push(pol(2 * mr, 30 + k * 60)); for (let k = 0; k < 6; k++) pts.push(pol(4 * mr, 30 + k * 60));
 for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) line(M, pts[i], pts[j]);
 pts.forEach((p) => circle(M, p[0], p[1], mr));
