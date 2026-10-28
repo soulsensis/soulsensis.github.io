@@ -195,7 +195,7 @@ h2 { margin: 0; font-weight: 200; font-size: clamp(32px, 5vw, 60px); line-height
 .cover { position: relative; display: grid; place-items: center; aspect-ratio: 1; width: 100%; max-width: 520px; margin: 0 auto; perspective: 1500px; isolation: isolate; }
 .cover svg { position: absolute; inset: -8%; width: 116%; height: 116%; z-index: 0; transform: translateZ(0); }
 .cover .floor { position: absolute; z-index: 1; left: 50%; top: 74%; width: 46%; height: 9%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.95), rgba(0,0,0,.55) 50%, transparent); filter: blur(6px); }
-.book3d { --tx: -28deg; --ty: -7deg; --d: 20px; position: relative; z-index: 2; -webkit-transform-style: preserve-3d; width: 41%; aspect-ratio: 2 / 3; transform-style: preserve-3d; transform: rotateY(var(--tx)) rotateX(var(--ty)); transition: transform .9s cubic-bezier(.2,.8,.2,1); animation: float 7s ease-in-out infinite; }
+.book3d { --tx: -28deg; --ty: -7deg; --d: 20px; position: relative; z-index: 2; -webkit-transform-style: preserve-3d; width: 41%; aspect-ratio: 5 / 8; transform-style: preserve-3d; transform: rotateY(var(--tx)) rotateX(var(--ty)); transition: transform .9s cubic-bezier(.2,.8,.2,1); animation: float 7s ease-in-out infinite; }
 @keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -7px; } }
 .cover:hover .book3d { --tx: -14deg; --ty: -5deg; }
 .book3d.live { transition: transform .35s cubic-bezier(.2,.8,.2,1); animation-play-state: paused; }
@@ -303,7 +303,7 @@ footer .help { line-height: 44px; }
     <div class="cover">
       <svg viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw" id="flower" fill="none" stroke="#F5F2EA" stroke-width="1.2" opacity=".6"></g></svg>
       <div class="floor" aria-hidden="true"></div>
-      <div class="book3d" id="book3d"><span class="back" aria-hidden="true"></span><span class="pages" aria-hidden="true"></span><span class="top" aria-hidden="true"></span><span class="spine" aria-hidden="true"></span><img src="book-cover.jpg" width="600" height="900" loading="lazy" decoding="async" alt="The cover of Sit Still Enough to Hear It, by soulsensis: black, the title in warm ink, a small flower of life beneath it"><span class="gloss" aria-hidden="true"></span></div>
+      <div class="book3d" id="book3d"><span class="back" aria-hidden="true"></span><span class="pages" aria-hidden="true"></span><span class="top" aria-hidden="true"></span><span class="spine" aria-hidden="true"></span><img src="book-cover.jpg" width="600" height="960" loading="lazy" decoding="async" alt="The cover of Sit Still Enough to Hear It, by soulsensis: black, rings drawn around a red centre, the title in warm ink"><span class="gloss" aria-hidden="true"></span></div>
     </div>
     <div class="stack">
       <p class="label rise" style="margin:0">The book</p>
