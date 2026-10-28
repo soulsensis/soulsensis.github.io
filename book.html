@@ -84,7 +84,7 @@ a { color: inherit; }
 .skip { position: absolute; left: 16px; top: -60px; z-index: 20; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: #000; font-size: 13px; text-decoration: none; transition: top .2s ease; }
 .skip:focus-visible { top: 12px; outline-offset: 2px; }
 nav { position: fixed; inset: 0 0 auto; z-index: 10; padding-top: env(safe-area-inset-top, 0px); transition: background .3s ease, backdrop-filter .3s ease; }
-nav.solid { background: rgba(0,0,0,.72); backdrop-filter: blur(10px); }
+nav.solid { background: rgba(0,0,0,.92); backdrop-filter: blur(10px); }
 nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 68px; }
 .mark { display: flex; align-items: center; gap: 10px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 15px; }
 nav .links { display: flex; gap: 26px; font-size: 13px; color: var(--muted); }
@@ -111,6 +111,7 @@ h1 { margin: 0; font-weight: 200; font-size: clamp(40px, 6vw, 84px); line-height
 .price-line b { color: var(--ink); font-weight: 400; }
 .fine { margin: 0; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
 .fine a { color: var(--muted); } .fine a.tell { color: var(--ink); }
+.fine a.tell { display: inline-block; padding: 10px 0; line-height: 24px; }
 .tell { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--heart); }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
@@ -150,7 +151,7 @@ h3 { margin: 0; font-weight: 400; font-size: 18px; line-height: 1.4; }
 
 /* passages */
 .passages { display: grid; gap: clamp(40px, 6vw, 72px); }
-.passage { position: relative; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 22px; align-items: start; }
+.passage { margin: 0; position: relative; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 22px; align-items: start; }
 .passage svg { width: 56px; height: 56px; margin-top: 6px; }
 .passage blockquote { margin: 0; font-family: var(--serif); font-size: clamp(20px, 2.3vw, 26px); line-height: 1.5; color: var(--ink); max-width: 36em; }
 .passage blockquote p { margin: 0; } .passage blockquote p + p { margin-top: .9em; }
@@ -190,7 +191,7 @@ h3 { margin: 0; font-weight: 400; font-size: 18px; line-height: 1.4; }
 .format .where { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
 .format .act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .format .btn { min-height: 48px; padding: 0 22px; }
-.format .tag { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--heart); border: 1px solid var(--heart); border-radius: 999px; padding: 7px 12px; }
+.format .tag { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--heart); border: 1px solid var(--heart); border-radius: 999px; padding: 7px 12px; }
 .format.best { border-color: #3a3a42; }
 @media (max-width: 480px) { .format { padding: 24px 20px; } .format .head { flex-direction: column; align-items: flex-start; gap: 4px; } .format .price { font-size: 26px; } }
 .format .thumbs { display: flex; gap: 10px; align-items: flex-end; }
@@ -222,7 +223,14 @@ h3 { margin: 0; font-weight: 400; font-size: 18px; line-height: 1.4; }
 .signup:focus-within { border-color: var(--ink); }
 .signup input { flex: 1; min-width: 0; background: none; border: 0; color: var(--ink); font: inherit; font-size: 16px; padding: 0 18px; outline: none; }
 .signup input::placeholder { color: var(--muted); }
-.signup .btn { min-height: 46px; flex: none; border: 0; font: 500 15px var(--sans); }
+.signup .btn { min-height: 46px; flex: none; border: 0; font: 500 15px var(--sans); justify-content: center; }
+@media (max-width: 480px) {
+  .signup { flex-direction: column; border-radius: 28px; padding: 8px; gap: 8px; }
+  .signup input { min-height: 48px; padding: 0 16px; text-align: center; }
+  .signup .btn { width: 100%; min-height: 48px; }
+  .hero { padding-bottom: 40px; } .hero .split { gap: 8px; } .hero .cover { max-width: 280px; }
+  .fine a, .fine a.tell { display: inline-block; padding: 10px 0; line-height: 24px; }
+}
 #letters { scroll-margin-top: 90px; }
 
 footer { border-top: 1px solid var(--line); padding-block: 36px calc(36px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; }
@@ -235,13 +243,19 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
   .draw *, .rise, .book3d { transition: none !important; animation: none !important; }
   .draw * { stroke-dashoffset: 0; } .rise { opacity: 1; transform: none; } .dot { opacity: 1; } .words p span { opacity: 1; }
 }
+nav .links { align-items: center; } nav .links a { display: inline-flex; align-items: center; min-height: 44px; }
+.mark { min-height: 44px; }
+footer a { display: inline-flex; align-items: center; min-height: 44px; }
+footer .wrap { gap: 0 20px; align-items: center; }
+@media (max-width: 480px) { .label { font-size: 12px; } .fine { font-size: 13px; } nav .links { font-size: 14px; } .eyebrow { font-size: 11px; letter-spacing: .12em; white-space: normal; } }
 </style>
+<noscript><style>.rise{opacity:1!important;transform:none!important}.draw *{stroke-dashoffset:0!important}.dot{opacity:1!important}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#formats">Skip to the formats</a>
 <nav id="nav" class="g" aria-label="Main"><div class="wrap">
   <a class="mark" href="index.html" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="4"><circle r="20"/><circle cx="20" r="20"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/></g><circle r="5" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="book.html" aria-current="page">The book</a><a href="essays.html">Essays</a><a class="far" href="index.html#ask">Ask</a><a class="far" href="index.html#ways">Watch</a></div>
+  <div class="links"><a href="book.html" aria-current="page">The book</a><a href="essays.html">Essays</a><a class="far" href="/question/">Ask</a><a class="far" href="https://www.youtube.com/@soulsensis" rel="noopener">Watch</a></div>
 </div></nav>
 
 <main id="top">
@@ -333,22 +347,22 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
       <div class="format rise" id="kindle">
         <div class="head"><h3>Kindle</h3><div class="price">A$9.99<small>US$6.99</small></div></div>
         <p>The whole book on your phone, Kindle or tablet. Buy it on your own country's Amazon; the price is set in your currency.</p>
-        <div class="act"><a class="btn primary" href="#letters" data-amazon-url="" data-live="Buy on Amazon" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Amazon</span></div>
+        <div class="act"><a class="btn quiet" href="#letters" data-amazon-url="" data-live="Buy on Amazon" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Amazon</span></div>
       </div>
       <div class="format rise" id="paperback">
         <div class="head"><h3>Paperback</h3><div class="price">A$24.99<small>US$14.99</small></div></div>
         <p>6 × 9 inches, 78 pages, matte cover, printed by Amazon and posted to you. The one to leave on the bedside table and lend.</p>
-        <div class="act"><a class="btn primary" href="#letters" data-amazon-url="" data-live="Buy on Amazon" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Amazon</span></div>
+        <div class="act"><a class="btn quiet" href="#letters" data-amazon-url="" data-live="Buy on Amazon" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Amazon</span></div>
       </div>
       <div class="format rise" id="journal">
         <div class="head"><h3>The guided journal</h3><div class="price">A$12<small>PDF</small></div></div>
         <p>The questions the book asks, with room to answer them. Print it at home or write into it on a tablet. Instant download.</p>
-        <div class="act"><a class="btn primary" href="#letters" data-ls-url="" data-live="Get the journal" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Lemon Squeezy</span></div>
+        <div class="act"><a class="btn quiet" href="#letters" data-ls-url="" data-live="Get the journal" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Lemon Squeezy</span></div>
       </div>
       <div class="format rise best" id="bundle">
         <div class="head"><h3>The book and the journal</h3><div class="price">A$25<small>PDF bundle</small></div></div>
         <p>The PDF edition of the book together with the guided journal: read a piece, then answer its question. The only place the book comes as a PDF.</p>
-        <div class="act"><a class="btn primary" href="#letters" data-ls-url="" data-live="Get the bundle" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Lemon Squeezy</span></div>
+        <div class="act"><a class="btn quiet" href="#letters" data-ls-url="" data-live="Get the bundle" data-soon="Tell me when it's out">Tell me when it's out</a><span class="tag" data-soon-tag>Coming soon</span><span class="where">Lemon Squeezy</span></div>
       </div>
     </div>
     <p class="fine rise" style="margin-top:18px">Prices in Australian dollars unless marked. Amazon sets local prices in other countries. Digital files are delivered by email within a minute of paying.</p>
@@ -370,14 +384,14 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 
   <section class="words g"><div class="wrap"><p id="words">You do not get what you want. You get who you are.</p></div></section>
 
-  <section class="g" aria-labelledby="praise-h" style="padding:56px 0"><div class="wrap" style="max-width:1040px;margin:0 auto;padding:0 16px"><p class="label" id="praise-h" style="margin:0 0 20px">What readers have said</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px"><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“This actually got to me this morning… thank you.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure></div></div></section>
+  <section class="g" aria-labelledby="praise-h" style="padding:56px 0"><div class="wrap" style="max-width:1040px;margin:0 auto"><p class="label" id="praise-h" style="margin:0 0 20px">What readers have said</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px"><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure><figure style="margin:0;border-top:1px solid rgba(245,242,234,.18);padding-top:16px"><blockquote style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.5;color:#F5F2EA">“This actually got to me this morning… thank you.”</blockquote><figcaption style="margin-top:10px;font-size:12px;letter-spacing:.04em;color:rgba(245,242,234,.6)">A reader, on an early soulsensis essay</figcaption></figure></div></div></section>
   <section id="letters-section" class="letters g">
     <div class="art" aria-hidden="true"><svg viewBox="-460 -460 920 920"><g class="draw" id="metatron" fill="none" stroke="#F5F2EA" stroke-width="1" opacity=".5"></g></svg></div>
     <div class="wrap inner">
       <p class="label rise" style="margin:0">Letters</p>
       <h2 class="rise" style="margin:0">Get told the day it's out.</h2>
       <p class="reading rise" style="text-align:center;max-width:44ch">One essay a week in your inbox, free, before it is narrated, and the first word when the book and the journal go live.</p>
-      <form id="letters" class="signup rise" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post" target="_blank">
+      <form id="letters" class="signup rise" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post">
         <label for="email" class="vh">Your email</label>
         <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email">
         <button class="btn primary" type="submit">Send me the first chapter</button>
@@ -432,7 +446,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches && matchMedia("(hove
 }
 
 // nav goes solid once you scroll
-const nav = document.getElementById("nav"); addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 40), { passive: true });
+const nav = document.getElementById("nav"); addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 8), { passive: true });
 
 // the closing line lights up word by word
 const W = document.getElementById("words"); W.innerHTML = W.textContent.split(" ").map((w) => `<span>${w}</span>`).join(" ");
@@ -455,5 +469,21 @@ addEventListener("scroll", light, { passive: true }); light();
   });
 })();
 </script>
+<!--SIGNUP_JS--><script>
+// Email sign-up: post to Substack in the background, then our own thank-you page (same tab, nothing to close).
+// No fetch, or the post fails: the plain form posts to Substack as before.
+document.querySelectorAll("form.signup").forEach(function (f) {
+  f.addEventListener("submit", function (ev) {
+    if (!window.fetch || !window.URLSearchParams || !f.checkValidity()) return;
+    ev.preventDefault();
+    var b = f.querySelector("button"); if (b) { b.disabled = true; b.textContent = "Sending…"; }
+    var m = /[?&]src=([\w-]+)/.exec(location.search);
+    fetch(f.action, { method: "POST", mode: "no-cors", body: new URLSearchParams({ email: f.email.value }) })
+      .then(function () { location.assign("/thanks/" + (m ? "?src=" + m[1] : "")); })
+      .catch(function () { f.submit(); });
+  });
+});
+</script>
+<!--/SIGNUP_JS-->
 </body>
 </html>

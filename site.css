@@ -15,10 +15,10 @@ img { max-width: 100%; }
 .skip:focus-visible { top: 12px; }
 
 /* nav */
-nav.top { position: sticky; top: 0; z-index: 10; padding-top: env(safe-area-inset-top, 0px); background: rgba(0,0,0,.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(36,36,42,.6); }
+nav.top { position: sticky; top: 0; z-index: 10; padding-top: env(safe-area-inset-top, 0px); background: rgba(0,0,0,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(36,36,42,.6); }
 nav.top .wrap { display: flex; justify-content: space-between; align-items: center; height: 64px; gap: 12px; }
-.mark { display: flex; align-items: center; gap: 10px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 15px; flex: none; }
-nav.top .links { display: flex; align-items: center; gap: 22px; font-size: 13px; color: var(--muted); }
+.mark { display: flex; align-items: center; min-height: 44px; gap: 10px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 15px; flex: none; }
+nav.top .links { display: flex; align-items: center; gap: 22px; font-size: 14px; color: var(--muted); }
 nav.top .links a { text-decoration: none; transition: color .2s; white-space: nowrap; } nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 nav.top .links a.buy { color: #fff; background: var(--heart); border-radius: 999px; padding: 8px 14px; font-weight: 500; }
 @media (max-width: 520px) { nav.top .links { gap: 14px; } nav.top .links a.far { display: none; } .mark { letter-spacing: .14em; } }
@@ -85,7 +85,7 @@ nav.top .links a.buy { color: #fff; background: var(--heart); border-radius: 999
 .signup:focus-within { border-color: var(--ink); }
 .signup input { flex: 1; min-width: 0; background: none; border: 0; color: var(--ink); font: inherit; font-size: 16px; padding: 0 16px; outline: none; }
 .signup input::placeholder { color: var(--muted); }
-.signup .btn { min-height: 44px; flex: none; padding: 0 20px; }
+.signup .btn { min-height: 44px; flex: none; padding: 0 20px; justify-content: center; }
 p.offer, .letters p.offer { color: var(--ink); }
 .offer strong { color: #E63946; font-weight: 600; }
 .fine { margin: 14px 0 0; font-size: 12px; color: var(--muted); }
@@ -128,3 +128,28 @@ footer { border-top: 1px solid var(--line); padding-block: 36px calc(36px + env(
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* funnel (28 Oct 2026): one wide primary button, the ask that closes an essay, the link-in-bio page */
+.btn.wide { width: 100%; max-width: 420px; min-height: 56px; font-size: 17px; }
+.sub-yt { text-align: center; margin: 16px 0 0; }
+.letters.inline { margin-top: clamp(40px, 6vw, 64px); padding-block: clamp(36px, 6vw, 56px) 0; }
+.letters .askq { margin: 18px 0 0; font-size: 15px; }
+.letters .askq a { display: inline-block; padding: 12px 0; line-height: 20px; color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); }
+
+/* mobile (audit 28 Oct 2026) */
+nav.top .links a { display: inline-flex; align-items: center; min-height: 44px; }
+nav.top .links a.buy { min-height: 44px; padding: 0 16px; }
+footer a { display: inline-flex; align-items: center; min-height: 44px; }
+footer .wrap { gap: 0 20px; }
+.jump a { min-height: 44px; display: inline-flex; align-items: center; }
+.kicker { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-bottom: 14px; }
+.also a { display: inline-block; padding: 10px 0; line-height: 24px; }
+.bookline a { display: inline-block; padding: 10px 0; line-height: 24px; }
+@media (max-width: 480px) {
+  .signup { flex-direction: column; border-radius: 28px; padding: 8px; gap: 8px; }
+  .signup input { min-height: 48px; padding: 0 16px; text-align: center; }
+  .signup .btn { width: 100%; min-height: 48px; }
+  .label, .tag { font-size: 12px; }
+  .fine { font-size: 13px; }
+  nav.top .links { font-size: 14px; }
+}

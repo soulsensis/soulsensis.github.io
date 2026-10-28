@@ -38,7 +38,7 @@ a { color: inherit; }
 .skip { position: absolute; left: 16px; top: -60px; z-index: 20; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: #000; font-size: 13px; text-decoration: none; transition: top .2s ease; }
 .skip:focus-visible { top: 12px; outline-offset: 2px; }
 nav { position: fixed; inset: 0 0 auto; z-index: 10; padding-top: env(safe-area-inset-top, 0px); transition: background .3s ease, backdrop-filter .3s ease; }
-nav.solid { background: rgba(0,0,0,.72); backdrop-filter: blur(10px); }
+nav.solid { background: rgba(0,0,0,.92); backdrop-filter: blur(10px); }
 nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 68px; }
 .mark { display: flex; align-items: center; gap: 10px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 15px; }
 nav .links { display: flex; gap: 26px; font-size: 13px; color: var(--muted); }
@@ -79,13 +79,19 @@ footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
   .draw *, .rise, .slow { transition: none !important; animation: none !important; }
   .draw * { stroke-dashoffset: 0; } .rise { opacity: 1; transform: none; }
 }
+nav .links { align-items: center; } nav .links a { display: inline-flex; align-items: center; min-height: 44px; }
+.mark { min-height: 44px; }
+footer a { display: inline-flex; align-items: center; min-height: 44px; }
+footer .wrap { gap: 0 20px; align-items: center; }
+@media (max-width: 480px) { .label { font-size: 12px; } .fine { font-size: 13px; } nav .links { font-size: 14px; } .eyebrow { font-size: 11px; letter-spacing: .12em; white-space: normal; } }
 </style>
+<noscript><style>.rise{opacity:1!important;transform:none!important}.draw *{stroke-dashoffset:0!important}.dot{opacity:1!important}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the text</a>
 <nav id="nav" class="g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/index.html" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="4"><circle r="20"/><circle cx="20" r="20"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/></g><circle r="5" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="/index.html#book">The book</a><a href="/essays.html">Essays</a><a class="far" href="/index.html#ask">Ask</a><a class="far" href="/index.html#ways">Watch</a></div>
+  <div class="links"><a href="/index.html#book">The book</a><a href="/essays.html">Essays</a><a class="far" href="/question/">Ask</a><a class="far" href="https://www.youtube.com/@soulsensis" rel="noopener">Watch</a></div>
 </div></nav>
 
 <main id="main">
@@ -116,7 +122,7 @@ const F = document.getElementById("flower"); if (F) { const fr = 64; circle(F, 0
 for (let k = 0; k < 6; k++) { circle(F, ...pol(fr, k * 60), fr); circle(F, ...pol(2 * fr, k * 60), fr); circle(F, ...pol(fr * Math.sqrt(3), 30 + k * 60), fr); }
 circle(F, 0, 0, 3 * fr); circle(F, 0, 0, 3 * fr + 18); for (let k = 0; k < 12; k++) circle(F, ...pol(3 * fr, k * 30), fr); }
 requestAnimationFrame(() => { document.querySelectorAll(".draw").forEach((el) => el.classList.add("on")); document.querySelectorAll(".rise").forEach((el, i) => setTimeout(() => el.classList.add("on"), i * 90)); });
-const nav = document.getElementById("nav"); addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 40), { passive: true });
+const nav = document.getElementById("nav"); addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 8), { passive: true });
 </script>
 </body>
 </html>
