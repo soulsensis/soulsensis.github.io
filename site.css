@@ -153,3 +153,7 @@ footer .wrap { gap: 0 20px; }
   .fine { font-size: 13px; }
   nav.top .links { font-size: 14px; }
 }
+/* 28 Oct 2026: wide background art made phones lay the page out wider than the screen; the anti-spam field showed */
+html { overflow-x: clip; }
+.g, .solo, header { overflow-x: clip; }
+.hp { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
