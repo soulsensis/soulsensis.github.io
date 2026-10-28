@@ -157,3 +157,12 @@ footer .wrap { gap: 0 20px; }
 html { overflow-x: clip; }
 .g, .solo, header { overflow-x: clip; }
 .hp { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+/* 29 Oct 2026: the question form ran label, box and email together on one line; each field now stands on its own */
+.qform { display: grid; gap: 18px; margin-top: 22px; }
+.qform label { display: grid; gap: 8px; font-size: 15px; color: var(--ink); }
+.qform textarea, .qform input[type="email"] { width: 100%; box-sizing: border-box; font: 16px/1.55 var(--serif, Georgia, serif);
+  color: var(--ink); background: rgba(245,242,234,.05); border: 1px solid rgba(245,242,234,.22); border-radius: 8px; padding: 14px 16px; }
+.qform textarea { min-height: 170px; resize: vertical; }
+.qform textarea:focus, .qform input[type="email"]:focus { outline: none; border-color: rgba(245,242,234,.6); }
+.qform .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.qform .row .count { font-size: 13px; color: var(--muted, #a29e96); }
