@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Start here · soulsensis</title>
-<meta name="description" content="Honest essays from one person still working it out. Subscribe on YouTube, or get the first chapter free by email.">
+<meta name="description" content="Honest essays from one person still working it out. Subscribe on YouTube.">
 <link rel="canonical" href="https://soulsensis.com/start/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="soulsensis">
 <meta property="og:url" content="https://soulsensis.com/start/">
 <meta property="og:title" content="Start here · soulsensis">
-<meta property="og:description" content="Honest essays from one person still working it out. Subscribe on YouTube, or get the first chapter free by email.">
+<meta property="og:description" content="Honest essays from one person still working it out. Subscribe on YouTube.">
 <meta property="og:image" content="https://soulsensis.com/book-og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Start here · soulsensis">
-<meta name="twitter:description" content="Honest essays from one person still working it out. Subscribe on YouTube, or get the first chapter free by email.">
+<meta name="twitter:description" content="Honest essays from one person still working it out. Subscribe on YouTube.">
 <meta name="twitter:image" content="https://soulsensis.com/book-og.jpg">
 <meta name="theme-color" content="#000000">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -47,29 +47,7 @@
 <h1>Sit still enough to hear it.</h1>
 <p class="sub">Honest essays from one person still working it out. For anyone who feels stuck, rushed or half alive.</p>
 <a class="btn primary wide" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a>
-<p class="then" id="letters">Or get the first chapter free by email.</p>
-<form class="signup" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post">
-  <label for="email" class="vh">Your email</label>
-  <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email">
-  <button class="btn quiet" type="submit">Send it to me</button>
-</form>
-<p class="fine">One essay a week. Free. Unsubscribe any time.</p>
 <div class="more"><a href="/essays/step-away/">Read today’s essay</a><a href="/question/">Leave a question</a></div>
 </div></main>
-<script>
-// Email sign-up: post to Substack in the background, then our own thank-you page (same tab, nothing to close).
-// No fetch, or the post fails: the plain form posts to Substack as before.
-document.querySelectorAll("form.signup").forEach(function (f) {
-  f.addEventListener("submit", function (ev) {
-    if (!window.fetch || !window.URLSearchParams || !f.checkValidity()) return;
-    ev.preventDefault();
-    var b = f.querySelector("button"); if (b) { b.disabled = true; b.textContent = "Sending…"; }
-    var m = /[?&]src=([\w-]+)/.exec(location.search);
-    fetch(f.action, { method: "POST", mode: "no-cors", body: new URLSearchParams({ email: f.email.value }) })
-      .then(function () { location.assign("/thanks/" + (m ? "?src=" + m[1] : "")); })
-      .catch(function () { f.submit(); });
-  });
-});
-</script>
 </body>
 </html>

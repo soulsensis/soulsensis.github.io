@@ -33,7 +33,7 @@
 <a class="skip" href="#main">Skip to the reading</a>
 <nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="4"><circle r="20"/><circle cx="20" r="20" transform="rotate(0)"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/></g><circle r="5" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="/essays.html">Read</a><a class="far" href="/book.html">The book</a><a class="buy" href="#letters">Free letters</a></div>
+  <div class="links"><a href="/essays.html">Read</a><a class="far" href="/book.html">The book</a></div>
 </div></nav>
 
 <main id="main"><article>
@@ -45,20 +45,9 @@
 <div class="g"><div class="col">
 <div class="prose opening"><p>Much of what I read in self-development, spirituality and metaphysics rests on one quiet assumption: that something is fundamentally wrong with you. That you are broken and need constant repair. I lived inside that assumption for years.</p></div>
 <aside class="inbook" aria-label="Finish it in the book"><img src="/book-cover.jpg" width="600" height="960" alt="The cover of Sit Still Enough to Hear It" loading="lazy">
-<div><h2>The rest of this essay is in chapter 6 of the book.</h2><p>Sit Still Enough to Hear It: twenty essays, in six chapters. The book is being finished. Join the letters to hear the day it&#x27;s out.</p>
-<div class="acts"><a class="btn primary" href="#letters">Get the first chapter free</a><a class="btn quiet" href="/book.html">About the book</a></div></div></aside>
-<section class="letters inline" id="letters" aria-labelledby="letters-h">
-  <h2 id="letters-h">If this landed, the letters bring one a week.</h2>
-  <p class="offer"><strong>The first chapter of the book is free</strong> in your welcome email.</p>
-  <form class="signup" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post">
-    <label for="email" class="vh">Your email</label>
-    <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email">
-    <button class="btn primary" type="submit">Send me the first chapter</button>
-  </form>
-  <p class="fine">Free. No noise. Unsubscribe any time.</p>
-  <p class="askq"><a href="/question/">Leave a question</a></p>
-</section>
-
+<div><h2>The rest of this essay is in chapter 6 of the book.</h2><p>Sit Still Enough to Hear It: twenty essays, in six chapters. The book is being finished.</p>
+<div class="acts"><a class="btn quiet" href="/book.html">About the book</a></div></div></aside>
+<p class="askq"><a href="/question/">Leave a question</a></p>
 <svg class="orn" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="1.2"><circle r="20"/><circle cx="20" r="20" transform="rotate(0)"/><circle cx="20" r="20" transform="rotate(60)"/><circle cx="20" r="20" transform="rotate(120)"/><circle cx="20" r="20" transform="rotate(180)"/><circle cx="20" r="20" transform="rotate(240)"/><circle cx="20" r="20" transform="rotate(300)"/><circle r="40"/></g><circle r="2.6" fill="#E63946"/></svg>
 <nav class="next" aria-label="Keep reading">
 <a href="/book.html"><div><small>The end of the book’s topics</small><b>Read it all in Sit Still Enough to Hear It</b></div><span class="arrow" aria-hidden="true">→</span></a>
@@ -70,7 +59,7 @@
 </main>
 <footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span><a href="/essays.html">Read</a> · <a href="/book.html">The book</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="https://soulsensis.substack.com" rel="noopener">Letters</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="/app.html">Get the app</a> · <a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
+  <span><a href="/essays.html">Read</a> · <a href="/book.html">The book</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="/app.html">Get the app</a> · <a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
 </div></footer>
 <script>
 // Send each reader to their own Amazon (local price, local printing and shipping). Same ASINs everywhere.
@@ -86,21 +75,6 @@
     ["href", "data-amazon-url"].forEach(function (k) { var v = a.getAttribute(k); if (v) a.setAttribute(k, v.replace("amazon.com/dp/", "amazon." + s + "/dp/")); });
   });
 })();
-</script>
-<script>
-// Email sign-up: post to Substack in the background, then our own thank-you page (same tab, nothing to close).
-// No fetch, or the post fails: the plain form posts to Substack as before.
-document.querySelectorAll("form.signup").forEach(function (f) {
-  f.addEventListener("submit", function (ev) {
-    if (!window.fetch || !window.URLSearchParams || !f.checkValidity()) return;
-    ev.preventDefault();
-    var b = f.querySelector("button"); if (b) { b.disabled = true; b.textContent = "Sending…"; }
-    var m = /[?&]src=([\w-]+)/.exec(location.search);
-    fetch(f.action, { method: "POST", mode: "no-cors", body: new URLSearchParams({ email: f.email.value }) })
-      .then(function () { location.assign("/thanks/" + (m ? "?src=" + m[1] : "")); })
-      .catch(function () { f.submit(); });
-  });
-});
 </script>
 <script>
 document.querySelectorAll("a.video[data-id]").forEach((a) => a.addEventListener("click", (ev) => {
