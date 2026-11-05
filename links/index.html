@@ -50,7 +50,7 @@
 .links li a:hover { border-color: var(--ink); }
 .links li a small { display: block; margin-top: 3px; font-weight: 300; font-size: 13px; color: var(--muted); }
 .links li a.first { background: var(--heart-fill, #D9303D); border-color: transparent; color: #fff; }
-.links li a.first small { color: rgba(255,255,255,.85); }
+.links li a.first small { color: #fff; }   /* 6 Nov audit: .85 white on the red was 3.8:1, under WCAG AA 4.5 */
 .links .home { margin-top: 10px; }
 .links .home a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-underline-offset: 4px; }
 </style>
