@@ -20,16 +20,22 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="soulsensis">
-<script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js"));</script>
+<script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));</script>
+<script>/* the entrance animation runs only when the page is on screen and motion is wanted; without this class everything is simply visible (5 Nov 2026) */
+try{if(document.visibilityState==="visible"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("hero-anim")}catch(e){}</script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap"></noscript>
 <style>
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946;
-  --sans: "Montserrat", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", Georgia, serif; color-scheme: dark; }
+:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D;
+  --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
+/* 5 Nov 2026: metric-matched fallbacks (measured in the browser: Montserrat is 1.11 x Arial, Source Serif 4 is 0.96 x Georgia), so the swap to the web font moves nothing */
+@font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
+@font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; min-height: 100svh; display: flex; flex-direction: column; }
 a { color: inherit; }
 .g { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
@@ -41,11 +47,12 @@ nav { position: fixed; inset: 0 0 auto; z-index: 10; padding-top: env(safe-area-
 nav.solid { background: rgba(0,0,0,.92); backdrop-filter: blur(10px); }
 nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 68px; }
 .mark { display: flex; align-items: center; gap: 10px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 15px; }
-nav .links { display: flex; gap: 26px; font-size: 13px; color: var(--muted); }
+nav .links { display: flex; gap: 10px; font-size: 14px; color: var(--muted); }
 nav .links a { text-decoration: none; transition: color .2s; } nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
-@media (max-width: 640px) { nav .links { gap: 18px; } nav .links a.far { display: none; } }
+@media (max-width: 640px) { nav .links { gap: 4px; } nav .links a { padding: 0 6px; } nav .links a.far { display: none; } .mark { letter-spacing: .14em; } }
 main { flex: 1; }
-.draw * { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.4s cubic-bezier(.65,0,.35,1); }
+.draw * { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 2.4s cubic-bezier(.65,0,.35,1); }
+.anim .draw:not(.on) * { stroke-dashoffset: 1; }
 .draw.on * { stroke-dashoffset: 0; }
 .draw.on *:nth-child(2n) { transition-delay: .12s; } .draw.on *:nth-child(3n) { transition-delay: .24s; } .draw.on *:nth-child(5n) { transition-delay: .36s; }
 .head { position: relative; overflow: hidden; padding-block: 128px 40px; }
@@ -55,7 +62,7 @@ main { flex: 1; }
 @keyframes turn { to { transform: rotate(360deg); } }
 .head .copy { position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 16px; max-width: 640px; }
 .head .copy::before { content: ""; position: absolute; inset: -20% -14%; background: radial-gradient(closest-side, rgba(0,0,0,.85), rgba(0,0,0,.5) 60%, transparent); z-index: -1; }
-.label { font-size: 11px; letter-spacing: .38em; color: var(--muted); text-transform: uppercase; margin: 0; }
+.label { font-size: 12px; letter-spacing: .38em; color: var(--muted); text-transform: uppercase; margin: 0; }
 h1 { margin: 0; font-weight: 200; font-size: clamp(34px, 4.2vw, 56px); line-height: 1.06; letter-spacing: .02em; }
 .lede { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(18px, 2vw, 22px); line-height: 1.45; color: #e9e5dc; max-width: 40ch; }
 .date { margin: 0; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
@@ -68,22 +75,26 @@ h1 { margin: 0; font-weight: 200; font-size: clamp(34px, 4.2vw, 56px); line-heig
 .prose a.btn { text-decoration: none; }
 .btn { font-family: var(--sans); display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform .15s ease, box-shadow .25s ease, border-color .25s ease; }
 .btn:active { transform: scale(.97); }
-.btn.primary { background: var(--heart); color: #fff; } .btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
+.btn.primary { background: var(--heart-fill); color: #fff; } .btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
 .btn.quiet { border: 1px solid #3a3a42; } .btn.quiet:hover { border-color: var(--ink); }
 footer { border-top: 1px solid var(--line); padding-block: 36px calc(36px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
-.rise { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
-.rise.on { opacity: 1; transform: none; }
+/* 5 Nov 2026: the head rises by CSS alone, so a slow or blocked script never leaves a dark page */
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.hero-anim .rise { animation: rise .6s cubic-bezier(.2,.8,.2,1) both; }
+.settled .rise { animation: none; opacity: 1; transform: none; }
+.hero-anim .rise:nth-child(2) { animation-delay: .09s; } .hero-anim .rise:nth-child(3) { animation-delay: .18s; } .hero-anim .rise:nth-child(4) { animation-delay: .27s; }
 @media (prefers-reduced-motion: reduce) {
   .draw *, .rise, .slow { transition: none !important; animation: none !important; }
-  .draw * { stroke-dashoffset: 0; } .rise { opacity: 1; transform: none; }
+  .draw * { stroke-dashoffset: 0 !important; } .rise { opacity: 1 !important; transform: none !important; }
 }
-nav .links { align-items: center; } nav .links a { display: inline-flex; align-items: center; min-height: 44px; }
+nav .links { align-items: center; } nav .links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; min-width: 44px; justify-content: center; }
 .mark { min-height: 44px; }
-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+footer a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; min-width: 44px; justify-content: center; }
+footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
 footer .wrap { gap: 0 20px; align-items: center; }
-@media (max-width: 480px) { .label { font-size: 12px; } .fine { font-size: 13px; } nav .links { font-size: 14px; } .eyebrow { font-size: 11px; letter-spacing: .12em; white-space: normal; } }
+@media (max-width: 480px) { .label { font-size: 12px; } .fine { font-size: 13px; } nav .links { font-size: 14px; } .eyebrow { font-size: 12px; letter-spacing: .12em; white-space: normal; } }
 </style>
 <noscript><style>.rise{opacity:1!important;transform:none!important}.draw *{stroke-dashoffset:0!important}.dot{opacity:1!important}</style></noscript>
 </head>
@@ -121,7 +132,9 @@ const pol = (r, deg) => [r * Math.cos(deg * Math.PI / 180), r * Math.sin(deg * M
 const F = document.getElementById("flower"); if (F) { const fr = 64; circle(F, 0, 0, fr);
 for (let k = 0; k < 6; k++) { circle(F, ...pol(fr, k * 60), fr); circle(F, ...pol(2 * fr, k * 60), fr); circle(F, ...pol(fr * Math.sqrt(3), 30 + k * 60), fr); }
 circle(F, 0, 0, 3 * fr); circle(F, 0, 0, 3 * fr + 18); for (let k = 0; k < 12; k++) circle(F, ...pol(3 * fr, k * 30), fr); }
-requestAnimationFrame(() => { document.querySelectorAll(".draw").forEach((el) => el.classList.add("on")); document.querySelectorAll(".rise").forEach((el, i) => setTimeout(() => el.classList.add("on"), i * 90)); });
+document.documentElement.classList.add("anim"); requestAnimationFrame(() => document.querySelectorAll(".draw").forEach((el) => el.classList.add("on")));
+// belt and braces: 1.5 s after load the entrance is over, so the hero is simply shown even where no frame has drawn
+setTimeout(() => document.documentElement.classList.add("settled"), 1500);
 const nav = document.getElementById("nav"); addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 8), { passive: true });
 </script>
 </body>
