@@ -201,3 +201,11 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }     /* "
 .qlist a { display: block; padding: 14px 0; min-height: 44px; font-size: 16px; line-height: 1.45; text-decoration: none; }
 .qlist a:hover { color: var(--heart); }
 .qline a { display: inline-block; padding: 12px 0; }
+/* 6 Nov 2026 retention: read next across topics, and the essay finder on /essays.html */
+.related { display: flex; flex-direction: column; margin-top: clamp(40px, 6vw, 56px); }
+.related .label { margin: 0 0 6px; }
+.find { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 22px 0 0; }
+.find label { font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
+.find input { flex: 1 1 220px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #3a3a42; background: rgba(0,0,0,.45); color: var(--ink); font: 400 16px var(--sans); }
+.find input:focus-visible { outline: 2px solid var(--heart); outline-offset: 2px; }
+.find[hidden], .row[hidden], section.topic[hidden] { display: none; }
