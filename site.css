@@ -246,7 +246,7 @@ p.kicker.feels { justify-content: center; margin: 0 0 14px; }
 /* ---- 11 Nov 2026: the essay page as a reading page (his: "feels bland ... narrow margins for reading ... a read out ...
    access to asksoulsensis"). An editorial column: the title and the read-out lead on the left, the words start on the
    first screen, the film follows the words. The name in the top bar is set heavier (his: "a bit stronger or bolder"). */
-.mark { font-weight: 500; letter-spacing: .16em; }
+.mark { font-weight: 400; letter-spacing: .24em; }   /* the logo's name: Regular, spaced (brandkit/logo.py) */
 article .col { max-width: 640px; }
 .essay-head { text-align: left; padding-block: clamp(36px, 6vw, 72px) clamp(20px, 3vw, 30px); }
 .essay-head .art { left: auto; right: -34%; top: 46%; transform: translate(0, -50%); width: min(760px, 130vw); opacity: .13; }
@@ -273,3 +273,53 @@ article .col { max-width: 640px; }
 .askcard h2 { margin: 10px 0 8px; font-weight: 500; font-size: clamp(24px, 3.4vw, 30px); letter-spacing: -.015em; }
 .askcard p { margin: 0 0 18px; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: #c9c5bc; } .askcard p.label { margin: 0; font-family: var(--sans); font-size: 12px; color: var(--heart); }
 @media (max-width: 520px) { .listen { gap: 10px; padding-right: 14px; } .essay-head .art { right: -70%; } }
+
+/* ---- 11 Nov 2026 (night): a journal, not a product page. His words: "make the website more narrower, more a blog style,
+   it is too wide - we arent apple ... add a soulsensis spin". Three critics' fixes (reader, brand, editorial):
+   one narrow column for every page and the top bar, serif for what is said, Montserrat for the name and small labels,
+   ruled lines in place of cards and capsules, one crimson point, no motion but a link's colour. */
+body { overflow-x: visible; }
+.wrap, nav.top .wrap, .topics-head .wrap, .bookband .wrap { max-width: 680px; }
+article .col, .col { max-width: 620px; }
+nav.top { background: #000; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid var(--line); }
+nav.top .links { gap: 4px; } nav.top .links a { padding: 0 8px; }
+h1, h2, .row b, .next b, .related .row b { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
+.label { letter-spacing: .16em; text-transform: lowercase; font-size: 12px; font-weight: 500; color: var(--muted); }
+/* the list page: the journal's index */
+.topics-head { text-align: left; padding-block: clamp(40px, 7vw, 72px) 10px; }
+.topics-head .art { display: none; }
+.topics-head h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
+.topics-head .lede { max-width: 34ch; font-size: clamp(18px, 2.6vw, 21px); }
+.chips { justify-content: flex-start; gap: 0 18px; }
+.chip { border: 0; background: none; padding: 0; min-height: 44px; border-radius: 0; font: 400 17px var(--serif); color: #b9b5ab; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; }
+.chip.on { background: none; color: var(--ink); text-decoration-color: var(--heart); } .chip small { margin-left: 5px; font: 400 12px var(--sans); color: var(--muted); }
+.row { grid-template-columns: 1fr; gap: 6px; padding: 26px 0; transition: none; } .row:hover { padding-left: 0; } .row:hover b { color: #fff; }
+.row time, .row .kind { display: block; margin-bottom: 6px; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--muted); }
+.row b { font-size: clamp(22px, 3.2vw, 26px); line-height: 1.25; transition: color .2s; }
+.list .row p, .related .row p { font-size: 17px; -webkit-line-clamp: 2; line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.row .feels { display: none; }
+.tag, .tag.full, .tag.watch { justify-self: start; border: 0; padding: 0; border-radius: 0; margin: 2px 0 0; font: 400 13px var(--sans); color: var(--muted); }
+.feel, a.feel { border: 0; padding: 0; background: none; border-radius: 0; min-height: 32px; font: italic 400 15px var(--serif); color: var(--muted); }
+.feels { gap: 0 14px; }
+/* buttons: one filled, square-shouldered; the rest are underlined words */
+.btn { border-radius: 4px; }
+.btn.quiet { border: 0; background: none; padding: 0; min-height: 44px; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
+/* the essay */
+.essay-head { padding-block: clamp(34px, 6vw, 64px) 10px; } .essay-head .art { display: none; }
+.essay-head h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
+.essay-head p.kicker.feels { margin: 0 0 8px; }
+.listen { margin: 6px 0 26px; border-radius: 6px; background: #0b0b0d; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.listen.on { top: 10px; }
+.prose { font-size: clamp(18px, 2vw, 21px); line-height: 1.7; } .prose p { margin: 0 0 1.2em; }
+.prose p:first-child { font-size: 1.22em; line-height: 1.5; color: var(--ink); }
+.prose p:first-child::first-letter { float: none; font-size: inherit; line-height: inherit; padding: 0; color: inherit; font-weight: inherit; }
+.prose p.short { margin: 1.5em 0; padding-left: 20px; border-left: 1px solid var(--heart); font-size: 1.22em; line-height: 1.4; color: var(--ink); font-style: italic; }
+@media (max-width: 520px) { .prose { font-size: 19px; } }
+.video { border-radius: 4px; max-width: none; }
+.askcard, .inbook, .next a { border-radius: 4px; background: none; }
+.askcard { border: 0; border-top: 1px solid rgba(245,242,234,.16); padding: 26px 0 0; position: relative; }
+.askcard::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+.askcard h2 { font-size: clamp(25px, 4vw, 30px); } .askcard p.label { color: var(--muted); }
+.bookband { text-align: left; } .bookband img { box-shadow: none; }
+footer .wrap { max-width: 680px; }
+@media (prefers-reduced-motion: no-preference) { .rise { transition-duration: .01s; } .list.swap .row { animation: none; } }
