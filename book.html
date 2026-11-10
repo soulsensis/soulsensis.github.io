@@ -66,7 +66,7 @@ try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!/[?&]still/.tes
    apple ... add a soulsensis spin"): one 640 px column set left, serif for what is said, Montserrat for small labels,
    ruled hairlines with a short crimson tick. One scene stays pinned: the open pages (#inside). The book in the hero
    still turns in the hand. */
-:root { --spine: 0.1059; /* the book's depth over its cover width: written by the build from the launch file's page count (site.shape_book); a longer book is drawn thicker */
+:root { --spine: 0.1007; /* the book's depth over its cover width: written by the build from the launch file's page count (site.shape_book); a longer book is drawn thicker */
   --ground: #000; --ink: #F5F2EA; --muted: #a29e96; --line: #24242a; --rule: rgba(245,242,234,.16); --heart: #E63946; --paper: #F5F2EA; --paper-ink: #111013; --paper-muted: #5d5a54;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
@@ -261,7 +261,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </div>
     <div class="stage" id="heroStage">
       <div class="floor" aria-hidden="true"></div>
-      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" fetchpriority="high" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" loading="lazy" alt=""><img class="f spine" src="book/spine.webp" width="286" height="4050" decoding="async" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" fetchpriority="high" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" loading="lazy" alt=""><img class="f spine" src="book/spine.webp" width="272" height="4050" decoding="async" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
       <p class="turn" id="turnHint" aria-hidden="true">Drag to turn</p>
     </div>
   </header>
@@ -272,13 +272,13 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <p class="reading">It is not the tiredness of the body. It is the tiredness of waiting. Waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is.</p>
     <p class="reading">Contentment was never about the absence of difficulty.</p>
     <p class="reading">All I had to do was sit still enough to hear it.</p>
-    <p class="reading"><!--COUNTS-->34 essays and 85 shorter pieces. Open it anywhere.<!--/COUNTS--></p>
+    <p class="reading"><!--COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/COUNTS--></p>
   </div></section>
 
   <section class="pin look g" id="look" style="--len:4.2" aria-labelledby="look-h"><div class="sticky">
     <h2 class="look-h" id="look-h">Take a closer look.</h2>
     <div class="scene3d">
-      <div class="bk" id="lookBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" alt="The front cover"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" alt="The back cover; its words follow"><img class="f spine" src="book/spine.webp" width="286" height="4050" decoding="async" alt="The spine: Your soul knows best, soulsensis"><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <div class="bk" id="lookBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" alt="The front cover"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" alt="The back cover; its words follow"><img class="f spine" src="book/spine.webp" width="272" height="4050" decoding="async" alt="The spine: Your soul knows best, soulsensis"><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
     </div>
     <p class="chip" id="lookChip" aria-hidden="true">The front</p>
     <div class="blurb" id="blurb"></div>
@@ -292,13 +292,13 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </div>
     <div class="scene3d">
       <div class="open" id="open"><!--OPEN-->
-        <div class="pg"><img data-src="book/p243.webp" width="1800" height="2700" decoding="async" alt="Page 243 as printed. Chapter 101, The cage only holds because you believe it does."></div>
-        <div class="leaf mid"><div class="lf-front"><img data-src="book/p183.webp" width="1200" height="1800" decoding="async" alt="Page 183 as printed. Chapter 74, The lighthouse does not try to shine."></div><div class="lf-back"><img data-src="book/p242.webp" width="1200" height="1800" decoding="async" alt="Page 242 as printed. Part 6, Contentment, the only destination."></div></div>
-        <div class="leaf mid"><div class="lf-front"><img src="book/p15.webp" width="1200" height="1800" decoding="async" alt="Page 15 as printed. Chapter 1, Perception is key."></div><div class="lf-back"><img data-src="book/p182.webp" width="1200" height="1800" decoding="async" alt="Page 182 as printed. Part 5, Sit still enough to hear it."></div></div>
-        <div class="leaf" id="leaf"><div class="lf-front"><img src="book/front.webp" width="1350" height="2025" decoding="async" alt=""></div><div class="lf-back"><img src="book/p14.webp" width="1200" height="1800" decoding="async" alt="Page 14 as printed. Part 1, A fraction of who I am."></div></div>
+        <div class="pg"><img data-src="book/p243.webp" width="1920" height="2880" decoding="async" alt="Page 243 as printed. Chapter 99, The actuality of the soul."></div>
+        <div class="leaf mid"><div class="lf-front"><img data-src="book/p193.webp" width="1200" height="1800" decoding="async" alt="Page 193 as printed. Chapter 70, Where are you rushing to?."></div><div class="lf-back"><img data-src="book/p242.webp" width="1920" height="2880" decoding="async" alt="Page 242 as printed."></div></div>
+        <div class="leaf mid"><div class="lf-front"><img src="book/p19.webp" width="1200" height="1800" decoding="async" alt="Page 19 as printed. Chapter 2, We weren’t meant to be living the way we do."></div><div class="lf-back"><img data-src="book/p192.webp" width="1200" height="1800" decoding="async" alt="Page 192 as printed."></div></div>
+        <div class="leaf" id="leaf"><div class="lf-front"><img src="book/front.webp" width="1350" height="2025" decoding="async" alt=""></div><div class="lf-back"><img src="book/p18.webp" width="1200" height="1800" decoding="async" alt="Page 18 as printed."></div></div>
       <!--/OPEN--></div>
     </div>
-    <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 1 · Perception is key|Chapter 74 · The lighthouse does not try to shine|Chapter 101 · The cage only holds because you believe it does" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 14 and 15, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
+    <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 18 and 19, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
   </div></section>
 
   <section class="flow g" id="feel" aria-label="What the book is for"><div class="wrap">

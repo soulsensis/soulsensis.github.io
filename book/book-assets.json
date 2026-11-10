@@ -1,66 +1,67 @@
 {
- "spine_ratio": 0.10592592592592592,
+ "spine_ratio": 0.10074074074074074,
+ "spine_in": 0.604,
  "spine_px": [
-  286,
+  272,
   4050
  ],
  "cover_px": [
   1350,
   2025
  ],
- "pages": 282,
+ "pages": 268,
  "essays": 34,
- "pieces": 85,
- "left": 14,
- "right": 15,
+ "pieces": 79,
+ "left": 18,
+ "right": 19,
  "stops": [
-  14,
-  182,
+  18,
+  192,
   242
  ],
  "shown": [
   {
-   "n": 14,
+   "n": 18,
    "w": 1200,
    "h": 1800,
-   "head": "Part 1 · A fraction of who I am",
-   "alt": "PART 1 A fraction of who I am We live in a world where people are habituated to not listen to their truest calling. Breaking out of the script is literally just breaking out of the habit of not listening to yourself."
+   "head": "",
+   "alt": "Numbness is a cheap sell. The power of being aware enough to interpret your own life with optimism is maybe a harder sell. Rather, as with anything, over time, patience and an unwavering conviction will lead one to a higher vibratory way of being. It leads to an existence not marred by peaks of happ"
   },
   {
-   "n": 15,
+   "n": 19,
    "w": 1200,
    "h": 1800,
-   "head": "Chapter 1 · Perception is key",
-   "alt": "CHAPTER 1 Perception is key Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me, watching everyone else appear further along, better positioned, more accomplished, measuring my progress against theirs as if we were running the same race. I caught myself spiral"
+   "head": "Chapter 2 · We weren’t meant to be living the way we do",
+   "alt": "CHAPTER 2 We weren’t meant to be living the way we do We weren’t meant to be living the way we do. Yet so many of us feel we don’t have a choice. But we have choices, and we make decisions all the time, every day. Why bother questioning otherwise? Life can be lived deliberately and consciously, with"
   },
   {
-   "n": 182,
+   "n": 192,
    "w": 1200,
    "h": 1800,
-   "head": "Part 5 · Sit still enough to hear it",
-   "alt": "PART 5 Sit still enough to hear it When you're able to sit with yourself in the stillness of your own mind, you actually start to see how crazy the world is around you. The heart speaks in truth when all is silent so a mind that does not too wish to hear truth will be loud and boisterous."
+   "head": "",
+   "alt": "You will think differently to be different. Where it lands most strongly is this: there is so much to this world to explore, and every day is an opportunity to do so, only if you can see it that way. Step aside. Let the pendulum swing. The beauty was always there. 192 Your soul knows best"
   },
   {
-   "n": 183,
+   "n": 193,
    "w": 1200,
    "h": 1800,
-   "head": "Chapter 74 · The lighthouse does not try to shine",
-   "alt": "CHAPTER 74 The lighthouse does not try to shine On the tiredness of performing a life rather than living it. There is a particular kind of tiredness that comes from living a life that is not yours. It is not the tiredness of physical work, nor the sharper tiredness that arrives at the end of a long "
+   "head": "Chapter 70 · Where are you rushing to?",
+   "alt": "CHAPTER 70 Where are you rushing to? Everyone feels rushed, but no one is asking: where are you rushing to? I think one of the most important things in life is to be able to slow down. Our world is moving too fast. We’re trying to hit different milestones all at the same time, and everything needs t"
   },
   {
    "n": 242,
-   "w": 1200,
-   "h": 1800,
-   "head": "Part 6 · Contentment, the only destination",
-   "alt": "PART 6 Contentment, the only destination I don't want peace to be at the end of it all. It doesn't make sense. I want peace now. I will choose to be peaceful now until the day I die."
+   "w": 1920,
+   "h": 2880,
+   "head": "",
+   "alt": "part in a new way of life through a new way of thinking, feeling and being. That is how I transmute the years of pain I have endured. It has led me to this point, and I truly believe that freedom is everyone’s true aspiration. I just want people to know it is possible. You will find meaning. You jus"
   },
   {
    "n": 243,
-   "w": 1800,
-   "h": 2700,
-   "head": "Chapter 101 · The cage only holds because you believe it does",
-   "alt": "CHAPTER 101 The cage only holds because you believe it does I am at a park, walking, one step after another, no agenda, no destination beyond this moment, this path, this air. In that simplicity, something opens. Thoughts arrive without me forcing them, the mind loosens, and the heart begins to spea"
+   "w": 1920,
+   "h": 2880,
+   "head": "Chapter 99 · The actuality of the soul",
+   "alt": "CHAPTER 99 The actuality of the soul The current movement in self-development, spirituality and metaphysics is a complete deviation from what is right, one that has led many to believe there is something fundamentally wrong with them, a persistent narrative built entirely on the assump- tion of a de"
   }
  ],
- "source": "Sit still enough to hear it - paperback interior 6x9.pdf"
+ "source": "Your soul knows best - paperback interior 6x9.pdf"
 }
