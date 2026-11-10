@@ -102,6 +102,7 @@ h3 { margin: 0; font-weight: 500; font-size: clamp(22px, 2.6vw, 28px); line-heig
 .btn.quiet:hover { border-color: var(--ink); }
 .ctas { display: flex; gap: 8px 22px; flex-wrap: wrap; align-items: center; justify-content: center; }
 .price-line { margin: 0; color: var(--muted); font-size: 15px; }
+.price-line a { color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); display: inline-block; padding: 10px 0; margin: -10px 0; }
 
 /* the two bars: the site's own, then the book's, which stays */
 nav.gnav .wrap { display: flex; justify-content: space-between; align-items: center; height: 48px; gap: 12px; }
@@ -271,6 +272,14 @@ section.flow { padding-block: clamp(72px, 10vw, 140px); }
 .chosen b { font-weight: 500; } .chosen .cp { color: #c9c5bc; font-variant-numeric: tabular-nums; }
 .chosen .ca { display: inline-flex; align-items: center; min-height: 44px; }
 .chosen .ca .tag { font-size: 13px; font-weight: 500; color: var(--ink); border: 1px solid #3a3a42; border-radius: 999px; padding: 8px 14px; }
+/* 10 Nov 2026 (his yes): a way to be told when the book is out. A plain form to Substack, no script. */
+.notify { width: 100%; max-width: 620px; margin-top: clamp(40px, 6vw, 72px); display: flex; flex-direction: column; align-items: center; gap: 16px; scroll-margin-top: 90px; }
+.tell { display: flex; gap: 10px; width: 100%; }
+.tell input { flex: 1; min-width: 0; min-height: 50px; padding: 0 20px; border-radius: 999px; border: 1px solid #3a3a42; background: var(--raised); color: var(--ink); font: 400 16px var(--sans); transition: border-color .25s ease; }
+.tell input::placeholder { color: var(--muted); }
+.tell input:focus { border-color: var(--ink); outline: none; }
+.tell .btn { min-height: 50px; border: 0; background: var(--ink); color: #000; font-family: var(--sans); white-space: nowrap; }
+@media (max-width: 420px) { .tell { flex-direction: column; } }
 .swap { animation: swap .35s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes swap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 /* a soft light that follows the cursor across a card */
@@ -321,12 +330,12 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
 <a class="skip" href="#formats">Skip to the formats</a>
 <nav id="nav" class="gnav g" aria-label="Main"><div class="wrap">
   <a class="mark" href="index.html" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="book.html" aria-current="page">The book</a><a href="essays.html">Essays</a><a class="far" href="/conversation/">A conversation</a><a class="far" href="https://www.youtube.com/@soulsensis" rel="noopener">Watch</a></div>
+  <div class="links"><a href="book.html" aria-current="page">The book</a><a href="essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a><a class="far" href="https://www.youtube.com/@soulsensis" rel="noopener">Watch</a></div>
 </div></nav>
 <div class="lnav g" id="lnav"><div class="wrap">
   <a class="pname" href="#top">Your soul knows best</a>
   <span class="readline" id="readline" aria-hidden="true"></span>
-  <div class="lright"><a class="far" href="#look">The cover</a><a href="#inside">Look inside</a><!--BUY_NAV--><a class="pill" href="#formats">Coming soon</a><!--/BUY_NAV--></div>
+  <div class="lright"><a class="far" href="#look">The cover</a><a href="#inside">Look inside</a><!--BUY_NAV--><a class="pill" href="#notify">Coming soon</a><!--/BUY_NAV--></div>
 </div></div>
 
 <main id="top">
@@ -335,7 +344,7 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
       <p class="eyebrow rise">The book</p>
       <h1 class="rise">Your soul knows best.</h1>
       <p class="sub rise">Listen to your soul. All it has wanted is to be heard.</p>
-      <!--BUY_HERO--><p class="price-line rise">The book is being finished.</p><!--/BUY_HERO-->
+      <!--BUY_HERO--><p class="price-line rise">The book is being finished. <a href="#notify">Be told the day it is out</a></p><!--/BUY_HERO-->
       <a class="more rise" href="#inside">Look inside</a>
     </div>
     <div class="stage" id="heroStage">
@@ -424,6 +433,15 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
       </div>
     </div>
     <p class="chosen" id="chosen" aria-live="polite"><b id="cName"></b><span class="cp" id="cPrice"></span><span class="ca" id="cAct"></span></p>
+    <!--NOTIFY--><div class="notify rise" id="notify">
+      <h3>Be told the day it is out.</h3>
+      <form class="tell" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post">
+        <label for="email" class="vh">Your email</label>
+        <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email" inputmode="email">
+        <button class="btn" type="submit">Tell me</button>
+      </form>
+      <p class="fine">One email, when the book is out. Sent through Substack; unsubscribe in one tap.</p>
+    </div><!--/NOTIFY-->
     <p class="fine rise" style="margin-top:18px">Prices in Australian dollars unless marked. Amazon sets local prices in other countries.</p>
   </div></section>
 
@@ -449,7 +467,7 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
 
 <footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a href="/conversation/">A conversation</a><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/reading/">Free reading</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
+  <span class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="ask.html">Ask soulsensis</a><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/reading/">Free reading</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
 </div></footer>
 
