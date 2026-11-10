@@ -49,6 +49,10 @@ h1 { margin: 0; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; text-wrap: 
 .fine { margin: 14px 0 0; font-size: 12px; color: var(--muted); }
 .meta { margin: 22px 0 0; font-size: 12px; letter-spacing: .08em; color: var(--muted); }
 .meta span + span::before { content: "·"; margin: 0 10px; }
+/* a line of facts wraps between facts, never inside one, and a wrapped line never opens on the dot (the dot of a fact that starts a line falls in the clipped gutter) */
+.meta:has(> span) { display: flex; flex-wrap: wrap; row-gap: 4px; margin-left: -22px; clip-path: inset(0 0 0 22px); }
+.meta:has(> span) span { position: relative; padding-left: 22px; white-space: nowrap; }
+.meta:has(> span) span + span::before { position: absolute; left: 9px; margin: 0; }
 .tag { flex: none; justify-self: start; margin: 2px 0 0; font: 400 13px var(--sans); color: var(--muted); white-space: nowrap; }
 
 /* buttons: one filled, square-shouldered, in warm white; the rest are underlined words */
@@ -59,8 +63,8 @@ h1 { margin: 0; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; text-wrap: 
 .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; }
 
 /* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
-.askcard, .inbook, .bookband .wrap, .ruled { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
-.askcard::before, .inbook::before, .bookband .wrap::before, .ruled::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+.askcard, .inbook, .bookband .wrap, #questions > .wrap, .ruled { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
+.askcard::before, .inbook::before, .bookband .wrap::before, #questions > .wrap::before, .ruled::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
 
 /* a page's head: the essay, the list, and every page that opens with a title */
 .essay-head, .topics-head { position: relative; text-align: left; }
@@ -108,8 +112,7 @@ a.feel { display: inline-flex; align-items: center; min-height: 32px; transition
 .col > .prose:first-child { margin-top: 16px; }
 .prose > p:first-child { font-size: 1.14em; line-height: 1.55; color: var(--ink); }
 .prose p.short { margin: 1.5em 0; padding-left: 20px; border-left: 1px solid var(--heart); font-size: 1.22em; line-height: 1.4; color: var(--ink); font-style: italic; }
-.prose.opening { position: relative; }
-.prose.opening::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.8em; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
+/* an opening is whole sentences of his, so it is shown whole: the line above it and the block below it say the rest is in the book (11 Nov: the fade greyed half of a two-line opening) */
 @media (max-width: 520px) { .prose { font-size: 19px; } }
 
 /* the film follows the words */
@@ -150,7 +153,7 @@ a.feel { display: inline-flex; align-items: center; min-height: 32px; transition
 .inbook p { margin: 0 0 16px; max-width: 60ch; color: var(--muted); font-size: 14px; line-height: 1.6; }
 
 /* the list: a journal's index. A row is a date, a title, two lines of the opening at most, one quiet tag */
-.topic { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line); scroll-margin-top: 20px; }
+.topic { padding-block: clamp(40px, 6vw, 72px); scroll-margin-top: 20px; }
 #all { border-top: 0; padding-top: 0; }
 .topic-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
 .topic h2 { margin: 0; font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
@@ -161,7 +164,6 @@ a.feel { display: inline-flex; align-items: center; min-height: 32px; transition
 .row b { display: block; font-size: clamp(22px, 3.2vw, 26px); line-height: 1.25; transition: color .2s; }
 .row:hover b { color: #fff; }
 .row p { margin: 6px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: #b9b5ab; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
-.list .row p { max-width: 60ch; }
 .find { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 22px 0 0; }
 .find label { font-size: 15px; font-weight: 500; color: var(--muted); }
 .find input { flex: 1 1 220px; min-height: 44px; padding: 0 14px; border-radius: 4px; border: 1px solid #3a3a42; background: none; color: var(--ink); font: 400 16px var(--sans); }

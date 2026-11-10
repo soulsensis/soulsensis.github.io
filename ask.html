@@ -320,7 +320,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <p id="say">I'll tell you what I think the real problem is, what I'd do about it, and why.</p>
   </div></section>
 
-  <section class="pin how g" id="how" style="--len:13" aria-labelledby="how-h"><div class="sticky">
+  <section class="pin how g" id="how" style="--len:12" aria-labelledby="how-h"><div class="sticky">
     <div class="how-copy" id="howCopy">
       <h2 id="how-h">It names the real problem.</h2>
       <p class="sub">And tells you straight what to do. Three real answers from its testing.</p>
@@ -478,10 +478,10 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     { const { p, near } = prog(sayPin, vh); if (near) { const n = Math.round(seg(p, .04, .78) * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n)); } }
     // the conversation: the phone stands up, a question is typed and sent, it listens, then the answer arrives a word at a time
     { const { p, near } = prog(how, vh); if (near) {
-      const up = ease(seg(p, .0, .1));
-      phone.style.transform = `rotateX(${lerp(46, 0, up).toFixed(2)}deg) scale(${lerp(.82, 1, up).toFixed(4)})`; phone.style.opacity = seg(p, 0, .04).toFixed(3);
-      // the talk runs from .15 to .985 of the scene; each exchange: typed, sent, heard, then answered a word at a time
-      const run = seg(p, .15, .985); let field = HOLD, typing = false;
+      const up = ease(seg(p, .0, .035));   // 11 Nov review: the phone is up within a third of a screen and the first question starts at once (it stood empty for two screens)
+      phone.style.transform = `rotateX(${lerp(46, 0, up).toFixed(2)}deg) scale(${lerp(.82, 1, up).toFixed(4)})`; phone.style.opacity = seg(p, 0, .012).toFixed(3);
+      // the talk runs from .045 to .985 of the scene; each exchange: typed, sent, heard, then answered a word at a time
+      const run = seg(p, .045, .985); let field = HOLD, typing = false;
       turns.forEach((t) => { const u = run <= t.a ? 0 : run >= t.b ? 1 : (run - t.a) / (t.b - t.a), sent = u >= .12, ans = u >= .2;
         if (u > 0 && !sent) { const n = Math.round(seg(u, .005, .11) * t.q.length); if (n > 0) { field = tail(t.q.slice(0, n)); typing = true; } }
         t.them.classList.toggle("in", sent); t.listen.classList.toggle("in", u >= .13 && !ans); t.ss.classList.toggle("in", ans);

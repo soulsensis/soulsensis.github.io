@@ -444,7 +444,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       const W = open.offsetWidth, w0 = Math.min(vw * .4, vh * .28, 300), o = ease(seg(p, OPEN0, OPEN1)), z = ease(seg(p, ZOOM0, ZOOM0 + .12)), pan = seg(p, ZOOM0 + .14, .97), N = leaves.length;
       leaves.forEach((L, i) => { let t = o; if (i) { const g = Math.floor((i - 1) / FL), j = (i - 1) % FL, q = seg(p, fw[g][0], fw[g][1]), st = j * .16; t = ease(seg(q, st, st + .36)); }
         L.style.transform = `translateZ(${lerp((N - i) * E, (i + 1) * E, t).toFixed(2)}px) rotateY(${(-180 * t).toFixed(2)}deg)`; });
-      const s = lerp(w0 / W, 1, z), hT = W * 1.5, top = 76, pad = 28;
+      const s = lerp(w0 / W, 1, z), hT = W * 1.5, top = 76, pad = 64;   // pad: the page ends above the note under it (at 28 the note lay on the page's last lines on a phone)
       const y0 = hT > vh - top - pad ? top + hT / 2 - vh / 2 - hT * .13 : (top - pad) / 2, y1 = hT > vh - top - pad ? vh / 2 - pad - hT / 2 : y0;
       const base = vh * .08, ty = lerp(lerp(base, y0, z), y1, ease(pan)), tx = lerp(lerp(0, w0 / 2, o), 0, z);
       open.style.transform = `translate3d(${tx.toFixed(1)}px, ${(ty - base).toFixed(1)}px, 0) scale(${s.toFixed(4)})`;
