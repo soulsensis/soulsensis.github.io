@@ -63,11 +63,6 @@ h3 { margin: 0; font-weight: 500; font-size: clamp(22px, 2.6vw, 28px); line-heig
 .acts { display: flex; gap: 4px 26px; flex-wrap: wrap; align-items: center; justify-content: center; margin: 0; }
 
 /* the two bars: the site's own, then this page's, which stays */
-nav.gnav .wrap { display: flex; justify-content: space-between; align-items: center; height: 48px; gap: 12px; }
-.mark { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 14px; }
-nav .links { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #c9c5bc; }
-nav .links a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 8px; text-decoration: none; transition: color .2s; }
-nav .links a:hover { color: var(--ink); }
 .lnav { position: sticky; top: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); background: rgba(0,0,0,.92); -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px); border-bottom: 1px solid rgba(245,242,234,.12); }
 .lnav .wrap { position: relative; display: flex; justify-content: space-between; align-items: center; height: 52px; gap: 12px; }
 .lnav .pname { font-size: 19px; font-weight: 500; letter-spacing: -.012em; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; }
@@ -204,12 +199,6 @@ button:disabled { opacity: .5; cursor: default; }
 .close svg { width: clamp(120px, 22vw, 200px); height: auto; margin-bottom: 12px; }
 .close .slogan { margin: 0; font-size: clamp(34px, 6.2vw, 72px); line-height: 1.05; font-weight: 500; letter-spacing: -.022em; }
 
-footer { border-top: 1px solid var(--line); padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; line-height: 1.7; }
-footer .wrap { display: flex; justify-content: space-between; gap: 0 20px; flex-wrap: wrap; align-items: center; }
-footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
-footer .links { display: flex; flex-wrap: wrap; gap: 0 12px; }
-footer a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; min-width: 44px; justify-content: center; } footer a:hover { color: var(--ink); }
-footer .help { flex-basis: 100%; margin: 6px 0 0; line-height: 1.7; }
 
 /* content is visible by default; the script hides .rise only after marking what is on screen (html.anim); the hero rises by CSS alone */
 .rise { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
@@ -234,8 +223,6 @@ footer .help { flex-basis: 100%; margin: 6px 0 0; line-height: 1.7; }
    writes inline. */
 .wrap, nav.gnav .wrap { max-width: 680px; }
 .lnav { display: none; }
-nav.gnav { background: #000; border-bottom: 1px solid var(--line); }
-.mark { font-weight: 400; letter-spacing: .24em; }
 h1, h2, h3, .close .slogan, .say p, .feel .word { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
 h1 { font-size: clamp(36px, 7.4vw, 52px); line-height: 1.1; }
 h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
@@ -254,7 +241,6 @@ button, .btn, .card, .tile, .format, .chip, .answer, .tell input { border-radius
 .tile:first-child { border-top: 0; } .tile::before { content: none; } .tile svg { width: 32px; height: 32px; margin: 2px 0 0; grid-row: span 2; }
 .tile p { font-family: var(--serif); font-size: 17px; line-height: 1.55; }
 .close { gap: 12px; } .close svg { width: 44px; margin-bottom: 8px; } .close .slogan { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
-footer .wrap { max-width: 680px; }
 /* scenes taken off the pin: they read as plain blocks in the column */
 .fx .pin.calm { height: auto; padding-block: clamp(40px, 7vw, 64px); padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 .fx .pin.calm .sticky { position: relative; top: auto; height: auto; overflow: visible; display: block; max-width: 680px; margin: 0 auto; padding: 26px 0 0; border-top: 1px solid rgba(245,242,234,.16); text-align: left; }
@@ -276,20 +262,36 @@ html:not(.live) #facts, html:not(.live) #private { display: none; }   /* prices 
 /* one site (second critic round): the home page's column, title size and warm-white button */
 .wrap, nav.gnav .wrap, footer .wrap, .fx .pin.calm .sticky { max-width: 640px; }
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
-nav.gnav .wrap { height: auto; min-height: 56px; }
 h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
 .btn.primary, .btn.red, button.red { background: var(--ink); color: #000; } .btn.primary:hover, .btn.red:hover, button.red:hover { box-shadow: none; background: #fff; }
 .btn.quiet { border: 0; background: none; padding: 0; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
 .hero .copy { max-width: 640px; }
 .talk { margin-left: 0; } .card { background: none; padding: 22px 0 0; border: 0; border-top: 1px solid var(--line); }
 </style>
+<style id="shared">
+nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 640px; height: auto; min-height: 56px; margin: 0 auto; }
+.mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
+nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
+nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
+nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
+@media (max-width: 560px) { nav.top .links a.far { display: none; } }
+body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
+body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 640px; margin: 0 auto; }
+body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
+body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
+body > footer a:hover { color: var(--ink); }
+body > footer .help { margin: 6px 0 0; line-height: 1.6; }
+body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
+</style>
 </head>
 <body>
 <a class="skip" href="#talk">Skip to the conversation</a>
-<nav id="nav" class="gnav g" aria-label="Main"><div class="wrap">
-  <a class="mark" href="index.html" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75" data-seed></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a></div>
+<!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
+  <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
+  <div class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a></div>
 </div></nav>
+<!--/NAV-->
 <div class="lnav g" id="lnav"><div class="wrap">
   <a class="pname" href="#top">Ask soulsensis</a>
   <span class="readline" id="readline" aria-hidden="true"></span>
@@ -405,11 +407,13 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
   </div></section>
 </main>
 
-<footer class="g"><div class="wrap">
+<!--FOOTER--><footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="ask.html">Ask soulsensis</a><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="privacy.html#ask">Privacy</a><a href="terms.html">Terms</a></span>
+  <span class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
+  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html#ask">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Not therapy. In danger or thinking about ending your life? Call 000 (AU), 911 (US), 999 (UK), 112 (EU), or Lifeline 13 11 14, 988 (US), Samaritans 116 123.</p>
 </div></footer>
+<!--/FOOTER-->
 
 <script>
 (() => {

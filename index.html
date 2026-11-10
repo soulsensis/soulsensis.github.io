@@ -82,13 +82,6 @@ a { color: inherit; }
 .skip { position: absolute; left: -9999px; } .skip:focus { left: 12px; top: 12px; background: var(--ink); color: #000; padding: 8px 12px; z-index: 30; font-family: var(--sans); }
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 .wrap { max-width: 640px; margin: 0 auto; }
-nav { border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); }
-nav .wrap { display: flex; justify-content: space-between; align-items: center; min-height: 56px; gap: 12px; }
-.mark { display: flex; align-items: center; gap: 10px; min-height: 44px; font-family: var(--sans); font-weight: 400; letter-spacing: .24em; font-size: 14px; text-decoration: none; }
-nav .links { display: flex; gap: 4px; font-family: var(--sans); font-size: 13px; color: #c9c5bc; }
-nav .links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; text-decoration: none; transition: color .2s; white-space: nowrap; }
-nav .links a:hover { color: var(--ink); }
-@media (max-width: 560px) { nav .links a.far { display: none; } }
 .label { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
 /* a section opens on a hairline with a short crimson tick at its left end: a ruled page */
 section, header.open { padding-block: clamp(40px, 7vw, 64px); }
@@ -132,25 +125,39 @@ figure { margin: 0; } figcaption { margin-top: 10px; font-family: var(--sans); f
 .book { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 26px; align-items: center; margin-top: 20px; }
 .book img { border: 1px solid #1c1c21; }
 .book p { margin: 10px 0 0; font-size: 18px; line-height: 1.55; color: #c9c5bc; }
+.book p.fine { margin-top: 12px; font-size: 13px; color: var(--muted); }
 .btn { display: inline-flex; align-items: center; min-height: 46px; margin-top: 16px; padding: 0 22px; border-radius: 4px; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; }
 .btn.primary { background: var(--ink); color: #000; }
 .fine { font-family: var(--sans); font-size: 13px; color: var(--muted); }
 @media (max-width: 440px) { .book { grid-template-columns: 96px minmax(0, 1fr); gap: 18px; } }
 .close .orn { width: 44px; height: 44px; display: block; margin-bottom: 20px; }
-footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; color: var(--muted); }
-footer .wrap { display: flex; flex-direction: column; gap: 14px; }
-footer .links { display: flex; flex-wrap: wrap; gap: 2px 16px; } footer a { display: inline-flex; align-items: center; min-height: 40px; text-decoration: none; transition: color .2s; } footer a:hover { color: var(--ink); }
-footer .help { margin: 0; line-height: 1.6; } footer .help a { text-decoration: underline; min-height: 0; display: inline; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 <noscript><style>.answer[hidden]{display:block!important;margin-bottom:22px}.chips{display:none}</style></noscript>
+<style id="shared">
+nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 640px; height: auto; min-height: 56px; margin: 0 auto; }
+.mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
+nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
+nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
+nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
+@media (max-width: 560px) { nav.top .links a.far { display: none; } }
+body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
+body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 640px; margin: 0 auto; }
+body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
+body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
+body > footer a:hover { color: var(--ink); }
+body > footer .help { margin: 6px 0 0; line-height: 1.6; }
+body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
+</style>
 </head>
 <body>
 <a class="skip" href="#essays">Skip to the essays</a>
-<nav id="nav" class="g" aria-label="Main"><div class="wrap">
-  <a class="mark" href="#top" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a></div>
+<!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
+  <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
+  <div class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a></div>
 </div></nav>
+<!--/NAV-->
 
 <main id="top">
   <header class="open g" id="hero"><div class="wrap">
@@ -213,11 +220,13 @@ footer .help { margin: 0; line-height: 1.6; } footer .help a { text-decoration: 
   </div></section>
 </main>
 
-<footer class="g"><div class="wrap">
+<!--FOOTER--><footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="ask.html">Ask soulsensis</a><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="/reading/">Free reading</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
+  <span class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
+  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
 </div></footer>
+<!--/FOOTER-->
 
 <script>
 // a feeling, answered: the word chosen shows that feeling's essay, in its own first sentence

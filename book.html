@@ -55,88 +55,72 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="soulsensis">
 <script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));</script>
-<script>/* the entrance animation runs only when the page is on screen and motion is wanted; without this class everything is simply visible (5 Nov 2026) */
-try{if(document.visibilityState==="visible"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("hero-anim")}catch(e){}</script>
-<script>/* the scroll scenes (10 Nov 2026, docs/specs/site-apple-scroll.md): pinned only when motion is wanted and sticky works; without this class every section is a plain, readable block */
+<script>/* the scroll scenes (10 Nov 2026, docs/specs/site-apple-scroll.md): the open pages are pinned only when motion is wanted and sticky works; without this class the page is plain, readable blocks */
 try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!/[?&]still/.test(location.search)&&window.CSS&&CSS.supports("position","sticky")&&"requestAnimationFrame" in window)document.documentElement.classList.add("fx")}catch(e){}</script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" as="image" href="book/front.webp">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <style>
+/* The book's page, set as a page of the journal (11 Nov 2026, author: "more narrower, more a blog style ... we arent
+   apple ... add a soulsensis spin"): one 640 px column set left, serif for what is said, Montserrat for small labels,
+   ruled hairlines with a short crimson tick. One scene stays pinned: the open pages (#inside). The book in the hero
+   still turns in the hand. */
 :root { --spine: 0.1059; /* the book's depth over its cover width: written by the build from the launch file's page count (site.shape_book); a longer book is drawn thicker */
-  --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D; --paper: #F5F2EA; --paper-ink: #111013; --paper-muted: #5d5a54;
+  --ground: #000; --ink: #F5F2EA; --muted: #a29e96; --line: #24242a; --rule: rgba(245,242,234,.16); --heart: #E63946; --paper: #F5F2EA; --paper-ink: #111013; --paper-muted: #5d5a54;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
 @font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a { color: inherit; }
 img { display: block; max-width: 100%; }
-.g { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
-.wrap { max-width: 1080px; margin: 0 auto; }
+.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 640px; margin: 0 auto; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
-.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: 16px; top: -60px; z-index: 30; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: #000; font-size: 13px; text-decoration: none; transition: top .2s ease; }
-.skip:focus-visible { top: 12px; outline-offset: 2px; }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 30; padding: 10px 16px; border-radius: 4px; background: var(--ink); color: #000; font: 13px var(--sans); text-decoration: none; }
+.skip:focus-visible { top: 12px; }
 
-/* type: one scale, tight and plain */
-h1, h2 { margin: 0; font-weight: 500; letter-spacing: -.022em; text-wrap: balance; }
-h1 { font-size: clamp(44px, 9vw, 104px); line-height: 1.02; }
-h2 { font-size: clamp(34px, 6.2vw, 72px); line-height: 1.05; }
-h3 { margin: 0; font-weight: 500; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.15; letter-spacing: -.012em; }
-.eyebrow { margin: 0 0 14px; font-size: clamp(15px, 1.5vw, 19px); font-weight: 500; color: var(--muted); letter-spacing: 0; }
-.sub { margin: 0; font-size: clamp(19px, 2.3vw, 28px); line-height: 1.3; font-weight: 400; color: #d9d5cc; text-wrap: balance; }
-.reading { font-family: var(--serif); font-size: 19px; line-height: 1.65; margin: 0; max-width: 58ch; color: #e9e5dc; }
-.fine { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); letter-spacing: .01em; }
-.more { display: inline-flex; align-items: center; min-height: 44px; font-size: 17px; text-decoration: none; color: var(--ink); }
-.more::after { content: "›"; margin-left: .35em; font-size: 1.2em; line-height: 1; transition: transform .2s ease; }
-.more:hover::after { transform: translateX(3px); }
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 24px; border-radius: 999px; font-weight: 500; font-size: 17px; text-decoration: none; transition: transform .15s ease, box-shadow .25s ease, border-color .25s ease; cursor: pointer; }
-.btn:active { transform: scale(.97); }
-.btn.primary { background: var(--heart-fill); color: #fff; border: 0; box-shadow: 0 0 0 0 rgba(230,57,70,.5); }
-.btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
-.btn.quiet { border: 1px solid #3a3a42; background: none; color: var(--ink); }
-.btn.quiet:hover { border-color: var(--ink); }
-.ctas { display: flex; gap: 8px 22px; flex-wrap: wrap; align-items: center; justify-content: center; }
-.price-line { margin: 0; color: var(--muted); font-size: 15px; }
-.price-line a { color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); display: inline-block; padding: 10px 0; margin: -10px 0; }
+/* type: the journal's one scale */
+h1, h2, h3 { margin: 0; font-weight: 400; letter-spacing: -.008em; text-wrap: balance; }
+h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
+h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
+h3 { font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
+.eyebrow { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
+.sub { margin: 0; font-style: italic; font-size: clamp(20px, 3.4vw, 24px); line-height: 1.4; color: #ddd9cf; }
+.reading { margin: 0; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
+.fine { margin: 0; font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
+.more, .btn.quiet { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
+.more:hover, .btn.quiet:hover { color: #fff; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 4px; background: var(--ink); color: #000; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; transition: background .2s; }
+.btn:hover { background: #fff; }
+.btn.quiet { padding: 0; border-radius: 0; background: none; font-family: var(--serif); font-weight: 400; }
+.ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; }
+.price-line { margin: 0; font-family: var(--sans); font-size: 14px; line-height: 1.5; color: var(--muted); }
+.price-line a { display: inline-block; padding: 10px 0; margin: -10px 0; color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
+.lnav { display: none; }   /* the book's own bar left on 11 Nov; its markup stays, for the sale switch's Buy link */
 
-/* the two bars: the site's own, then the book's, which stays */
-nav.gnav .wrap { display: flex; justify-content: space-between; align-items: center; height: 48px; gap: 12px; }
-.mark { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 14px; }
-nav .links { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #c9c5bc; }
-nav .links a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 8px; text-decoration: none; transition: color .2s; }
-nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
-.lnav { position: sticky; top: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); background: rgba(0,0,0,.92); -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px); border-bottom: 1px solid rgba(245,242,234,.12); }
-.lnav .wrap { display: flex; justify-content: space-between; align-items: center; height: 52px; gap: 12px; }
-.lnav .pname { font-size: 19px; font-weight: 500; letter-spacing: -.012em; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; }
-.lnav .lright { display: flex; align-items: center; gap: 6px; font-size: 13px; }
-.lnav .lright a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 8px; text-decoration: none; color: #c9c5bc; white-space: nowrap; }
-.lnav .lright a:hover, .lnav .lright a[aria-current] { color: var(--ink); }
-.lnav .lright a.pill { min-height: 30px; padding: 0 14px; margin: 7px 0 7px 4px; border-radius: 999px; background: var(--heart-fill); color: #fff; font-weight: 500; position: relative; }
-.lnav .lright a.pill::after { content: ""; position: absolute; inset: -7px 0; }
-@media (max-width: 640px) { nav .links a.far, .lnav .lright a.far { display: none; } .mark { letter-spacing: .14em; } .lnav .pname { font-size: 17px; } }
-@media (max-width: 480px) { .lnav .lright a:not(.pill) { display: none; } .lnav .pname { font-size: 16px; } }
+/* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
+section.flow { padding-block: clamp(40px, 7vw, 64px); }
+section.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
+section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
 
-/* hero */
-/* 10 Nov 2026: the book is on the first screen at every size (on a 1280 x 800 laptop only its top edge showed). The title and the book give way to the height of the window, never the other way round. */
-.hero { position: relative; overflow: hidden; text-align: center; padding-block: clamp(28px, 5svh, 84px) 0; }
-.hero h1 { font-size: clamp(44px, min(9vw, 11svh), 104px); }
-.hero-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+/* the head of the page: the words, then the book itself, set left in the column, to be turned in the hand */
+.hero { overflow: hidden; padding-block: clamp(44px, 9vw, 88px) 0; }
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; max-width: 640px; margin: 0 auto; }
 .hero-copy .eyebrow { margin: 0; }
-.stage { --bw: min(46vw, 300px, max(150px, calc((100svh - 510px) / 1.5))); position: relative; display: grid; place-items: center; height: calc(var(--bw) * 1.5 + 84px); margin-top: clamp(4px, 1.4vw, 16px); perspective: 1600px; touch-action: pan-y; }
+/* the book stays on the first screen of a short window: it gives way to the height, never the other way round */
+.stage { --bw: min(46vw, 250px, max(150px, calc((100svh - 510px) / 1.5))); position: relative; display: grid; align-items: center; justify-items: start; max-width: 640px; height: calc(var(--bw) * 1.5 + 84px); margin: clamp(8px, 2vw, 20px) auto 0; padding-left: clamp(22px, 7vw, 48px); perspective: 1600px; touch-action: pan-y; }
 .fx .stage { cursor: grab; } .fx .stage.held { cursor: grabbing; }
 .stage .bk { --w: var(--bw); outline-offset: 14px; }
 .turn { display: none; }
-.fx .turn { display: block; position: absolute; inset: auto 0 6px; margin: 0; z-index: 3; font-size: 13px; color: var(--muted); letter-spacing: .01em; pointer-events: none; transition: opacity .5s ease; }
+.fx .turn { display: block; position: absolute; inset: auto 0 6px; margin: 0; z-index: 3; font-family: var(--sans); font-size: 13px; color: var(--muted); pointer-events: none; transition: opacity .5s ease; }
 .fx .turn.done { opacity: 0; }
-.stage svg.flower { position: absolute; left: 50%; top: 50%; width: min(150vw, 900px); height: min(150vw, 900px); translate: -50% -50%; opacity: .5; transform: rotate(var(--spin, 0deg)); }
-.floor { position: absolute; left: 50%; bottom: 7%; width: min(54vw, 360px); height: 34px; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.95), rgba(0,0,0,.5) 55%, transparent); filter: blur(7px); }
+.floor { position: absolute; left: calc(clamp(22px, 7vw, 48px) + var(--bw) / 2); bottom: 7%; width: calc(var(--bw) * 1.2); height: 34px; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.95), rgba(0,0,0,.5) 55%, transparent); filter: blur(7px); }
 
-/* the book, six faces, real proportions (6 x 9 in, 282 pages) */
+/* the book, six faces, real proportions (6 x 9 in) */
 .bk { --w: min(46vw, 300px); --d: calc(var(--w) * var(--spine)); --ry: -26deg; --rx: -5deg; position: relative; z-index: 2; width: var(--w); aspect-ratio: 2 / 3; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); will-change: transform; }
 .bk .f { position: absolute; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .bk img.f { width: 100%; height: 100%; object-fit: cover; background: #0b0b0d; }
@@ -153,49 +137,21 @@ nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
 .bk .gl { pointer-events: none; transform: translateZ(calc(var(--d) / 2 + .6px)); inset: 0; border-radius: 1px 3px 3px 1px; background: linear-gradient(104deg, transparent 34%, rgba(255,255,255,.13) 47%, rgba(255,255,255,.03) 55%, transparent 68%) var(--gx, 50%) 0 / 320% 100% no-repeat; opacity: var(--lf, 1); }
 .bk .top { left: 0; right: .5%; top: calc(var(--d) / -2); height: var(--d); transform: rotateX(90deg); background: repeating-linear-gradient(0deg, #ece7dc 0 1px, #cdc8bb 1px 2px); }
 .bk .bot { left: 0; right: .5%; bottom: calc(var(--d) / -2); height: var(--d); transform: rotateX(-90deg); background: #b9b4a8; }
-.hero .bk { animation: float 7s ease-in-out infinite; }
-@keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 
-/* line art that draws itself; hidden only once the script has taken over (html.anim) */
-.draw * { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 2.4s cubic-bezier(.65,0,.35,1); }
-.anim .draw:not(.on):not(.scrub) * { stroke-dashoffset: 1; }
-.draw.on * { stroke-dashoffset: 0; }
-.draw.on *:nth-child(2n) { transition-delay: .12s; } .draw.on *:nth-child(3n) { transition-delay: .24s; } .draw.on *:nth-child(5n) { transition-delay: .36s; }
-.fx .draw.scrub * { transition: none; stroke-dashoffset: var(--off, 1); }
+/* from the back cover: its first line set large, the rest as it is printed */
+#about .hook { margin: 0 0 18px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
+#about .reading + .reading { margin-top: 12px; }
 
-/* the line that lights up */
-.say { padding-block: clamp(90px, 16vw, 220px); }
-.say svg.flower { display: none; }
-.fx .pin.say .sticky { display: grid; place-items: center; padding: 0 20px; }
-.fx .say svg.flower { display: block; position: absolute; left: 50%; top: 50%; width: min(150vw, 900px); height: min(150vw, 900px); translate: -50% -50%; opacity: 0; }
-.fx .say p { position: relative; }
-.lnav .readline { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--heart); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
-.say p { margin: 0 auto; max-width: 17em; font-size: clamp(30px, 5.6vw, 68px); line-height: 1.12; font-weight: 500; letter-spacing: -.022em; text-wrap: balance; }
-.say p span { opacity: .16; transition: opacity .4s ease; }
-.say p span.lit { opacity: 1; }
-
-/* pinned scenes. Default (no .fx): plain blocks, everything visible. */
-.pin { position: relative; padding-block: clamp(72px, 10vw, 140px); }
-.pin .sticky { display: flex; flex-direction: column; align-items: center; gap: 34px; text-align: center; }
+/* the cover's own scene is not shown (the cover already turns in the hand at the top of the page); its markup stays for the script */
+#look { display: none; }
 .scene3d { perspective: 1600px; display: grid; place-items: center; }
-.chip { display: none; }
-.blurb { max-width: 620px; text-align: left; display: flex; flex-direction: column; gap: 18px; }
-.blurb p.hook { margin: 0; font-family: var(--sans); color: var(--ink); font-size: clamp(24px, 3.4vw, 36px); line-height: 1.2; font-weight: 500; letter-spacing: -.018em; }
-.blurb .rule { width: 44px; height: 2px; background: var(--heart); border: 0; margin: 4px 0; }
-.blurb p { margin: 0; font-family: var(--serif); font-size: clamp(17px, 1.9vw, 20px); line-height: 1.6; color: #e3dfd6; }
-.blurb p.eyebrow { font-family: var(--sans); font-size: 17px; color: var(--muted); }
-.blurb p.sig { font-family: var(--sans); letter-spacing: .2em; font-size: 15px; color: var(--ink); margin-top: 8px; }
+.fx .look .bk { --w: calc(min(48vw, 38svh, 320px) * 1.5); scale: .667; }
 
-.fx .pin { padding: 0; height: calc(var(--len, 3) * 100vh); height: calc(var(--len, 3) * 100svh); }
+/* inside: the one pinned scene. Default (no .fx): a plain block, everything visible. */
+.pin { position: relative; padding-block: clamp(56px, 9vw, 96px); }
+.pin .sticky { display: flex; flex-direction: column; align-items: center; gap: 34px; text-align: center; }
+.fx .pin { padding: 0; height: 320vh; height: 320svh; }
 .fx .pin .sticky { position: sticky; top: 0; display: block; height: 100vh; height: 100svh; overflow: hidden; }
-.fx .look .look-h { position: absolute; inset: 12svh 20px auto; will-change: opacity, transform; }
-.fx .look .scene3d { position: absolute; inset: 0; padding-top: 13svh; }
-/* 10 Nov 2026 (author: "too low resolution ... iphone standard"): a book is laid out at the closest size it ever reaches and only scaled down, never up, so the browser paints every face at full sharpness */
-.fx .look .bk { --w: calc(min(48vw, 38svh, 320px) * 1.5); position: absolute; left: 50%; top: 56.5%; margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); scale: .667; }
-.fx .look .chip { display: block; position: absolute; inset: auto 0 7svh; margin: 0; font-size: 15px; font-weight: 500; color: var(--muted); }
-.fx .look .blurb { position: absolute; left: 50%; top: 50%; width: min(620px, calc(100vw - 48px)); translate: -50% -46%; opacity: 0; will-change: opacity, transform; }
-
-/* inside: paper */
 .paper { background: var(--paper); color: var(--paper-ink); color-scheme: light; }
 .paper .eyebrow, .paper .fine { color: var(--paper-muted); }
 .paper .sub { color: #34322e; }
@@ -223,180 +179,71 @@ nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
 .fx .inside .open { --w: min(121vw, 640px); position: absolute; left: 50%; top: 58%; margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); transform: scale(.47); }   /* laid out at reading size, scaled down until it is read */
 .fx .inside .in-note { position: absolute; inset: auto 20px 4svh; text-align: center; opacity: 0; }
 
-/* feel */
-.feel .word { margin: 0; font-size: clamp(44px, 10vw, 128px); line-height: 1; font-weight: 500; letter-spacing: -.03em; }
-.feel .last h2 { font-size: clamp(46px, 10.5vw, 136px); line-height: 1; letter-spacing: -.03em; }
-.feel .feel-sub { margin: clamp(16px, 2.4vw, 28px) 0 0; font-size: clamp(19px, 2.3vw, 28px); font-weight: 400; letter-spacing: 0; line-height: 1.3; color: #d9d5cc; }
-.feel svg.flower { display: none; }
-.fx .feel .word { position: absolute; left: 20px; right: 20px; top: 50%; translate: 0 -50%; text-align: center; opacity: 0; will-change: opacity, transform; }
-.fx .feel .feel-sub { opacity: 0; }
-.fx .feel svg.flower { display: block; position: absolute; left: 50%; top: 50%; width: min(170vw, 1000px); height: min(170vw, 1000px); translate: -50% -50%; opacity: .34; }
+/* what the book is for */
+#feel .word { margin: 0 0 4px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.3; color: #c9c5bc; }
+#feel h2 { margin: 16px 0 8px; }
 
-/* readers */
-.readers h2 { max-width: 12em; }
-.readers figure { margin: 0; width: 100%; }
-.track { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; text-align: left; max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-.track blockquote { margin: 0; padding: 28px; border-radius: 22px; background: var(--raised); border: 1px solid var(--line); font-family: var(--serif); font-size: clamp(19px, 2.1vw, 24px); line-height: 1.42; color: var(--ink); display: flex; align-items: center; }
-.readers figcaption { margin-top: 22px; font-size: 13px; color: var(--muted); text-align: center; }
-.fx .readers .rd-head { position: absolute; inset: 13svh 20px auto; display: flex; flex-direction: column; align-items: center; }
-.fx .readers figure { position: absolute; inset: auto 0 9svh; }
-.fx .readers .track { display: flex; max-width: none; margin: 0; padding: 0 max(20px, calc(50vw - 540px)); width: max-content; will-change: transform; }
-.fx .readers .track blockquote { width: min(78vw, 420px); min-height: min(42svh, 300px); flex: none; }
+/* readers: a plain stack of their own words, as on the front page */
+figure { margin: 0; }
+.said { margin: 20px 0 0; }
+.said blockquote { margin: 0; padding: 16px 0; border-top: 1px solid var(--line); font-style: italic; font-size: 19px; line-height: 1.5; color: #ddd9cf; }
+.said blockquote:first-child { border-top: 0; padding-top: 0; }
+figcaption { margin-top: 10px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
 
-/* sections that simply scroll */
-section.flow { padding-block: clamp(72px, 10vw, 140px); }
-.center { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 56px); }
-@media (max-width: 820px) { .tiles { grid-template-columns: 1fr; } }
-.tile { padding: 32px 28px; border-radius: 22px; background: var(--raised); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; text-align: left; }
-.tile svg { width: 44px; height: 44px; margin-bottom: 8px; }
-.tile p { margin: 0; font-size: 16px; line-height: 1.5; color: #c9c5bc; }
+/* the formats: two ruled entries, the name and its price on one line */
+.formats { margin-top: 20px; }
+.format { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 16px; padding: 20px 0; border-top: 1px solid var(--line); }
+.format:first-child { border-top: 0; padding-top: 0; }
+.format .price { margin: 0; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; white-space: nowrap; }
+.format .price small { margin-left: 8px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.format > p:not(.price), .format .act { grid-column: 1 / -1; }
+.format > p:not(.price) { margin: 0; font-size: 17px; line-height: 1.55; color: #b9b5ab; }
+.format .act { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; min-height: 24px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.format .tag { color: var(--ink); font-weight: 500; }
+.format .where::before { content: "· "; }
+#formats .wrap > .fine { margin-top: 20px; }
+/* a way to be told when the book is out: one email to the author, who writes back himself. No list, no service. */
+.notify { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 10px; padding-top: 26px; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
 
-.formats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 56px); width: 100%; }
-@media (max-width: 820px) { .formats { grid-template-columns: 1fr; } }
-.format { display: grid; grid-template-rows: auto auto 1fr auto; gap: 14px; padding: 32px 28px; border-radius: 22px; background: var(--raised); border: 1px solid var(--line); text-align: left; }
-.format .price { margin: 0; font-weight: 500; font-size: 30px; letter-spacing: -.02em; }
-.format .price small { font-size: 14px; color: var(--muted); font-weight: 400; letter-spacing: 0; margin-left: 8px; }
-.format p { margin: 0; color: #c9c5bc; font-size: 16px; line-height: 1.5; }
-.format .act { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 6px; }
-.format .tag { font-size: 13px; font-weight: 500; color: var(--ink); border: 1px solid #3a3a42; border-radius: 999px; padding: 8px 14px; }
-.format .where { font-size: 13px; color: var(--muted); }
-/* 10 Nov 2026: choosing a format the way a phone is chosen: one is picked, its ring closes, the line under the cards says what was picked */
-.pick .format { cursor: pointer; transition: border-color .25s ease, transform .2s ease; }
-.pick .format::after { content: ""; position: absolute; right: 22px; top: 22px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid #3a3a42; background: radial-gradient(circle, var(--ink) 0 38%, transparent 42%) center / 0 0 no-repeat; transition: background-size .25s ease, border-color .25s ease; }
-.pick .format[aria-checked="true"] { border-color: var(--ink); }
-.pick .format[aria-checked="true"]::after { border-color: var(--ink); background-size: 100% 100%; }
-.pick .format:active { transform: scale(.99); }
-.chosen { display: none; }
-.pick ~ .chosen { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 18px; width: 100%; margin-top: 16px; padding: 16px 24px; border-radius: 22px; border: 1px solid var(--line); background: var(--raised); font-size: 17px; }
-.chosen b { font-weight: 500; } .chosen .cp { color: #c9c5bc; font-variant-numeric: tabular-nums; }
-.chosen .ca { display: inline-flex; align-items: center; min-height: 44px; }
-.chosen .ca .tag { font-size: 13px; font-weight: 500; color: var(--ink); border: 1px solid #3a3a42; border-radius: 999px; padding: 8px 14px; }
-/* 11 Nov 2026: a way to be told when the book is out. One email to the author, who writes back himself. No list, no service. */
-.notify { width: 100%; max-width: 620px; margin-top: clamp(40px, 6vw, 72px); display: flex; flex-direction: column; align-items: center; gap: 16px; scroll-margin-top: 90px; }
-.tell { display: flex; gap: 10px; width: 100%; }
-.tell input { flex: 1; min-width: 0; min-height: 50px; padding: 0 20px; border-radius: 999px; border: 1px solid #3a3a42; background: var(--raised); color: var(--ink); font: 400 16px var(--sans); transition: border-color .25s ease; }
-.tell input::placeholder { color: var(--muted); }
-.tell input:focus { border-color: var(--ink); outline: none; }
-.tell .btn { min-height: 50px; border: 0; background: var(--ink); color: #000; font-family: var(--sans); white-space: nowrap; }
-@media (max-width: 420px) { .tell { flex-direction: column; } }
-.swap { animation: swap .35s cubic-bezier(.2,.8,.2,1) both; }
-@keyframes swap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-/* a soft light that follows the cursor across a card */
-.tile, .format { position: relative; overflow: hidden; }
-.tile::before, .format::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s ease; background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(245,242,234,.07), transparent 62%); }
-@media (hover: hover) { .tile:hover::before, .format:hover::before { opacity: 1; } }
-.tile > *, .format > * { position: relative; }
-
-.faq { width: 100%; max-width: 760px; margin: clamp(28px, 4vw, 44px) auto 0; text-align: left; }
+.faq { margin-top: 14px; }
 .faq details { border-top: 1px solid var(--line); }
-.faq details:last-child { border-bottom: 1px solid var(--line); }
-.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 0; min-height: 44px; font-size: 19px; font-weight: 500; line-height: 1.35; letter-spacing: -.008em; }
+.faq details:first-child { border-top: 0; }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 44px; padding: 16px 0; font-size: clamp(19px, 3vw, 21px); line-height: 1.35; transition: color .2s; }
+.faq summary:hover { color: #fff; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; flex: none; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid #3a3a42; border-radius: 50%; font-weight: 300; font-size: 18px; transition: transform .3s ease, border-color .3s ease; }
-.faq details[open] summary::after { transform: rotate(45deg); border-color: var(--ink); }
-.faq details p { margin: 0 0 24px; font-family: var(--serif); font-size: 17px; line-height: 1.65; color: #e9e5dc; max-width: 60ch; }
-.faq details p a { color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; display: inline-block; padding: 10px 0; line-height: 24px; margin: -10px 0; }
+.faq summary::after { content: "+"; flex: none; font-family: var(--sans); font-weight: 300; font-size: 20px; color: var(--muted); }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { margin: 0 0 22px; max-width: 60ch; font-size: 17px; line-height: 1.6; color: #c9c5bc; }
+.faq details p a { color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
 
-.close { gap: 16px; }
-.close svg { width: clamp(120px, 22vw, 200px); height: auto; margin-bottom: 12px; }
-.close .slogan { margin: 0; font-size: clamp(34px, 6.2vw, 72px); line-height: 1.05; font-weight: 500; letter-spacing: -.022em; }
-
-footer { border-top: 1px solid var(--line); padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; line-height: 1.7; }
-footer .wrap { display: flex; justify-content: space-between; gap: 0 20px; flex-wrap: wrap; align-items: center; }
-footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
-footer .links { display: flex; flex-wrap: wrap; gap: 0 12px; }
-footer a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; min-width: 44px; justify-content: center; } footer a:hover { color: var(--ink); }
-footer .help { flex-basis: 100%; margin: 6px 0 0; line-height: 44px; }
-footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-
-/* content is visible by default; the script hides .rise only after marking what is on screen (html.anim); the hero rises by CSS alone */
-.rise { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
-.anim .rise:not(.on) { opacity: 0; transform: translateY(16px); }
-.rise.on { opacity: 1; transform: none; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.hero-anim .hero .rise { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
-.hero-anim .hero .rise:nth-child(2) { animation-delay: .08s; } .hero-anim .hero .rise:nth-child(3) { animation-delay: .16s; } .hero-anim .hero .rise:nth-child(4) { animation-delay: .24s; } .hero-anim .hero .rise:nth-child(5) { animation-delay: .32s; }
-.anim .hero .rise:not(.on), .settled .hero .rise { opacity: 1; transform: none; }
-.settled .hero .rise { animation: none; }
-@media (prefers-reduced-motion: reduce) {
-  .draw *, .rise, .bk, .swap, .pick .format, .pick .format::after { transition: none !important; animation: none !important; }
-  .draw * { stroke-dashoffset: 0 !important; } .rise { opacity: 1 !important; transform: none !important; } .say p span { opacity: 1; }
-}
+.close .orn { display: block; width: 44px; height: 44px; margin-bottom: 20px; }
+.close .slogan { margin: 0 0 12px; font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; letter-spacing: -.008em; }
+.close .more { margin-top: 12px; }
 </style>
-<noscript><style>.rise{opacity:1!important;transform:none!important}.draw *{stroke-dashoffset:0!important}.dot{opacity:1!important}.say p span{opacity:1!important}</style></noscript>
-<style id="journal">
-/* 11 Nov 2026 (author: "more narrower, more a blog style ... we arent apple ... add a soulsensis spin"). Laid over the
-   page's own styles: one 680 px column set left, serif for what is said, ruled lines for cards, square shoulders for
-   capsules, and only the scenes named below stay pinned. !important is used only against values the scroll script
-   writes inline. */
-.wrap, nav.gnav .wrap { max-width: 680px; }
-.lnav { display: none; }
-nav.gnav { background: #000; border-bottom: 1px solid var(--line); }
-.mark { font-weight: 400; letter-spacing: .24em; }
-h1, h2, h3, .close .slogan, .say p, .feel .word { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
-h1 { font-size: clamp(36px, 7.4vw, 52px); line-height: 1.1; }
-h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
-h3 { font-size: clamp(21px, 3.2vw, 24px); line-height: 1.25; }
-.center { text-align: left; align-items: flex-start; }
-.eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: lowercase; }
-.sub { font-family: var(--serif); font-style: italic; }
-.more { font-family: var(--serif); font-size: 18px; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; }
-.more::after { content: none; } .more.dim { text-decoration-color: #4a4a52; }
-button, .btn, .card, .tile, .format, .chip, .answer, .tell input { border-radius: 4px; }
-.flow { padding-block: clamp(40px, 7vw, 64px); }
-.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgba(245,242,234,.16); }
-.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
-.tiles { grid-template-columns: 1fr; gap: 0; margin-top: 20px; }
-.tile { padding: 18px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; }
-.tile:first-child { border-top: 0; } .tile::before { content: none; } .tile svg { width: 32px; height: 32px; margin: 2px 0 0; grid-row: span 2; }
-.tile p { font-family: var(--serif); font-size: 17px; line-height: 1.55; }
-.close { gap: 12px; } .close svg { width: 44px; margin-bottom: 8px; } .close .slogan { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
-footer .wrap { max-width: 680px; }
-/* scenes taken off the pin: they read as plain blocks in the column */
-.fx .pin.calm { height: auto; padding-block: clamp(40px, 7vw, 64px); padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
-.fx .pin.calm .sticky { position: relative; top: auto; height: auto; overflow: visible; display: block; max-width: 680px; margin: 0 auto; padding: 26px 0 0; border-top: 1px solid rgba(245,242,234,.16); text-align: left; }
-.fx .pin.calm .sticky::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
-.fx .pin.calm svg.flower { display: none; }
-.say p, .fx .say p { max-width: none; margin: 0; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
-.fx .pin.calm.say p span { opacity: 1 !important; }
-.feel .word, .fx .pin.calm.feel .word { position: static; translate: none; opacity: 1 !important; transform: none !important; text-align: left; margin: 0 0 6px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.3; }
-.feel .last h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; margin-top: 16px; }
-.feel .feel-sub, .fx .pin.calm.feel .feel-sub { opacity: 1 !important; margin: 8px 0 0; font-family: var(--serif); font-style: italic; font-size: 19px; }
-@media (prefers-reduced-motion: no-preference) { .anim .rise:not(.on) { opacity: 1; transform: none; } }
-.hero h1 { font-size: clamp(36px, 7.4vw, 52px); line-height: 1.1; text-wrap: balance; }
-.fx #inside { height: 320vh; height: 320svh; }                 /* the open pages keep their scene, shorter */
-#look, #why { display: none; }                                   /* the cover already turns in the hand at the top of the page */
-.fx .pin.calm.readers .rd-head, .fx .pin.calm.readers figure { position: static; inset: auto; display: block; }
-.fx .pin.calm.readers .track, .readers .track { display: block; width: auto; max-width: none; margin: 18px 0 0; padding: 0; transform: none !important; }
-.fx .pin.calm.readers .track blockquote, .readers .track blockquote { width: auto; min-height: 0; margin: 0; padding: 16px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.5; }
-.readers .track blockquote:first-child { border-top: 0; padding-top: 0; }
-.readers figcaption { text-align: left; }
-.fx .pin.calm.readers .rd-head, .readers .rd-head { align-items: flex-start; text-align: left; padding: 0; }
-.hero { text-align: left; } .hero .copy { align-items: flex-start; }
-/* one site (second critic round): the home page's column, title size and warm-white button */
-.wrap, nav.gnav .wrap, footer .wrap, .fx .pin.calm .sticky { max-width: 640px; }
-.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
-nav.gnav .wrap { height: auto; min-height: 56px; }
-h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
-.btn.primary, .btn.red, button.red { background: var(--ink); color: #000; } .btn.primary:hover, .btn.red:hover, button.red:hover { box-shadow: none; background: #fff; }
-.btn.quiet { border: 0; background: none; padding: 0; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
-.hero-copy { align-items: flex-start; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
-.stage svg.flower { display: none; }
-.format { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; padding: 22px 0; } .format::before { content: none; }
-.format .tag { border: 0; padding: 0; } .chosen { border-radius: 4px; }
-.notify .btn { background: var(--ink); color: #000; border-radius: 4px; min-height: 46px; padding: 0 22px; }
-.faq summary { font-family: var(--serif); font-weight: 400; }
-.faq { text-align: left; width: 100%; } .formats, .pick { justify-content: flex-start; }
-.notify { align-items: flex-start; max-width: none; }
+<style id="shared">
+nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 640px; height: auto; min-height: 56px; margin: 0 auto; }
+.mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
+nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
+nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
+nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
+@media (max-width: 560px) { nav.top .links a.far { display: none; } }
+body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
+body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 640px; margin: 0 auto; }
+body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
+body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
+body > footer a:hover { color: var(--ink); }
+body > footer .help { margin: 6px 0 0; line-height: 1.6; }
+body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 </style>
 </head>
 <body>
 <a class="skip" href="#formats">Skip to the formats</a>
-<nav id="nav" class="gnav g" aria-label="Main"><div class="wrap">
-  <a class="mark" href="index.html" aria-label="soulsensis home"><svg width="26" height="26" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a href="book.html" aria-current="page">The book</a><a href="essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a><a class="far" href="https://www.youtube.com/@soulsensis" rel="noopener">Watch</a></div>
+<!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
+  <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
+  <div class="links"><a href="/book.html" aria-current="page">The book</a><a href="/essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a></div>
 </div></nav>
+<!--/NAV-->
 <div class="lnav g" id="lnav"><div class="wrap">
   <a class="pname" href="#top">Your soul knows best</a>
   <span class="readline" id="readline" aria-hidden="true"></span>
@@ -406,23 +253,26 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
 <main id="top">
   <header class="hero g">
     <div class="hero-copy">
-      <p class="eyebrow rise">The book</p>
-      <h1 class="rise">Your soul knows best.</h1>
-      <p class="sub rise">Listen to your soul. All it has wanted is to be heard.</p>
-      <!--BUY_HERO--><p class="price-line rise">The book is being finished. <a href="#notify">Be told the day it is out</a></p><!--/BUY_HERO-->
-      <a class="more rise" href="#inside">Look inside</a>
+      <p class="eyebrow">The book</p>
+      <h1>Your soul knows best.</h1>
+      <p class="sub">Listen to your soul. All it has wanted is to be heard.</p>
+      <!--BUY_HERO--><p class="price-line">The book is being finished. <a href="#notify">Be told the day it is out</a></p><!--/BUY_HERO-->
+      <a class="more" href="#inside">Look inside</a>
     </div>
     <div class="stage" id="heroStage">
-      <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="1.1"></g></svg>
       <div class="floor" aria-hidden="true"></div>
       <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" fetchpriority="high" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" loading="lazy" alt=""><img class="f spine" src="book/spine.webp" width="286" height="4050" decoding="async" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
       <p class="turn" id="turnHint" aria-hidden="true">Drag to turn</p>
     </div>
   </header>
 
-  <section class="pin calm say g" id="sayPin" style="--len:2.3" aria-label="From the back cover"><div class="sticky">
-    <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw scrub" id="sayArt" fill="none" stroke="#F5F2EA" stroke-width="1"><circle cx="-95" r="190" pathLength="1"/><circle cx="95" r="190" pathLength="1"/><circle r="285" pathLength="1"/><circle r="303" pathLength="1"/></g></svg>
-    <p id="say">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
+  <section class="flow g" id="about" aria-labelledby="about-h"><div class="wrap">
+    <p class="eyebrow" id="about-h">On the back</p>
+    <p class="hook" id="say">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
+    <p class="reading">It is not the tiredness of the body. It is the tiredness of waiting. Waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is.</p>
+    <p class="reading">Contentment was never about the absence of difficulty.</p>
+    <p class="reading">All I had to do was sit still enough to hear it.</p>
+    <p class="reading"><!--COUNTS-->34 essays and 85 shorter pieces. Open it anywhere.<!--/COUNTS--></p>
   </div></section>
 
   <section class="pin look g" id="look" style="--len:4.2" aria-labelledby="look-h"><div class="sticky">
@@ -431,16 +281,7 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
       <div class="bk" id="lookBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" alt="The front cover"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" alt="The back cover; its words follow"><img class="f spine" src="book/spine.webp" width="286" height="4050" decoding="async" alt="The spine: Your soul knows best, soulsensis"><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
     </div>
     <p class="chip" id="lookChip" aria-hidden="true">The front</p>
-    <div class="blurb" id="blurb">
-      <p class="eyebrow" style="margin:0">On the back</p>
-      <p class="hook">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
-      <hr class="rule">
-      <p>It is not the tiredness of the body. It is the tiredness of waiting. Waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is.</p>
-      <p>Contentment was never about the absence of difficulty.</p>
-      <p>All I had to do was sit still enough to hear it.</p>
-      <p><!--COUNTS-->34 essays and 85 shorter pieces. Open it anywhere.<!--/COUNTS--></p>
-      <p class="sig">soulsensis</p>
-    </div>
+    <div class="blurb" id="blurb"></div>
   </div></section>
 
   <section class="pin inside paper g" id="inside" style="--len:6.4" aria-labelledby="inside-h"><div class="sticky">
@@ -460,55 +301,45 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
     <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 1 · Perception is key|Chapter 74 · The lighthouse does not try to shine|Chapter 101 · The cage only holds because you believe it does" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 14 and 15, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
   </div></section>
 
-  <section class="pin calm feel g" id="feel" style="--len:4.4" aria-label="What the book is for"><div class="sticky">
-    <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw scrub" data-flower fill="none" stroke="#F5F2EA" stroke-width="1"></g></svg>
+  <section class="flow g" id="feel" aria-label="What the book is for"><div class="wrap">
     <p class="word">Authenticity.</p>
     <p class="word">Relatability.</p>
     <p class="word">Connection.</p>
-    <div class="word last"><h2>Feel at home again.</h2><p class="feel-sub">You are not alone in this life.</p></div>
+    <h2>Feel at home again.</h2>
+    <p class="sub">You are not alone in this life.</p>
   </div></section>
 
-  <section class="pin calm readers" id="readers" style="--len:3.4" aria-labelledby="praise-h"><div class="sticky">
-    <div class="rd-head g"><h2 id="praise-h">What readers have said.</h2></div>
-    <figure><div class="track" id="track"><blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“Very wholesome post to wake up to at the top of my feed. Thank you sir, well written and very encouraging.”</blockquote><blockquote>“This resonated with me as i have experienced this several times and I now welcome moments like this in my life and indeed somewhat chase them now.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote></div><figcaption>From early readers of the essays</figcaption></figure>
+  <section class="flow g" id="readers" aria-labelledby="praise-h"><div class="wrap">
+    <h2 id="praise-h">What readers have said.</h2>
+    <figure><div class="said"><blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“Very wholesome post to wake up to at the top of my feed. Thank you sir, well written and very encouraging.”</blockquote><blockquote>“This resonated with me as i have experienced this several times and I now welcome moments like this in my life and indeed somewhat chase them now.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote></div><figcaption>From early readers of the essays</figcaption></figure>
   </div></section>
 
-  <section class="flow g" id="why"><div class="wrap center">
-    <h2 class="rise">Written from inside it.</h2>
-    <div class="tiles">
-      <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle cx="-14" r="30" pathLength="1"/><circle cx="14" r="30" pathLength="1"/></g></svg><h3>Open it anywhere.</h3><p>Every piece stands on its own page.</p></div>
-      <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="18" pathLength="1"/><circle cx="18" r="18" pathLength="1"/><circle cx="-18" r="18" pathLength="1"/><circle cy="18" r="18" pathLength="1"/><circle cy="-18" r="18" pathLength="1"/></g></svg><h3>Written by a human.</h3><p>Every line is the author's own, most of it written by hand in a journal first.</p></div>
-      <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="44" pathLength="1"/><circle r="30" pathLength="1"/><circle r="16" pathLength="1"/></g></svg><h3>No name. No face.</h3><p>The author stays soulsensis so nothing has to be left out.</p></div>
-    </div>
-  </div></section>
-
-  <section class="flow g" id="formats"><div class="wrap center">
-    <p class="eyebrow rise">Formats</p>
-    <h2 class="rise">Choose how you want to read it.</h2>
+  <section class="flow g" id="formats"><div class="wrap">
+    <p class="eyebrow">Formats</p>
+    <h2>Choose how you want to read it.</h2>
     <div class="formats" id="pick">
-      <div class="format rise" id="paperback">
+      <div class="format" id="paperback">
         <h3>Paperback</h3><p class="price" data-au="A$24.99" data-us="US$14.99">A$24.99<small>US$14.99</small></p>
         <p>6 × 9 inches, matte cover, printed by Amazon and posted to you. The one to leave on the bedside table and lend.</p>
         <div class="act"><!--BUY_PAPERBACK--><span class="tag" data-soon-tag>Coming soon</span><!--/BUY_PAPERBACK--><span class="where">Amazon</span></div>
       </div>
-      <div class="format rise" id="kindle">
+      <div class="format" id="kindle">
         <h3>Kindle</h3><p class="price" data-au="A$9.99" data-us="US$6.99">A$9.99<small>US$6.99</small></p>
         <p>The whole book on your phone, Kindle or tablet. Buy it on your own country's Amazon; the price is set in your currency.</p>
         <div class="act"><!--BUY_KINDLE--><span class="tag" data-soon-tag>Coming soon</span><!--/BUY_KINDLE--><span class="where">Amazon</span></div>
       </div>
     </div>
-    <p class="chosen" id="chosen" aria-live="polite"><b id="cName"></b><span class="cp" id="cPrice"></span><span class="ca" id="cAct"></span></p>
-    <!--NOTIFY--><div class="notify rise" id="notify">
+    <!--NOTIFY--><div class="notify" id="notify">
       <h3>Be told the day it is out.</h3>
       <a class="btn" href="mailto:hello@soulsensis.com?subject=Tell%20me%20when%20the%20book%20is%20out">Tell me</a>
       <p class="fine">It opens an email to hello@soulsensis.com. Send it as it is. One email back, from the author, the day the book is out.</p>
     </div><!--/NOTIFY-->
-    <p class="fine rise" style="margin-top:18px">Prices in Australian dollars unless marked. Amazon sets local prices in other countries.</p>
+    <p class="fine">Prices in Australian dollars unless marked. Amazon sets local prices in other countries.</p>
   </div></section>
 
-  <section class="flow g" id="faq"><div class="wrap center">
-    <h2 class="rise">Before you buy.</h2>
-    <div class="faq rise">
+  <section class="flow g" id="faq"><div class="wrap">
+    <h2>Before you buy.</h2>
+    <div class="faq">
       <details><summary>Was this written by a human?</summary><p>Yes. Every line is the author's own, most of it written by hand in a journal first.</p></details>
       <details><summary>Why is the author anonymous?</summary><p>So the writing can stay honest. The essays describe real mornings, real jobs and real shame, and a name would mean softening them. The author stays soulsensis so nothing has to be left out.</p></details>
       <details><summary>How long is the book?</summary><p>It is being finished as one larger book, with the author's journals added, so the length and the contents may change. Written to be read slowly and returned to.</p></details>
@@ -518,19 +349,21 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
     </div>
   </div></section>
 
-  <section class="flow g"><div class="wrap center close">
-    <svg viewBox="-64 -64 128 128" aria-hidden="true"><g class="draw" data-mark fill="none" stroke="#F5F2EA" stroke-width=".9"></g><circle r="16" fill="#E63946" fill-opacity=".3"/><circle r="3.2" fill="#E63946"/></svg>
-    <p class="slogan rise">Your soul knows best.</p>
-    <p class="sub rise">Listen to your soul. All it has wanted is to be heard.</p>
-    <a class="more rise" href="#formats">Choose a format</a>
+  <section class="flow g"><div class="wrap close">
+    <svg class="orn" viewBox="-64 -64 128 128" aria-hidden="true"><g data-mark fill="none" stroke="#F5F2EA" stroke-width=".9"></g><circle r="16" fill="#E63946" fill-opacity=".3"/><circle r="3.2" fill="#E63946"/></svg>
+    <p class="slogan">Your soul knows best.</p>
+    <p class="sub">Listen to your soul. All it has wanted is to be heard.</p>
+    <a class="more" href="#formats">Choose a format</a>
   </div></section>
 </main>
 
-<footer class="g"><div class="wrap">
+<!--FOOTER--><footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="book.html">The book</a><a href="essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="ask.html">Ask soulsensis</a><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/reading/">Free reading</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
+  <span class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
+  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
 </div></footer>
+<!--/FOOTER-->
 
 <script>
 (() => {
@@ -538,29 +371,12 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
   const NS = "http://www.w3.org/2000/svg";
   const circle = (g, cx, cy, r) => { const c = document.createElementNS(NS, "circle"); c.setAttribute("cx", cx.toFixed(2)); c.setAttribute("cy", cy.toFixed(2)); c.setAttribute("r", r); c.setAttribute("pathLength", "1"); g.append(c); };
   const pol = (r, deg) => [r * Math.cos(deg * Math.PI / 180), r * Math.sin(deg * Math.PI / 180)];
-  // the flower of life (hero, feel) and the v3 mark (close): the brand's own geometry, drawn here so the markup stays small
+  // the flower of life (the cover's scene) and the v3 mark (close): the brand's own geometry, drawn here so the markup stays small
   document.querySelectorAll("[data-flower]").forEach((F) => { const fr = 64; circle(F, 0, 0, fr);
     for (let k = 0; k < 6; k++) { circle(F, ...pol(fr, k * 60), fr); circle(F, ...pol(2 * fr, k * 60), fr); circle(F, ...pol(fr * Math.sqrt(3), 30 + k * 60), fr); }
     circle(F, 0, 0, 3 * fr); circle(F, 0, 0, 3 * fr + 18); for (let k = 0; k < 12; k++) circle(F, ...pol(3 * fr, k * 30), fr); });
   document.querySelectorAll("[data-mark]").forEach((M) => { circle(M, 0, 0, 20);
     [[20, 0], [40, 0], [34.64, 30]].forEach(([d, t]) => { for (let a = 0; a < 360; a += 60) circle(M, ...pol(d, a + t), 20); }); circle(M, 0, 0, 60); });
-
-  // reveal on scroll: what is already on screen is marked first, then html.anim hides the rest until it scrolls in (no observer: show everything)
-  const seen = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
-  const all = [...document.querySelectorAll(".draw:not(.scrub), .rise")];
-  if ("IntersectionObserver" in window) {
-    const below = all.filter((el) => !seen(el) && !el.closest(".hero"));
-    root.classList.add("anim");
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: 0, rootMargin: "0px 0px -6% 0px" });
-    below.forEach((el) => io.observe(el));
-    requestAnimationFrame(() => all.filter((el) => !below.includes(el)).forEach((el, i) => setTimeout(() => el.classList.add("on"), i * 90)));
-  } else all.forEach((el) => el.classList.add("on"));
-  // belt and braces: 1.5 s after load the entrance is over, so the hero is simply shown even where no frame has drawn
-  setTimeout(() => root.classList.add("settled"), 1500);
-
-  // the line from the back cover lights up word by word
-  const say = $("say"); say.innerHTML = say.textContent.split(" ").map((w) => `<span>${w}</span>`).join(" ");
-  const sayWords = [...say.children];
 
   const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
   const seg = (p, a, b) => clamp((p - a) / (b - a));
@@ -572,10 +388,10 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
   const light = (bk, ry) => { bk.style.setProperty("--lf", (.5 + .5 * Math.max(0, Math.cos(rad(ry + 18)))).toFixed(3)); bk.style.setProperty("--lb", (.5 + .5 * Math.max(0, -Math.cos(rad(ry - 18)))).toFixed(3)); bk.style.setProperty("--ls", (.5 + .5 * Math.max(0, Math.sin(rad(ry + 10)))).toFixed(3));
     const a = ((ry + 180) % 360 + 360) % 360 - 180; bk.style.setProperty("--gx", (clamp((a + 70) / 110) * 100).toFixed(1) + "%"); };   // the band of light crosses the cover as it turns
 
-  const heroBook = $("heroBook"), heroFlower = document.querySelector(".hero svg.flower");
+  const heroBook = $("heroBook");
   const look = $("look"), lookH = $("look-h"), lookBook = $("lookBook"), chip = $("lookChip"), blurb = $("blurb");
   const inside = $("inside"), open = $("open"), leaf = $("leaf"), inCopy = inside.querySelector(".in-copy"), inNote = $("inNote");
-  const sayPin = $("sayPin"), sayArt = $("sayArt"), saySvg = sayPin.querySelector("svg"), readline = $("readline"), heroCopy = document.querySelector(".hero-copy");
+  const readline = $("readline");
   // the open book's leaves in turning order (10 Nov 2026, his ask: "flick through the book stopping at several chapters"): the cover,
   // then for each later stop a short flick of leaves. The first leaf's face is the page being left, the last leaf's back the page arrived at.
   const FL = 5, E = .5, leaves = [leaf], flicks = [];
@@ -587,8 +403,6 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
   const OPEN0 = .04, OPEN1 = .15, F0 = .2, F1 = .58, ZOOM0 = .62, slot = (F1 - F0) / Math.max(1, flicks.length);
   const fw = flicks.map((_, k) => [F0 + k * slot + .02, F0 + (k + 1) * slot - .07]);
   const heads = (inNote.dataset.heads || "").split("|"), lastNote = inNote.dataset.last || inNote.textContent;
-  const feel = $("feel"), words = [...feel.querySelectorAll(".word")], feelSub = feel.querySelector(".feel-sub"), feelArt = feel.querySelector(".draw");
-  const readers = $("readers"), track = $("track"), rdSticky = readers.querySelector(".sticky");
   const probe = look.querySelector(".sticky"), stage = $("heroStage");
   const shade = (bk) => { ["front", "back", "spine"].forEach((c) => { if (bk.querySelector("img." + c)) { const s = document.createElement("span"); s.className = "f sh " + c; s.setAttribute("aria-hidden", "true"); bk.append(s); } });
     const g = document.createElement("span"); g.className = "f gl"; g.setAttribute("aria-hidden", "true"); bk.append(g); };
@@ -602,20 +416,14 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
   function frame() {
     ticking = false;
     const vh = probe.offsetHeight || innerHeight, vw = root.clientWidth, y = scrollY;   // the pinned box is the viewport the scenes live in
-    // say
-    if (!fx) { const r = say.getBoundingClientRect(); const p = clamp((vh * .82 - r.top) / (vh * .55)); const n = Math.round(p * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n)); return; }
+    if (!fx) return;
     // the reading line under the book's bar
     { const max = root.scrollHeight - innerHeight; readline.style.transform = `scaleX(${(max > 0 ? clamp(y / max) : 0).toFixed(4)})`; }
-    // say: held in place and lit word by word while two circles draw themselves behind it
-    { const { p, near } = prog(sayPin, vh); if (near) { const n = Math.round(seg(p, .04, .72) * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n));
-      sayArt.style.setProperty("--off", (1 - ease(seg(p, .04, .9))).toFixed(3)); saySvg.style.opacity = (.26 * seg(p, .03, .1)).toFixed(3); saySvg.style.transform = `rotate(${(p * 40).toFixed(2)}deg)`; } }
-    // hero: the words let go first and the book sinks back a little, so the page has depth as it leaves
-    if (y < vh * 1.4) { const t = clamp(y / vh); heroCopy.style.opacity = (1 - seg(t, .2, .7)).toFixed(3); heroCopy.style.transform = `translateY(${(-50 * t).toFixed(1)}px)`; stage.style.transform = `translateY(${(y * .12).toFixed(1)}px)`; }
     // the paper arrives as a sheet with round corners and squares up as it fills the screen; it leaves the same way
     { const r = inside.getBoundingClientRect(), a = clamp(r.top / vh), b = clamp((vh - r.bottom) / vh);
       inside.style.clipPath = a > 0 || b > 0 ? `inset(0 ${(a * 5 + b * 5).toFixed(2)}% round ${(a * 44).toFixed(0)}px ${(a * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px)` : "none"; }
-    // hero: the book turns a little and the flower wheels as the page leaves
-    if (y < vh * 1.4) { heroPaint(); heroFlower.style.setProperty("--spin", (y * .03 + spin * .12).toFixed(2) + "deg"); }
+    // hero: the book turns a little as the page leaves
+    if (y < vh * 1.4) heroPaint();
     // the book's own bar says where you are
     { const at = (el) => { const r = el.getBoundingClientRect(); return r.top < vh * .5 && r.bottom > vh * .5; };
       lnavLinks.forEach(([a, el]) => { if (at(el)) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }
@@ -647,15 +455,6 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
       const txt = end > 0 ? lastNote : (heads[k] || lastNote); if (inNote.textContent !== txt) inNote.textContent = txt;
       inNote.style.opacity = Math.max(hold, end).toFixed(3);
     } }
-    // feel: one word at a time, the last one stays while the flower draws itself
-    { const { p, near } = prog(feel, vh); if (near) {
-      const n = words.length;
-      words.forEach((w, i) => { const c = (i + .5) / n, d = Math.abs(p - c) / (.5 / n); let o = clamp(1.7 - 1.7 * d); if (i === n - 1 && p > c) o = 1; if (i === 0 && p < c) o = Math.max(o, seg(p, 0, .04));
-        w.style.opacity = o.toFixed(3); w.style.transform = `translateY(${((i === n - 1 && p > c ? 0 : (c - p) * 260)).toFixed(1)}px) scale(${lerp(.94, 1, o).toFixed(3)})`; });
-      feelArt.style.setProperty("--off", (1 - ease(seg(p, .62, .96))).toFixed(3)); feelSub.style.opacity = seg(p, .9, .97).toFixed(3);
-    } }
-    // readers: the cards pass sideways
-    { const { p, near } = prog(readers, vh); if (near) { const span = Math.max(0, track.scrollWidth - rdSticky.clientWidth); track.style.transform = `translate3d(${(-span * seg(p, .06, .94)).toFixed(1)}px, 0, 0)`; } }
   }
   const lnavLinks = [...document.querySelectorAll('#lnav .lright a[href^="#"]:not(.pill)')].map((a) => [a, $(a.getAttribute("href").slice(1))]).filter(([, el]) => el);
   let ticking = false;
@@ -682,28 +481,9 @@ h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
     heroBook.addEventListener("keydown", (e) => { const k = e.key === "ArrowLeft" ? -1 : e.key === "ArrowRight" ? 1 : 0; if (!k) return; e.preventDefault(); cancelAnimationFrame(settle); vel = k * 9; hint.classList.add("done"); spin += 1e-4; settle = requestAnimationFrame(coast); });
   }
 
-  // a format is chosen the way a phone is: one card is picked, and the line under the cards says what was picked
-  const pick = $("pick"), cards = pick ? [...pick.querySelectorAll(".format")] : [];
-  if (cards.length) {
-    // each reader sees their own money first: Australian dollars at home, US dollars elsewhere
-    let au = true; try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; au = !tz || /^Australia\/|^Pacific\/Auckland$/.test(tz); } catch (_) {}
-    cards.forEach((c) => { const p = c.querySelector(".price"); if (p && !au && p.dataset.us) p.innerHTML = `${p.dataset.us}<small>${p.dataset.au}</small>`; });
-    const cName = $("cName"), cPrice = $("cPrice"), cAct = $("cAct"), line = $("chosen");
-    const choose = (c, say) => {
-      cards.forEach((o) => { o.setAttribute("aria-checked", o === c); o.tabIndex = o === c ? 0 : -1; });
-      cName.textContent = c.querySelector("h3").textContent; cPrice.textContent = c.querySelector(".price").firstChild.textContent;
-      const act = c.querySelector(".act > a, .act > .tag"); cAct.replaceChildren(act ? act.cloneNode(true) : "");
-      if (say) { line.classList.remove("swap"); void line.offsetWidth; line.classList.add("swap"); }
-    };
-    pick.classList.add("pick"); pick.setAttribute("role", "radiogroup"); pick.setAttribute("aria-label", "Choose a format");
-    cards.forEach((c, i) => { c.setAttribute("role", "radio");
-      c.addEventListener("click", (e) => { if (!e.target.closest("a")) choose(c, true); });
-      c.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { if (e.target.closest("a")) return; e.preventDefault(); choose(c, true); }
-        else if (/^Arrow/.test(e.key)) { e.preventDefault(); const n = cards[(i + (/Right|Down/.test(e.key) ? 1 : cards.length - 1)) % cards.length]; choose(n, true); n.focus(); } }); });
-    choose(cards[0], false);
-  }
-  // a soft light follows the cursor across a card
-  if (matchMedia("(hover: hover)").matches) document.querySelectorAll(".tile, .format").forEach((t) => t.addEventListener("pointermove", (e) => { const r = t.getBoundingClientRect(); t.style.setProperty("--mx", (e.clientX - r.left).toFixed(0) + "px"); t.style.setProperty("--my", (e.clientY - r.top).toFixed(0) + "px"); }, { passive: true }));
+  // each reader sees their own money first: Australian dollars at home, US dollars elsewhere
+  { let au = true; try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; au = !tz || /^Australia\/|^Pacific\/Auckland$/.test(tz); } catch (_) {}
+    document.querySelectorAll("#pick .price").forEach((p) => { if (!au && p.dataset.us) p.innerHTML = `${p.dataset.us}<small>${p.dataset.au}</small>`; }); }
 })();
 </script>
 <script>

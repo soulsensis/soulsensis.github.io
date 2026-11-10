@@ -27,37 +27,36 @@
 <link rel="alternate" type="application/rss+xml" title="soulsensis essays" href="https://soulsensis.com/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/site.css?v=981d64dc">
+<link rel="stylesheet" href="/site.css?v=673bc225">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebPage", "name": "Seven statements · soulsensis", "url": "https://soulsensis.com/seven/", "description": "Put in your problem. You get seven statements, written as already true, to say out loud. Nothing you type leaves your device.", "inLanguage": "en", "isPartOf": {"@type": "WebSite", "@id": "https://soulsensis.com/#site", "name": "soulsensis", "url": "https://soulsensis.com/"}, "publisher": {"@id": "https://soulsensis.com/#author"}}, {"@context": "https://schema.org", "@type": "WebApplication", "name": "Seven statements", "url": "https://soulsensis.com/seven/", "description": "Put in your problem. You get seven statements, written as already true, to say out loud. Nothing you type leaves your device.", "applicationCategory": "LifestyleApplication", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "author": {"@id": "https://soulsensis.com/#author"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://soulsensis.com/"}, {"@type": "ListItem", "position": 2, "name": "Seven statements", "item": "https://soulsensis.com/seven/"}]}]</script>
 <style>
-.seven { padding-block: 56px calc(48px + env(safe-area-inset-bottom, 0px)); position: relative; overflow: hidden; }
-.seven .art { position: absolute; left: 50%; top: 26%; width: min(900px, 170vw); aspect-ratio: 1; transform: translate(-50%, -50%); opacity: .12; pointer-events: none; }
-.seven .col { position: relative; }
-.seven h1 { margin: 0 0 22px; font-weight: 500; letter-spacing: -.022em; font-size: clamp(32px, 8vw, 48px); line-height: 1.12; text-wrap: balance; }
+.seven { padding-top: clamp(40px, 7vw, 72px); }
+.seven h1 { margin: 0 0 22px; }
 .seven .says { margin: 0 0 26px; font-family: var(--serif); font-size: 19px; line-height: 1.7; color: #ebe7de; }
-.seven label { display: block; margin: 0 0 10px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.seven textarea { width: 100%; box-sizing: border-box; min-height: 150px; resize: vertical; padding: 14px 16px; border-radius: 14px;
-  border: 1px solid #3a3a42; background: rgba(0,0,0,.45); color: var(--ink); font: 17px/1.55 var(--serif); }
+.seven label { display: block; margin: 0 0 10px; font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
+.seven textarea { width: 100%; box-sizing: border-box; min-height: 150px; resize: vertical; padding: 14px 16px; border-radius: 4px;
+  border: 1px solid rgba(245,242,234,.22); background: rgba(245,242,234,.05); color: var(--ink); font: 17px/1.55 var(--serif); }
 .seven textarea:focus { outline: none; border-color: rgba(245,242,234,.6); }
-.seven .btn { width: 100%; min-height: 56px; font-size: 17px; margin-top: 14px; }
+.seven .btn { margin-top: 14px; }
 .seven .out { margin-top: 36px; }
-.seven .out h2 { margin: 0 0 16px; font-weight: 300; font-size: 22px; }
-.seven ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.seven li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border: 1px solid #3a3a42; border-radius: 14px; background: rgba(0,0,0,.45); font-family: var(--serif); font-size: 18px; line-height: 1.5; }
-.seven li .stem { flex: none; color: var(--heart); font-family: var(--sans); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding-top: 6px; min-width: 92px; }
+.seven .out h2 { margin: 0 0 6px; font-size: clamp(22px, 3.2vw, 26px); }
+.seven ol { list-style: none; margin: 0; padding: 0; }
+.seven li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); font-family: var(--serif); font-size: 18px; line-height: 1.5; }
+.seven li:first-child { border-top: 0; }
+.seven li .stem { flex: none; color: var(--muted); font-family: var(--sans); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding-top: 6px; min-width: 92px; }
 .seven li .line { flex: 1; min-width: 0; outline: none; }
 .seven li .line:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 4px; }
-.seven .today { margin: 18px 0 0; padding: 14px 18px; border-left: 2px solid var(--heart); font-family: var(--serif); font-size: 17px; line-height: 1.6; }
+.seven .today { margin: 18px 0 0; padding: 4px 0 4px 20px; border-left: 1px solid var(--heart); font-family: var(--serif); font-size: 17px; line-height: 1.6; }
 .seven .today b { font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 4px; }
 .seven .how, .seven .note { margin: 18px 0 0; color: var(--muted); line-height: 1.6; font-size: 15px; }
-.seven .crisis { margin-top: 36px; padding: 20px; border: 1px solid var(--heart); border-radius: 14px; background: rgba(0,0,0,.6); }
+.seven .crisis { margin-top: 36px; padding: 20px; border: 1px solid var(--heart); border-radius: 4px; }
 .seven .crisis h2 { margin: 0 0 12px; font-weight: 400; font-size: 22px; }
 .seven .crisis p { margin: 0 0 12px; font-size: 17px; line-height: 1.6; }
-.seven .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
-.seven .row .btn { width: auto; flex: 1 1 160px; margin: 0; min-height: 48px; font-size: 15px; }
+.seven .row { display: flex; gap: 12px 26px; flex-wrap: wrap; margin-top: 18px; padding: 0; border: 0; }
+.seven .row .btn { margin: 0; }
 .seven .fine { margin: 28px 0 0; color: var(--muted); line-height: 1.6; font-size: 13px; }
-.seven .alt { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 22px 0 0; }
-.seven .alt a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); }
+.seven .alt { display: flex; gap: 0 26px; flex-wrap: wrap; margin: 22px 0 0; }
+.seven .alt a { display: inline-flex; align-items: center; min-height: 44px; font: 400 17px var(--serif); color: var(--ink); text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; }
 .seven .hid { display: none; }
 @media (prefers-reduced-motion: no-preference) { .seven li { animation: in .4s ease both; } @keyframes in { from { opacity: 0; transform: translateY(6px); } } }
 </style>
@@ -68,7 +67,7 @@
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
   <div class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a class="far" href="/music/">Piano</a><a class="far" href="/conversation/">A conversation</a></div>
 </div></nav>
-<main id="main" class="seven g"><div class="art" aria-hidden="true"><svg viewBox="-340 -340 680 680"><g fill="none" stroke="#F5F2EA" stroke-width="1"><circle cx="0.0" cy="0.0" r="64"/><circle cx="64.0" cy="0.0" r="64"/><circle cx="128.0" cy="0.0" r="64"/><circle cx="96.0" cy="55.4" r="64"/><circle cx="32.0" cy="55.4" r="64"/><circle cx="64.0" cy="110.9" r="64"/><circle cx="0.0" cy="110.9" r="64"/><circle cx="-32.0" cy="55.4" r="64"/><circle cx="-64.0" cy="110.9" r="64"/><circle cx="-96.0" cy="55.4" r="64"/><circle cx="-64.0" cy="0.0" r="64"/><circle cx="-128.0" cy="0.0" r="64"/><circle cx="-96.0" cy="-55.4" r="64"/><circle cx="-32.0" cy="-55.4" r="64"/><circle cx="-64.0" cy="-110.9" r="64"/><circle cx="-0.0" cy="-110.9" r="64"/><circle cx="32.0" cy="-55.4" r="64"/><circle cx="64.0" cy="-110.9" r="64"/><circle cx="96.0" cy="-55.4" r="64"/><circle r="192"/><circle r="210"/></g></svg></div><div class="col">
+<main id="main" class="seven g"><div class="col">
 <p class="label">Seven statements</p>
 <h1>There is a version of you in this world where this is the case.</h1>
 <p class="says">You&#x27;ve got so many options to choose from, yet we tend to fall back into the same patterns every single day because we&#x27;re not aware enough of the patterns that govern and run our lives.</p>
@@ -86,8 +85,9 @@
 <p class="alt"><a href="/question/">Leave a question, free</a><a href="/conversation/">A conversation</a></p>
 </div></main>
 <footer class="g"><div class="wrap">
-  <span>Your soul knows best. · soulsensis · written by a human</span>
-  <span><a href="/book.html">The book</a> · <a href="/essays.html">Essays</a> · <a href="/music/">Piano</a> · <a href="/conversation/">A conversation</a> · <a href="/ask.html">Ask soulsensis</a> · <a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a> · <a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a> · <a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a> · <a href="/app.html">Get the app</a> · <a href="/reading/">Free reading</a> · <a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span>
+  <span>soulsensis · written by a human</span>
+  <span class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
+  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
 </div></footer>
 <script>

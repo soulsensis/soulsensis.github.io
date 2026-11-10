@@ -1,353 +1,219 @@
-/* soulsensis: shared styles for the reading pages (essays.html and essays/<slug>/). Generated pages link this file. */
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946;
+/* soulsensis: the one stylesheet of every page the build writes, and of the question, privacy, terms and 404 pages.
+   A journal (11 Nov 2026, his words: "more narrower, more a blog style ... we arent apple ... add a soulsensis spin"):
+   one 640 px column set left, serif for what is said, Montserrat for the name and small labels, ruled hairlines with a
+   short crimson tick in place of cards, one crimson point, nothing moving but a link's colour.
+   Every rule is stated once (pruned 11 Nov: the older layers each later block overrode are gone). */
+:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --rule: rgba(245,242,234,.16); --heart: #E63946;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
-/* 5 Nov 2026: metric-matched fallbacks (measured in the browser: Montserrat is 1.11 x Arial, Source Serif 4 is 0.96 x Georgia), so the swap to the web font moves nothing */
+/* metric-matched fallbacks (measured 5 Nov 2026: Montserrat is 1.11 x Arial, Source Serif 4 is 0.96 x Georgia), so the swap to the web font moves nothing */
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
 @font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 img { max-width: 100%; }
-.g { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
-.wrap { max-width: 1160px; margin: 0 auto; }
-.col { max-width: 680px; margin: 0 auto; }
+.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
+.g, .solo, header { overflow-x: clip; }
+.wrap, .col { max-width: 640px; margin: 0 auto; }
+main { padding-bottom: clamp(40px, 7vw, 64px); }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: 16px; top: -60px; z-index: 20; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: #000; font-size: 13px; text-decoration: none; }
+.hp { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 20; padding: 10px 16px; border-radius: 4px; background: var(--ink); color: #000; font-size: 13px; text-decoration: none; }
 .skip:focus-visible { top: 12px; }
 
-/* nav */
-nav.top { position: sticky; top: 0; z-index: 10; padding-top: env(safe-area-inset-top, 0px); background: rgba(0,0,0,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(36,36,42,.6); }
-nav.top .wrap { display: flex; justify-content: space-between; align-items: center; height: 64px; gap: 12px; }
-.mark { display: flex; align-items: center; min-height: 44px; gap: 10px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 15px; flex: none; }
-nav.top .links { display: flex; align-items: center; gap: 22px; font-size: 14px; color: var(--muted); }
-nav.top .links a { text-decoration: none; transition: color .2s; white-space: nowrap; } nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
-nav.top .links a.buy { color: #fff; background: var(--heart); border-radius: 999px; padding: 8px 14px; font-weight: 500; }
-@media (max-width: 520px) { nav.top .links { gap: 14px; } nav.top .links a.far { display: none; } .mark { letter-spacing: .14em; } }
+/* shared:start
+   The top bar and the footer of every page. site.hand_page() also sets this block into the hand pages that carry
+   their own styles (index, book, ask, the piano), so the bar and the footer have one design, kept in one place. */
+nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 640px; height: auto; min-height: 56px; margin: 0 auto; }
+.mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
+nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
+nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
+nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
+@media (max-width: 560px) { nav.top .links a.far { display: none; } }
+body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
+body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 640px; margin: 0 auto; }
+body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
+body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
+body > footer a:hover { color: var(--ink); }
+body > footer .help { margin: 6px 0 0; line-height: 1.6; }
+body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
+/* shared:end */
 
-/* buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border-radius: 999px; font-weight: 500; font-size: 15px; text-decoration: none; border: 0; cursor: pointer; font-family: inherit; transition: transform .15s ease, box-shadow .25s ease, border-color .25s ease; }
-.btn:active { transform: scale(.97); }
-.btn.primary { background: var(--heart); color: #fff; } .btn.primary:hover { box-shadow: 0 0 0 8px rgba(230,57,70,.12); }
-.btn.quiet { border: 1px solid #3a3a42; color: var(--ink); background: none; } .btn.quiet:hover { border-color: var(--ink); }
-.label { font-size: 12px; letter-spacing: .32em; color: var(--muted); text-transform: uppercase; margin: 0 0 14px; }
-
-/* essay page */
-.essay-head { padding-block: clamp(48px, 9vw, 96px) clamp(28px, 4vw, 40px); text-align: center; position: relative; overflow: hidden; }
-.essay-head .art { position: absolute; left: 50%; top: 50%; width: min(900px, 160vw); aspect-ratio: 1; transform: translate(-50%, -52%); opacity: .16; pointer-events: none; }
-.essay-head .col { position: relative; }
-.kicker { display: inline-block; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 22px; line-height: 1.8; }
-.kicker:hover { color: var(--ink); }
-.essay-head h1 { margin: 0; font-weight: 500; letter-spacing: -.022em; font-size: clamp(38px, 7vw, 68px); line-height: 1.06; text-wrap: balance; }
-.dek { margin: 20px auto 0; font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.4vw, 23px); line-height: 1.45; color: #d9d5cb; max-width: 34ch; }
+/* type */
+h1, h2, .row b, .next b { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
+h1 { margin: 0; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; text-wrap: balance; }
+.label { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
+.fine { margin: 14px 0 0; font-size: 12px; color: var(--muted); }
 .meta { margin: 22px 0 0; font-size: 12px; letter-spacing: .08em; color: var(--muted); }
 .meta span + span::before { content: "·"; margin: 0 10px; }
+.tag { flex: none; justify-self: start; margin: 2px 0 0; font: 400 13px var(--sans); color: var(--muted); white-space: nowrap; }
 
-.video { display: block; position: relative; aspect-ratio: 16 / 9; width: 100%; max-width: 920px; margin: 8px auto 0; border-radius: 6px; overflow: hidden; background: var(--raised); border: 1px solid var(--line); }
-.video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .82; transition: opacity .3s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
-.video:hover img { opacity: 1; transform: scale(1.015); }
-.video .play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(0,0,0,.55); border: 1px solid rgba(245,242,234,.7); display: grid; place-items: center; backdrop-filter: blur(4px); }
-.video .play::after { content: ""; margin-left: 5px; border-left: 20px solid var(--ink); border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
-.video .cap { position: absolute; left: 14px; bottom: 12px; font-size: 12px; letter-spacing: .06em; color: var(--ink); background: rgba(0,0,0,.6); padding: 6px 10px; border-radius: 999px; }
-.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.video-wrap { padding-bottom: clamp(28px, 5vw, 48px); }
-
-.prose { font-family: var(--serif); font-size: clamp(19px, 2.1vw, 21px); line-height: 1.75; color: #ebe7de; }
-.prose p { margin: 0 0 1.15em; }
-.prose p:first-child::first-letter { float: left; font-size: 3.3em; line-height: .9; padding: .08em .1em 0 0; color: var(--ink); font-weight: 400; }
-.prose.opening { position: relative; }
-.prose.opening::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.8em; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
-
-.inbook { margin: 8px 0 0; padding: clamp(24px, 4vw, 34px); border: 1px solid var(--line); border-radius: 8px; background: var(--raised); display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 22px; align-items: center; }
-.inbook img { width: 96px; height: auto; border-radius: 2px 4px 4px 2px; box-shadow: 10px 14px 30px -8px rgba(0,0,0,.9), 0 0 50px -10px rgba(230,57,70,.25); }
-.inbook h2 { margin: 0 0 8px; font-weight: 300; font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
-.inbook p { margin: 0 0 16px; color: var(--muted); font-size: 14px; line-height: 1.6; }
-.inbook .acts { display: flex; gap: 10px; flex-wrap: wrap; }
-@media (max-width: 520px) { .inbook { grid-template-columns: 1fr; text-align: center; } .inbook img { margin: 0 auto; width: 110px; } .inbook .acts { justify-content: center; } }
-
-.bookline { margin: 34px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.7; color: var(--muted); }
-.bookline a { color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); }
-.also { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
-.also a { color: var(--muted); }
-
-.orn { display: block; width: 64px; height: 64px; margin: clamp(40px, 6vw, 64px) auto; opacity: .7; }
-
-.next { display: grid; gap: 12px; }
-.next a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 22px 24px; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; transition: border-color .25s ease, background .25s ease; }
-.next a:hover { border-color: #4a4a52; background: var(--raised); }
-.next small { display: block; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-.next b { display: block; font-weight: 300; font-size: clamp(20px, 2.6vw, 26px); line-height: 1.25; }
-.next .arrow { font-size: 22px; transition: transform .3s ease; } .next a:hover .arrow { transform: translateX(6px); }
-.next a.back { padding: 14px 24px; } .next a.back b { font-size: 16px; }
-
-.letters { margin-top: clamp(56px, 8vw, 96px); padding-block: clamp(48px, 7vw, 80px); border-top: 1px solid var(--line); text-align: center; }
-.letters h2 { margin: 0 0 10px; font-weight: 500; letter-spacing: -.022em; font-size: clamp(30px, 4.4vw, 44px); }
-.letters p { margin: 0 auto 22px; color: var(--muted); max-width: 44ch; line-height: 1.6; font-size: 15px; }
-.signup { display: flex; gap: 10px; width: min(460px, 100%); margin: 0 auto; padding: 6px; border: 1px solid #3a3a42; border-radius: 999px; background: rgba(10,10,12,.7); }
-.signup:focus-within { border-color: var(--ink); }
-.signup input { flex: 1; min-width: 0; background: none; border: 0; color: var(--ink); font: inherit; font-size: 16px; padding: 0 16px; outline: none; }
-.signup input::placeholder { color: var(--muted); }
-.signup .btn { min-height: 44px; flex: none; padding: 0 20px; justify-content: center; }
-p.offer, .letters p.offer { color: var(--ink); }
-.offer strong { color: #E63946; font-weight: 600; }
-.fine { margin: 14px 0 0; font-size: 12px; color: var(--muted); }
-
-/* topics page */
-.topics-head { padding-block: clamp(56px, 10vw, 110px) clamp(24px, 4vw, 40px); position: relative; overflow: hidden; }
-.topics-head .art { position: absolute; right: -18%; top: 50%; width: min(760px, 120vw); aspect-ratio: 1; transform: translateY(-50%); opacity: .18; pointer-events: none; }
-.topics-head .wrap { position: relative; }
-.topics-head h1 { margin: 0; font-weight: 500; letter-spacing: -.022em; font-size: clamp(44px, 8vw, 92px); line-height: 1; }
-.topics-head .lede { margin: 22px 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.4vw, 24px); line-height: 1.5; color: #ddd9cf; max-width: 40ch; }
-.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
-.jump a { font-size: 13px; padding: 9px 14px; border: 1px solid #3a3a42; border-radius: 999px; text-decoration: none; color: #d9d5cb; transition: border-color .2s; }
-.jump a:hover { border-color: var(--ink); }
-.topic { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line); scroll-margin-top: 70px; }
-.topic-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 6vw, 80px); }
-@media (max-width: 820px) { .topic-grid { grid-template-columns: 1fr; } }
-.topic h2 { margin: 0; font-weight: 500; letter-spacing: -.022em; font-size: clamp(32px, 4.6vw, 52px); line-height: 1.08; }
-.topic .about { margin: 16px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 40ch; }
-.topic .count { margin: 16px 0 0; font-size: 12px; letter-spacing: .1em; color: var(--muted); }
-.list { display: flex; flex-direction: column; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; padding: 20px 0; border-top: 1px solid var(--line); text-decoration: none; transition: padding .3s ease; }
-.row:last-child { border-bottom: 1px solid var(--line); }
-.row:hover { padding-left: 8px; }
-.row b { display: block; font-weight: 400; font-size: 18px; line-height: 1.35; }
-.row p { margin: 6px 0 0; font-family: var(--serif); font-size: 16px; line-height: 1.55; color: #b9b5ab; }
-/* 11 Nov 2026: every list row reads the same: a title, two lines of the opening at most, one quiet tag */
-.list .row p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
-.tag { flex: none; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; border-radius: 999px; padding: 6px 10px; border: 1px solid #3a3a42; color: var(--muted); white-space: nowrap; margin-top: 2px; }
-.tag.full { border-color: var(--ink); color: var(--ink); }
-.tag.watch { border-color: var(--heart); color: var(--heart); }
-@media (max-width: 520px) { .row { grid-template-columns: 1fr; gap: 10px; } .row .tag { justify-self: start; } }
-
-.bookband { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); }
-.bookband .wrap { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: clamp(24px, 5vw, 60px); align-items: center; max-width: 900px; }
-.bookband img { width: 180px; height: auto; border-radius: 2px 5px 5px 2px; box-shadow: 18px 24px 50px -10px rgba(0,0,0,.95), 0 0 90px -10px rgba(230,57,70,.25); }
-.bookband h2 { margin: 0 0 12px; font-weight: 500; letter-spacing: -.022em; font-size: clamp(30px, 4.4vw, 48px); line-height: 1.08; }
-.bookband p { margin: 0 0 20px; color: var(--muted); line-height: 1.65; font-size: 15px; max-width: 48ch; }
-.bookband .acts { display: flex; gap: 10px; flex-wrap: wrap; }
-@media (max-width: 620px) { .bookband .wrap { grid-template-columns: 1fr; text-align: center; } .bookband img { margin: 0 auto; width: 150px; } .bookband p { margin-inline: auto; } .bookband .acts { justify-content: center; } }
-
-footer { border-top: 1px solid var(--line); padding-block: 36px calc(36px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; line-height: 1.9; }
-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
-
-/* funnel (28 Oct 2026): one wide primary button, the ask that closes an essay, the link-in-bio page */
+/* buttons: one filled, square-shouldered, in warm white; the rest are underlined words */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border: 0; border-radius: 4px; font-family: inherit; font-weight: 500; font-size: 15px; text-decoration: none; cursor: pointer; transition: background .2s; }
+.btn.primary { background: var(--ink); color: #000; } .btn.primary:hover { background: #fff; }
+.btn.quiet { min-height: 44px; padding: 0; background: none; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; }
 .btn.wide { width: 100%; max-width: 420px; min-height: 56px; font-size: 17px; }
-.sub-yt { text-align: center; margin: 16px 0 0; }
-.letters.inline { margin-top: clamp(40px, 6vw, 64px); padding-block: clamp(36px, 6vw, 56px) 0; }
-.letters .askq { margin: 18px 0 0; font-size: 15px; }
-.letters .askq a { display: inline-block; padding: 12px 0; line-height: 20px; color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); }
+.acts { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; }
 
-/* mobile (audit 28 Oct 2026) */
-nav.top .links a { display: inline-flex; align-items: center; min-height: 44px; }
-nav.top .links a.buy { min-height: 44px; padding: 0 16px; }
-footer a { display: inline-flex; align-items: center; min-height: 44px; }
-footer .wrap { gap: 0 20px; }
-.jump a { min-height: 44px; display: inline-flex; align-items: center; }
-.kicker { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-bottom: 14px; }
-.also a { display: inline-block; padding: 10px 0; line-height: 24px; }
-.bookline a { display: inline-block; padding: 10px 0; line-height: 24px; }
-@media (max-width: 480px) {
-  .signup { flex-direction: column; border-radius: 28px; padding: 8px; gap: 8px; }
-  .signup input { min-height: 48px; padding: 0 16px; text-align: center; }
-  .signup .btn { width: 100%; min-height: 48px; }
-  .label, .tag { font-size: 12px; }
-  .fine { font-size: 13px; }
-  nav.top .links { font-size: 14px; }
-}
-/* 28 Oct 2026: wide background art made phones lay the page out wider than the screen; the anti-spam field showed */
-html { overflow-x: clip; }
-.g, .solo, header { overflow-x: clip; }
-.hp { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
-/* 29 Oct 2026: the question form ran label, box and email together on one line; each field now stands on its own */
-.qform { display: grid; gap: 18px; margin-top: 22px; }
-.qform label { display: grid; gap: 8px; font-size: 15px; color: var(--ink); }
-.qform textarea, .qform input[type="email"] { width: 100%; box-sizing: border-box; font: 16px/1.55 var(--serif, Georgia, serif);
-  color: var(--ink); background: rgba(245,242,234,.05); border: 1px solid rgba(245,242,234,.22); border-radius: 8px; padding: 14px 16px; }
-.qform textarea { min-height: 170px; resize: vertical; }
-.qform textarea:focus, .qform input[type="email"]:focus { outline: none; border-color: rgba(245,242,234,.6); }
-.qform .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
-.qform .row .count { font-size: 13px; color: var(--muted, #a29e96); }
-/* 5 Nov 2026: UI audit (docs/specs/site-ui-audit.md). Tap targets 44 px both ways, no text under 12 px, AA on the red
-   button, the phone nav shows both links, long lines capped, smooth scroll off when motion is reduced. */
-nav.top .links { gap: 10px; }
-nav.top .links a { padding: 0 8px; min-width: 44px; justify-content: center; }
-@media (max-width: 520px) { nav.top .links { gap: 4px; } nav.top .links a { padding: 0 6px; } nav.top .links a.far { display: inline-flex; } nav.top .links a.far ~ a.far { display: none; } }
-footer a { padding: 0 4px; min-width: 44px; justify-content: center; }
-.askq a { display: inline-block; padding: 12px 0; line-height: 20px; color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); }
-.label, .kicker, .next small, .meta, .topic .count, .fine, .video .cap { font-size: 12px; }
-.tag { font-size: 12px; letter-spacing: .16em; }
-.also { font-size: 13px; }
-:root { --heart-fill: #D9303D; }          /* white on #E63946 is 4.17:1; this fill gives 4.73:1 (AA) and reads as the same crimson */
-.btn.primary { background: var(--heart-fill); }
-.inbook p, .bookband p, .topic .about { max-width: 60ch; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }     /* "written by a human" readable, same words */
-.sub-yt.after { margin: 8px 0 0; }            /* the Subscribe button again after the last line (conversion audit, 5 Nov 2026) */
-.next.near { margin: 28px 0 24px; }
+/* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
+.askcard, .inbook, .bookband .wrap, .ruled { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
+.askcard::before, .inbook::before, .bookband .wrap::before, .ruled::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
 
-/* question pages /question/<slug>/ (6 Nov 2026, docs/specs/question-pages.md): his sentence first, the FAQ, other questions */
-.answer { margin: 28px auto 0; max-width: 36ch; }
-.answer p { margin: 0; font-family: var(--serif); font-size: clamp(21px, 2.8vw, 27px); line-height: 1.45; color: var(--ink); text-wrap: pretty; }
-.answer footer { margin-top: 14px; font-size: 13px; letter-spacing: .06em; color: var(--muted); }
-.answer footer a { color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); display: inline-block; padding: 12px 0; }
-.qpage .prose p:first-child::first-letter { float: none; font-size: inherit; padding: 0; }
-.faq { margin: clamp(40px, 6vw, 56px) 0 0; }
-.faq h3 { margin: 26px 0 8px; font-weight: 400; font-size: 18px; line-height: 1.4; }
-.faq p { margin: 0; font-family: var(--serif); font-size: 18px; line-height: 1.65; color: #ebe7de; }
-.qlist ul { list-style: none; margin: 0; padding: 0; }
-.qlist li { border-bottom: 1px solid var(--line); }
-.qlist a { display: block; padding: 14px 0; min-height: 44px; font-size: 16px; line-height: 1.45; text-decoration: none; }
-.qlist a:hover { color: var(--heart); }
-.qline a { display: inline-block; padding: 12px 0; }
-/* 6 Nov 2026 retention: read next across topics, and the essay finder on /essays.html */
-.related { display: flex; flex-direction: column; margin-top: clamp(40px, 6vw, 56px); }
-.related .label { margin: 0 0 6px; }
-.find { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 22px 0 0; }
-.find label { font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
-.find input { flex: 1 1 220px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #3a3a42; background: rgba(0,0,0,.45); color: var(--ink); font: 400 16px var(--sans); }
-.find input:focus-visible { outline: 2px solid var(--heart); outline-offset: 2px; }
-.find[hidden], .row[hidden], section.topic[hidden] { display: none; }
-
-/* 10 Nov 2026: every page in the book page's type (docs/specs/site-apple-scroll.md): headings Montserrat Medium and
-   tight, labels plain words (no capitals, no wide tracking), cards with the same round corner */
-.label, .kicker, .next small, .find label { letter-spacing: 0; text-transform: none; font-size: 15px; font-weight: 500; }
-.tag { letter-spacing: 0; text-transform: none; font-size: 13px; font-weight: 500; }
-.topics-head .lede { font-family: var(--sans); font-style: normal; line-height: 1.35; }
-.inbook, .next a { border-radius: 22px; }
-.video { border-radius: 14px; }
-nav.top .wrap { height: 52px; }
-nav.top .links { font-size: 13px; color: #c9c5bc; }
-.mark { font-size: 14px; }
-
-/* 10 Nov 2026: the essays are filed by feeling (docs/specs/site-home-logic.md): chips that filter one list, the
-   feeling shown on each row and on each essay. Chapters are no longer shown to a reader. */
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
-.chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #3a3a42; background: none; color: #d9d5cb; font: 500 15px var(--sans); cursor: pointer; transition: border-color .2s ease, background .25s ease, color .25s ease, transform .15s ease; }
-.chip:hover { border-color: var(--ink); }
-.chip:active { transform: scale(.96); }
-.chip.on { background: var(--ink); border-color: var(--ink); color: #000; }
-.chip small { font-size: 12px; font-weight: 400; opacity: .6; }
-.feels { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.feel { font-size: 13px; font-weight: 500; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; text-decoration: none; }
-a.feel { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; color: #d9d5cb; border-color: #3a3a42; transition: border-color .2s ease; }
-a.feel:hover { border-color: var(--ink); color: var(--ink); }
-p.kicker.feels { justify-content: center; margin: 0 0 14px; }
-#all { border-top: 0; padding-top: 0; }
-.none { padding: 28px 0; }
-@keyframes rowin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.list.swap .row { animation: rowin .45s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(min(var(--i, 0), 8) * 40ms); }
-@media (prefers-reduced-motion: reduce) { .list.swap .row { animation: none; } }
-@media (max-width: 640px) { nav.top .links a.far { display: none; } }
-
-/* ---- 11 Nov 2026: the essay page as a reading page (his: "feels bland ... narrow margins for reading ... a read out ...
-   access to asksoulsensis"). An editorial column: the title and the read-out lead on the left, the words start on the
-   first screen, the film follows the words. The name in the top bar is set heavier (his: "a bit stronger or bolder"). */
-.mark { font-weight: 400; letter-spacing: .24em; }   /* the logo's name: Regular, spaced (brandkit/logo.py) */
-article .col { max-width: 640px; }
-.essay-head { text-align: left; padding-block: clamp(36px, 6vw, 72px) clamp(20px, 3vw, 30px); }
-.essay-head .art { left: auto; right: -34%; top: 46%; transform: translate(0, -50%); width: min(760px, 130vw); opacity: .13; }
-.essay-head h1 { font-size: clamp(34px, 5.4vw, 54px); line-height: 1.08; text-wrap: balance; }
-.essay-head p.kicker.feels { justify-content: flex-start; margin: 0 0 18px; }
+/* a page's head: the essay, the list, and every page that opens with a title */
+.essay-head, .topics-head { position: relative; text-align: left; }
+.essay-head { padding-block: clamp(34px, 6vw, 64px) 10px; }
+.topics-head { padding-block: clamp(40px, 7vw, 72px) 10px; }
+.essay-head .art, .topics-head .art { display: none; }
+.essay-head .col, .topics-head .wrap { position: relative; }
+.essay-head:has(.listen.on) { overflow: visible; }
+.kicker { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 14px; font-size: 15px; font-weight: 500; line-height: 1.8; color: var(--muted); text-decoration: none; }
+a.kicker:hover { color: var(--ink); }
+.dek { margin: 20px 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.4vw, 23px); line-height: 1.45; color: #d9d5cb; max-width: 34ch; }
 .essay-head .meta { margin-top: 18px; }
-.listen { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 14px; margin-top: 26px; padding: 10px 18px 10px 10px; border: 1px solid #2c2c33; border-radius: 999px; background: rgba(14,14,17,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-.listen .lp { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); cursor: pointer; display: grid; place-items: center; transition: transform .2s ease; }
-.listen .lp:hover { transform: scale(1.06); } .listen .lp svg { width: 20px; height: 20px; fill: #000; }
+.topics-head .lede { margin: 22px 0 0; max-width: 34ch; font-family: var(--serif); font-style: italic; font-size: clamp(18px, 2.6vw, 21px); line-height: 1.4; color: #ddd9cf; }
+.topics-head .lede.plain { max-width: none; font-style: normal; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
+.topics-head .acts { margin-top: 22px; }
+
+/* the feelings an essay is filed under, and the words that filter the list */
+.feels { display: flex; flex-wrap: wrap; gap: 0 14px; margin-top: 10px; }
+.feel { font: italic 400 15px var(--serif); color: var(--muted); text-decoration: none; }
+a.feel { display: inline-flex; align-items: center; min-height: 32px; transition: color .2s; } a.feel:hover { color: var(--ink); }
+.essay-head p.kicker.feels { display: flex; justify-content: flex-start; margin: 0 0 8px; }
+.row .feels { display: none; }
+.chips { display: flex; flex-wrap: wrap; gap: 0 18px; margin-top: 30px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0; border: 0; background: none; color: #b9b5ab; font: 400 17px var(--serif); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s, text-decoration-color .2s; }
+.chip:hover { color: var(--ink); }
+.chip.on { color: var(--ink); text-decoration-color: var(--heart); }
+.chip small { margin-left: -3px; font: 400 12px var(--sans); color: var(--muted); }
+
+/* the read-out: one button, one line; it stays in reach while it plays */
+.listen { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 14px; margin: 6px 0 26px; padding: 10px 18px 10px 10px; border: 1px solid #2c2c33; border-radius: 6px; background: #0b0b0d; }
+.listen .lp { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); cursor: pointer; display: grid; place-items: center; }
+.listen .lp svg { width: 20px; height: 20px; fill: #000; }
 .listen .pa, .listen .lp[aria-pressed="true"] .pl { display: none; } .listen .lp[aria-pressed="true"] .pa { display: block; }
 .listen .lt { display: flex; flex-direction: column; line-height: 1.25; } .listen .lt b { font-weight: 500; font-size: 15px; }
 .listen .ld { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .listen .lbar { height: 28px; display: flex; align-items: center; cursor: pointer; position: relative; }
 .listen .lbar::before { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: #33333b; border-radius: 2px; }
 .listen .lbar i { position: absolute; left: 0; right: 0; height: 2px; background: var(--heart); transform: scaleX(0); transform-origin: left; border-radius: 2px; }
-.listen.on { position: sticky; top: 62px; z-index: 9; }
-.essay-head:has(.listen.on) { overflow: visible; }
-.prose { font-size: clamp(18px, 1.9vw, 20px); line-height: 1.72; }
-.prose p { margin: 0 0 1.3em; }
-.prose p:first-child { font-size: 1.14em; line-height: 1.6; color: var(--ink); }
-.prose p:first-child::first-letter { float: none; font-size: inherit; padding: 0; }
-.video-wrap.after { margin: clamp(34px, 5vw, 52px) 0 0; padding: 0; }
-.askcard { margin: clamp(40px, 6vw, 64px) 0 0; padding: clamp(24px, 4vw, 34px); border: 1px solid #2c2c33; border-radius: 22px; background: linear-gradient(160deg, #101014, #08080a); }
-.askcard h2 { margin: 10px 0 8px; font-weight: 500; font-size: clamp(24px, 3.4vw, 30px); letter-spacing: -.015em; }
-.askcard p { margin: 0 0 18px; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: #c9c5bc; } .askcard p.label { margin: 0; font-family: var(--sans); font-size: 12px; color: var(--heart); }
-@media (max-width: 520px) { .listen { gap: 10px; padding-right: 14px; } .essay-head .art { right: -70%; } }
+.listen.on { position: sticky; top: 10px; z-index: 9; }
+@media (max-width: 520px) { .listen { gap: 10px; padding-right: 14px; } }
 
-/* ---- 11 Nov 2026 (night): a journal, not a product page. His words: "make the website more narrower, more a blog style,
-   it is too wide - we arent apple ... add a soulsensis spin". Three critics' fixes (reader, brand, editorial):
-   one narrow column for every page and the top bar, serif for what is said, Montserrat for the name and small labels,
-   ruled lines in place of cards and capsules, one crimson point, no motion but a link's colour. */
-body { overflow-x: visible; }
-.wrap, nav.top .wrap, .topics-head .wrap, .bookband .wrap { max-width: 680px; }
-article .col, .col { max-width: 620px; }
-nav.top { background: #000; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid var(--line); }
-nav.top .links { gap: 4px; } nav.top .links a { padding: 0 8px; }
-h1, h2, .row b, .next b, .related .row b { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
-.label { letter-spacing: .16em; text-transform: lowercase; font-size: 12px; font-weight: 500; color: var(--muted); }
-/* the list page: the journal's index */
-.topics-head { text-align: left; padding-block: clamp(40px, 7vw, 72px) 10px; }
-.topics-head .art { display: none; }
-.topics-head h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
-.topics-head .lede { max-width: 34ch; font-size: clamp(18px, 2.6vw, 21px); }
-.chips { justify-content: flex-start; gap: 0 18px; }
-.chip { border: 0; background: none; padding: 0; min-height: 44px; border-radius: 0; font: 400 17px var(--serif); color: #b9b5ab; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; }
-.chip.on { background: none; color: var(--ink); text-decoration-color: var(--heart); } .chip small { margin-left: 5px; font: 400 12px var(--sans); color: var(--muted); }
-.row { grid-template-columns: 1fr; gap: 6px; padding: 26px 0; transition: none; } .row:hover { padding-left: 0; } .row:hover b { color: #fff; }
-.row time, .row .kind { display: block; margin-bottom: 6px; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--muted); }
-.row b { font-size: clamp(22px, 3.2vw, 26px); line-height: 1.25; transition: color .2s; }
-.list .row p, .related .row p { font-size: 17px; -webkit-line-clamp: 2; line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
-.row .feels { display: none; }
-.tag, .tag.full, .tag.watch { justify-self: start; border: 0; padding: 0; border-radius: 0; margin: 2px 0 0; font: 400 13px var(--sans); color: var(--muted); }
-.feel, a.feel { border: 0; padding: 0; background: none; border-radius: 0; min-height: 32px; font: italic 400 15px var(--serif); color: var(--muted); }
-.feels { gap: 0 14px; }
-/* buttons: one filled, square-shouldered; the rest are underlined words */
-.btn { border-radius: 4px; }
-.btn.quiet { border: 0; background: none; padding: 0; min-height: 44px; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
-/* the essay */
-.essay-head { padding-block: clamp(34px, 6vw, 64px) 10px; } .essay-head .art { display: none; }
-.essay-head h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
-.essay-head p.kicker.feels { margin: 0 0 8px; }
-.listen { margin: 6px 0 26px; border-radius: 6px; background: #0b0b0d; -webkit-backdrop-filter: none; backdrop-filter: none; }
-.listen.on { top: 10px; }
-.prose { font-size: clamp(18px, 2vw, 21px); line-height: 1.7; } .prose p { margin: 0 0 1.2em; }
-.prose p:first-child { font-size: 1.22em; line-height: 1.5; color: var(--ink); }
-.prose p:first-child::first-letter { float: none; font-size: inherit; line-height: inherit; padding: 0; color: inherit; font-weight: inherit; }
+/* the words */
+.prose { font-family: var(--serif); font-size: clamp(18px, 2vw, 21px); line-height: 1.7; color: #ebe7de; }
+.prose p { margin: 0 0 1.2em; }
+.col > .prose:first-child { margin-top: 16px; }
+.prose > p:first-child { font-size: 1.14em; line-height: 1.55; color: var(--ink); }
 .prose p.short { margin: 1.5em 0; padding-left: 20px; border-left: 1px solid var(--heart); font-size: 1.22em; line-height: 1.4; color: var(--ink); font-style: italic; }
+.prose.opening { position: relative; }
+.prose.opening::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.8em; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
 @media (max-width: 520px) { .prose { font-size: 19px; } }
-.video { border-radius: 4px; max-width: none; }
-.askcard, .inbook, .next a { border-radius: 4px; background: none; }
-.askcard { border: 0; border-top: 1px solid rgba(245,242,234,.16); padding: 26px 0 0; position: relative; }
-.askcard::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
-.askcard h2 { font-size: clamp(25px, 4vw, 30px); } .askcard p.label { color: var(--muted); }
-.bookband { text-align: left; } .bookband img { box-shadow: none; }
-footer .wrap { max-width: 680px; }
-@media (prefers-reduced-motion: no-preference) { .rise { transition-duration: .01s; } .list.swap .row { animation: none; } }
-/* second critic round, 11 Nov: the essay footer's help line; the quiet close */
-footer .help { margin: 12px 0 0; font-size: 13px; line-height: 1.6; color: var(--muted); } footer .help a { text-decoration: underline; }
-.next { margin-top: 26px; } .related { margin-top: 34px; }
-/* ---- one site (11 Nov, the second critic round): every page shares the home page's column (640 px, 22 px gutter),
-   a plain top bar that scrolls away, one title size, one filled button in warm white, ruled lines for every card. */
-.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
-.wrap, nav.top .wrap, footer .wrap, .topics-head .wrap, .bookband .wrap, .col, article .col { max-width: 640px; }
-nav.top { position: static; } nav.top .wrap { height: auto; min-height: 56px; }
-h1, .essay-head h1, .topics-head h1, body .conv h1 { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
-.btn.primary { background: var(--ink); color: #000; } .btn.primary:hover { box-shadow: none; background: #fff; }
-footer a { min-width: 0; padding: 0; min-height: 40px; }
+
+/* the film follows the words */
+.video { display: block; position: relative; aspect-ratio: 16 / 9; width: 100%; margin: 8px auto 0; border-radius: 4px; overflow: hidden; background: var(--raised); border: 1px solid var(--line); }
+.video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .82; transition: opacity .3s ease; }
+.video:hover img { opacity: 1; }
+.video .play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(0,0,0,.55); border: 1px solid rgba(245,242,234,.7); display: grid; place-items: center; }
+.video .play::after { content: ""; margin-left: 5px; border-left: 20px solid var(--ink); border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.video .cap { position: absolute; left: 14px; bottom: 12px; font-size: 12px; letter-spacing: .06em; color: var(--ink); background: rgba(0,0,0,.6); padding: 6px 10px; border-radius: 4px; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-wrap { padding-bottom: clamp(28px, 5vw, 48px); }
+.video-wrap.after { margin: clamp(34px, 5vw, 52px) 0 0; padding: 0; }
+
+/* how an essay closes: subscribe, the book's line, one way on, two to read next, Ask */
+.sub-yt { margin: 16px 0 0; text-align: left; } .sub-yt.after { margin: 8px 0 0; }
+.bookline { margin: 34px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--muted); }
+.bookline a, .askq a { display: inline-block; color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); }
+.bookline a { padding: 10px 0; line-height: 24px; } .askq a { padding: 12px 0; line-height: 20px; }
+.also { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+.also a { display: inline-block; padding: 10px 0; line-height: 24px; color: var(--muted); }
+.qline a { padding: 12px 0; }
+.orn { display: block; width: 64px; height: 64px; margin: clamp(40px, 6vw, 64px) 0; opacity: .7; }
+.next { display: grid; gap: 12px; margin-top: 26px; } .next.near { margin: 28px 0 24px; }
+.next a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.next small { display: block; margin-bottom: 6px; font-size: 15px; font-weight: 500; color: var(--muted); }
+.next b { display: block; font-size: clamp(20px, 2.6vw, 26px); line-height: 1.25; transition: color .2s; }
+.next a:hover b { color: #fff; }
+.next .arrow { font-size: 22px; }
+.related { display: flex; flex-direction: column; margin-top: 34px; }
+.related .label { margin: 0 0 6px; }
+.askcard { margin: clamp(40px, 6vw, 64px) 0 0; }
+.askcard h2 { margin: 10px 0 8px; font-size: clamp(25px, 4vw, 30px); }
+.askcard p { margin: 0 0 18px; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: #c9c5bc; }
+.askcard p.label { margin: 0; font-family: var(--sans); font-size: 12px; color: var(--muted); }
+.inbook { margin: 8px 0 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 22px; align-items: center; justify-items: start; text-align: left; }
+.inbook img { width: 96px; height: auto; border: 1px solid #1c1c21; }
+.inbook h2 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
+.inbook p { margin: 0 0 16px; max-width: 60ch; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+/* the list: a journal's index. A row is a date, a title, two lines of the opening at most, one quiet tag */
+.topic { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line); scroll-margin-top: 20px; }
+#all { border-top: 0; padding-top: 0; }
+.topic-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.topic h2 { margin: 0; font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
+.list { display: flex; flex-direction: column; }
+.row { display: grid; grid-template-columns: 1fr; gap: 6px; align-items: start; padding: 26px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.row:last-child { border-bottom: 1px solid var(--line); }
+.row time, .row .kind { display: block; margin-bottom: 6px; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--muted); }
+.row b { display: block; font-size: clamp(22px, 3.2vw, 26px); line-height: 1.25; transition: color .2s; }
+.row:hover b { color: #fff; }
+.row p { margin: 6px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: #b9b5ab; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .list .row p { max-width: 60ch; }
-.qform .row { padding: 0; border: 0; display: flex; }
-.inbook { border: 0; border-top: 1px solid rgba(245,242,234,.16); border-radius: 0; background: none; padding: 26px 0 0; } .inbook h2 { font-weight: 400; } .inbook img { box-shadow: none; }
-.next a { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; padding: 18px 0; } .next a:hover { transform: none; }
-.listen.on { top: 10px; }
-/* the conversation page, ruled like the rest */
-body .conv .art { display: none; }
-body .conv li { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; padding: 12px 0; font-family: var(--serif); font-size: 18px; }
-body .conv ul { gap: 0; } body .conv li:first-child { border-top: 0; }
-body .conv .btn { width: auto; min-height: 50px; padding: 0 26px; }
-body .conv .how { text-align: left; } body .conv .alt { justify-content: flex-start; }
-/* the final critic round, 11 Nov: what still broke the one column */
-.topics-head .lede { font-family: var(--serif); font-style: italic; line-height: 1.4; }
-.topic-grid { grid-template-columns: 1fr; gap: 18px; }
-.bookband .wrap, .inbook, .inbook > div { text-align: left; justify-content: flex-start; justify-items: start; }
-.inbook .acts, .bookband .acts { justify-content: flex-start; }
-.sub-yt, .sub-yt.after { text-align: left; }
+.find { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 22px 0 0; }
+.find label { font-size: 15px; font-weight: 500; color: var(--muted); }
+.find input { flex: 1 1 220px; min-height: 44px; padding: 0 14px; border-radius: 4px; border: 1px solid #3a3a42; background: none; color: var(--ink); font: 400 16px var(--sans); }
+.find input:focus-visible { outline: 2px solid var(--heart); outline-offset: 2px; }
+.find .fine { margin: 0; }
+.find[hidden], .row[hidden], section.topic[hidden] { display: none; }
+.none { padding: 28px 0; }
+.bookband { padding-block: clamp(40px, 7vw, 64px) 0; }
+.bookband .wrap { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 26px; align-items: center; text-align: left; }
+.bookband img { width: 132px; height: auto; border: 1px solid #1c1c21; }
+.bookband h2 { margin: 0 0 12px; font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
+.bookband p { margin: 0 0 10px; max-width: 60ch; font-family: var(--serif); font-size: 18px; line-height: 1.55; color: #c9c5bc; }
+.bookband p.label { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+@media (max-width: 440px) { .bookband .wrap { grid-template-columns: 96px minmax(0, 1fr); gap: 18px; } .bookband img { width: 96px; } }
+
+/* leave a question: each field stands on its own line */
+.qbox, .coach, section.qlist { padding-block: clamp(30px, 5vw, 44px); }
+.qbox .col, .coach .col, section.qlist .col { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
+.qbox .col::before, .coach .col::before, section.qlist .col::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+.qbox h2, .coach h2 { margin: 0; font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
+.qbox .why, .coach p { margin: 14px 0 0; font-family: var(--serif); font-size: 18px; line-height: 1.6; color: #c9c5bc; }
+.coach p.label { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
+.coach ul { list-style: none; margin: 18px 0 20px; padding: 0; }
+.coach li { padding: 12px 0; border-top: 1px solid var(--line); font-family: var(--serif); font-size: 18px; line-height: 1.4; } .coach li:first-child { border-top: 0; }
+.qform { display: grid; gap: 18px; margin-top: 22px; }
+.qform label { display: grid; gap: 8px; font-size: 15px; color: var(--ink); }
+.qform textarea, .qform input[type="email"] { width: 100%; font: 17px/1.55 var(--serif); color: var(--ink); background: rgba(245,242,234,.05); border: 1px solid rgba(245,242,234,.22); border-radius: 4px; padding: 14px 16px; }
+.qform textarea { min-height: 170px; resize: vertical; }
+.qform textarea:focus, .qform input[type="email"]:focus { outline: none; border-color: rgba(245,242,234,.6); }
+.qform .fine { margin: 0; font-size: 13px; line-height: 1.6; }
+.qform .send { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.qform .count { font-size: 13px; color: var(--muted); }
+.qform .err { margin: 0; font-size: 15px; color: var(--heart); } .qform .done { margin: 0; font-family: var(--serif); font-size: 19px; line-height: 1.6; }
+
+/* a question's own page /question/<slug>/: his sentence first, the FAQ, other questions */
+.answer { margin: 28px 0 0; padding-left: 20px; border-left: 1px solid var(--heart); max-width: 36ch; }
+.answer p { margin: 0; font-family: var(--serif); font-size: clamp(21px, 2.8vw, 27px); line-height: 1.45; color: var(--ink); text-wrap: pretty; }
+.answer footer { margin-top: 10px; font-size: 13px; letter-spacing: .06em; color: var(--muted); }
+.answer footer a { color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); display: inline-block; padding: 12px 0; }
+.faq { margin: clamp(40px, 6vw, 56px) 0 0; }
+.faq h3 { margin: 26px 0 8px; font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.3; }
+.faq p { margin: 0; font-family: var(--serif); font-size: 18px; line-height: 1.65; color: #ebe7de; }
+.qlist ul { list-style: none; margin: 0; padding: 0; }
+.qlist li { border-bottom: 1px solid var(--line); }
+.qlist a { display: block; padding: 14px 0; min-height: 44px; font-family: var(--serif); font-size: 19px; line-height: 1.4; text-decoration: none; transition: color .2s; }
+.qlist a:hover { color: #fff; }
+
+/* the small print (privacy, terms) and the page that is not there */
+.legal { padding-block: 24px 0; font-family: var(--serif); font-size: 17px; line-height: 1.65; color: #d9d5cb; }
+.legal h2 { margin: 2em 0 .5em; font-size: clamp(21px, 3.2vw, 24px); line-height: 1.25; color: var(--ink); }
+.legal h2:first-child { margin-top: 0; }
+.legal p { margin: 0 0 1em; }
+.legal a { color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }

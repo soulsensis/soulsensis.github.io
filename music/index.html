@@ -18,45 +18,48 @@
 <meta name="theme-color" content="#000000">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<script>try{if(document.visibilityState==="visible"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("hero-anim")}catch(e){}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <style>
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D;
-  --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; color-scheme: dark; }
+/* The piano (10 Nov 2026), set as a page of the journal (11 Nov): one 640 px column set left, serif for what is said,
+   ruled lines. The ring with the flower riding it stays: that is the brand's own geometry at work, and it turns only
+   while a song plays. */
+:root { --ground: #000; --ink: #F5F2EA; --muted: #a29e96; --line: #24242a; --rule: rgba(245,242,234,.16); --heart: #E63946;
+  --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
+@font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a { color: inherit; }
-.g { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
-.wrap { max-width: 1080px; margin: 0 auto; }
+.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 640px; margin: 0 auto; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: 16px; top: -60px; z-index: 30; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: #000; font-size: 13px; text-decoration: none; transition: top .2s ease; }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 30; padding: 10px 16px; border-radius: 4px; background: var(--ink); color: #000; font: 13px var(--sans); text-decoration: none; }
 .skip:focus-visible { top: 12px; }
-h1 { margin: 0; font-weight: 500; letter-spacing: -.022em; font-size: clamp(44px, min(9vw, 11svh), 104px); line-height: 1.02; text-wrap: balance; }
-.eyebrow { margin: 0; font-size: clamp(15px, 1.5vw, 19px); font-weight: 500; color: var(--muted); }
-.sub { margin: 0; font-size: clamp(19px, 2.3vw, 28px); line-height: 1.3; color: #d9d5cc; text-wrap: balance; }
-.fine { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); letter-spacing: .01em; }
-.more { display: inline-flex; align-items: center; min-height: 44px; font-size: 17px; text-decoration: none; color: var(--ink); }
-.more::after { content: "›"; margin-left: .35em; font-size: 1.2em; line-height: 1; transition: transform .2s ease; }
-.more:hover::after { transform: translateX(3px); }
+.label { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
+h1 { margin: 0; font-weight: 400; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; letter-spacing: -.008em; }
+.sub { margin: 16px 0 0; font-style: italic; font-size: clamp(20px, 3.4vw, 24px); line-height: 1.4; color: #ddd9cf; }
+.fine { margin: 0; font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
+.more, .else .btn { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
+.else .btn { color: #c9c5bc; text-decoration-color: #4a4a52; } .more:hover, .else .btn:hover { color: #fff; }
 
-nav { position: sticky; top: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); background: rgba(0,0,0,.92); -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px); border-bottom: 1px solid rgba(245,242,234,.12); }
-nav .wrap { position: relative; display: flex; justify-content: space-between; align-items: center; height: 52px; gap: 12px; }
-.mark { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 300; letter-spacing: .2em; text-decoration: none; font-size: 14px; flex: none; }
-nav .links { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #c9c5bc; }
-nav .links a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
-nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
-/* the line under the bar is the song: it fills as the song plays */
-nav .readline { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--heart); transform-origin: 0 50%; transform: scaleX(var(--at, 0)); pointer-events: none; }
-@media (max-width: 640px) { nav .links a.far { display: none; } .mark { letter-spacing: .14em; } }
+header.open { padding-block: clamp(44px, 9vw, 88px) clamp(40px, 7vw, 64px); }
+/* the line about the music lights word by word as it is read past (his words, 10 Nov: all of it is improvised) */
+.say p { margin: 18px 0 0; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
+.anim .say span { opacity: .3; transition: opacity .4s ease; }
+.anim .say span.lit { opacity: 1; }
 
-/* the stage: the brand's geometry turns while a song plays, and one crimson point travels the ring once a song */
-.hero { position: relative; overflow: hidden; text-align: center; padding-block: clamp(36px, 6svh, 84px) clamp(28px, 5svh, 56px); }
-.hero .copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.disc { position: relative; width: min(72vw, 420px, max(200px, calc(100svh - 470px))); aspect-ratio: 1; margin: clamp(20px, 4svh, 44px) auto 0; }
+/* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
+section.flow { padding-bottom: clamp(48px, 8vw, 80px); }
+section.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
+section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+
+/* the player: the ring on the left, the song and its line beside it */
+.player { display: grid; grid-template-columns: 208px minmax(0, 1fr); gap: 14px; align-items: center; }
+.disc { position: relative; width: 100%; aspect-ratio: 1; margin: -4% 0 -4% -12%; }
+@media (max-width: 520px) { .player { grid-template-columns: 1fr; gap: 6px; } .disc { width: 220px; } }
 .disc svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* 10 Nov 2026 (his ask): the flower of life rides the ring around the play button, clockwise, and stands still when the song is paused.
    The origin is 0 0 on purpose: in an SVG whose viewBox is centred, 50% 50% is the bottom right corner, which sent the flower out of view. */
@@ -66,133 +69,101 @@ nav .readline { position: absolute; left: 0; bottom: -1px; height: 2px; width: 1
 .draw * { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 2.4s cubic-bezier(.65,0,.35,1); }
 .anim .draw:not(.on) * { stroke-dashoffset: 1; }
 .draw.on *:nth-child(2n) { transition-delay: .12s; } .draw.on *:nth-child(3n) { transition-delay: .24s; } .draw.on *:nth-child(5n) { transition-delay: .36s; }
-.big { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: clamp(72px, 22%, 96px); aspect-ratio: 1; border-radius: 50%; border: 0; padding: 0; background: var(--ink); color: #000; cursor: pointer; display: grid; place-items: center; transition: transform .2s ease, box-shadow .3s ease; }
-.big:hover { box-shadow: 0 0 0 10px rgba(245,242,234,.08); }
-.big:active { transform: scale(.95); }
+.big { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 36%; min-width: 52px; aspect-ratio: 1; border-radius: 50%; border: 0; padding: 0; background: var(--ink); color: #000; cursor: pointer; display: grid; place-items: center; transition: background .2s; }
+.big:hover { background: #fff; }
 .big svg { position: static; width: 38%; height: 38%; }
 .big .pause, .playing .big .play { display: none; } .playing .big .pause { display: block; }
-.now { margin: clamp(18px, 3svh, 30px) 0 0; display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 58px; }
-.now b { font-weight: 500; font-size: clamp(22px, 2.6vw, 28px); letter-spacing: -.012em; }
-.now span { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.side { min-width: 0; }
+.now { margin: 0; display: flex; flex-direction: column; gap: 4px; }
+.now b { font-weight: 400; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.25; letter-spacing: -.008em; }
+.now span { font-family: var(--sans); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.seek { display: block; width: 100%; height: 44px; margin: 2px 0 0; background: none; -webkit-appearance: none; appearance: none; cursor: pointer; }
+.seek::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--heart) calc(var(--at, 0) * 100%), #3a3a42 0); }
+.seek::-moz-range-track { height: 2px; background: #3a3a42; } .seek::-moz-range-progress { height: 2px; background: var(--heart); }
+.seek::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; margin-top: -5px; border-radius: 50%; background: var(--ink); }
+.seek::-moz-range-thumb { width: 12px; height: 12px; border: 0; border-radius: 50%; background: var(--ink); }
 
-/* the line that lights up as it is read past (his words, 10 Nov: all of it is improvised) */
-.say { padding-block: clamp(70px, 14vw, 180px); text-align: center; }
-.say p { margin: 0 auto; max-width: 15em; font-size: clamp(30px, 5.6vw, 68px); line-height: 1.12; font-weight: 500; letter-spacing: -.022em; text-wrap: balance; }
-.anim .say span { opacity: .16; transition: opacity .4s ease; }
-.anim .say span.lit { opacity: 1; }
-.anim .songs li { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
-.anim .songs li.on { opacity: 1; transform: none; }
-.else { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 6px 0; }
-.else:empty { display: none; }
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 24px; border-radius: 999px; border: 1px solid #3a3a42; font-weight: 500; font-size: 17px; text-decoration: none; color: var(--ink); transition: border-color .25s ease, transform .15s ease; }
-.btn:hover { border-color: var(--ink); } .btn:active { transform: scale(.97); }
-
-/* the list */
-.songs { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; text-align: left; counter-reset: n; }
+/* the list, as a journal lists its entries */
+.songs { list-style: none; margin: clamp(14px, 3vw, 22px) 0 0; padding: 0; counter-reset: n; }
 .songs li { border-top: 1px solid var(--line); }
 .songs li:last-child { border-bottom: 1px solid var(--line); }
-.song { position: relative; width: 100%; display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px; min-height: 64px; padding: 8px 6px; border: 0; background: none; color: #d9d5cc; font: inherit; font-size: 19px; text-align: left; cursor: pointer; transition: color .2s ease, background .25s ease; border-radius: 12px; }
-.song::before { counter-increment: n; content: counter(n); font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: center; }
-.song:hover { color: var(--ink); background: rgba(245,242,234,.04); }
-.song .t { font-weight: 500; letter-spacing: -.008em; }
-.song .d { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.song { width: 100%; display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 60px; padding: 8px 0; border: 0; background: none; color: #c9c5bc; font: 400 clamp(19px, 3vw, 21px)/1.3 var(--serif); text-align: left; cursor: pointer; transition: color .2s; }
+.song::before { counter-increment: n; content: counter(n); font: 13px var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+.song:hover { color: #fff; }
+.song .d { font: 13px var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
 .song[aria-current] { color: var(--ink); }
-.song[aria-current]::before { content: ""; width: 9px; height: 9px; margin: 0 auto; border-radius: 50%; background: var(--heart); }
+.song[aria-current]::before { content: ""; width: 7px; height: 7px; margin-left: 2px; border-radius: 50%; background: var(--heart); }
 .playing .song[aria-current]::before { animation: beat 1.6s ease-in-out infinite; }
 @keyframes beat { 50% { transform: scale(.55); opacity: .5; } }
-.seek { max-width: 760px; margin: 0 auto clamp(18px, 3svh, 28px); display: block; width: 100%; height: 44px; background: none; -webkit-appearance: none; appearance: none; cursor: pointer; }
-.seek::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--ink) calc(var(--at, 0) * 100%), #3a3a42 0); }
-.seek::-moz-range-track { height: 2px; background: #3a3a42; } .seek::-moz-range-progress { height: 2px; background: var(--ink); }
-.seek::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -6px; border-radius: 50%; background: var(--ink); }
-.seek::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--ink); }
-section.flow { padding-block: 0 clamp(72px, 10vw, 140px); }
-.center { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.after { margin-top: clamp(28px, 4vw, 44px); gap: 6px; }
-
-footer { border-top: 1px solid var(--line); padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; line-height: 1.7; }
-footer .wrap { display: flex; justify-content: space-between; gap: 0 20px; flex-wrap: wrap; align-items: center; }
-footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
-footer .links { display: flex; flex-wrap: wrap; gap: 0 12px; }
-footer a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; min-width: 44px; justify-content: center; } footer a:hover { color: var(--ink); }
-
-.rise { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.hero-anim .hero .rise { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
-.hero-anim .hero .rise:nth-child(2) { animation-delay: .08s; } .hero-anim .hero .rise:nth-child(3) { animation-delay: .16s; }
-@media (prefers-reduced-motion: reduce) { .draw *, .rise, .disc .orbit, .song::before, .say span, .songs li { transition: none !important; animation: none !important; } .say span { opacity: 1 !important; } .songs li { opacity: 1 !important; transform: none !important; } .draw * { stroke-dashoffset: 0 !important; } }
+.anim .songs li { opacity: 0; transition: opacity .6s ease; }
+.anim .songs li.on { opacity: 1; }
+.after { margin-top: 22px; }
+.else { display: flex; flex-wrap: wrap; gap: 0 26px; margin-top: 6px; }
+@media (prefers-reduced-motion: reduce) { .draw *, .disc .orbit, .song::before, .say span, .songs li { transition: none !important; animation: none !important; } .say span { opacity: 1 !important; } .songs li { opacity: 1 !important; } .draw * { stroke-dashoffset: 0 !important; } }
 </style>
-<noscript><style>.draw *{stroke-dashoffset:0!important}.say span{opacity:1!important}.songs li{opacity:1!important;transform:none!important}.big,.seek,.now{display:none!important}.song{cursor:default}</style></noscript>
-<style id="journal">
-/* 11 Nov 2026: the piano page in the journal's manner (as book.html and ask.html): one 680 px column set left, serif,
-   square shoulders. The disc and its turning flower stay: that is the brand's own geometry at work. */
-:root { --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; }
-@font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 103%; }
-.wrap, footer .wrap { max-width: 640px; }
-.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
-nav { position: static; } nav .wrap { height: auto; min-height: 56px; }
-.disc { margin-left: max(0px, calc((100% - 640px) / 2)); margin-right: auto; }
-.now { width: 640px; max-width: 100%; margin-inline: auto; align-items: flex-start; text-align: left; }
-.songs { margin: 0; width: 100%; }
-.eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: lowercase; }
-.sub { font-family: var(--serif); font-style: italic; }
-.more { font-family: var(--serif); font-size: 18px; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; } .more::after { content: none; }
-section.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgba(245,242,234,.16); }
-section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
-nav { background: #000; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid var(--line); }
-.mark { font-weight: 400; letter-spacing: .24em; }
-h1, h2, h3, .say p { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
-h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
-h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
-.hero { text-align: left; } .hero .copy { align-items: flex-start; max-width: 640px; margin: 0 auto; }
-.center { text-align: left; align-items: flex-start; }
-.say { text-align: left; padding-block: clamp(40px, 7vw, 64px); }
-.say p { max-width: 640px; margin: 0 auto; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
-.btn, .skip { border-radius: 4px; }
+<noscript><style>.draw *{stroke-dashoffset:0!important}.say span{opacity:1!important}.songs li{opacity:1!important}.player{display:none!important}.song{cursor:default}</style></noscript>
+<style id="shared">
+nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 640px; height: auto; min-height: 56px; margin: 0 auto; }
+.mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
+nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
+nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
+nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
+@media (max-width: 560px) { nav.top .links a.far { display: none; } }
+body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
+body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 640px; margin: 0 auto; }
+body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
+body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
+body > footer a:hover { color: var(--ink); }
+body > footer .help { margin: 6px 0 0; line-height: 1.6; }
+body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 </style>
 </head>
 <body>
 <a class="skip" href="#songs">Skip to the songs</a>
-<nav class="g" aria-label="Main"><div class="wrap">
-  <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75" data-seed></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
+<!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
+  <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
   <div class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a class="far" href="/music/" aria-current="page">Piano</a><a class="far" href="/conversation/">A conversation</a></div>
-  <span class="readline" aria-hidden="true"></span>
 </div></nav>
+<!--/NAV-->
 
 <main id="top">
-  <header class="hero g">
-    <div class="copy">
-      <p class="eyebrow rise">Music</p>
-      <h1 class="rise">The piano.</h1>
-      <p class="sub rise">The music under the essays, on its own.</p>
-    </div>
-    <div class="disc" id="disc">
-      <svg viewBox="-340 -340 680 680" aria-hidden="true">
-        <g fill="none" stroke="#F5F2EA"><circle r="222" stroke-width="1.4" opacity=".5"/></g>
-        <g class="orbit"><g transform="translate(0 -222) scale(.5)"><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="2" opacity=".8"></g><circle r="30" fill="#E63946" fill-opacity=".3"/><circle r="11" fill="#E63946"/></g></g>
-      </svg>
-      <button class="big" id="big" type="button" aria-label="Play"><svg class="play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg><svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></svg></button>
-    </div>
-    <p class="now" aria-live="polite"><b id="nowT"></b><span id="nowD"></span></p>
-  </header>
+  <header class="open g"><div class="wrap">
+    <p class="label">Music</p>
+    <h1>The piano.</h1>
+    <p class="sub">The music under the essays, on its own.</p>
+    <div class="say"><p id="say">Every piece is improvised. Unique to its moment. More to come.</p></div>
+  </div></header>
 
-  <section class="say g" aria-label="About the music"><p id="say">Every piece is improvised. Unique to its moment. More to come.</p></section>
-
-  <section class="flow g" id="songs" aria-label="The songs"><div class="wrap center">
-    <label class="vh" for="seek">Place in the song</label>
-    <input class="seek" id="seek" type="range" min="0" max="1000" value="0" step="1">
+  <section class="flow g" id="songs" aria-label="The songs"><div class="wrap">
+    <div class="player">
+      <div class="disc" id="disc">
+        <svg viewBox="-340 -340 680 680" aria-hidden="true">
+          <g fill="none" stroke="#F5F2EA"><circle r="222" stroke-width="1.4" opacity=".5"/></g>
+          <g class="orbit"><g transform="translate(0 -222) scale(.5)"><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="2" opacity=".8"></g><circle r="30" fill="#E63946" fill-opacity=".3"/><circle r="11" fill="#E63946"/></g></g>
+        </svg>
+        <button class="big" id="big" type="button" aria-label="Play"><svg class="play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg><svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></svg></button>
+      </div>
+      <div class="side"><p class="now" aria-live="polite"><b id="nowT"></b><span id="nowD"></span></p>
+        <label class="vh" for="seek">Place in the song</label>
+        <input class="seek" id="seek" type="range" min="0" max="1000" value="0" step="1">
+      </div>
+    </div>
     <ol class="songs" id="list"><!--TRACKS--><li><button class="song" type="button" data-src="/music/old-photographs.mp3" data-s="204"><span class="t">Old photographs</span><span class="d">3:24</span></button><noscript><audio controls preload="none" src="/music/old-photographs.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/winter-morning.mp3" data-s="195"><span class="t">Winter morning</span><span class="d">3:15</span></button><noscript><audio controls preload="none" src="/music/winter-morning.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/things-left-unsaid.mp3" data-s="219"><span class="t">Things left unsaid</span><span class="d">3:39</span></button><noscript><audio controls preload="none" src="/music/things-left-unsaid.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/slow-waltz.mp3" data-s="218"><span class="t">Slow waltz</span><span class="d">3:38</span></button><noscript><audio controls preload="none" src="/music/slow-waltz.mp3"></audio></noscript></li><!--/TRACKS--></ol>
-    <div class="center after">
+    <div class="after">
       <p class="fine">Music: soulsensis</p>
-      <div class="else"><!--ELSEWHERE--><a class="btn" href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">The essays on Spotify</a><!--/ELSEWHERE--></div>
-      <a class="more" href="/essays.html">Read the essays</a>
+      <div class="else"><!--ELSEWHERE--><a class="btn" href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">The essays on Spotify</a><!--/ELSEWHERE--><a class="more" href="/essays.html">Read the essays</a></div>
     </div>
   </div></section>
 </main>
 
-<footer class="g"><div class="wrap">
+<!--FOOTER--><footer class="g"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
+  <span class="links"><a href="/book.html">The book</a><a href="/essays.html">Essays</a><a href="/music/">Piano</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
+  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
+  <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
 </div></footer>
+<!--/FOOTER-->
 
 <audio id="au" preload="none"></audio>
 <script>
@@ -201,18 +172,16 @@ h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
   const NS = "http://www.w3.org/2000/svg";
   const circle = (g, cx, cy, r, len = true) => { const c = document.createElementNS(NS, "circle"); c.setAttribute("cx", cx.toFixed(2)); c.setAttribute("cy", cy.toFixed(2)); c.setAttribute("r", r); if (len) c.setAttribute("pathLength", "1"); g.append(c); };
   const pol = (r, deg) => [r * Math.cos(deg * Math.PI / 180), r * Math.sin(deg * Math.PI / 180)];
-  document.querySelectorAll("[data-seed]").forEach((M) => { circle(M, 0, 0, 20, false); [[20, 0], [40, 0], [34.64, 30]].forEach(([d, t]) => { for (let a = 0; a < 360; a += 60) circle(M, ...pol(d, a + t), 20, false); }); });
   document.querySelectorAll("[data-flower]").forEach((F) => { const fr = 64; circle(F, 0, 0, fr);
     for (let k = 0; k < 6; k++) { circle(F, ...pol(fr, k * 60), fr); circle(F, ...pol(2 * fr, k * 60), fr); circle(F, ...pol(fr * Math.sqrt(3), 30 + k * 60), fr); }
     circle(F, 0, 0, 3 * fr); });
-  // scroll: the hero lets go, the line about the music lights word by word as it is read past, the songs rise one by one
-  const say = $("say"), copy = document.querySelector(".hero .copy"), calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // scroll: the line about the music lights word by word as it is read past, the songs rise one by one
+  const say = $("say"), calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   say.innerHTML = say.textContent.split(" ").map((w) => `<span>${w}</span>`).join(" ");
   const sayWords = [...say.children], clamp = (x) => Math.min(1, Math.max(0, x));
   let ticking = false;
   const frame = () => { ticking = false; if (calm) return; const vh = innerHeight, r = say.getBoundingClientRect();
-    const n = Math.round(clamp((vh * .86 - r.top) / (vh * .5)) * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n));
-    const t = clamp(scrollY / (vh * .7)); copy.style.opacity = (1 - t * .9).toFixed(3); copy.style.transform = `translateY(${(-40 * t).toFixed(1)}px)`; };
+    const n = Math.round(clamp((vh * .86 - r.top) / (vh * .5)) * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n)); };
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true }); addEventListener("resize", frame);
   const lis = [...document.querySelectorAll(".songs li")];
   if ("IntersectionObserver" in window && !calm) { const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const li = e.target; li.style.transitionDelay = (li.dataset.k % 4) * 70 + "ms"; li.classList.add("on"); io.unobserve(li); } }), { rootMargin: "0px 0px -6% 0px" });

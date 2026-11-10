@@ -27,28 +27,27 @@
 <link rel="alternate" type="application/rss+xml" title="soulsensis essays" href="https://soulsensis.com/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/site.css?v=981d64dc">
+<link rel="stylesheet" href="/site.css?v=673bc225">
 <meta name="robots" content="noindex">
 <style>
-.solo { min-height: 100svh; display: grid; align-items: center; text-align: center; padding-block: 56px calc(40px + env(safe-area-inset-bottom, 0px)); position: relative; overflow: hidden; }
-.solo .art { position: absolute; left: 50%; top: 50%; width: min(900px, 170vw); aspect-ratio: 1; transform: translate(-50%, -50%); opacity: .14; pointer-events: none; }
-.solo .inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 18px; max-width: 460px; margin: 0 auto; width: 100%; }
-.solo .mark { justify-content: center; }
-.solo h1 { margin: 6px 0 0; font-weight: 500; letter-spacing: -.022em; font-size: clamp(36px, 10vw, 56px); line-height: 1.08; text-wrap: balance; }
-.solo .sub { margin: 0; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.5; color: #e9e5dc; max-width: 30ch; }
-.solo .then { margin: 14px 0 0; font-size: 15px; color: var(--muted); }
-.solo .more { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 22px; margin-top: 6px; }
-.solo .more a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--heart); }
-.solo .fine { margin: 0; }
+/* a page that stands alone (start, thanks, links): the journal's column with no bar, the name at the top */
+.solo { padding-block: clamp(36px, 8vw, 72px) calc(40px + env(safe-area-inset-bottom, 0px)); }
+.solo .inner { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; max-width: 640px; margin: 0 auto; }
+.solo .mark { margin-bottom: clamp(18px, 4vw, 30px); }
+.solo .sub { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(20px, 3.4vw, 24px); line-height: 1.4; color: #ddd9cf; max-width: 34ch; }
+.solo .then { margin: 0; font-family: var(--serif); font-size: 18px; line-height: 1.6; color: #c9c5bc; }
+.solo .btn { margin-top: 6px; }
+.solo .more { display: flex; flex-wrap: wrap; gap: 0 26px; }
+.solo .more a { display: inline-flex; align-items: center; min-height: 44px; font: 400 17px var(--serif); color: var(--ink); text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the reading</a>
-<main id="main" class="solo g"><div class="art" aria-hidden="true"><svg viewBox="-340 -340 680 680"><g fill="none" stroke="#F5F2EA" stroke-width="1"><circle cx="0.0" cy="0.0" r="64"/><circle cx="64.0" cy="0.0" r="64"/><circle cx="128.0" cy="0.0" r="64"/><circle cx="96.0" cy="55.4" r="64"/><circle cx="32.0" cy="55.4" r="64"/><circle cx="64.0" cy="110.9" r="64"/><circle cx="0.0" cy="110.9" r="64"/><circle cx="-32.0" cy="55.4" r="64"/><circle cx="-64.0" cy="110.9" r="64"/><circle cx="-96.0" cy="55.4" r="64"/><circle cx="-64.0" cy="0.0" r="64"/><circle cx="-128.0" cy="0.0" r="64"/><circle cx="-96.0" cy="-55.4" r="64"/><circle cx="-32.0" cy="-55.4" r="64"/><circle cx="-64.0" cy="-110.9" r="64"/><circle cx="-0.0" cy="-110.9" r="64"/><circle cx="32.0" cy="-55.4" r="64"/><circle cx="64.0" cy="-110.9" r="64"/><circle cx="96.0" cy="-55.4" r="64"/><circle r="192"/><circle r="210"/></g></svg></div><div class="inner">
+<main id="main" class="solo g"><div class="inner">
 <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
 <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Thank you</h1>
 <p class="then">The essays are narrated on YouTube.</p>
-<a class="btn primary wide" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a>
+<a class="btn primary" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a>
 <div class="more"><a href="/">Back to soulsensis</a></div>
 </div></main>
 <script src="/scroll.js" defer></script>
