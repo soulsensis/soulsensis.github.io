@@ -271,6 +271,16 @@ footer .wrap { max-width: 680px; }
 .hero .copy::before { content: none; }
 .hero .price-line { margin: 0; font-family: var(--sans); font-size: 13px; color: var(--muted); }
 .how-copy h2 { font-size: clamp(27px, 4.6vw, 34px); } .how-copy .sub { font-size: 18px; }
+html:not(.live) #facts, html:not(.live) #private { display: none; }   /* prices and promises wait until Ask is open */
+.how-copy .more { margin-top: 4px; }
+/* one site (second critic round): the home page's column, title size and warm-white button */
+.wrap, nav.gnav .wrap, footer .wrap, .fx .pin.calm .sticky { max-width: 640px; }
+.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
+nav.gnav .wrap { height: auto; min-height: 56px; }
+h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
+.btn.primary, .btn.red, button.red { background: var(--ink); color: #000; } .btn.primary:hover, .btn.red:hover, button.red:hover { box-shadow: none; background: #fff; }
+.btn.quiet { border: 0; background: none; padding: 0; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
+.hero .copy { max-width: 640px; }
 .talk { margin-left: 0; } .card { background: none; padding: 22px 0 0; border: 0; border-top: 1px solid var(--line); }
 </style>
 </head>
@@ -312,6 +322,7 @@ footer .wrap { max-width: 680px; }
     <div class="how-copy" id="howCopy">
       <h2 id="how-h">It names the real problem.</h2>
       <p class="sub">And tells you straight what to do. Three real answers from its testing.</p>
+      <a class="more wait-only" href="/question/">Leave your question</a>
     </div>
     <div class="scene3d">
       <div class="phone" id="phone" role="img" aria-label="Three conversations on a phone, each a real answer from testing. Someone writes what is going on; soulsensis names the real problem, says what it would do, and why.">

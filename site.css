@@ -323,3 +323,25 @@ h1, h2, .row b, .next b, .related .row b { font-family: var(--serif); font-weigh
 .bookband { text-align: left; } .bookband img { box-shadow: none; }
 footer .wrap { max-width: 680px; }
 @media (prefers-reduced-motion: no-preference) { .rise { transition-duration: .01s; } .list.swap .row { animation: none; } }
+/* second critic round, 11 Nov: the essay footer's help line; the quiet close */
+footer .help { margin: 12px 0 0; font-size: 13px; line-height: 1.6; color: var(--muted); } footer .help a { text-decoration: underline; }
+.next { margin-top: 26px; } .related { margin-top: 34px; }
+/* ---- one site (11 Nov, the second critic round): every page shares the home page's column (640 px, 22 px gutter),
+   a plain top bar that scrolls away, one title size, one filled button in warm white, ruled lines for every card. */
+.g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
+.wrap, nav.top .wrap, footer .wrap, .topics-head .wrap, .bookband .wrap, .col, article .col { max-width: 640px; }
+nav.top { position: static; } nav.top .wrap { height: auto; min-height: 56px; }
+h1, .essay-head h1, .topics-head h1, body .conv h1 { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
+.btn.primary { background: var(--ink); color: #000; } .btn.primary:hover { box-shadow: none; background: #fff; }
+footer a { min-width: 0; padding: 0; min-height: 40px; }
+.list .row p { max-width: 60ch; }
+.qform .row { padding: 0; border: 0; display: flex; }
+.inbook { border: 0; border-top: 1px solid rgba(245,242,234,.16); border-radius: 0; background: none; padding: 26px 0 0; } .inbook h2 { font-weight: 400; } .inbook img { box-shadow: none; }
+.next a { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; padding: 18px 0; } .next a:hover { transform: none; }
+.listen.on { top: 10px; }
+/* the conversation page, ruled like the rest */
+body .conv .art { display: none; }
+body .conv li { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; padding: 12px 0; font-family: var(--serif); font-size: 18px; }
+body .conv ul { gap: 0; } body .conv li:first-child { border-top: 0; }
+body .conv .btn { width: auto; min-height: 50px; padding: 0 26px; }
+body .conv .how { text-align: left; } body .conv .alt { justify-content: flex-start; }
