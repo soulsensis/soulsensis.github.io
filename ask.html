@@ -115,7 +115,12 @@ nav .links a:hover { color: var(--ink); }
 .phone { --w: min(78vw, 340px, max(200px, calc((100svh - 300px) * .49))); width: var(--w); height: calc(var(--w) * 2.04); font-size: calc(var(--w) * .049); display: flex; flex-direction: column; text-align: left; border-radius: calc(var(--w) * .15); background: #060607; border: 1px solid #3a3a42; box-shadow: 0 0 0 calc(var(--w) * .024) #121215, 0 0 0 calc(var(--w) * .024 + 1px) #2c2c33, 0 calc(var(--w) * .16) calc(var(--w) * .3) calc(var(--w) * -.1) rgba(0,0,0,.9); padding: calc(var(--w) * .05) calc(var(--w) * .055) calc(var(--w) * .055); transform-origin: 50% 100%; will-change: transform, opacity; overflow: hidden; }
 .phone .bar { display: flex; align-items: center; gap: .6em; padding-bottom: .8em; border-bottom: 1px solid var(--line); font-weight: 300; letter-spacing: .2em; font-size: .92em; }
 .phone .bar svg { width: 1.9em; height: 1.9em; flex: none; }
-.phone .log { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 1em; padding: 1em 0; }
+/* 11 Nov 2026: a whole trial run. The thread is pinned to the bottom of the screen, so each new line pushes the talk up as a real chat does. */
+.phone .log { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; margin: .4em 0 1em; -webkit-mask-image: linear-gradient(transparent, #000 2.4em); mask-image: linear-gradient(transparent, #000 2.4em); }
+.phone .thread { display: flex; flex-direction: column; gap: 1em; }
+html:not(.fx) .phone { height: auto; } html:not(.fx) .phone .log { -webkit-mask-image: none; mask-image: none; }
+.phone .ss p { margin: 0 0 .75em; } .phone .ss p:last-child { margin-bottom: 0; }
+.phone .ss + .them { margin-top: .6em; }
 .phone .them { align-self: flex-end; max-width: 88%; margin: 0; background: var(--them); border: 1px solid var(--line); border-radius: 1.2em 1.2em .3em 1.2em; padding: .7em 1em; line-height: 1.45; }
 .phone .ss { margin: 0; font-family: var(--serif); font-size: 1.14em; line-height: 1.5; }
 .phone .who { display: block; margin-bottom: .4em; font-family: var(--sans); font-size: .7em; letter-spacing: .3em; text-transform: uppercase; color: var(--heart); }
@@ -131,11 +136,14 @@ nav .links a:hover { color: var(--ink); }
 .phone .field i svg { width: 1em; height: 1em; }
 .fx .how .how-copy { position: absolute; inset: 10svh 20px auto; will-change: opacity, transform; }
 .fx .how .scene3d { position: absolute; inset: auto 0 4svh; }
-.fx .phone .them, .fx .phone .ss { opacity: 0; transform: translateY(.8em); transition: opacity .35s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
-.fx .phone .them.in, .fx .phone .ss.in { opacity: 1; transform: none; }
+.fx .phone .them, .fx .phone .ss, .fx .phone .ss p { display: none; }
+.fx .phone .them.in { display: block; animation: msgin .4s cubic-bezier(.2,.8,.2,1) both; }
+.fx .phone .ss.in, .fx .phone .ss p.in { display: block; }
+@keyframes msgin { from { opacity: 0; transform: translateY(.8em); } to { opacity: 1; transform: none; } }
 .fx .phone .listen.in { display: block; }
-.fx .phone .ss b { font-weight: 400; opacity: 0; transition: opacity .3s ease; }
-.fx .phone .ss b.lit { opacity: 1; }
+.fx .phone .ss b { font-weight: 400; display: none; }
+.fx .phone .ss b.lit { display: inline; animation: wordin .3s ease both; }
+@keyframes wordin { from { opacity: 0; } to { opacity: 1; } }
 .phone .ss b { font-weight: 400; }
 
 /* 4. private, one line at a time */
@@ -254,19 +262,25 @@ footer .help { flex-basis: 100%; margin: 6px 0 0; line-height: 1.7; }
     <p id="say">I'll tell you what I think the real problem is, what I'd do about it, and why.</p>
   </div></section>
 
-  <section class="pin how g" id="how" style="--len:4.6" aria-labelledby="how-h"><div class="sticky">
+  <section class="pin how g" id="how" style="--len:13" aria-labelledby="how-h"><div class="sticky">
     <div class="how-copy" id="howCopy">
       <h2 id="how-h">It names the real problem.</h2>
-      <p class="sub">And tells you straight what to do.</p>
+      <p class="sub">And tells you straight what to do. Three real answers from its testing.</p>
     </div>
     <div class="scene3d">
-      <div class="phone" id="phone" role="img" aria-label="A conversation on a phone. Someone writes: I keep saying I'll start tomorrow and never do. soulsensis answers: I'll listen, ask if I need to, then tell you what I think the real problem is, what I'd do about it, and why. Straight, like a friend who isn't scared to tell you the truth.">
+      <div class="phone" id="phone" role="img" aria-label="Three conversations on a phone, each a real answer from testing. Someone writes what is going on; soulsensis names the real problem, says what it would do, and why.">
         <div class="bar" aria-hidden="true"><svg viewBox="-64 -64 128 128"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75" data-seed></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</div>
-        <div class="log" aria-hidden="true">
-          <p class="them" id="pThem">I keep saying I'll start tomorrow and never do.</p>
-          <p class="listen" id="pListen">Listening…</p>
-          <p class="ss" id="pSs"><span class="who">soulsensis</span><span id="pAns">I'll listen, ask if I need to, then tell you what I think the real problem is, what I'd do about it, and why. Straight, like a friend who isn't scared to tell you the truth.</span></p>
-        </div>
+        <div class="log" aria-hidden="true"><div class="thread" id="thread">
+          <p class="them">I game 5-6 hours every night after the kids go to bed. Wife says Im checked out. She is probably right. I just feel like its the only time that belongs to me. How do I fix this without giving up the one thing I enjoy?</p>
+          <p class="listen">Listening…</p>
+          <div class="ss"><span class="who">soulsensis</span><p>Your wife's right, and so are you, and that's the knot. That block after bedtime is the only hour of the day nobody's asking you for anything, so you've loaded all your rest into it, and six hours of gaming doesn't rest you, it just stops you feeling the day. Meanwhile she's sitting in the next room feeling like she lives with a ghost.</p><p>You don't have to kill the gaming. Tonight, set a hard stop at 10:30 and sit with her for the first hour after the kids are down instead, phones and screens off, asking how she's actually going and hearing the whole answer without fixing it. Then you game guilt-free, because the time with her is banked first and the stop time means you're not hiding in it.</p><p>Do that every night this week and watch what happens to the gaming. When you're not using it to shut the day out, three hours will feel like plenty, and what you do with that time is yours.</p><p>Start tonight, kids down, 10:30 on the clock.</p></div>
+          <p class="them">Grading till midnight, then up with my toddler. I feel like I'm failing both my students and my kid. I tried a bath last week and thought about all the things I should be doing the whole time. How do I actually relax?</p>
+          <p class="listen">Listening…</p>
+          <div class="ss"><span class="who">soulsensis</span><p>The bath failed because you were sitting in it with a prosecutor. Relaxing was never the problem. You can't switch off while a voice keeps reading you the charges, and "failing both" is that voice talking, not a fact. You're up late marking and up early with a kid. That's two people depending on you and not enough hours. It's a squeeze, not a failure.</p><p>So stop trying to relax and decide where the line is. Pick a hard stop for marking, say 10:30pm, and when the timer goes, whatever's unmarked stays unmarked. Write tomorrow's first three scripts on a sticky note so the pile stops chasing you into the bathroom. Your head holds on to unfinished things because nothing told it they were parked.</p><p>Then, for ten minutes after the stop, do something with your hands and no screen: dishes, folding, stretching on the floor. Not a bath yet. A bath is too much empty room when your head's still loud, and the hands give it somewhere to land.</p><p>Try that tonight, hard stop at 10:30, sticky note written, ten minutes of dishes before bed.</p></div>
+          <p class="them">I've been into spirituality, meditation, manifesting, all of it. But lately it feels like I'm just lying to myself and nothing actually changes. Is this stuff real or am I kidding myself?</p>
+          <p class="listen">Listening…</p>
+          <div class="ss"><span class="who">soulsensis</span><p>Some of it's real and some of it's you kidding yourself, and you probably already know which is which. The stuff that works is the stuff that changes how you see things: sitting still without reaching for your phone, noticing a feeling without feeding it. The stuff that doesn't is when it turns into a replacement for doing anything. If you're meditating or manifesting and your actual days look identical, it's become a nicer way to wait.</p><p>Spirituality that can't touch your real life is just a hobby with good branding. A lot of people run it as a second, more flattering identity, and underneath it they're still avoiding the one thing they know they should do.</p><p>So pick the one real-world thing you've been circling, the conversation, the application, the thing you'd do for free, and do the smallest piece of it for ten minutes. Then sit still for ten minutes after, and watch how different that sit feels when something actually moved. You'll learn more from that one swap than from another month of practising on its own.</p><p>Do it tomorrow morning, before you open anything else.</p></div>
+        </div></div>
         <div class="field" aria-hidden="true"><span id="pField">What's going on?</span><i><svg viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
       </div>
     </div>
@@ -378,10 +392,14 @@ footer .help { flex-basis: 100%; margin: 6px 0 0; line-height: 1.7; }
   const sayPin = $("sayPin"), say = $("say");
   say.innerHTML = say.textContent.split(" ").map((w) => `<span>${w}</span>`).join(" ");
   const sayWords = [...say.children];
-  const how = $("how"), howCopy = $("howCopy"), phone = $("phone"), pThem = $("pThem"), pListen = $("pListen"), pSs = $("pSs"), pAns = $("pAns"), pField = $("pField");
-  const Q = pThem.textContent, HOLD = pField.textContent;
-  let ansWords = [];
-  if (fx) { pAns.innerHTML = pAns.textContent.split(" ").map((w) => `<b>${w}</b>`).join(" "); ansWords = [...pAns.children]; }
+  const how = $("how"), howCopy = $("howCopy"), phone = $("phone"), pField = $("pField");
+  const HOLD = pField.textContent;
+  // every exchange in the phone: the question, the listening line, the answer and its words (wrapped only when the scene runs)
+  const turns = [...phone.querySelectorAll(".them")].map((them) => { const listen = them.nextElementSibling, ss = listen.nextElementSibling, paras = [...ss.querySelectorAll("p")];
+    if (fx) paras.forEach((p) => { p.innerHTML = p.textContent.split(" ").map((w) => `<b>${w.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</b>`).join(" "); });
+    return { them, listen, ss, paras, q: them.textContent, words: [...ss.querySelectorAll("b")], shown: -1 }; });
+  { let at = 0; const total = turns.reduce((n, t) => n + 60 + t.words.length, 0); turns.forEach((t) => { t.a = at / total; at += 60 + t.words.length; t.b = at / total; }); }
+  const tail = (s) => { if (s.length <= 64) return s; const cut = s.slice(-64); return "…" + cut.slice(cut.indexOf(" ") + 1); };
   const priv = $("private"), words = [...priv.querySelectorAll(".word")], feelSub = priv.querySelector(".feel-sub"), feelArt = priv.querySelector(".draw"), feelSvg = priv.querySelector("svg.flower");
   const probe = sayPin.querySelector(".sticky");
   const lnavLinks = [...document.querySelectorAll('#lnav .lright a[href^="#"]:not(.pill)')].map((a) => [a, $(a.getAttribute("href").slice(1))]).filter(([, el]) => el);
@@ -399,13 +417,16 @@ footer .help { flex-basis: 100%; margin: 6px 0 0; line-height: 1.7; }
     { const { p, near } = prog(sayPin, vh); if (near) { const n = Math.round(seg(p, .04, .78) * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n)); } }
     // the conversation: the phone stands up, a question is typed and sent, it listens, then the answer arrives a word at a time
     { const { p, near } = prog(how, vh); if (near) {
-      const up = ease(seg(p, .0, .16));
-      phone.style.transform = `rotateX(${lerp(46, 0, up).toFixed(2)}deg) scale(${lerp(.82, 1, up).toFixed(4)})`; phone.style.opacity = seg(p, 0, .07).toFixed(3);
-      const sent = p >= .45, n = Math.round(seg(p, .19, .43) * Q.length), typed = !sent && n > 0;
-      const txt = typed ? Q.slice(0, n) : HOLD; if (pField.textContent !== txt) pField.textContent = txt; pField.classList.toggle("typed", typed);
-      pThem.classList.toggle("in", sent);
-      const ans = p >= .57; pListen.classList.toggle("in", p >= .48 && !ans); pSs.classList.toggle("in", ans);
-      const m = Math.round(seg(p, .58, .93) * ansWords.length); ansWords.forEach((w, i) => w.classList.toggle("lit", i < m));
+      const up = ease(seg(p, .0, .1));
+      phone.style.transform = `rotateX(${lerp(46, 0, up).toFixed(2)}deg) scale(${lerp(.82, 1, up).toFixed(4)})`; phone.style.opacity = seg(p, 0, .04).toFixed(3);
+      // the talk runs from .15 to .985 of the scene; each exchange: typed, sent, heard, then answered a word at a time
+      const run = seg(p, .15, .985); let field = HOLD, typing = false;
+      turns.forEach((t) => { const u = run <= t.a ? 0 : run >= t.b ? 1 : (run - t.a) / (t.b - t.a), sent = u >= .12, ans = u >= .2;
+        if (u > 0 && !sent) { const n = Math.round(seg(u, .005, .11) * t.q.length); if (n > 0) { field = tail(t.q.slice(0, n)); typing = true; } }
+        t.them.classList.toggle("in", sent); t.listen.classList.toggle("in", u >= .13 && !ans); t.ss.classList.toggle("in", ans);
+        const m = Math.round(seg(u, .2, .97) * t.words.length);
+        if (m !== t.shown) { t.shown = m; t.words.forEach((w, i) => w.classList.toggle("lit", i < m)); t.paras.forEach((para) => para.classList.toggle("in", para.firstElementChild.classList.contains("lit"))); } });
+      if (pField.textContent !== field) pField.textContent = field; pField.classList.toggle("typed", typing);
     } }
     // private: one line at a time, the last one stays while the flower draws itself
     { const { p, near } = prog(priv, vh); if (near) {

@@ -272,7 +272,7 @@ section.flow { padding-block: clamp(72px, 10vw, 140px); }
 .chosen b { font-weight: 500; } .chosen .cp { color: #c9c5bc; font-variant-numeric: tabular-nums; }
 .chosen .ca { display: inline-flex; align-items: center; min-height: 44px; }
 .chosen .ca .tag { font-size: 13px; font-weight: 500; color: var(--ink); border: 1px solid #3a3a42; border-radius: 999px; padding: 8px 14px; }
-/* 10 Nov 2026 (his yes): a way to be told when the book is out. A plain form to Substack, no script. */
+/* 11 Nov 2026: a way to be told when the book is out. One email to the author, who writes back himself. No list, no service. */
 .notify { width: 100%; max-width: 620px; margin-top: clamp(40px, 6vw, 72px); display: flex; flex-direction: column; align-items: center; gap: 16px; scroll-margin-top: 90px; }
 .tell { display: flex; gap: 10px; width: 100%; }
 .tell input { flex: 1; min-width: 0; min-height: 50px; padding: 0 20px; border-radius: 999px; border: 1px solid #3a3a42; background: var(--raised); color: var(--ink); font: 400 16px var(--sans); transition: border-color .25s ease; }
@@ -435,12 +435,8 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
     <p class="chosen" id="chosen" aria-live="polite"><b id="cName"></b><span class="cp" id="cPrice"></span><span class="ca" id="cAct"></span></p>
     <!--NOTIFY--><div class="notify rise" id="notify">
       <h3>Be told the day it is out.</h3>
-      <form class="tell" action="https://soulsensis.substack.com/api/v1/free?nojs=true" method="post">
-        <label for="email" class="vh">Your email</label>
-        <input id="email" type="email" name="email" required placeholder="Your email" autocomplete="email" inputmode="email">
-        <button class="btn" type="submit">Tell me</button>
-      </form>
-      <p class="fine">One email, when the book is out. Sent through Substack; unsubscribe in one tap.</p>
+      <a class="btn" href="mailto:hello@soulsensis.com?subject=Tell%20me%20when%20the%20book%20is%20out">Tell me</a>
+      <p class="fine">It opens an email to hello@soulsensis.com. Send it as it is. One email back, from the author, the day the book is out.</p>
     </div><!--/NOTIFY-->
     <p class="fine rise" style="margin-top:18px">Prices in Australian dollars unless marked. Amazon sets local prices in other countries.</p>
   </div></section>

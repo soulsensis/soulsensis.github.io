@@ -114,6 +114,8 @@ p.offer, .letters p.offer { color: var(--ink); }
 .row:hover { padding-left: 8px; }
 .row b { display: block; font-weight: 400; font-size: 18px; line-height: 1.35; }
 .row p { margin: 6px 0 0; font-family: var(--serif); font-size: 16px; line-height: 1.55; color: #b9b5ab; }
+/* 11 Nov 2026: every list row reads the same: a title, two lines of the opening at most, one quiet tag */
+.list .row p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .tag { flex: none; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; border-radius: 999px; padding: 6px 10px; border: 1px solid #3a3a42; color: var(--muted); white-space: nowrap; margin-top: 2px; }
 .tag.full { border-color: var(--ink); color: var(--ink); }
 .tag.watch { border-color: var(--heart); color: var(--heart); }
