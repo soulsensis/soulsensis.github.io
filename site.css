@@ -242,3 +242,34 @@ p.kicker.feels { justify-content: center; margin: 0 0 14px; }
 .list.swap .row { animation: rowin .45s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(min(var(--i, 0), 8) * 40ms); }
 @media (prefers-reduced-motion: reduce) { .list.swap .row { animation: none; } }
 @media (max-width: 640px) { nav.top .links a.far { display: none; } }
+
+/* ---- 11 Nov 2026: the essay page as a reading page (his: "feels bland ... narrow margins for reading ... a read out ...
+   access to asksoulsensis"). An editorial column: the title and the read-out lead on the left, the words start on the
+   first screen, the film follows the words. The name in the top bar is set heavier (his: "a bit stronger or bolder"). */
+.mark { font-weight: 500; letter-spacing: .16em; }
+article .col { max-width: 640px; }
+.essay-head { text-align: left; padding-block: clamp(36px, 6vw, 72px) clamp(20px, 3vw, 30px); }
+.essay-head .art { left: auto; right: -34%; top: 46%; transform: translate(0, -50%); width: min(760px, 130vw); opacity: .13; }
+.essay-head h1 { font-size: clamp(34px, 5.4vw, 54px); line-height: 1.08; text-wrap: balance; }
+.essay-head p.kicker.feels { justify-content: flex-start; margin: 0 0 18px; }
+.essay-head .meta { margin-top: 18px; }
+.listen { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 14px; margin-top: 26px; padding: 10px 18px 10px 10px; border: 1px solid #2c2c33; border-radius: 999px; background: rgba(14,14,17,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.listen .lp { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); cursor: pointer; display: grid; place-items: center; transition: transform .2s ease; }
+.listen .lp:hover { transform: scale(1.06); } .listen .lp svg { width: 20px; height: 20px; fill: #000; }
+.listen .pa, .listen .lp[aria-pressed="true"] .pl { display: none; } .listen .lp[aria-pressed="true"] .pa { display: block; }
+.listen .lt { display: flex; flex-direction: column; line-height: 1.25; } .listen .lt b { font-weight: 500; font-size: 15px; }
+.listen .ld { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.listen .lbar { height: 28px; display: flex; align-items: center; cursor: pointer; position: relative; }
+.listen .lbar::before { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: #33333b; border-radius: 2px; }
+.listen .lbar i { position: absolute; left: 0; right: 0; height: 2px; background: var(--heart); transform: scaleX(0); transform-origin: left; border-radius: 2px; }
+.listen.on { position: sticky; top: 62px; z-index: 9; }
+.essay-head:has(.listen.on) { overflow: visible; }
+.prose { font-size: clamp(18px, 1.9vw, 20px); line-height: 1.72; }
+.prose p { margin: 0 0 1.3em; }
+.prose p:first-child { font-size: 1.14em; line-height: 1.6; color: var(--ink); }
+.prose p:first-child::first-letter { float: none; font-size: inherit; padding: 0; }
+.video-wrap.after { margin: clamp(34px, 5vw, 52px) 0 0; padding: 0; }
+.askcard { margin: clamp(40px, 6vw, 64px) 0 0; padding: clamp(24px, 4vw, 34px); border: 1px solid #2c2c33; border-radius: 22px; background: linear-gradient(160deg, #101014, #08080a); }
+.askcard h2 { margin: 10px 0 8px; font-weight: 500; font-size: clamp(24px, 3.4vw, 30px); letter-spacing: -.015em; }
+.askcard p { margin: 0 0 18px; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: #c9c5bc; } .askcard p.label { margin: 0; font-family: var(--sans); font-size: 12px; color: var(--heart); }
+@media (max-width: 520px) { .listen { gap: 10px; padding-right: 14px; } .essay-head .art { right: -70%; } }
