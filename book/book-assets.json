@@ -1,11 +1,66 @@
 {
- "spine_ratio": 0.10583333333333333,
+ "spine_ratio": 0.10592592592592592,
+ "spine_px": [
+  286,
+  4050
+ ],
+ "cover_px": [
+  1350,
+  2025
+ ],
  "pages": 282,
  "essays": 34,
  "pieces": 85,
  "left": 14,
  "right": 15,
- "alt_left": "PART 1 A fraction of who I am We live in a world where people are habituated to not listen to their truest calling. Breaking out of the script is literally just breaking out of the habit of not listening to yourself.",
- "alt_right": "CHAPTER 1 Perception is key Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me, watching everyone else appear further along, better positioned, more accomplished, measuring my progress against theirs as if we were running the same race. I caught myself spiralling into self-hatred for not being where I thought I should be. And then it hit me. Their goals are",
+ "stops": [
+  14,
+  182,
+  242
+ ],
+ "shown": [
+  {
+   "n": 14,
+   "w": 1200,
+   "h": 1800,
+   "head": "Part 1 · A fraction of who I am",
+   "alt": "PART 1 A fraction of who I am We live in a world where people are habituated to not listen to their truest calling. Breaking out of the script is literally just breaking out of the habit of not listening to yourself."
+  },
+  {
+   "n": 15,
+   "w": 1200,
+   "h": 1800,
+   "head": "Chapter 1 · Perception is key",
+   "alt": "CHAPTER 1 Perception is key Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me, watching everyone else appear further along, better positioned, more accomplished, measuring my progress against theirs as if we were running the same race. I caught myself spiral"
+  },
+  {
+   "n": 182,
+   "w": 1200,
+   "h": 1800,
+   "head": "Part 5 · Sit still enough to hear it",
+   "alt": "PART 5 Sit still enough to hear it When you're able to sit with yourself in the stillness of your own mind, you actually start to see how crazy the world is around you. The heart speaks in truth when all is silent so a mind that does not too wish to hear truth will be loud and boisterous."
+  },
+  {
+   "n": 183,
+   "w": 1200,
+   "h": 1800,
+   "head": "Chapter 74 · The lighthouse does not try to shine",
+   "alt": "CHAPTER 74 The lighthouse does not try to shine On the tiredness of performing a life rather than living it. There is a particular kind of tiredness that comes from living a life that is not yours. It is not the tiredness of physical work, nor the sharper tiredness that arrives at the end of a long "
+  },
+  {
+   "n": 242,
+   "w": 1200,
+   "h": 1800,
+   "head": "Part 6 · Contentment, the only destination",
+   "alt": "PART 6 Contentment, the only destination I don't want peace to be at the end of it all. It doesn't make sense. I want peace now. I will choose to be peaceful now until the day I die."
+  },
+  {
+   "n": 243,
+   "w": 1800,
+   "h": 2700,
+   "head": "Chapter 101 · The cage only holds because you believe it does",
+   "alt": "CHAPTER 101 The cage only holds because you believe it does I am at a park, walking, one step after another, no agenda, no destination beyond this moment, this path, this air. In that simplicity, something opens. Thoughts arrive without me forcing them, the mind loosens, and the heart begins to spea"
+  }
+ ],
  "source": "Sit still enough to hear it - paperback interior 6x9.pdf"
 }

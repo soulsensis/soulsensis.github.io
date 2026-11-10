@@ -131,10 +131,15 @@ nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
 .bk { --w: min(46vw, 300px); --d: calc(var(--w) * .106); --ry: -26deg; --rx: -5deg; position: relative; z-index: 2; width: var(--w); aspect-ratio: 2 / 3; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); will-change: transform; }
 .bk .f { position: absolute; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .bk img.f { width: 100%; height: 100%; object-fit: cover; background: #0b0b0d; }
-.bk .front { inset: 0; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; filter: brightness(var(--lf, 1)); }
-.bk .back { inset: 0; transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; filter: brightness(var(--lb, 1)); }
-.bk img.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg); filter: brightness(var(--ls, .8)); }
+.bk .front { inset: 0; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; }
+.bk .back { inset: 0; transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; }
+.bk img.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg); }
 .bk .edge { top: .5%; bottom: .5%; right: calc(var(--d) / -2); width: var(--d); transform: rotateY(90deg); background: repeating-linear-gradient(90deg, #f1ede3 0 1px, #d3cec2 1px 2px, #e6e1d6 2px 3px); box-shadow: inset 0 0 10px rgba(0,0,0,.28); }
+/* 10 Nov 2026: the light on a face is a black sheet over it, never a filter. A filter made the browser paint the face small and stretch it (the soft spine he saw). */
+.bk .sh { background: #000; pointer-events: none; }
+.bk .sh.front { transform: translateZ(calc(var(--d) / 2 + .3px)); opacity: calc(1 - var(--lf, 1)); }
+.bk .sh.back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2 + .3px)); opacity: calc(1 - var(--lb, 1)); }
+.bk .sh.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg) translateZ(.3px); opacity: calc(1 - var(--ls, .8)); }
 .bk .top { left: 0; right: .5%; top: calc(var(--d) / -2); height: var(--d); transform: rotateX(90deg); background: repeating-linear-gradient(0deg, #ece7dc 0 1px, #cdc8bb 1px 2px); }
 .bk .bot { left: 0; right: .5%; bottom: calc(var(--d) / -2); height: var(--d); transform: rotateX(-90deg); background: #b9b4a8; }
 .hero .bk { animation: float 7s ease-in-out infinite; }
@@ -149,6 +154,11 @@ nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
 
 /* the line that lights up */
 .say { padding-block: clamp(90px, 16vw, 220px); }
+.say svg.flower { display: none; }
+.fx .pin.say .sticky { display: grid; place-items: center; padding: 0 20px; }
+.fx .say svg.flower { display: block; position: absolute; left: 50%; top: 50%; width: min(150vw, 900px); height: min(150vw, 900px); translate: -50% -50%; opacity: 0; }
+.fx .say p { position: relative; }
+.lnav .readline { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--heart); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
 .say p { margin: 0 auto; max-width: 17em; font-size: clamp(30px, 5.6vw, 68px); line-height: 1.12; font-weight: 500; letter-spacing: -.022em; text-wrap: balance; }
 .say p span { opacity: .16; transition: opacity .4s ease; }
 .say p span.lit { opacity: 1; }
@@ -169,7 +179,8 @@ nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
 .fx .pin .sticky { position: sticky; top: 0; display: block; height: 100vh; height: 100svh; overflow: hidden; }
 .fx .look .look-h { position: absolute; inset: 12svh 20px auto; will-change: opacity, transform; }
 .fx .look .scene3d { position: absolute; inset: 0; padding-top: 13svh; }
-.fx .look .bk { --w: min(48vw, 38svh, 320px); }
+/* 10 Nov 2026 (author: "too low resolution ... iphone standard"): a book is laid out at the closest size it ever reaches and only scaled down, never up, so the browser paints every face at full sharpness */
+.fx .look .bk { --w: calc(min(48vw, 38svh, 320px) * 1.5); position: absolute; left: 50%; top: 56.5%; margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); scale: .667; }
 .fx .look .chip { display: block; position: absolute; inset: auto 0 7svh; margin: 0; font-size: 15px; font-weight: 500; color: var(--muted); }
 .fx .look .blurb { position: absolute; left: 50%; top: 50%; width: min(620px, calc(100vw - 48px)); translate: -50% -46%; opacity: 0; will-change: opacity, transform; }
 
@@ -179,19 +190,26 @@ nav .links a:hover, nav .links a[aria-current] { color: var(--ink); }
 .paper .sub { color: #34322e; }
 .in-copy { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .in-copy .eyebrow { margin: 0; }
-.open { --w: min(42vw, 300px); --open: -180deg; position: relative; width: var(--w); aspect-ratio: 2 / 3; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: translateX(50%); will-change: transform; }
+.open { --w: min(42vw, 300px); --open: -180deg; --e: calc(var(--w) * .0067); position: relative; width: var(--w); aspect-ratio: 2 / 3; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: translateX(50%); will-change: transform; }
 .open .pg, .open .leaf > * { position: absolute; inset: 0; }
-.open .pg { background: #fff; box-shadow: 2px 0 0 #ebe8e0, 4px 1px 0 #dedad1, 6px 2px 0 #d2cec5, 0 34px 60px -24px rgba(0,0,0,.5); }
+.open .pg { background: #fff; box-shadow: var(--e) 0 0 #ebe8e0, calc(var(--e) * 2) calc(var(--e) * .5) 0 #dedad1, calc(var(--e) * 3) var(--e) 0 #d2cec5, 0 calc(var(--e) * 17) calc(var(--e) * 30) calc(var(--e) * -12) rgba(0,0,0,.5); }
 .open .pg::after, .open .lf-back::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.13), rgba(0,0,0,.03) 4%, transparent 9%); }
 .open .lf-back::after { background: linear-gradient(270deg, rgba(0,0,0,.13), rgba(0,0,0,.03) 4%, transparent 9%); }
 .open img { width: 100%; height: 100%; object-fit: cover; }
 .open .leaf { position: absolute; inset: 0; transform-origin: left center; transform: rotateY(var(--open)); transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
 .open .leaf > * { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-.open .lf-front { background: #0b0b0d; border-radius: 1px 3px 3px 1px; box-shadow: 0 34px 60px -24px rgba(0,0,0,.5); }
-.open .lf-back { transform: rotateY(180deg); background: #fff; box-shadow: -2px 0 0 #ebe8e0, -4px 1px 0 #dedad1, -6px 2px 0 #d2cec5; }
+.open .lf-front { background: #0b0b0d; border-radius: 1px 3px 3px 1px; box-shadow: 0 calc(var(--e) * 17) calc(var(--e) * 30) calc(var(--e) * -12) rgba(0,0,0,.5); }
+.open .lf-back { transform: rotateY(180deg); background: #fff; box-shadow: calc(var(--e) * -1) 0 0 #ebe8e0, calc(var(--e) * -2) calc(var(--e) * .5) 0 #dedad1, calc(var(--e) * -3) var(--e) 0 #d2cec5; }
+/* the leaves between the stops: with no script they lie closed under the first spread; with it they flick */
+.open .leaf.mid { --open: 0deg; }
+.open .leaf.mid .lf-front, .open .leaf.fl .lf-front { background: #fff; border-radius: 0; box-shadow: none; }
+.open .leaf.fl .lf-back { box-shadow: none; }
+.open .leaf.mid .lf-front::after, .open .leaf.fl .lf-front::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.13), rgba(0,0,0,.03) 4%, transparent 9%); }
+.open .lines::before { content: ""; position: absolute; inset: 13% 14% 12%; background: repeating-linear-gradient(180deg, rgba(17,16,19,.1) 0 calc(var(--w) * .013), transparent 0 calc(var(--w) * .034)); }
+.open img:not([src]) { visibility: hidden; }
 .fx .inside .in-copy { position: absolute; inset: 11svh 20px auto; will-change: opacity; }
-.fx .inside .scene3d { position: absolute; inset: 0; padding-top: 12svh; }
-.fx .inside .open { --w: min(40vw, 32svh, 300px); transform: none; }
+.fx .inside .scene3d { position: absolute; inset: 0; padding-top: 12svh; perspective: 2600px; }   /* a longer lens: a turning leaf does not swing up over the heading */
+.fx .inside .open { --w: min(121vw, 640px); position: absolute; left: 50%; top: 58%; margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); transform: scale(.47); }   /* laid out at reading size, scaled down until it is read */
 .fx .inside .in-note { position: absolute; inset: auto 20px 4svh; text-align: center; opacity: 0; }
 
 /* feel */
@@ -276,6 +294,7 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
 </div></nav>
 <div class="lnav g" id="lnav"><div class="wrap">
   <a class="pname" href="#top">Your soul knows best</a>
+  <span class="readline" id="readline" aria-hidden="true"></span>
   <div class="lright"><a class="far" href="#look">The cover</a><a href="#inside">Look inside</a><!--BUY_NAV--><a class="pill" href="#formats">Coming soon</a><!--/BUY_NAV--></div>
 </div></div>
 
@@ -291,16 +310,19 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
     <div class="stage" id="heroStage">
       <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="1.1"></g></svg>
       <div class="floor" aria-hidden="true"></div>
-      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="900" height="1350" decoding="async" fetchpriority="high" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f spine" src="book/spine.webp" width="95" height="1350" decoding="async" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" fetchpriority="high" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f spine" src="book/spine.webp" width="286" height="4050" decoding="async" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
     </div>
   </header>
 
-  <section class="say g" aria-label="From the back cover"><p id="say">There is a particular kind of tiredness that comes from living a life that is not yours.</p></section>
+  <section class="pin say g" id="sayPin" style="--len:2.3" aria-label="From the back cover"><div class="sticky">
+    <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw scrub" id="sayArt" fill="none" stroke="#F5F2EA" stroke-width="1"><circle cx="-95" r="190" pathLength="1"/><circle cx="95" r="190" pathLength="1"/><circle r="285" pathLength="1"/><circle r="303" pathLength="1"/></g></svg>
+    <p id="say">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
+  </div></section>
 
   <section class="pin look g" id="look" style="--len:4.2" aria-labelledby="look-h"><div class="sticky">
     <h2 class="look-h" id="look-h">Take a closer look.</h2>
     <div class="scene3d">
-      <div class="bk" id="lookBook"><img class="f front" src="book/front.webp" width="900" height="1350" decoding="async" alt="The front cover"><img class="f back" src="book/back.webp" width="900" height="1350" decoding="async" alt="The back cover; its words follow"><img class="f spine" src="book/spine.webp" width="95" height="1350" decoding="async" alt="The spine: Your soul knows best, soulsensis"><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <div class="bk" id="lookBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" alt="The front cover"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" alt="The back cover; its words follow"><img class="f spine" src="book/spine.webp" width="286" height="4050" decoding="async" alt="The spine: Your soul knows best, soulsensis"><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
     </div>
     <p class="chip" id="lookChip" aria-hidden="true">The front</p>
     <div class="blurb" id="blurb">
@@ -315,22 +337,21 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
     </div>
   </div></section>
 
-  <section class="pin inside paper g" id="inside" style="--len:4.6" aria-labelledby="inside-h"><div class="sticky">
+  <section class="pin inside paper g" id="inside" style="--len:6.4" aria-labelledby="inside-h"><div class="sticky">
     <div class="in-copy">
       <p class="eyebrow">Inside</p>
       <h2 id="inside-h">Open it anywhere.</h2>
       <p class="sub">Every piece stands on its own page.</p>
     </div>
     <div class="scene3d">
-      <div class="open" id="open">
-        <div class="pg"><img src="book/page-right.webp" width="1200" height="1800" decoding="async" alt="Page 15 as printed. Chapter 1, Perception is key. It opens: Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me."></div>
-        <div class="leaf" id="leaf">
-          <div class="lf-front"><img src="book/front.webp" width="900" height="1350" decoding="async" alt=""></div>
-          <div class="lf-back"><img src="book/page-left.webp" width="900" height="1350" decoding="async" alt="Page 14 as printed. Part 1, A fraction of who I am."></div>
-        </div>
-      </div>
+      <div class="open" id="open"><!--OPEN-->
+        <div class="pg"><img data-src="book/p243.webp" width="1800" height="2700" decoding="async" alt="Page 243 as printed. Chapter 101, The cage only holds because you believe it does."></div>
+        <div class="leaf mid"><div class="lf-front"><img data-src="book/p183.webp" width="1200" height="1800" decoding="async" alt="Page 183 as printed. Chapter 74, The lighthouse does not try to shine."></div><div class="lf-back"><img data-src="book/p242.webp" width="1200" height="1800" decoding="async" alt="Page 242 as printed. Part 6, Contentment, the only destination."></div></div>
+        <div class="leaf mid"><div class="lf-front"><img src="book/p15.webp" width="1200" height="1800" decoding="async" alt="Page 15 as printed. Chapter 1, Perception is key."></div><div class="lf-back"><img data-src="book/p182.webp" width="1200" height="1800" decoding="async" alt="Page 182 as printed. Part 5, Sit still enough to hear it."></div></div>
+        <div class="leaf" id="leaf"><div class="lf-front"><img src="book/front.webp" width="1350" height="2025" decoding="async" alt=""></div><div class="lf-back"><img src="book/p14.webp" width="1200" height="1800" decoding="async" alt="Page 14 as printed. Part 1, A fraction of who I am."></div></div>
+      <!--/OPEN--></div>
     </div>
-    <p class="fine in-note" id="inNote">Pages 14 and 15, as printed. Paperback, 6 × 9 inches.</p>
+    <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 1 · Perception is key|Chapter 74 · The lighthouse does not try to shine|Chapter 101 · The cage only holds because you believe it does" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 14 and 15, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
   </div></section>
 
   <section class="pin feel g" id="feel" style="--len:4.4" aria-label="What the book is for"><div class="sticky">
@@ -440,17 +461,40 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
   const heroBook = $("heroBook"), heroFlower = document.querySelector(".hero svg.flower");
   const look = $("look"), lookH = $("look-h"), lookBook = $("lookBook"), chip = $("lookChip"), blurb = $("blurb");
   const inside = $("inside"), open = $("open"), leaf = $("leaf"), inCopy = inside.querySelector(".in-copy"), inNote = $("inNote");
+  const sayPin = $("sayPin"), sayArt = $("sayArt"), saySvg = sayPin.querySelector("svg"), readline = $("readline"), heroCopy = document.querySelector(".hero-copy");
+  // the open book's leaves in turning order (10 Nov 2026, his ask: "flick through the book stopping at several chapters"): the cover,
+  // then for each later stop a short flick of leaves. The first leaf's face is the page being left, the last leaf's back the page arrived at.
+  const FL = 5, E = .5, leaves = [leaf], flicks = [];
+  if (fx) [...open.querySelectorAll(".leaf.mid")].reverse().forEach((m) => {
+    const f = m.querySelector(".lf-front"), b = m.querySelector(".lf-back"), blank = (c) => { const s = document.createElement("div"); s.className = c + " lines"; return s; };
+    for (let j = 0; j < FL; j++) { const L = document.createElement("div"); L.className = "leaf fl"; L.append(j ? blank("lf-front") : f, j < FL - 1 ? blank("lf-back") : b); open.append(L); leaves.push(L); }
+    m.remove(); flicks.push(0);
+  });
+  const OPEN0 = .04, OPEN1 = .15, F0 = .2, F1 = .58, ZOOM0 = .62, slot = (F1 - F0) / Math.max(1, flicks.length);
+  const fw = flicks.map((_, k) => [F0 + k * slot + .02, F0 + (k + 1) * slot - .07]);
+  const heads = (inNote.dataset.heads || "").split("|"), lastNote = inNote.dataset.last || inNote.textContent;
   const feel = $("feel"), words = [...feel.querySelectorAll(".word")], feelSub = feel.querySelector(".feel-sub"), feelArt = feel.querySelector(".draw");
   const readers = $("readers"), track = $("track"), rdSticky = readers.querySelector(".sticky");
-  const probe = look.querySelector(".sticky");
+  const probe = look.querySelector(".sticky"), stage = $("heroStage");
+  const shade = (bk) => ["front", "back", "spine"].forEach((c) => { if (bk.querySelector("img." + c)) { const s = document.createElement("span"); s.className = "f sh " + c; s.setAttribute("aria-hidden", "true"); bk.append(s); } });
+  shade(heroBook); shade(lookBook);
   light(heroBook, -26); light(lookBook, -26);
 
   function frame() {
     ticking = false;
     const vh = probe.offsetHeight || innerHeight, vw = root.clientWidth, y = scrollY;   // the pinned box is the viewport the scenes live in
     // say
-    { const r = say.getBoundingClientRect(); const p = clamp((vh * .82 - r.top) / (vh * .55)); const n = Math.round(p * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n)); }
-    if (!fx) return;
+    if (!fx) { const r = say.getBoundingClientRect(); const p = clamp((vh * .82 - r.top) / (vh * .55)); const n = Math.round(p * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n)); return; }
+    // the reading line under the book's bar
+    { const max = root.scrollHeight - innerHeight; readline.style.transform = `scaleX(${(max > 0 ? clamp(y / max) : 0).toFixed(4)})`; }
+    // say: held in place and lit word by word while two circles draw themselves behind it
+    { const { p, near } = prog(sayPin, vh); if (near) { const n = Math.round(seg(p, .04, .72) * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n));
+      sayArt.style.setProperty("--off", (1 - ease(seg(p, .04, .9))).toFixed(3)); saySvg.style.opacity = (.26 * seg(p, .03, .1)).toFixed(3); saySvg.style.transform = `rotate(${(p * 40).toFixed(2)}deg)`; } }
+    // hero: the words let go first and the book sinks back a little, so the page has depth as it leaves
+    if (y < vh * 1.4) { const t = clamp(y / vh); heroCopy.style.opacity = (1 - seg(t, .2, .7)).toFixed(3); heroCopy.style.transform = `translateY(${(-50 * t).toFixed(1)}px)`; stage.style.transform = `translateY(${(y * .12).toFixed(1)}px)`; }
+    // the paper arrives as a sheet with round corners and squares up as it fills the screen; it leaves the same way
+    { const r = inside.getBoundingClientRect(), a = clamp(r.top / vh), b = clamp((vh - r.bottom) / vh);
+      inside.style.clipPath = a > 0 || b > 0 ? `inset(0 ${(a * 5 + b * 5).toFixed(2)}% round ${(a * 44).toFixed(0)}px ${(a * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px)` : "none"; }
     // hero: the book turns a little and the flower wheels as the page leaves
     if (y < vh * 1.4) { const ry = -26 + y * .035; heroBook.style.setProperty("--ry", ry.toFixed(2) + "deg"); light(heroBook, ry); heroFlower.style.setProperty("--spin", (y * .03).toFixed(2) + "deg"); }
     // look: front, spine, back, then the back's words
@@ -458,21 +502,28 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
       const t = ease(seg(p, .1, .62)), ry = lerp(-26, 180, t), z = ease(seg(p, .68, .84));
       lookH.style.opacity = (1 - seg(p, .06, .18)).toFixed(3); lookH.style.transform = `translateY(${(-40 * seg(p, .06, .18)).toFixed(1)}px)`;
       lookBook.style.setProperty("--ry", ry.toFixed(2) + "deg"); lookBook.style.setProperty("--rx", lerp(-5, 0, t).toFixed(2) + "deg"); light(lookBook, ry);
-      lookBook.style.scale = (lerp(1, 1.5, z) + .22 * Math.sin(Math.PI * t)).toFixed(3);   // a little closer while the spine passes
+      lookBook.style.scale = ((lerp(1, 1.5, z) + .3 * Math.sin(Math.PI * t)) / 1.5).toFixed(4);   // a little closer while the spine passes
       // 10 Nov 2026 (his journal): the book is gone before its typed words arrive, so the two never sit on top of each other
       const gone = seg(p, .7, .8); lookBook.style.opacity = (1 - gone).toFixed(3); lookBook.style.visibility = gone >= 1 ? "hidden" : "visible";
       chip.textContent = ry < 38 ? "The front" : ry < 132 ? "The spine" : "The back"; chip.style.opacity = (seg(p, .08, .14) * (1 - seg(p, .66, .72))).toFixed(3);
       const b = seg(p, .81, .92); blurb.style.opacity = b.toFixed(3); blurb.style.transform = `translateY(${lerp(34, 0, ease(b)).toFixed(1)}px)`; blurb.style.pointerEvents = b > .5 ? "auto" : "none";
     } }
-    // inside: the cover opens on a real spread, then the right page comes close enough to read, and scrolls
+    // inside: the cover opens on a real spread, the book flicks to each later stop and rests there, then the last right page comes close enough to read, and scrolls
     { const { p, near } = prog(inside, vh); if (near) {
-      const w0 = open.offsetWidth, o = ease(seg(p, .08, .44)), z = ease(seg(p, .5, .68)), pan = seg(p, .7, .97);
-      leaf.style.setProperty("--open", lerp(0, -180, o).toFixed(2) + "deg");
-      const wT = Math.min(vw * .92 / .76, 640), s = lerp(1, wT / w0, z), hT = wT * 1.5, top = 76, pad = 28;
+      if (!open.dataset.ld) { open.dataset.ld = 1; open.querySelectorAll("img[data-src]").forEach((im) => { im.src = im.dataset.src; }); }   // the later pages load only as the scene nears
+      const W = open.offsetWidth, w0 = Math.min(vw * .4, vh * .28, 300), o = ease(seg(p, OPEN0, OPEN1)), z = ease(seg(p, ZOOM0, ZOOM0 + .12)), pan = seg(p, ZOOM0 + .14, .97), N = leaves.length;
+      leaves.forEach((L, i) => { let t = o; if (i) { const g = Math.floor((i - 1) / FL), j = (i - 1) % FL, q = seg(p, fw[g][0], fw[g][1]), st = j * .16; t = ease(seg(q, st, st + .36)); }
+        L.style.transform = `translateZ(${lerp((N - i) * E, (i + 1) * E, t).toFixed(2)}px) rotateY(${(-180 * t).toFixed(2)}deg)`; });
+      const s = lerp(w0 / W, 1, z), hT = W * 1.5, top = 76, pad = 28;
       const y0 = hT > vh - top - pad ? top + hT / 2 - vh / 2 - hT * .13 : (top - pad) / 2, y1 = hT > vh - top - pad ? vh / 2 - pad - hT / 2 : y0;
-      const base = vh * .06, ty = lerp(lerp(base, y0, z), y1, ease(pan)), tx = lerp(lerp(0, w0 / 2, o), 0, z);
+      const base = vh * .08, ty = lerp(lerp(base, y0, z), y1, ease(pan)), tx = lerp(lerp(0, w0 / 2, o), 0, z);
       open.style.transform = `translate3d(${tx.toFixed(1)}px, ${(ty - base).toFixed(1)}px, 0) scale(${s.toFixed(4)})`;
-      inCopy.style.opacity = (1 - seg(p, .46, .56)).toFixed(3); inNote.style.opacity = (seg(p, .3, .4) * (1 - seg(p, .5, .56)) + seg(p, .9, .97)).toFixed(3);
+      inCopy.style.opacity = (1 - seg(p, ZOOM0 - .04, ZOOM0 + .04)).toFixed(3);
+      // the note under the book names the chapter it rests on
+      let k = 0; while (k < fw.length && p > (fw[k][0] + fw[k][1]) / 2) k++;
+      const hs = k ? fw[k - 1][1] : OPEN1, he = k < fw.length ? fw[k][0] : ZOOM0, hold = seg(p, hs - .02, hs + .01) * (1 - seg(p, he - .01, he + .02)), end = seg(p, .9, .97);
+      const txt = end > 0 ? lastNote : (heads[k] || lastNote); if (inNote.textContent !== txt) inNote.textContent = txt;
+      inNote.style.opacity = Math.max(hold, end).toFixed(3);
     } }
     // feel: one word at a time, the last one stays while the flower draws itself
     { const { p, near } = prog(feel, vh); if (near) {
@@ -489,7 +540,6 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
   addEventListener("scroll", ask, { passive: true }); addEventListener("resize", ask); addEventListener("load", ask); frame();
 
   // the hero book turns toward the cursor
-  const stage = $("heroStage");
   if (fx && matchMedia("(hover: hover)").matches) {
     stage.addEventListener("pointermove", (e) => { const r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, yy = (e.clientY - r.top) / r.height - .5; const ry = -18 + x * 30 + scrollY * .035; heroBook.style.setProperty("--ry", ry.toFixed(1) + "deg"); heroBook.style.setProperty("--rx", (-5 - yy * 10).toFixed(1) + "deg"); light(heroBook, ry); }, { passive: true });
     stage.addEventListener("pointerleave", () => { heroBook.style.setProperty("--rx", "-5deg"); ask(); });

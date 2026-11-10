@@ -200,9 +200,14 @@ a.tile:hover { border-color: #4a4a52; transform: translateY(-2px); }
 .bk { --w: min(46vw, 280px); --d: calc(var(--w) * .106); --ry: -26deg; --rx: -5deg; position: relative; z-index: 2; display: block; width: var(--w); aspect-ratio: 2 / 3; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); will-change: transform; }
 .bk .f { position: absolute; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .bk img.f { width: 100%; height: 100%; object-fit: cover; background: #0b0b0d; }
-.bk .front { inset: 0; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; filter: brightness(var(--lf, 1)); }
-.bk img.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg); filter: brightness(var(--ls, .8)); }
+.bk .front { inset: 0; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; }
+.bk img.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg); }
 .bk .edge { top: .5%; bottom: .5%; right: calc(var(--d) / -2); width: var(--d); transform: rotateY(90deg); background: repeating-linear-gradient(90deg, #f1ede3 0 1px, #d3cec2 1px 2px, #e6e1d6 2px 3px); box-shadow: inset 0 0 10px rgba(0,0,0,.28); }
+/* 10 Nov 2026: the light on a face is a black sheet over it, never a filter. A filter made the browser paint the face small and stretch it (the soft spine he saw). */
+.bk .sh { background: #000; pointer-events: none; }
+.bk .sh.front { transform: translateZ(calc(var(--d) / 2 + .3px)); opacity: calc(1 - var(--lf, 1)); }
+.bk .sh.back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2 + .3px)); opacity: calc(1 - var(--lb, 1)); }
+.bk .sh.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg) translateZ(.3px); opacity: calc(1 - var(--ls, .8)); }
 .bk .top { left: 0; right: .5%; top: calc(var(--d) / -2); height: var(--d); transform: rotateX(90deg); background: repeating-linear-gradient(0deg, #ece7dc 0 1px, #cdc8bb 1px 2px); }
 .bk .bot { left: 0; right: .5%; bottom: calc(var(--d) / -2); height: var(--d); transform: rotateX(-90deg); background: #b9b4a8; }
 .scene3d { perspective: 1600px; display: grid; place-items: center; text-decoration: none; }
@@ -210,7 +215,7 @@ a.tile:hover { border-color: #4a4a52; transform: translateY(-2px); }
 .bookpin .bk-copy .eyebrow { margin: 0; }
 .bookpin .bk-copy .btn { margin-top: 8px; }
 .fx .bookpin .scene3d { position: absolute; inset: 0 0 auto; height: 58svh; padding-top: 6svh; }
-.fx .bookpin .bk { --w: min(40vw, 30svh, 260px); }
+.fx .bookpin .bk { --w: calc(min(40vw, 30svh, 260px) * 2.3); position: absolute; left: 50%; top: 32svh; margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); scale: .435; }   /* 10 Nov 2026: laid out at its closest size and only scaled down, so the spine is sharp */
 .fx .bookpin .bk-copy { position: absolute; inset: 60svh 20px auto; will-change: opacity, transform; }
 .fx .bookpin .bk-copy h2 { font-size: clamp(30px, 5.4vw, 60px); }
 
@@ -310,7 +315,7 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
   </div></section>
 
   <section class="pin bookpin g" id="book" style="--len:2.6" aria-labelledby="book-h"><div class="sticky">
-    <a class="scene3d" href="book.html" aria-label="The book: Your soul knows best"><span class="bk" id="homeBook"><img class="f front" src="book/front.webp" width="900" height="1350" decoding="async" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f spine" src="book/spine.webp" width="95" height="1350" decoding="async" alt="The spine: the soulsensis mark, soulsensis, Your soul knows best, one red point"><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></span></a>
+    <a class="scene3d" href="book.html" aria-label="The book: Your soul knows best"><span class="bk" id="homeBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f spine" src="book/spine.webp" width="286" height="4050" decoding="async" alt="The spine: the soulsensis mark, soulsensis, Your soul knows best, one red point"><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></span></a>
     <div class="bk-copy" id="bookCopy">
       <p class="eyebrow">The book</p>
       <h2 id="book-h">Your soul knows best.</h2>
@@ -385,6 +390,8 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
   const readers = $("readers"), track = $("track"), rdSticky = readers.querySelector(".sticky");
   const book = $("book"), bk = $("homeBook"), bookCopy = $("bookCopy");
   const probe = mission.querySelector(".sticky");
+  const shade = (bk) => ["front", "back", "spine"].forEach((c) => { if (bk.querySelector("img." + c)) { const s = document.createElement("span"); s.className = "f sh " + c; s.setAttribute("aria-hidden", "true"); bk.append(s); } });
+  shade(bk);
   light(bk, -26);
 
   function frame() {
@@ -413,7 +420,7 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
       const t = ease(seg(p, .08, .7)), ry = lerp(96, -24, t);
       bk.style.setProperty("--ry", ry.toFixed(2) + "deg"); bk.style.setProperty("--rx", lerp(0, -5, t).toFixed(2) + "deg"); light(bk, ry);
       const near0 = ease(seg(p, .08, .5));               // close on the spine first, so its mark and words can be read, then back
-      bk.style.scale = lerp(2.3, 1, near0).toFixed(3); bk.style.translate = `0 ${lerp(vh * .17, 0, near0).toFixed(1)}px`;
+      bk.style.scale = (lerp(2.3, 1, near0) / 2.3).toFixed(4); bk.style.translate = `0 ${lerp(vh * .17, 0, near0).toFixed(1)}px`;
       const c = seg(p, .5, .78); bookCopy.style.opacity = c.toFixed(3); bookCopy.style.transform = `translateY(${lerp(30, 0, ease(c)).toFixed(1)}px)`; bookCopy.style.pointerEvents = c > .5 ? "auto" : "none";
     } }
   }
