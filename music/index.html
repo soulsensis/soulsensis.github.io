@@ -58,10 +58,11 @@ nav .readline { position: absolute; left: 0; bottom: -1px; height: 2px; width: 1
 .hero .copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .disc { position: relative; width: min(72vw, 420px, max(200px, calc(100svh - 470px))); aspect-ratio: 1; margin: clamp(20px, 4svh, 44px) auto 0; }
 .disc svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.disc .wheel { transform-origin: 50% 50%; animation: wheel 90s linear infinite; animation-play-state: paused; }
-.playing .disc .wheel { animation-play-state: running; }
-@keyframes wheel { to { transform: rotate(360deg); } }
-.disc .orbit { transform-origin: 50% 50%; transform: rotate(calc(var(--at, 0) * 360deg)); }
+/* 10 Nov 2026 (his ask): the flower of life rides the ring around the play button, clockwise, and stands still when the song is paused.
+   The origin is 0 0 on purpose: in an SVG whose viewBox is centred, 50% 50% is the bottom right corner, which sent the flower out of view. */
+.disc .orbit { transform-origin: 0 0; animation: orbit 48s linear infinite; animation-play-state: paused; }
+.playing .disc .orbit { animation-play-state: running; }
+@keyframes orbit { to { transform: rotate(360deg); } }
 .draw * { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 2.4s cubic-bezier(.65,0,.35,1); }
 .anim .draw:not(.on) * { stroke-dashoffset: 1; }
 .draw.on *:nth-child(2n) { transition-delay: .12s; } .draw.on *:nth-child(3n) { transition-delay: .24s; } .draw.on *:nth-child(5n) { transition-delay: .36s; }
@@ -73,6 +74,18 @@ nav .readline { position: absolute; left: 0; bottom: -1px; height: 2px; width: 1
 .now { margin: clamp(18px, 3svh, 30px) 0 0; display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 58px; }
 .now b { font-weight: 500; font-size: clamp(22px, 2.6vw, 28px); letter-spacing: -.012em; }
 .now span { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* the line that lights up as it is read past (his words, 10 Nov: all of it is improvised) */
+.say { padding-block: clamp(70px, 14vw, 180px); text-align: center; }
+.say p { margin: 0 auto; max-width: 15em; font-size: clamp(30px, 5.6vw, 68px); line-height: 1.12; font-weight: 500; letter-spacing: -.022em; text-wrap: balance; }
+.anim .say span { opacity: .16; transition: opacity .4s ease; }
+.anim .say span.lit { opacity: 1; }
+.anim .songs li { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
+.anim .songs li.on { opacity: 1; transform: none; }
+.else { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 6px 0; }
+.else:empty { display: none; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 24px; border-radius: 999px; border: 1px solid #3a3a42; font-weight: 500; font-size: 17px; text-decoration: none; color: var(--ink); transition: border-color .25s ease, transform .15s ease; }
+.btn:hover { border-color: var(--ink); } .btn:active { transform: scale(.97); }
 
 /* the list */
 .songs { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; text-align: left; counter-reset: n; }
@@ -106,9 +119,9 @@ footer a { text-decoration: none; display: inline-flex; align-items: center; min
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .hero-anim .hero .rise { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
 .hero-anim .hero .rise:nth-child(2) { animation-delay: .08s; } .hero-anim .hero .rise:nth-child(3) { animation-delay: .16s; }
-@media (prefers-reduced-motion: reduce) { .draw *, .rise, .disc .wheel, .song::before { transition: none !important; animation: none !important; } .draw * { stroke-dashoffset: 0 !important; } }
+@media (prefers-reduced-motion: reduce) { .draw *, .rise, .disc .orbit, .song::before, .say span, .songs li { transition: none !important; animation: none !important; } .say span { opacity: 1 !important; } .songs li { opacity: 1 !important; transform: none !important; } .draw * { stroke-dashoffset: 0 !important; } }
 </style>
-<noscript><style>.draw *{stroke-dashoffset:0!important}.big,.seek,.now{display:none!important}.song{cursor:default}</style></noscript>
+<noscript><style>.draw *{stroke-dashoffset:0!important}.say span{opacity:1!important}.songs li{opacity:1!important;transform:none!important}.big,.seek,.now{display:none!important}.song{cursor:default}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#songs">Skip to the songs</a>
@@ -127,14 +140,15 @@ footer a { text-decoration: none; display: inline-flex; align-items: center; min
     </div>
     <div class="disc" id="disc">
       <svg viewBox="-340 -340 680 680" aria-hidden="true">
-        <g class="wheel"><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="1.1" opacity=".5"></g></g>
-        <g fill="none" stroke="#F5F2EA"><circle r="300" stroke-width="1.4" opacity=".55"/></g>
-        <g class="orbit"><circle cy="-300" r="16" fill="#E63946" fill-opacity=".3"/><circle cy="-300" r="6" fill="#E63946"/></g>
+        <g fill="none" stroke="#F5F2EA"><circle r="222" stroke-width="1.4" opacity=".5"/></g>
+        <g class="orbit"><g transform="translate(0 -222) scale(.5)"><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="2" opacity=".8"></g><circle r="30" fill="#E63946" fill-opacity=".3"/><circle r="11" fill="#E63946"/></g></g>
       </svg>
       <button class="big" id="big" type="button" aria-label="Play"><svg class="play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg><svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></svg></button>
     </div>
     <p class="now" aria-live="polite"><b id="nowT"></b><span id="nowD"></span></p>
   </header>
+
+  <section class="say g" aria-label="About the music"><p id="say">Every piece is improvised. Unique to its moment. More to come.</p></section>
 
   <section class="flow g" id="songs" aria-label="The songs"><div class="wrap center">
     <label class="vh" for="seek">Place in the song</label>
@@ -142,6 +156,7 @@ footer a { text-decoration: none; display: inline-flex; align-items: center; min
     <ol class="songs" id="list"><!--TRACKS--><li><button class="song" type="button" data-src="/music/lantern-on-the-sill.mp3" data-s="204"><span class="t">Lantern on the sill</span><span class="d">3:24</span></button><noscript><audio controls preload="none" src="/music/lantern-on-the-sill.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/quiet-hour-of-moths.mp3" data-s="192"><span class="t">Quiet hour of moths</span><span class="d">3:12</span></button><noscript><audio controls preload="none" src="/music/quiet-hour-of-moths.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/after-the-rain.mp3" data-s="195"><span class="t">After the rain</span><span class="d">3:15</span></button><noscript><audio controls preload="none" src="/music/after-the-rain.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/slow-light.mp3" data-s="180"><span class="t">Slow light</span><span class="d">3:00</span></button><noscript><audio controls preload="none" src="/music/slow-light.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/where-the-dust-settles.mp3" data-s="182"><span class="t">Where the dust settles</span><span class="d">3:02</span></button><noscript><audio controls preload="none" src="/music/where-the-dust-settles.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/thread-of-the-tide.mp3" data-s="219"><span class="t">Thread of the tide</span><span class="d">3:39</span></button><noscript><audio controls preload="none" src="/music/thread-of-the-tide.mp3"></audio></noscript></li><li><button class="song" type="button" data-src="/music/the-last-warm-stair.mp3" data-s="218"><span class="t">The last warm stair</span><span class="d">3:38</span></button><noscript><audio controls preload="none" src="/music/the-last-warm-stair.mp3"></audio></noscript></li><!--/TRACKS--></ol>
     <div class="center after">
       <p class="fine">Music: soulsensis</p>
+      <div class="else"><!--ELSEWHERE--><a class="btn" href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">The essays on Spotify</a><!--/ELSEWHERE--></div>
       <a class="more" href="/essays.html">Read the essays</a>
     </div>
   </div></section>
@@ -163,7 +178,20 @@ footer a { text-decoration: none; display: inline-flex; align-items: center; min
   document.querySelectorAll("[data-flower]").forEach((F) => { const fr = 64; circle(F, 0, 0, fr);
     for (let k = 0; k < 6; k++) { circle(F, ...pol(fr, k * 60), fr); circle(F, ...pol(2 * fr, k * 60), fr); circle(F, ...pol(fr * Math.sqrt(3), 30 + k * 60), fr); }
     circle(F, 0, 0, 3 * fr); });
-  root.classList.add("anim"); setTimeout(() => document.querySelectorAll(".draw").forEach((d) => d.classList.add("on")), 60);   // a timer, not a frame: a tab opened in the background still draws
+  // scroll: the hero lets go, the line about the music lights word by word as it is read past, the songs rise one by one
+  const say = $("say"), copy = document.querySelector(".hero .copy"), calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  say.innerHTML = say.textContent.split(" ").map((w) => `<span>${w}</span>`).join(" ");
+  const sayWords = [...say.children], clamp = (x) => Math.min(1, Math.max(0, x));
+  let ticking = false;
+  const frame = () => { ticking = false; if (calm) return; const vh = innerHeight, r = say.getBoundingClientRect();
+    const n = Math.round(clamp((vh * .86 - r.top) / (vh * .5)) * sayWords.length); sayWords.forEach((s, i) => s.classList.toggle("lit", i < n));
+    const t = clamp(scrollY / (vh * .7)); copy.style.opacity = (1 - t * .9).toFixed(3); copy.style.transform = `translateY(${(-40 * t).toFixed(1)}px)`; };
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true }); addEventListener("resize", frame);
+  const lis = [...document.querySelectorAll(".songs li")];
+  if ("IntersectionObserver" in window && !calm) { const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const li = e.target; li.style.transitionDelay = (li.dataset.k % 4) * 70 + "ms"; li.classList.add("on"); io.unobserve(li); } }), { rootMargin: "0px 0px -6% 0px" });
+    lis.forEach((li, k) => { li.dataset.k = k; io.observe(li); }); }
+  else lis.forEach((li) => li.classList.add("on"));
+  root.classList.add("anim"); setTimeout(() => { document.querySelectorAll(".draw").forEach((d) => d.classList.add("on")); frame(); }, 60);   // a timer, not a frame: a tab opened in the background still draws
 
   // the player: one audio element, the list is the playlist, the next song follows by itself
   const au = $("au"), rows = [...document.querySelectorAll(".song")], big = $("big"), seek = $("seek"), nowT = $("nowT"), nowD = $("nowD");
