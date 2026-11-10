@@ -73,7 +73,8 @@ try { if (/[?&]src=yt/.test(location.search)) document.documentElement.classList
 try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!/[?&]still/.test(location.search)&&window.CSS&&CSS.supports("position","sticky")&&"requestAnimationFrame" in window)document.documentElement.classList.add("fx")}catch(e){}</script>
 <link rel="preload" as="image" href="book/front.webp">
 <style>
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D;
+:root { --spine: 0.1059; /* the book's depth over its cover width: written by the build from the launch file's page count (site.shape_book) */
+  --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 /* metric-matched fallbacks (measured in the browser: Montserrat is 1.11 x Arial, Source Serif 4 is 0.96 x Georgia), so the swap to the web font moves nothing */
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
@@ -195,9 +196,14 @@ a.tile:hover { border-color: #4a4a52; transform: translateY(-2px); }
 .tile p { margin: 0; font-size: 16px; line-height: 1.5; color: #c9c5bc; }
 .tile .go { margin-top: auto; padding-top: 8px; font-size: 15px; color: var(--ink); }
 .tile .go::after { content: " ›"; }
+/* a soft light that follows the cursor across a card */
+.tile, .answer { position: relative; overflow: hidden; }
+.tile::before, .answer::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s ease; background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(245,242,234,.07), transparent 62%); }
+@media (hover: hover) { .tile:hover::before, .answer:hover::before { opacity: 1; } }
+.tile > *, .answer > * { position: relative; }
 
 /* 6. the book: six faces, real proportions (6 x 9 in, 282 pages) */
-.bk { --w: min(46vw, 280px); --d: calc(var(--w) * .106); --ry: -26deg; --rx: -5deg; position: relative; z-index: 2; display: block; width: var(--w); aspect-ratio: 2 / 3; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); will-change: transform; }
+.bk { --w: min(46vw, 280px); --d: calc(var(--w) * var(--spine)); --ry: -26deg; --rx: -5deg; position: relative; z-index: 2; display: block; width: var(--w); aspect-ratio: 2 / 3; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); will-change: transform; }
 .bk .f { position: absolute; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .bk img.f { width: 100%; height: 100%; object-fit: cover; background: #0b0b0d; }
 .bk .front { inset: 0; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; }
@@ -208,6 +214,8 @@ a.tile:hover { border-color: #4a4a52; transform: translateY(-2px); }
 .bk .sh.front { transform: translateZ(calc(var(--d) / 2 + .3px)); opacity: calc(1 - var(--lf, 1)); }
 .bk .sh.back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2 + .3px)); opacity: calc(1 - var(--lb, 1)); }
 .bk .sh.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg) translateZ(.3px); opacity: calc(1 - var(--ls, .8)); }
+/* a band of light that crosses the cover as the book turns: a sheet like the shade, never a filter */
+.bk .gl { pointer-events: none; transform: translateZ(calc(var(--d) / 2 + .6px)); inset: 0; border-radius: 1px 3px 3px 1px; background: linear-gradient(104deg, transparent 34%, rgba(255,255,255,.13) 47%, rgba(255,255,255,.03) 55%, transparent 68%) var(--gx, 50%) 0 / 320% 100% no-repeat; opacity: var(--lf, 1); }
 .bk .top { left: 0; right: .5%; top: calc(var(--d) / -2); height: var(--d); transform: rotateX(90deg); background: repeating-linear-gradient(0deg, #ece7dc 0 1px, #cdc8bb 1px 2px); }
 .bk .bot { left: 0; right: .5%; bottom: calc(var(--d) / -2); height: var(--d); transform: rotateX(-90deg); background: #b9b4a8; }
 .scene3d { perspective: 1600px; display: grid; place-items: center; text-decoration: none; }
@@ -380,7 +388,8 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
   const rad = (d) => d * Math.PI / 180;
   const fx = root.classList.contains("fx");
   const prog = (el, vh) => { const r = el.getBoundingClientRect(), total = r.height - vh; return { p: total > 0 ? clamp(-r.top / total) : 0, near: r.bottom > -vh * .5 && r.top < vh * 1.5 }; };
-  const light = (bk, ry) => { bk.style.setProperty("--lf", (.5 + .5 * Math.max(0, Math.cos(rad(ry + 18)))).toFixed(3)); bk.style.setProperty("--ls", (.5 + .5 * Math.max(0, Math.sin(rad(ry + 10)))).toFixed(3)); };
+  const light = (bk, ry) => { bk.style.setProperty("--lf", (.5 + .5 * Math.max(0, Math.cos(rad(ry + 18)))).toFixed(3)); bk.style.setProperty("--ls", (.5 + .5 * Math.max(0, Math.sin(rad(ry + 10)))).toFixed(3));
+    bk.style.setProperty("--gx", (clamp((ry + 70) / 110) * 100).toFixed(1) + "%"); };   // the band of light crosses the cover as it turns
 
   const nav = $("nav"), heroArt = $("heroArt"), heroCopy = $("heroCopy");
   const mission = $("mission"), say = $("say");
@@ -390,8 +399,11 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
   const readers = $("readers"), track = $("track"), rdSticky = readers.querySelector(".sticky");
   const book = $("book"), bk = $("homeBook"), bookCopy = $("bookCopy");
   const probe = mission.querySelector(".sticky");
-  const shade = (bk) => ["front", "back", "spine"].forEach((c) => { if (bk.querySelector("img." + c)) { const s = document.createElement("span"); s.className = "f sh " + c; s.setAttribute("aria-hidden", "true"); bk.append(s); } });
+  const shade = (bk) => { ["front", "back", "spine"].forEach((c) => { if (bk.querySelector("img." + c)) { const s = document.createElement("span"); s.className = "f sh " + c; s.setAttribute("aria-hidden", "true"); bk.append(s); } });
+    const g = document.createElement("span"); g.className = "f gl"; g.setAttribute("aria-hidden", "true"); bk.append(g); };
   shade(bk);
+  // a soft light follows the cursor across a card
+  if (matchMedia("(hover: hover)").matches) document.querySelectorAll(".tile, .answer").forEach((t) => t.addEventListener("pointermove", (e) => { const r = t.getBoundingClientRect(); t.style.setProperty("--mx", (e.clientX - r.left).toFixed(0) + "px"); t.style.setProperty("--my", (e.clientY - r.top).toFixed(0) + "px"); }, { passive: true }));
   light(bk, -26);
 
   function frame() {
