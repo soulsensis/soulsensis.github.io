@@ -325,6 +325,58 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
 }
 </style>
 <noscript><style>.rise{opacity:1!important;transform:none!important}.draw *{stroke-dashoffset:0!important}.dot{opacity:1!important}.say p span{opacity:1!important}</style></noscript>
+<style id="journal">
+/* 11 Nov 2026 (author: "more narrower, more a blog style ... we arent apple ... add a soulsensis spin"). Laid over the
+   page's own styles: one 680 px column set left, serif for what is said, ruled lines for cards, square shoulders for
+   capsules, and only the scenes named below stay pinned. !important is used only against values the scroll script
+   writes inline. */
+.wrap, nav.gnav .wrap { max-width: 680px; }
+.lnav { display: none; }
+nav.gnav { background: #000; border-bottom: 1px solid var(--line); }
+.mark { font-weight: 400; letter-spacing: .24em; }
+h1, h2, h3, .close .slogan, .say p, .feel .word { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
+h1 { font-size: clamp(36px, 7.4vw, 52px); line-height: 1.1; }
+h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
+h3 { font-size: clamp(21px, 3.2vw, 24px); line-height: 1.25; }
+.center { text-align: left; align-items: flex-start; }
+.eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: lowercase; }
+.sub { font-family: var(--serif); font-style: italic; }
+.more { font-family: var(--serif); font-size: 18px; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.more::after { content: none; } .more.dim { text-decoration-color: #4a4a52; }
+button, .btn, .card, .tile, .format, .chip, .answer, .tell input { border-radius: 4px; }
+.flow { padding-block: clamp(40px, 7vw, 64px); }
+.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgba(245,242,234,.16); }
+.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+.tiles { grid-template-columns: 1fr; gap: 0; margin-top: 20px; }
+.tile { padding: 18px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; }
+.tile:first-child { border-top: 0; } .tile::before { content: none; } .tile svg { width: 32px; height: 32px; margin: 2px 0 0; grid-row: span 2; }
+.tile p { font-family: var(--serif); font-size: 17px; line-height: 1.55; }
+.close { gap: 12px; } .close svg { width: 44px; margin-bottom: 8px; } .close .slogan { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
+footer .wrap { max-width: 680px; }
+/* scenes taken off the pin: they read as plain blocks in the column */
+.fx .pin.calm { height: auto; padding-block: clamp(40px, 7vw, 64px); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.fx .pin.calm .sticky { position: relative; top: auto; height: auto; overflow: visible; display: block; max-width: 680px; margin: 0 auto; padding: 26px 0 0; border-top: 1px solid rgba(245,242,234,.16); text-align: left; }
+.fx .pin.calm .sticky::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+.fx .pin.calm svg.flower { display: none; }
+.say p, .fx .say p { max-width: none; margin: 0; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
+.fx .pin.calm.say p span { opacity: 1 !important; }
+.feel .word, .fx .pin.calm.feel .word { position: static; translate: none; opacity: 1 !important; transform: none !important; text-align: left; margin: 0 0 6px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.3; }
+.feel .last h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; margin-top: 16px; }
+.feel .feel-sub, .fx .pin.calm.feel .feel-sub { opacity: 1 !important; margin: 8px 0 0; font-family: var(--serif); font-style: italic; font-size: 19px; }
+@media (prefers-reduced-motion: no-preference) { .anim .rise:not(.on) { opacity: 1; transform: none; } }
+.hero h1 { font-size: clamp(36px, 7.4vw, 52px); line-height: 1.1; text-wrap: balance; }
+.fx #inside { height: 420vh; height: 420svh; }                 /* the open pages keep their scene, shorter */
+.fx #look { display: none; }                                   /* the cover already turns in the hand at the top of the page */
+.fx .pin.calm.readers .rd-head, .fx .pin.calm.readers figure { position: static; inset: auto; display: block; }
+.fx .pin.calm.readers .track, .readers .track { display: block; width: auto; max-width: none; margin: 18px 0 0; padding: 0; transform: none !important; }
+.fx .pin.calm.readers .track blockquote, .readers .track blockquote { width: auto; min-height: 0; margin: 0; padding: 16px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.5; }
+.readers .track blockquote:first-child { border-top: 0; padding-top: 0; }
+.readers figcaption { text-align: left; }
+.fx .pin.calm.readers .rd-head, .readers .rd-head { align-items: flex-start; text-align: left; padding: 0; }
+.hero { text-align: left; } .hero .copy { align-items: flex-start; }
+.faq { text-align: left; width: 100%; } .formats, .pick { justify-content: flex-start; }
+.notify { align-items: flex-start; max-width: none; }
+</style>
 </head>
 <body>
 <a class="skip" href="#formats">Skip to the formats</a>
@@ -355,7 +407,7 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
     </div>
   </header>
 
-  <section class="pin say g" id="sayPin" style="--len:2.3" aria-label="From the back cover"><div class="sticky">
+  <section class="pin calm say g" id="sayPin" style="--len:2.3" aria-label="From the back cover"><div class="sticky">
     <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw scrub" id="sayArt" fill="none" stroke="#F5F2EA" stroke-width="1"><circle cx="-95" r="190" pathLength="1"/><circle cx="95" r="190" pathLength="1"/><circle r="285" pathLength="1"/><circle r="303" pathLength="1"/></g></svg>
     <p id="say">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
   </div></section>
@@ -395,7 +447,7 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
     <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 1 · Perception is key|Chapter 74 · The lighthouse does not try to shine|Chapter 101 · The cage only holds because you believe it does" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 14 and 15, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
   </div></section>
 
-  <section class="pin feel g" id="feel" style="--len:4.4" aria-label="What the book is for"><div class="sticky">
+  <section class="pin calm feel g" id="feel" style="--len:4.4" aria-label="What the book is for"><div class="sticky">
     <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw scrub" data-flower fill="none" stroke="#F5F2EA" stroke-width="1"></g></svg>
     <p class="word">Authenticity.</p>
     <p class="word">Relatability.</p>
@@ -403,7 +455,7 @@ footer .help a { display: inline-block; min-height: 0; color: var(--ink); text-d
     <div class="word last"><h2>Feel at home again.</h2><p class="feel-sub">You are not alone in this life.</p></div>
   </div></section>
 
-  <section class="pin readers" id="readers" style="--len:3.4" aria-labelledby="praise-h"><div class="sticky">
+  <section class="pin calm readers" id="readers" style="--len:3.4" aria-labelledby="praise-h"><div class="sticky">
     <div class="rd-head g"><h2 id="praise-h">What readers have said.</h2></div>
     <figure><div class="track" id="track"><blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“Very wholesome post to wake up to at the top of my feed. Thank you sir, well written and very encouraging.”</blockquote><blockquote>“This resonated with me as i have experienced this several times and I now welcome moments like this in my life and indeed somewhat chase them now.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote></div><figcaption>From early readers of the essays</figcaption></figure>
   </div></section>
