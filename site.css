@@ -345,3 +345,9 @@ body .conv li { border: 0; border-top: 1px solid var(--line); border-radius: 0; 
 body .conv ul { gap: 0; } body .conv li:first-child { border-top: 0; }
 body .conv .btn { width: auto; min-height: 50px; padding: 0 26px; }
 body .conv .how { text-align: left; } body .conv .alt { justify-content: flex-start; }
+/* the final critic round, 11 Nov: what still broke the one column */
+.topics-head .lede { font-family: var(--serif); font-style: italic; line-height: 1.4; }
+.topic-grid { grid-template-columns: 1fr; gap: 18px; }
+.bookband .wrap, .inbook, .inbook > div { text-align: left; justify-content: flex-start; justify-items: start; }
+.inbook .acts, .bookband .acts { justify-content: flex-start; }
+.sub-yt, .sub-yt.after { text-align: left; }

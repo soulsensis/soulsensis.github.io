@@ -130,7 +130,14 @@ footer a { text-decoration: none; display: inline-flex; align-items: center; min
 .wrap, footer .wrap { max-width: 640px; }
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 nav { position: static; } nav .wrap { height: auto; min-height: 56px; }
-.disc { margin-left: 0; margin-right: auto; }
+.disc { margin-left: max(0px, calc((100% - 640px) / 2)); margin-right: auto; }
+.now { width: 640px; max-width: 100%; margin-inline: auto; align-items: flex-start; text-align: left; }
+.songs { margin: 0; width: 100%; }
+.eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: lowercase; }
+.sub { font-family: var(--serif); font-style: italic; }
+.more { font-family: var(--serif); font-size: 18px; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; } .more::after { content: none; }
+section.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgba(245,242,234,.16); }
+section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
 nav { background: #000; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid var(--line); }
 .mark { font-weight: 400; letter-spacing: .24em; }
 h1, h2, h3, .say p { font-family: var(--serif); font-weight: 400; letter-spacing: -.008em; }
