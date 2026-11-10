@@ -458,9 +458,11 @@ footer .wrap > span:first-child { color: var(--ink); font-size: 14px; }
       const t = ease(seg(p, .1, .62)), ry = lerp(-26, 180, t), z = ease(seg(p, .68, .84));
       lookH.style.opacity = (1 - seg(p, .06, .18)).toFixed(3); lookH.style.transform = `translateY(${(-40 * seg(p, .06, .18)).toFixed(1)}px)`;
       lookBook.style.setProperty("--ry", ry.toFixed(2) + "deg"); lookBook.style.setProperty("--rx", lerp(-5, 0, t).toFixed(2) + "deg"); light(lookBook, ry);
-      lookBook.style.scale = (lerp(1, 1.5, z) + .22 * Math.sin(Math.PI * t)).toFixed(3);   // a little closer while the spine passes lookBook.style.opacity = (1 - seg(p, .72, .84)).toFixed(3);
+      lookBook.style.scale = (lerp(1, 1.5, z) + .22 * Math.sin(Math.PI * t)).toFixed(3);   // a little closer while the spine passes
+      // 10 Nov 2026 (his journal): the book is gone before its typed words arrive, so the two never sit on top of each other
+      const gone = seg(p, .7, .8); lookBook.style.opacity = (1 - gone).toFixed(3); lookBook.style.visibility = gone >= 1 ? "hidden" : "visible";
       chip.textContent = ry < 38 ? "The front" : ry < 132 ? "The spine" : "The back"; chip.style.opacity = (seg(p, .08, .14) * (1 - seg(p, .66, .72))).toFixed(3);
-      const b = seg(p, .78, .9); blurb.style.opacity = b.toFixed(3); blurb.style.transform = `translateY(${lerp(34, 0, ease(b)).toFixed(1)}px)`; blurb.style.pointerEvents = b > .5 ? "auto" : "none";
+      const b = seg(p, .81, .92); blurb.style.opacity = b.toFixed(3); blurb.style.transform = `translateY(${lerp(34, 0, ease(b)).toFixed(1)}px)`; blurb.style.pointerEvents = b > .5 ? "auto" : "none";
     } }
     // inside: the cover opens on a real spread, then the right page comes close enough to read, and scrolls
     { const { p, near } = prog(inside, vh); if (near) {
