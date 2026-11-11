@@ -108,22 +108,24 @@ h3 { margin: 0; font-weight: 500; font-size: clamp(22px, 2.6vw, 28px); line-heig
 .how-copy { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .scene3d { perspective: 1800px; display: grid; place-items: center; }
 .phone { --w: min(78vw, 340px, max(200px, calc((100svh - 300px) * .49))); width: var(--w); height: calc(var(--w) * 2.04); font-size: calc(var(--w) * .049); display: flex; flex-direction: column; text-align: left; border-radius: calc(var(--w) * .15); background: #060607; border: 1px solid #3a3a42; box-shadow: 0 0 0 calc(var(--w) * .024) #121215, 0 0 0 calc(var(--w) * .024 + 1px) #2c2c33, 0 calc(var(--w) * .16) calc(var(--w) * .3) calc(var(--w) * -.1) rgba(0,0,0,.9); padding: calc(var(--w) * .05) calc(var(--w) * .055) calc(var(--w) * .055); transform-origin: 50% 100%; will-change: transform, opacity; overflow: hidden; }
-.phone .bar { display: flex; align-items: center; gap: .6em; padding-bottom: .8em; border-bottom: 1px solid var(--line); font-weight: 300; letter-spacing: .2em; font-size: .92em; }
+.phone .bar { display: flex; align-items: center; gap: .6em; padding-bottom: .8em; border-bottom: 1px solid var(--line); font-weight: 300; letter-spacing: .2em; font-size: max(12px, .92em); }
 .phone .bar svg { width: 1.9em; height: 1.9em; flex: none; }
 /* 11 Nov 2026: a whole trial run. The thread is pinned to the bottom of the screen, so each new line pushes the talk up as a real chat does. */
 .phone .log { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; margin: .4em 0 1em; -webkit-mask-image: linear-gradient(transparent, #000 2.4em); mask-image: linear-gradient(transparent, #000 2.4em); }
 .phone .thread { display: flex; flex-direction: column; gap: 1em; }
+/* 11 Nov 2026, the critics' round: with the scene running the talk is laid out from the top and slid up by a transform, so a new line never moves the lines above it in the layout (the page scored as shifting under the reader all through the scene) */
+.fx .phone .log { justify-content: flex-start; } .fx .phone .thread { will-change: transform; }
 html:not(.fx) .phone { height: auto; } html:not(.fx) .phone .log { -webkit-mask-image: none; mask-image: none; }
 .phone .ss p { margin: 0 0 .75em; } .phone .ss p:last-child { margin-bottom: 0; }
 .phone .ss + .them { margin-top: .6em; }
 .phone .them { align-self: flex-end; max-width: 88%; margin: 0; background: var(--them); border: 1px solid var(--line); border-radius: 1.2em 1.2em .3em 1.2em; padding: .7em 1em; line-height: 1.45; }
 .phone .ss { margin: 0; font-family: var(--serif); font-size: 1.14em; line-height: 1.5; }
-.phone .who { display: block; margin-bottom: .4em; font-family: var(--sans); font-size: .7em; letter-spacing: .3em; text-transform: uppercase; color: var(--heart); }
+.phone .who { display: block; margin-bottom: .4em; font-family: var(--sans); font-size: max(12px, .7em); letter-spacing: .3em; text-transform: uppercase; color: var(--heart); }
 .phone .listen { display: none; margin: 0; font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 1.14em; }
 .phone .listen::after { content: ""; display: inline-block; width: .4em; height: .4em; margin-left: .5em; border-radius: 50%; background: var(--heart); vertical-align: middle; animation: pulse 1.2s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .2; transform: scale(.7); } }
 .phone .field { display: flex; align-items: center; gap: .6em; min-height: 3.1em; padding: .5em .5em .5em 1.1em; border-radius: 1.6em; border: 1px solid #3a3a42; line-height: 1.35; }
-.phone .field span { flex: 1; color: var(--muted); }
+.phone .field span { flex: 1; color: var(--muted); } .fx .phone .field span { min-width: 0; white-space: nowrap; overflow: hidden; }
 .phone .field span.typed { color: var(--ink); }
 .phone .field span.typed::after { content: ""; display: inline-block; width: 1px; height: 1.1em; margin-left: 2px; background: var(--ink); vertical-align: text-bottom; animation: caret 1s steps(1) infinite; }
 @keyframes caret { 50% { opacity: 0; } }
@@ -240,7 +242,7 @@ button, .btn, .card, .tile, .format, .chip, .answer, .tell input { border-radius
 .tile { padding: 18px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; }
 .tile:first-child { border-top: 0; } .tile::before { content: none; } .tile svg { width: 32px; height: 32px; margin: 2px 0 0; grid-row: span 2; }
 .tile p { font-family: var(--serif); font-size: 17px; line-height: 1.55; }
-.close { gap: 12px; } .close svg { width: 44px; margin-bottom: 8px; } .close .slogan { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
+.close { gap: 12px; } .close svg { width: 44px; margin-bottom: 8px; } .close .draw * { transition-duration: 1.1s; }   /* a mark this small is drawn in about a second (it scribbled for nearly three) */ .close .slogan { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
 /* scenes taken off the pin: they read as plain blocks in the column */
 .fx .pin.calm { height: auto; padding-block: clamp(40px, 7vw, 64px); padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 .fx .pin.calm .sticky { position: relative; top: auto; height: auto; overflow: visible; display: block; max-width: 680px; margin: 0 auto; padding: 26px 0 0; border-top: 1px solid rgba(245,242,234,.16); text-align: left; }
@@ -276,11 +278,15 @@ nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; 
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 @media (max-width: 560px) { nav.top .links a.far { display: none; } }
+/* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
+   geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
+@media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }
 body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
 body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 680px; margin: 0 auto; }
 body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
 body > footer a:hover { color: var(--ink); }
+body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 </style>
@@ -453,14 +459,14 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   const sayPin = $("sayPin"), say = $("say");
   say.innerHTML = say.textContent.split(" ").map((w) => `<span>${w}</span>`).join(" ");
   const sayWords = [...say.children];
-  const how = $("how"), howCopy = $("howCopy"), phone = $("phone"), pField = $("pField");
+  const how = $("how"), howCopy = $("howCopy"), phone = $("phone"), pField = $("pField"), thread = $("thread"), pLog = thread.parentNode;
   const HOLD = pField.textContent;
   // every exchange in the phone: the question, the listening line, the answer and its words (wrapped only when the scene runs)
   const turns = [...phone.querySelectorAll(".them")].map((them) => { const listen = them.nextElementSibling, ss = listen.nextElementSibling, paras = [...ss.querySelectorAll("p")];
-    if (fx) paras.forEach((p) => { p.innerHTML = p.textContent.split(" ").map((w) => `<b>${w.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</b>`).join(" "); });
+    if (fx) paras.forEach((p) => { p.innerHTML = p.textContent.split(" ").map((w) => `<b>${w.replace(/&/g, "&amp;").replace(/</g, "&lt;")} </b>`).join(""); });   // each word carries its own space: no loose space is left to be pushed down the page as the words arrive
     return { them, listen, ss, paras, q: them.textContent, words: [...ss.querySelectorAll("b")], shown: -1 }; });
   { let at = 0; const total = turns.reduce((n, t) => n + 60 + t.words.length, 0); turns.forEach((t) => { t.a = at / total; at += 60 + t.words.length; t.b = at / total; }); }
-  const tail = (s) => { if (s.length <= 64) return s; const cut = s.slice(-64); return "…" + cut.slice(cut.indexOf(" ") + 1); };
+  const tail = (s) => { if (s.length <= 22) return s; const cut = s.slice(-22);   /* one line, as a phone's own field shows what is being typed: the field never grows and nothing above it moves */ return "…" + cut.slice(cut.indexOf(" ") + 1); };
   const priv = $("private"), words = [...priv.querySelectorAll(".word")], feelSub = priv.querySelector(".feel-sub"), feelArt = priv.querySelector(".draw"), feelSvg = priv.querySelector("svg.flower");
   const probe = sayPin.querySelector(".sticky");
   const lnavLinks = [...document.querySelectorAll('#lnav .lright a[href^="#"]:not(.pill)')].map((a) => [a, $(a.getAttribute("href").slice(1))]).filter(([, el]) => el);
@@ -488,6 +494,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         const m = Math.round(seg(u, .2, .97) * t.words.length);
         if (m !== t.shown) { t.shown = m; t.words.forEach((w, i) => w.classList.toggle("lit", i < m)); t.paras.forEach((para) => para.classList.toggle("in", para.firstElementChild.classList.contains("lit"))); } });
       if (pField.textContent !== field) pField.textContent = field; pField.classList.toggle("typed", typing);
+      thread.style.transform = `translateY(${(pLog.clientHeight - thread.offsetHeight).toFixed(1)}px)`;   // the newest line rests on the bottom of the screen, as in a real chat
     } }
     // private: one line at a time, the last one stays while the flower draws itself
     { const { p, near } = prog(priv, vh); if (near) {

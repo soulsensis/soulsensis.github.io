@@ -6,7 +6,8 @@
 //    svg[data-turn] and the line art in a page's head turn slowly with the scroll;
 // 4. on a reading page the blocks after the essay light gently as they arrive. The essay's own text never waits.
 // Nothing is ever hidden to be revealed (11 Nov 2026, the independent review: rows that rose in as they arrived left
-// blank blocks on a fast flick): a line that waits is dim and readable, a line that has lit stays lit.
+// blank blocks on a fast flick): a line that waits is dim and readable, a line that has lit stays lit. The critics' round the
+// same day: a waiting line is at half strength or more (4.5:1 on the black ground), so it never reads as switched off.
 // Enhancement only: with reduced motion or no script, the page is the same page, all there and still.
 (function () {
   var d = document, root = d.documentElement;
@@ -15,7 +16,7 @@
 
   var st = d.createElement("style");
   st.textContent = ".readline{position:fixed;left:0;top:0;height:2px;width:100%;background:#E63946;transform-origin:0 50%;transform:scaleX(0);z-index:60;pointer-events:none}" +
-    ".lw{opacity:.3;transition:opacity .5s ease}.lb{opacity:.42;transition:opacity .7s ease}.lw.lit,.lb.lit{opacity:1}";
+    ".lw{opacity:.5;transition:opacity .5s ease}.lb{opacity:.55;transition:opacity .7s ease}.lw.lit,.lb.lit{opacity:1}";
   d.head.appendChild(st);
 
   var all = function (sel, el) { return [].slice.call((el || d).querySelectorAll(sel)); };

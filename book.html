@@ -105,7 +105,7 @@ h3 { font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
 .btn.quiet { padding: 0; border-radius: 0; background: none; font-family: var(--serif); font-weight: 400; }
 .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; }
 .price-line { margin: 0; font-family: var(--sans); font-size: 14px; line-height: 1.5; color: var(--muted); }
-.price-line a { display: inline-block; padding: 10px 0; margin: -10px 0; color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
+.price-line a { display: inline-block; padding: 12px 0; margin: -12px 0; color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
 .lnav { display: none; }   /* the book's own bar left on 11 Nov; its markup stays, for the sale switch's Buy link */
 
 /* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
@@ -125,9 +125,10 @@ section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1
 .fx .turn { display: block; position: absolute; inset: auto 0 6px; margin: 0; z-index: 3; font-family: var(--sans); font-size: 13px; color: var(--muted); pointer-events: none; transition: opacity .5s ease; }
 .fx .turn.done { opacity: 0; }
 @media (min-width: 960px) {
-  .hero { display: grid; grid-template-columns: calc((100% - 680px) / 2) minmax(0, 1fr) auto; align-items: center; column-gap: 0; max-width: 1124px; margin: 0 auto; padding-bottom: clamp(24px, 4vw, 56px); }
-  .hero-copy { grid-column: 2; margin: 0; padding-right: 40px; }
-  .stage { --bw: min(300px, max(170px, calc((100svh - 330px) / 1.5))); grid-column: 3; width: calc(var(--bw) + 110px); max-width: none; margin: 0; padding-left: 0; justify-items: center; }
+  /* the frame is the stage: the words at its left edge, under the name in the bar, the book at its right (11 Nov, the critics' round) */
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 0; max-width: 1124px; margin: 0 auto; padding-bottom: clamp(24px, 4vw, 56px); }
+  .hero-copy { grid-column: 1; margin: 0; padding-right: 40px; } .hero h1 { font-size: clamp(48px, 4.4vw, 56px); }
+  .stage { --bw: min(300px, max(170px, calc((100svh - 330px) / 1.5))); grid-column: 2; width: calc(var(--bw) + 110px); max-width: none; margin: 0; padding-left: 0; justify-items: center; }
   .floor { left: 50% !important; }
   .fx .turn { text-align: center; }
 }
@@ -155,8 +156,9 @@ section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1
 #about .hook { margin: 0 0 18px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
 #about .reading + .reading { margin-top: 12px; }
 #about, #feel { overflow: hidden; overflow: clip; }
-.flower { position: absolute; z-index: -1; top: 6px; right: -170px; width: 300px; height: 300px; opacity: .34; pointer-events: none; }
-@media (min-width: 960px) { .flower { right: -300px; width: 400px; height: 400px; opacity: .7; } .flower g { stroke-width: .2; } }
+/* the logo's geometry in the margin: on a phone a faint quarter at the page's edge; on a wide screen it ends on the stage's edge and no line of the back's runs under it */
+.flower { position: absolute; z-index: -1; top: 6px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
+@media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g { stroke-width: .2; } #about .hook, #about .reading { max-width: 540px; } }
 
 /* the cover's scene: the book turns front, spine, back as the page is scrolled, and comes close on its back */
 .scene3d { perspective: 1600px; display: grid; place-items: center; }
@@ -247,11 +249,15 @@ nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; 
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 @media (max-width: 560px) { nav.top .links a.far { display: none; } }
+/* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
+   geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
+@media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }
 body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
 body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 680px; margin: 0 auto; }
 body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
 body > footer a:hover { color: var(--ink); }
+body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 </style>
@@ -279,7 +285,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </div>
     <div class="stage" id="heroStage">
       <div class="floor" aria-hidden="true"></div>
-      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" decoding="async" fetchpriority="high" draggable="false" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" loading="lazy" draggable="false" alt=""><img class="f spine" src="book/spine.webp" width="272" height="4050" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" fetchpriority="high" draggable="false" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" loading="lazy" draggable="false" alt=""><img class="f spine" src="book/spine.webp" width="272" height="4050" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
       <p class="turn" id="turnHint" aria-hidden="true">Drag to turn</p>
     </div>
   </header>

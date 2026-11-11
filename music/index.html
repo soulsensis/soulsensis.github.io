@@ -95,7 +95,7 @@ section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1
 .song[aria-current]::before { content: ""; width: 7px; height: 7px; margin-left: 2px; border-radius: 50%; background: var(--heart); }
 .playing .song[aria-current]::before { animation: beat 1.6s ease-in-out infinite; }
 @keyframes beat { 50% { transform: scale(.55); opacity: .5; } }
-.anim .songs li { opacity: 0; transition: opacity .6s ease; }
+.anim .songs li { opacity: .42; transition: opacity .6s ease; }   /* a row that waits is dim and readable, never hidden */
 .anim .songs li.on { opacity: 1; }
 .after { margin-top: 22px; }
 .else { display: flex; flex-wrap: wrap; gap: 0 26px; margin-top: 6px; }
@@ -110,11 +110,15 @@ nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; 
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 @media (max-width: 560px) { nav.top .links a.far { display: none; } }
+/* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
+   geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
+@media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }
 body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
 body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 680px; margin: 0 auto; }
 body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
 body > footer a:hover { color: var(--ink); }
+body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 </style>

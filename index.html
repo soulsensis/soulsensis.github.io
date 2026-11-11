@@ -97,8 +97,9 @@ section .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgb
 section .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
 header.top { padding-top: clamp(44px, 9vw, 88px); }
 .logo { width: 92px; height: 92px; display: block; margin: 0 0 30px -4px; }
-/* on a wide screen the logo is the page's one large drawing, in the right of the stage, in line as thin as on the phone */
-@media (min-width: 960px) { header.top .stage { display: grid; align-items: center; min-height: 400px; } header.top .wrap { width: 100%; }
+/* on a wide screen the logo is the page's one large drawing, in the right of the stage, in line as thin as on the phone;
+   the words stand at the stage's left edge, under the name in the bar (11 Nov, the critics' round: the frame is the stage) */
+@media (min-width: 960px) { header.top .stage { display: grid; align-items: center; min-height: 400px; } header.top .wrap { width: 100%; max-width: none; } header.top h1 { font-size: clamp(48px, 4.4vw, 56px); }
   .logo { --s: min(360px, 30vw); position: absolute; right: 0; top: 50%; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0; }
   .logo g g { stroke-width: .2; } .logo g > circle { stroke-width: .32; } header.top .sub { max-width: 19em; } header.top .what { max-width: 26em; } }
 h1 { margin: 0; font-weight: 400; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; letter-spacing: -.012em; text-wrap: balance; }
@@ -111,8 +112,9 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(27px, 4.6vw, 34px); line-heig
 #essays h2 { font-size: clamp(23px, 3.8vw, 28px); line-height: 1.3; }
 /* what are you carrying: plain words to choose from, answered in the essay's own first sentence */
 .chips { display: flex; flex-wrap: wrap; gap: 2px 18px; margin: 18px 0 0; }
-.chip { min-height: 44px; padding: 0; border: 0; background: none; color: #b9b5ab; font: 400 17px var(--serif); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; transition: color .2s, text-decoration-color .2s; }
+.chip { position: relative; min-height: 44px; padding: 0; border: 0; background: none; color: #b9b5ab; font: 400 17px var(--serif); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; transition: color .2s, text-decoration-color .2s; }
 .chip:hover { color: var(--ink); } .chip.on { color: var(--ink); text-decoration-color: var(--heart); }
+.chip::after { content: ""; position: absolute; inset: 0 -9px; }   /* a finger's width without moving a word */
 .answers { margin-top: 18px; min-height: 11em; }
 .answer { padding-left: 20px; border-left: 1px solid var(--heart); } .answer[hidden] { display: none; }
 .answer blockquote { margin: 0; font-size: clamp(21px, 3.4vw, 26px); line-height: 1.42; text-wrap: pretty; }
@@ -127,9 +129,10 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(27px, 4.6vw, 34px); line-heig
 .entry p { margin: 8px 0 0; font-size: 17px; line-height: 1.55; color: #b9b5ab; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .entry:hover b { color: #fff; }
 #stand { overflow: hidden; overflow: clip; }
-.flower { position: absolute; z-index: -1; top: 6px; right: -170px; width: 300px; height: 300px; opacity: .34; pointer-events: none; }
+/* the logo's geometry in the margin: on a phone a faint quarter at the page's edge; on a wide screen it ends on the stage's edge and no line of his runs under it */
+.flower { position: absolute; z-index: -1; top: 6px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
 .flower g g { stroke-width: .26; } .flower g > circle { stroke-width: .4; }
-@media (min-width: 960px) { .flower { right: -290px; width: 380px; height: 380px; opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .32; } }
+@media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .32; } .stand { max-width: 540px; } }
 .stand { margin: 20px 0 0; padding: 0; list-style: none; }
 .stand li { padding: 16px 0; border-top: 1px solid var(--line); } .stand li:first-child { border-top: 0; padding-top: 0; }
 .stand b { display: block; font-weight: 400; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
@@ -185,7 +188,7 @@ figure { margin: 0; } figcaption { margin-top: 10px; font-family: var(--sans); f
 .opn .leaf.fl .lf-back { box-shadow: none; }
 .opn .lines::before { content: ""; position: absolute; inset: 13% 14% 12%; background: repeating-linear-gradient(180deg, rgba(17,16,19,.1) 0 calc(var(--w) * .013), transparent 0 calc(var(--w) * .034)); }
 .fx .pin .bknote { display: block; position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 20px); margin: 0; text-align: center; font-family: var(--sans); font-size: 13px; color: var(--muted); }
-.fx .pin .bk-copy { position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 62px); max-width: 680px; margin: 0 auto; }
+.fx .pin .bk-copy { position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 78px); max-width: 680px; margin: 0 auto; }
 }
 /* a wide screen: the book in the left of the stage, its words beside it */
 @media (min-width: 960px) and (min-height: 540px) {
@@ -209,11 +212,15 @@ nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; 
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 @media (max-width: 560px) { nav.top .links a.far { display: none; } }
+/* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
+   geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
+@media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }
 body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
 body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 680px; margin: 0 auto; }
 body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
 body > footer a:hover { color: var(--ink); }
+body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 </style>
@@ -330,7 +337,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   const light = (ry) => { bk.style.setProperty("--lf", (.5 + .5 * Math.max(0, Math.cos(rad(ry + 18)))).toFixed(3)); bk.style.setProperty("--ls", (.5 + .5 * Math.max(0, Math.sin(rad(ry + 10)))).toFixed(3));
     bk.style.setProperty("--gx", (clamp((ry + 70) / 110) * 100).toFixed(1) + "%"); };   // the band of light crosses the cover as it turns
   ["front", "spine", "gl"].forEach((c) => { const s = document.createElement("span"); s.className = c === "gl" ? "f gl" : "f sh " + c; s.setAttribute("aria-hidden", "true"); bk.append(s); });
-  bk.querySelectorAll("img").forEach((im) => { im.loading = "eager"; });
+  bk.querySelectorAll("img").forEach((im) => { im.loading = "eager"; if (im.decode) im.decode().catch(() => {}); });   // the cover is ready before its scene arrives
   // the leaves in turning order: the cover, then for each later stop a short flick. The first leaf's face is the page being left, the last leaf's back the page arrived at.
   const FL = 5, E = .5, leaves = [leaf], flicks = [];
   [...open.querySelectorAll(".leaf.mid")].reverse().forEach((m) => {
