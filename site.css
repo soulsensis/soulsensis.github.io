@@ -3,7 +3,7 @@
    one 640 px column set left, serif for what is said, Montserrat for the name and small labels, ruled hairlines with a
    short crimson tick in place of cards, one crimson point, nothing moving but a link's colour.
    Every rule is stated once (pruned 11 Nov: the older layers each later block overrode are gone). */
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --rule: rgba(245,242,234,.16); --heart: #E63946;
+:root { --ground: #0b0b0d; --raised: #131317; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --rule: rgba(245,242,234,.16); --heart: #E63946;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 /* metric-matched fallbacks (measured 5 Nov 2026: Montserrat is 1.11 x Arial, Source Serif 4 is 0.96 x Georgia), so the swap to the web font moves nothing */
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
@@ -26,13 +26,19 @@ main { padding-bottom: clamp(40px, 7vw, 64px); }
 /* shared:start
    The top bar and the footer of every page. site.hand_page() also sets this block into the hand pages that carry
    their own styles (index, book, ask, the piano), so the bar and the footer have one design, kept in one place. */
-nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
+nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
 nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
 .mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
 nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 @media (max-width: 560px) { nav.top .links a.far { display: none; } }
+/* 12 Nov 2026 (author: "a landing sales page ... premium feel and sales focused"): the bar's one button, white, at its right: the book */
+nav.top .links a.pill { min-height: 44px; margin-left: 10px; padding: 0 18px; border-radius: 999px; background: var(--ink, #F5F2EA); color: #0b0b0d; font-weight: 500; position: relative; transition: background .2s; }
+nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: #fff; color: #0b0b0d; }
+.btn.pill, a.pill-lg { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 28px; border-radius: 999px; background: var(--ink, #F5F2EA); color: #0b0b0d; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; transition: background .2s; }
+.btn.pill:hover, a.pill-lg:hover { background: #fff; }
+@media (max-width: 400px) { nav.top .links a:not(.pill) { display: none; } nav.top .links a.pill { margin-left: 0; padding: 0 16px; } }
 /* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
    geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
 @media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }
