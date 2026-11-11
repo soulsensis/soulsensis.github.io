@@ -55,8 +55,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="soulsensis">
 <script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));</script>
-<script>/* the scroll scenes (10 Nov 2026, docs/specs/site-apple-scroll.md): the open pages are pinned only when motion is wanted and sticky works; without this class the page is plain, readable blocks */
-try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!/[?&]still/.test(location.search)&&window.CSS&&CSS.supports("position","sticky")&&"requestAnimationFrame" in window)document.documentElement.classList.add("fx")}catch(e){}</script>
+<script>/* the scroll scenes (10 Nov 2026, docs/specs/site-apple-scroll.md): the open pages are pinned only when motion is wanted and sticky works; without this class the page is plain, readable blocks.
+   11 Nov, the iPhone look (shims/phone_check.py): a phone on its side is 343 px tall and the open book lay on its own heading, so a window under 540 px tall gets the plain page, as the home page's scene already does */
+try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&matchMedia("(min-height: 540px)").matches&&!/[?&]still/.test(location.search)&&window.CSS&&CSS.supports("position","sticky")&&"requestAnimationFrame" in window)document.documentElement.classList.add("fx")}catch(e){}</script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" as="image" href="book/front.webp">
@@ -198,7 +199,7 @@ section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1
 .fx .inside .in-copy { position: absolute; inset: 11svh 20px auto; will-change: opacity; }
 .fx .inside .scene3d { position: absolute; inset: 0; padding-top: 12svh; perspective: 2600px; }   /* a longer lens: a turning leaf does not swing up over the heading */
 .fx .inside .open { --w: min(121vw, 640px); position: absolute; left: 50%; top: 58%; margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); transform: scale(.47); }   /* laid out at reading size, scaled down until it is read */
-.fx .inside .in-note { position: absolute; inset: auto 20px 4svh; text-align: center; opacity: 0; }
+.fx .inside .in-note { position: absolute; inset: auto 20px 4svh; text-align: center; text-wrap: balance; opacity: 0; }
 
 /* what the book is for */
 #feel .word { margin: 0 0 4px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.3; color: #c9c5bc; }
@@ -459,17 +460,17 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     // inside: the cover opens on a real spread, the book flicks to each later stop and rests there, then the last right page comes close enough to read, and scrolls
     { const { p, near } = prog(inside, vh); if (near) {
       if (!open.dataset.ld) { open.dataset.ld = 1; open.querySelectorAll("img[data-src]").forEach((im) => { im.src = im.dataset.src; if (im.decode) im.decode().catch(() => {}); }); }   // the later pages load only as the scene nears
-      const W = open.offsetWidth, w0 = Math.min(vw * .4, vh * .28, 300), o = ease(seg(p, OPEN0, OPEN1)), z = ease(seg(p, ZOOM0, ZOOM0 + .12)), pan = seg(p, ZOOM0 + .14, .97), N = leaves.length;
+      const W = open.offsetWidth, w0 = Math.min(vw * .4, vh * .28, 300), o = ease(seg(p, OPEN0, OPEN1)), z = ease(seg(p, ZOOM0, ZOOM0 + .12)), pan = seg(p, ZOOM0 + .14, .94), N = leaves.length;
       leaves.forEach((L, i) => { let t = o; if (i) { const g = Math.floor((i - 1) / FL), j = (i - 1) % FL, q = seg(p, fw[g][0], fw[g][1]), st = j * .16; t = ease(seg(q, st, st + .36)); }
         L.style.transform = `translateZ(${lerp((N - i) * E, (i + 1) * E, t).toFixed(2)}px) rotateY(${(-180 * t).toFixed(2)}deg)`; });
-      const s = lerp(w0 / W, 1, z), hT = W * 1.5, top = 76, pad = 64;   // pad: the page ends above the note under it (at 28 the note lay on the page's last lines on a phone)
+      const s = lerp(w0 / W, 1, z), hT = W * 1.5, top = 76, pad = Math.max(64, vh * .04 + inNote.offsetHeight + 26);   // pad: the page ends above the note under it (at 28 the note lay on the page's last lines on a phone; 11 Nov: on a 320 px phone the note takes two lines, so its own height is counted)
       const y0 = hT > vh - top - pad ? top + hT / 2 - vh / 2 - hT * .13 : (top - pad) / 2, y1 = hT > vh - top - pad ? vh / 2 - pad - hT / 2 : y0;
       const base = vh * .08, ty = lerp(lerp(base, y0, z), y1, ease(pan)), tx = lerp(lerp(0, w0 / 2, o), 0, z);
       open.style.transform = `translate3d(${tx.toFixed(1)}px, ${(ty - base).toFixed(1)}px, 0) scale(${s.toFixed(4)})`;
       inCopy.style.opacity = (1 - seg(p, ZOOM0 - .04, ZOOM0 + .04)).toFixed(3);
       // the note under the book names the chapter it rests on
       let k = 0; while (k < fw.length && p > (fw[k][0] + fw[k][1]) / 2) k++;
-      const hs = k ? fw[k - 1][1] : OPEN1, he = k < fw.length ? fw[k][0] : ZOOM0, hold = seg(p, hs - .02, hs + .01) * (1 - seg(p, he - .01, he + .02)), end = seg(p, .9, .97);
+      const hs = k ? fw[k - 1][1] : OPEN1, he = k < fw.length ? fw[k][0] : ZOOM0, hold = seg(p, hs - .02, hs + .01) * (1 - seg(p, he - .01, he + .02)), end = seg(p, .94, .98);   // the closing note comes up once the page has stopped moving (11 Nov: on a small phone it came up while the page was still passing under it)
       const txt = end > 0 ? lastNote : (heads[k] || lastNote); if (inNote.textContent !== txt) inNote.textContent = txt;
       inNote.style.opacity = Math.max(hold, end).toFixed(3);
     } }

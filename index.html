@@ -157,7 +157,7 @@ figure { margin: 0; } figcaption { margin-top: 10px; font-family: var(--sans); f
 @media (min-height: 540px) {
 .fx #book.pin { padding-block: 0; height: 430vh; height: 430svh; }
 .fx .pin .sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-.fx #book.pin .stage { display: block; max-width: 1080px; height: 100%; --w0: min(40vw, 27svh, 240px); --k: 1.35; --top: max(13svh, calc(50svh - var(--w0) * .75 - 120px)); }
+.fx #book.pin .stage { display: block; max-width: 1080px; height: 100%; --w0: min(40vw, 27svh, 240px, calc((94svh - 340px) / 1.5));   /* the last term: on a short phone (an SE in Safari shows 548 px) the book gives way so the button and the line under it stay on the screen */ --k: 1.22; --top: max(calc(6svh + 62px), calc(50svh - var(--w0) * .75 - 120px)); }   /* 11 Nov, the iPhone look (shims/phone_check.py): the book starts a clear line under its label; at 13svh the open pages touched "the book" on a small phone, and at 1.35 the spine, close, rose through the rule over the label to 10 px from the top of the screen */
 .fx #book.pin .stage > .wrap { position: absolute; left: 0; right: 0; top: 6svh; margin: 0 auto; }
 .fx .pin .scene3d { position: absolute; left: 0; right: 0; top: var(--top); height: calc(var(--w0) * 1.5); perspective: 2200px; cursor: grab; touch-action: pan-y; }
 .fx .pin .scene3d.held { cursor: grabbing; }
@@ -187,7 +187,7 @@ figure { margin: 0; } figcaption { margin-top: 10px; font-family: var(--sans); f
 .opn .leaf.fl .lf-front { background: #fff; border-radius: 0; }
 .opn .leaf.fl .lf-back { box-shadow: none; }
 .opn .lines::before { content: ""; position: absolute; inset: 13% 14% 12%; background: repeating-linear-gradient(180deg, rgba(17,16,19,.1) 0 calc(var(--w) * .013), transparent 0 calc(var(--w) * .034)); }
-.fx .pin .bknote { display: block; position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 20px); margin: 0; text-align: center; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.fx .pin .bknote { display: block; position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 20px); margin: 0; text-align: center; text-wrap: balance; font-family: var(--sans); font-size: 13px; color: var(--muted); }
 .fx .pin .bk-copy { position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 78px); max-width: 680px; margin: 0 auto; }
 }
 /* a wide screen: the book in the left of the stage, its words beside it */
