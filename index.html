@@ -69,20 +69,23 @@ try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!/[?&]still/.tes
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <style>
-/* 11 Nov 2026 (author: "make the website more narrower, more a blog style, it is too wide - we arent apple ... add a
-   soulsensis spin"). The front page of a journal: one 640 px column set left, serif for everything that is said,
-   Montserrat only for the name and small labels, thin geometry as an ornament, one crimson point.
-   11 Nov 2026, later (author: "u changed a lot by removing the scrolling animations ... Before it felt premium";
-   "im not sure about the narrow marjins"): the journal stays and the motion comes back inside it. What is read keeps
-   a 680 px measure; the logo's geometry and the book have a stage of up to 1080 px. The logo draws itself, his lines
-   light as they are reached (scroll.js), and one scene is pinned: the book shows its spine, turns to face you, opens
-   and flicks to three chapters. No blur, no capsules, nothing hidden to be revealed. */
+/* 12 Nov 2026 (author: "update ss website to look like eden and professional again - i dont like the blog look anymore -
+   we want premium feel and sales focused"; "we need the website as a landing sales page ... its the rule"). The study:
+   docs/specs/eden-koe-sell-like-crazy-study.md section 1, taken as a manner, never a template. A near-black ground and
+   one idea a screen. The hero is his own line in the serif, one phrase in white italic, two grey lines with the phrases
+   that matter in white, ONE white pill (the book), the same pill small at the top right. Under it, tabs that show the
+   real thing: an essay as its page sets it, a film's own picture, the book's cover and a printed page. Then sections
+   whose headings are his sentences, each saying something the others do not, ending on the book. No dated list of
+   entries (the blog look he no longer wants), no piano. What is read keeps its 680 px measure; the logo and the book
+   keep their stage of up to 1080 px and their motion (scroll.js, the book's pinned scene). */
 :root { --spine: 0.1007; /* the book's depth over its cover width: written by the build (site.shape_book) */
-  --ground: #000; --ink: #F5F2EA; --muted: #a29e96; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D;
+  --ground: #0b0b0d; --ink: #F5F2EA; --grey: #8f8b84; --muted: #a29e96; --line: #24242a; --raised: #131317; --heart: #E63946; --heart-fill: #D9303D;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
+@font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
+@font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--serif); -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
@@ -90,28 +93,60 @@ a { color: inherit; }
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 .wrap { max-width: 680px; margin: 0 auto; }
 .stage { position: relative; max-width: 1080px; margin: 0 auto; }
-.label { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
-/* a section opens on a hairline with a short crimson tick at its left end: a ruled page */
-section, header.top { padding-block: clamp(40px, 7vw, 64px); }
-section .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgba(245,242,234,.16); }
-section .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
-header.top { padding-top: clamp(44px, 9vw, 88px); }
-.logo { width: 92px; height: 92px; display: block; margin: 0 0 30px -4px; }
-/* on a wide screen the logo is the page's one large drawing, in the right of the stage, in line as thin as on the phone;
-   the words stand at the stage's left edge, under the name in the bar (11 Nov, the critics' round: the frame is the stage) */
-@media (min-width: 960px) { header.top .stage { display: grid; align-items: center; min-height: 400px; } header.top .wrap { width: 100%; max-width: none; } header.top h1 { font-size: clamp(48px, 4.4vw, 56px); }
-  .logo { --s: min(360px, 30vw); position: absolute; right: 0; top: 50%; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0; }
-  .logo g g { stroke-width: .2; } .logo g > circle { stroke-width: .32; } header.top .sub { max-width: 19em; } header.top .what { max-width: 26em; } }
-h1 { margin: 0; font-weight: 400; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; letter-spacing: -.012em; text-wrap: balance; }
-.sub { margin: 16px 0 0; font-style: italic; font-size: clamp(20px, 3.4vw, 24px); line-height: 1.4; color: #ddd9cf; }
-.what { margin: 18px 0 0; font-size: 18px; line-height: 1.6; color: #c9c5bc; max-width: 34em; }
-.acts { display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 22px 0 0; }
+.label { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
+section { padding-block: clamp(72px, 12vw, 128px); }
+/* the hero: his line, large and quiet; one phrase in white italic */
+header.top { padding-block: clamp(56px, 12vw, 120px) clamp(40px, 7vw, 72px); }
+.logo { width: 76px; height: 76px; display: block; margin: 0 0 34px -4px; }
+/* the book itself beside his line on a wide screen: what is sold is seen in the first second (12 Nov, both judges) */
+.hero-book { display: none; }
+@media (min-width: 960px) { header.top .stage { display: grid; align-items: center; min-height: 520px; } header.top .wrap { width: 100%; max-width: none; }
+  header.top .lines { max-width: 30em; } header.top h1 { max-width: 11em; }
+  .hero-book { display: block; position: absolute; right: 40px; top: 50%; width: min(300px, 24vw); margin: 0; translate: 0 -50%; rotate: 3deg; }
+  .hero-book img { width: 100%; border: 1px solid #1c1c21; border-radius: 1px 3px 3px 1px; box-shadow: 0 40px 80px -20px rgba(0,0,0,.9), 0 0 0 1px rgba(245,242,234,.04); }
+  .hero-book::after { content: ""; position: absolute; left: 8%; right: 8%; bottom: -34px; height: 30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.9), transparent); } }
+@media (max-width: 959px) { header.top { padding-top: clamp(40px, 9vw, 72px); } .logo { width: 60px; height: 60px; margin-bottom: 26px; } }
+h1 { margin: 0; font-weight: 400; font-size: clamp(42px, 7.4vw, 68px); line-height: 1.04; letter-spacing: -.02em; color: var(--grey); text-wrap: balance; }
+h1 em { font-style: italic; color: var(--ink); }
+.lines { margin: 22px 0 0; font-family: var(--sans); font-size: 16px; line-height: 1.65; color: var(--grey); max-width: 34em; }
+.lines + .lines { margin-top: 6px; }
+.lines b { font-weight: 500; color: var(--ink); }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin: 32px 0 0; }
+.cta .fine { margin: 0; }
+.btn.pill { margin: 0; }
+/* the tabs: the real thing, shown */
+#show { padding-block: 0 clamp(72px, 12vw, 128px); }
+.tabs { display: flex; gap: 6px; margin: 0 0 18px; padding: 5px; border: 1px solid var(--line); border-radius: 999px; width: max-content; max-width: 100%; }
+.tab { min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 500 14px var(--sans); cursor: pointer; transition: background .2s, color .2s; }
+.tab:hover { color: var(--ink); } .tab[aria-selected="true"] { background: var(--raised); color: var(--ink); }
+.panels { border: 1px solid var(--line); border-radius: 18px; background: var(--raised); padding: clamp(22px, 5vw, 44px); }
+.panel + .panel { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line); }   /* no script: all three, one under another */
+.js-tabs .panel + .panel { margin-top: 0; padding-top: 0; border-top: 0; }
+.js-tabs .panel[hidden] { display: none; }
+.kind { margin: 0 0 10px; font-family: var(--sans); font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+.panel h3 { margin: 0; font-weight: 400; font-size: clamp(26px, 4.4vw, 34px); line-height: 1.18; letter-spacing: -.01em; }
+.sheet .prose p { margin: 16px 0 0; font-size: 19px; line-height: 1.65; color: #d9d5cc; }
+.sheet .prose p + p { color: #b9b5ab; }
+.acts { display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 20px 0 0; }
 .more { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
 .more.dim { color: #c9c5bc; text-decoration-color: #4a4a52; } .more:hover { color: #fff; }
-h2 { margin: 0; font-weight: 400; font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; letter-spacing: -.008em; }
-#essays h2 { font-size: clamp(23px, 3.8vw, 28px); line-height: 1.3; }
+.film { position: relative; display: block; margin: 0 0 20px; border-radius: 10px; overflow: hidden; }
+.film img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.film .play { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: rgba(11,11,13,.72); border: 1px solid rgba(245,242,234,.5); }
+.film .play::after { content: ""; position: absolute; left: 26px; top: 21px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent var(--ink); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 28px); align-items: end; }
+.pp { margin: 0; } .pp img { width: 100%; border-radius: 2px; } .pp.cover img { border: 1px solid #1c1c21; }
+.pp figcaption { margin-top: 10px; font-family: var(--sans); font-size: 12px; line-height: 1.45; color: var(--muted); }
+/* the sections after: his sentence as the heading, one picture, one thing said */
+h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-height: 1.1; letter-spacing: -.015em; text-wrap: balance; }
+.ask { margin: 22px 0 0; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.4; color: #c9c5bc; }
+#who { overflow: hidden; overflow: clip; }
+#who .wrap { position: relative; }
+.flower { position: absolute; z-index: -1; top: -40px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
+.flower g g { stroke-width: .26; } .flower g > circle { stroke-width: .4; }
+@media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .32; } #who h2, #who .ask { max-width: 540px; } }
 /* what are you carrying: plain words to choose from, answered in the essay's own first sentence */
-.chips { display: flex; flex-wrap: wrap; gap: 2px 18px; margin: 18px 0 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 2px 18px; margin: 14px 0 0; }
 .chip { position: relative; min-height: 44px; padding: 0; border: 0; background: none; color: #b9b5ab; font: 400 17px var(--serif); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; transition: color .2s, text-decoration-color .2s; }
 .chip:hover { color: var(--ink); } .chip.on { color: var(--ink); text-decoration-color: var(--heart); }
 .chip::after { content: ""; position: absolute; inset: 0 -9px; }   /* a finger's width without moving a word */
@@ -120,27 +155,21 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(27px, 4.6vw, 34px); line-heig
 .answer blockquote { margin: 0; font-size: clamp(21px, 3.4vw, 26px); line-height: 1.42; text-wrap: pretty; }
 .answer .from { margin: 14px 0 0; font-family: var(--sans); font-size: 13px; color: var(--muted); }
 .answer .acts { margin-top: 6px; }
-/* the essays, as a journal lists its entries */
-.entries { margin: 20px 0 0; }
-.entry { display: block; padding: 20px 0; border-top: 1px solid var(--line); text-decoration: none; }
-.entry:first-child { border-top: 0; padding-top: 4px; }
-.entry time, .entry .kind { display: block; margin-bottom: 6px; font-style: italic; font-size: 14px; color: var(--muted); }
-.entry b { display: block; font-weight: 400; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; transition: color .2s; }
-.entry p { margin: 8px 0 0; font-size: 17px; line-height: 1.55; color: #b9b5ab; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
-.entry:hover b { color: #fff; }
-#stand { overflow: hidden; overflow: clip; }
-/* the logo's geometry in the margin: on a phone a faint quarter at the page's edge; on a wide screen it ends on the stage's edge and no line of his runs under it */
-.flower { position: absolute; z-index: -1; top: 6px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
-.flower g g { stroke-width: .26; } .flower g > circle { stroke-width: .4; }
-@media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .32; } .stand { max-width: 540px; } }
-.stand { margin: 20px 0 0; padding: 0; list-style: none; }
-.stand li { padding: 16px 0; border-top: 1px solid var(--line); } .stand li:first-child { border-top: 0; padding-top: 0; }
-.stand b { display: block; font-weight: 400; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
-.stand span { display: block; margin-top: 6px; font-size: 17px; line-height: 1.55; color: #b9b5ab; }
-.said { margin: 20px 0 0; }
-.said blockquote { margin: 0; padding: 16px 0; border-top: 1px solid var(--line); font-style: italic; font-size: 19px; line-height: 1.5; color: #ddd9cf; }
-.said blockquote:first-child { border-top: 0; padding-top: 0; }
-figure { margin: 0; } figcaption { margin-top: 10px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
+/* the three ways to talk: one card each, one drawing each */
+.ways { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 34px 0 0; }
+@media (min-width: 760px) { #talk .wrap { max-width: 1080px; } .ways { grid-template-columns: repeat(3, 1fr); } #talk h2, #talk .ask { max-width: 680px; } }
+.way { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--raised); text-decoration: none; transition: border-color .2s; }
+.way:hover { border-color: #3a3a42; }
+.way svg { width: 44px; height: 44px; margin-bottom: 8px; }
+.way h3 { margin: 0; font-weight: 400; font-size: 23px; line-height: 1.25; }
+.way p { margin: 0; font-size: 17px; line-height: 1.55; color: #b9b5ab; }
+.way .price { margin-top: auto; padding-top: 8px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.way .go { font-size: 17px; text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
+/* readers: their own words, two a row on a wide screen */
+.said { display: grid; grid-template-columns: 1fr; gap: 0 40px; margin: 26px 0 0; }
+@media (min-width: 760px) { #readers .wrap { max-width: 1080px; } .said { grid-template-columns: 1fr 1fr; } }
+.said blockquote { margin: 0; padding: 20px 0; border-top: 1px solid var(--line); font-style: italic; font-size: clamp(20px, 2.6vw, 23px); line-height: 1.45; color: #ddd9cf; }
+figure { margin: 0; } figcaption { margin-top: 14px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
 /* the book. With no script or with reduced motion: the cover, flat, beside its words. */
 #book .stage { display: grid; grid-template-columns: 132px minmax(0, 1fr); column-gap: 26px; align-items: center; max-width: 680px; }
 #book .stage > .wrap { grid-column: 1 / -1; width: 100%; margin-bottom: 20px; }
@@ -198,9 +227,11 @@ figure { margin: 0; } figcaption { margin-top: 10px; font-family: var(--sans); f
 .fx .pin .bk-copy { left: 60%; top: 50%; translate: 0 -50%; margin: 0; }
 }
 .btn { display: inline-flex; align-items: center; min-height: 46px; margin-top: 16px; padding: 0 22px; border-radius: 4px; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; }
-.btn.primary { background: var(--ink); color: #000; }
+
+#book h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; letter-spacing: -.008em; }
+#book .btn.pill { margin-top: 16px; }
 .fine { font-family: var(--sans); font-size: 13px; color: var(--muted); }
-.close .orn { width: 44px; height: 44px; display: block; margin-bottom: 20px; }
+.bk-copy .fine { margin: 12px 0 0; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 <noscript><style>.answer[hidden]{display:block!important;margin-bottom:22px}.chips{display:none}</style></noscript>
@@ -230,9 +261,10 @@ body > footer .links a { position: relative; } body > footer .links a::after { c
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
 </style>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e155ba4216a34b21b859f42ce67b9078"}'></script>
 </head>
 <body>
-<a class="skip" href="#essays">Skip to the essays</a>
+<a class="skip" href="#show">Skip to the reading</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
   <div class="links"><a href="/essays.html">Essays</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/book.html">See the book</a></div>
@@ -242,35 +274,50 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <main id="top">
   <header class="top g" id="hero"><div class="stage"><div class="wrap">
     <svg class="logo" data-draw="load" data-turn viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
-    <h1>Your soul knows best.</h1>
-    <p class="sub">Listen to your soul. All it has wanted is to be heard.</p>
-    <p class="what">Honest essays from one person still working it out. For anyone who feels stuck, rushed or half alive.</p>
-    <p class="acts"><a class="more" href="essays.html">Read the essays</a><a class="more dim" href="book.html">The book</a></p>
-  </div></div></header>
+    <h1>Your soul <em>knows best.</em></h1>
+    <p class="lines"><b>Listen to your soul.</b> All it has wanted is to be heard.</p>
+    <p class="lines">Honest essays from one person still working it out. For anyone who feels <b>stuck, rushed or half alive.</b></p>
+    <div class="cta"><a class="btn pill" href="book.html">See the book</a></div>
+  </div><a class="hero-book" href="book.html" tabindex="-1" aria-hidden="true"><img src="book/front.webp" width="1350" height="2025" decoding="async" alt=""></a></div></header>
 
-  <section class="g" id="help" aria-labelledby="help-h"><div class="wrap">
-    <p class="label">Will it help?</p>
-    <h2 id="help-h">What are you carrying?</h2>
+  <section class="g" id="show" aria-label="See it for yourself"><div class="wrap">
+    <div class="tabs" role="tablist" aria-label="See it for yourself">
+      <button class="tab" type="button" role="tab" id="t-book" aria-controls="p-book" aria-selected="true">The book</button>
+      <button class="tab" type="button" role="tab" id="t-read" aria-controls="p-read" aria-selected="false">Read</button>
+      <button class="tab" type="button" role="tab" id="t-watch" aria-controls="p-watch" aria-selected="false">Watch</button>
+    </div>
+    <div class="panels">
+      <div class="panel" role="tabpanel" id="p-book" aria-labelledby="t-book"><!--TAB_BOOK--><div class="pair"><figure class="pp cover"><img src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" alt="The cover of Your soul knows best"><figcaption>The cover</figcaption></figure><figure class="pp"><img src="book/p19.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 19 as printed."><figcaption>Chapter 2, We weren’t meant to be living the way we do, as printed</figcaption></figure></div><p class="acts"><a class="more" href="/book.html#inside">Look inside</a></p><!--/TAB_BOOK--></div>
+      <div class="panel" role="tabpanel" id="p-read" aria-labelledby="t-read"><!--TAB_READ--><article class="sheet"><p class="kind">An essay · 2 min read</p><h3>Half alive, half dead</h3><div class="prose"><p>There&#x27;s a state a lot of people live in without ever naming it. You&#x27;re not really living, but you&#x27;re not dying either. You&#x27;re half alive and half dead.</p><p>No one is here to tell you how to live. That&#x27;s number one. You need to decide for yourself exactly how you want to live, and know that your decision dictates exactly how your life turns out. Because the way you live strongly influences the thoughts you have about yourself.</p></div><p class="acts"><a class="more" href="/essays/half-alive-half-dead/">Read the essay</a><a class="more dim" href="/essays.html">All 27 essays</a></p></article><!--/TAB_READ--></div>
+      <div class="panel" role="tabpanel" id="p-watch" aria-labelledby="t-watch"><!--TAB_WATCH--><a class="film" href="/essays/where-are-you-rushing-to/"><img src="/film/where-are-you-rushing-to.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="The film&#39;s picture: Where are you rushing to?"><span class="play" aria-hidden="true"></span></a><p class="kind">A film, narrated</p><h3>Where are you rushing to?</h3><p class="acts"><a class="more" href="/essays/where-are-you-rushing-to/">Watch it</a><a class="more dim" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p><!--/TAB_WATCH--></div>
+    </div>
+  </div></section>
+
+  <section class="g" id="who" aria-labelledby="who-h"><div class="wrap">
+    <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
+    <p class="label">Who it is for</p>
+    <h2 id="who-h" data-lit>Sit still enough to hear it.</h2>
+    <p class="ask">What are you carrying?</p>
     <div class="chips" id="feelings" role="group" aria-label="Choose how you feel"><!--FEEL_CHIPS--><button type="button" class="chip on" data-f="stuck" aria-pressed="true">Stuck</button><button type="button" class="chip" data-f="rushed" aria-pressed="false">Rushed</button><button type="button" class="chip" data-f="half-alive" aria-pressed="false">Half alive</button><button type="button" class="chip" data-f="not-enough" aria-pressed="false">Not enough</button><button type="button" class="chip" data-f="hurting" aria-pressed="false">Hurting</button><button type="button" class="chip" data-f="tired" aria-pressed="false">Tired</button><button type="button" class="chip" data-f="lost" aria-pressed="false">Lost</button><button type="button" class="chip" data-f="peace" aria-pressed="false">Ready for peace</button><!--/FEEL_CHIPS--></div>
     <div class="answers" id="answers" aria-live="polite"><!--FEEL_ANSWERS--><div class="answer on" data-f="stuck"><blockquote>We were born to be fearless, to pursue the greatest things that are available to us, to pursue what is most meaningful to us.</blockquote><p class="from">Born to be fearless</p><p class="acts"><a class="more" href="/essays/born-to-be-fearless/">Read it</a><a class="more dim" href="/essays.html#stuck">9 essays for this</a></p></div><div class="answer" data-f="rushed" hidden><blockquote>Everyone feels rushed, but no one is asking: where are you rushing to?</blockquote><p class="from">Where are you rushing to?</p><p class="acts"><a class="more" href="/essays/where-are-you-rushing-to/">Read it</a><a class="more dim" href="/essays.html#rushed">5 essays for this</a></p></div><div class="answer" data-f="half-alive" hidden><blockquote>There&#x27;s a state a lot of people live in without ever naming it.</blockquote><p class="from">Half alive, half dead</p><p class="acts"><a class="more" href="/essays/half-alive-half-dead/">Read it</a><a class="more dim" href="/essays.html#half-alive">2 essays for this</a></p></div><div class="answer" data-f="not-enough" hidden><blockquote>Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me.</blockquote><p class="from">Perception is key</p><p class="acts"><a class="more" href="/essays/perception-is-key/">Read the opening</a><a class="more dim" href="/essays.html#not-enough">5 essays for this</a></p></div><div class="answer" data-f="hurting" hidden><blockquote>There are mornings I wake up underneath a crushing weight which I can&#x27;t seem to name nor quite shake.</blockquote><p class="from">You do not get what you want</p><p class="acts"><a class="more" href="/essays/you-do-not-get-what-you-want/">Read it</a><a class="more dim" href="/essays.html#hurting">6 essays for this</a></p></div><div class="answer" data-f="tired" hidden><blockquote>You need to be kind to yourself.</blockquote><p class="from">Step away</p><p class="acts"><a class="more" href="/essays/step-away/">Read it</a><a class="more dim" href="/essays.html#tired">4 essays for this</a></p></div><div class="answer" data-f="lost" hidden><blockquote>Do you realise that your inner state strongly dictates your external environment?</blockquote><p class="from">Listen to your soul</p><p class="acts"><a class="more" href="/essays/listen-to-your-soul/">Read it</a><a class="more dim" href="/essays.html#lost">6 essays for this</a></p></div><div class="answer" data-f="peace" hidden><blockquote>Somewhere between one tree and the next, something opens.</blockquote><p class="from">The walk: the alignment</p><p class="acts"><a class="more" href="/essays/the-walk-the-alignment/">Read the opening</a><a class="more dim" href="/essays.html#peace">4 essays for this</a></p></div><!--/FEEL_ANSWERS--></div>
   </div></section>
 
-  <section class="g" id="essays" aria-labelledby="essays-h"><div class="wrap">
-    <p class="label">The essays</p>
-    <h2 id="essays-h" data-lit>These essays help you connect with yourself as a soul. You have simply forgotten, and that's okay.</h2>
-    <div class="entries"><!--LATEST--><a class="entry" href="/essays/blame-and-responsibility/"><time datetime="2026-11-10">10 November 2026</time><b>Blame and responsibility</b><p>The moment my daughter was born, blame became useless to me, not gradually, not philosophically, but immediately and practically, because I understood something I had not understood before: she would learn from watching me, and every pattern of self-blame, every loop of guilt, every inherited shame I had carried without questioning, she would absorb as the natural way a person moves through the world.</p></a><a class="entry" href="/essays/listen-to-your-soul/"><time datetime="2026-11-05">5 November 2026</time><b>Listen to your soul</b><p>Do you realise that your inner state strongly dictates your external environment? Why do some people who are brought up with nothing achieve millions?</p></a><a class="entry" href="/essays/you-do-not-get-what-you-want/"><time datetime="2026-11-01">1 November 2026</time><b>You do not get what you want</b><p>There are mornings I wake up underneath a crushing weight which I can&#x27;t seem to name nor quite shake.</p></a><a class="entry" href="/essays/step-away/"><time datetime="2026-10-31">31 October 2026</time><b>Step away</b><p>You need to be kind to yourself. Kindness to yourself is a very important skill set, and it requires you to understand that even if you might be doing things that you know you shouldn&#x27;t be doing, you keep that awareness.</p></a><a class="entry" href="/essays/born-to-be-fearless/"><time datetime="2026-10-30">30 October 2026</time><b>Born to be fearless</b><p>We were born to be fearless, to pursue the greatest things that are available to us, to pursue what is most meaningful to us.</p></a><a class="entry" href="/essays/the-receptiveness-i-was-waiting-for/"><time datetime="2026-10-29">29 October 2026</time><b>The receptiveness I was waiting for</b><p>There is a particular kind of tiredness that lives at the edge of a life that has not yet committed to itself. It is not the tiredness of the body.</p></a><!--/LATEST--></div>
-    <p class="acts"><a class="more" href="essays.html">All <!--FACT_ESSAYS-->27<!--/FACT_ESSAYS--> essays</a><a class="more dim" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
+  <section class="g" id="talk" aria-labelledby="talk-h"><div class="wrap">
+    <p class="label">Talk to soulsensis</p>
+    <h2 id="talk-h" data-lit>What's in the way for you right now?</h2>
+    <p class="ask">Leave it here. I read every one.</p>
+    <div class="ways">
+      <a class="way" href="/question/"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="2.4"><circle r="40"/></g><circle r="5" fill="#E63946"/></svg><h3>Leave your question</h3><p>Some become essays and videos, so others carrying the same thing can read the answer.</p><span class="price">Free, always.</span><span class="go">Leave a question</span></a>
+      <a class="way" href="/conversation/"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="2.4"><circle cx="-16" r="30"/><circle cx="16" r="30"/></g><circle r="5" fill="#E63946"/></svg><h3>Hear the truth, said with care.</h3><p>Your friends don't always tell you the truth. They love you, and they don't want to hurt you or lose you.</p><span class="price">60 minutes, one to one · A$300</span><span class="go">Book a conversation</span></a>
+      <a class="way" href="ask.html"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="2.4"><circle cx="-22" r="16"/><circle r="16"/><circle cx="22" r="16"/></g></svg><h3>Tell me what's going on.</h3><p>Private by design: no name or email, your chats are encrypted, nobody reads them, and you can delete everything in one tap.</p><span class="price">A$5 a month · opening soon</span><span class="go">Ask soulsensis, opening soon</span></a>
+    </div>
   </div></section>
 
-  <section class="g" id="stand" aria-labelledby="stand-h"><div class="wrap">
-    <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
-    <h2 class="label" id="stand-h">What we stand for</h2>
-    <ul class="stand" data-lit="lines">
-      <li><b>Life is a process to be enjoyed.</b><span>When's your turn?</span></li>
-      <li><b>Written by a human.</b><span>Every line is the author's own, most of it written by hand in a journal first.</span></li>
-      <li><b>No name. No face.</b><span>The author stays soulsensis so nothing has to be left out.</span></li>
-      <li><b>Sit still enough to hear it.</b></li>
-    </ul>
+  <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
+    <h2 class="label" id="readers-h">What readers have said</h2>
+    <figure><div class="said" data-lit="lines">
+      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote>
+    </div><figcaption>From early readers of the essays</figcaption></figure>
   </div></section>
 
   <section class="pin g" id="book" aria-labelledby="book-h"><div class="sticky"><div class="stage">
@@ -286,26 +333,12 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </a>
     <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
     <div class="bk-copy">
-      <h2 id="book-h">Your soul knows best.</h2>
+      <h2 id="book-h">Feel at home again.</h2>
       <p><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></p>
-      <a class="btn primary" href="book.html">See the book</a>
+      <a class="btn pill" href="book.html">See the book</a>
       <!--BOOK_LINE--><p class="fine">The book is being finished.</p><!--/BOOK_LINE-->
     </div>
   </div></div></section>
-
-  <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
-    <h2 class="label" id="readers-h">What readers have said</h2>
-    <figure><div class="said" data-lit="lines">
-      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“Very wholesome post to wake up to at the top of my feed. Thank you sir, well written and very encouraging.”</blockquote><blockquote>“This resonated with me as i have experienced this several times and I now welcome moments like this in my life and indeed somewhat chase them now.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote>
-    </div><figcaption>From early readers of the essays</figcaption></figure>
-  </div></section>
-
-  <section class="g close" id="question"><div class="wrap">
-    <svg class="orn" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
-    <h2 data-lit>What's in the way for you right now?</h2>
-    <p class="sub">Leave it here. I read every one.</p>
-    <p class="acts"><a class="more" href="/question/">Leave your question</a><a class="more dim" href="/conversation/">A conversation</a><a class="more dim" href="/music/">The piano</a><a class="more dim" href="ask.html">Ask soulsensis, opening soon</a></p>
-  </div></section>
 </main>
 
 <!--FOOTER--><footer class="g"><div class="wrap">
@@ -316,6 +349,20 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 </div></footer>
 <!--/FOOTER-->
 
+<script>
+// the tabs (12 Nov 2026): The book (first: the one thing sold), Read, Watch. With no script all three show, one under another. An empty panel (no film picture on this build) and its tab are left off.
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll("#show .tab")), root = document.getElementById("show");
+  tabs.forEach(function (t) { var p = document.getElementById(t.getAttribute("aria-controls")); if (!p.textContent.trim()) { t.remove(); p.remove(); } });
+  tabs = [].slice.call(document.querySelectorAll("#show .tab"));
+  function pick(t) { tabs.forEach(function (o) { var on = o === t; o.setAttribute("aria-selected", on); o.tabIndex = on ? 0 : -1; document.getElementById(o.getAttribute("aria-controls")).hidden = !on; }); }
+  root.classList.add("js-tabs"); pick(tabs[0]);
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { pick(t); });
+    t.addEventListener("keydown", function (e) { var k = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!k) return; e.preventDefault(); var n = tabs[(i + k + tabs.length) % tabs.length]; pick(n); n.focus(); });
+  });
+})();
+</script>
 <script>
 // a feeling, answered: the word chosen shows that feeling's essay, in its own first sentence
 (function () {
@@ -393,6 +440,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   scene.addEventListener("click", (e) => { if (moved > 4) e.preventDefault(); });   // a turn is not a tap on the link
 })();
 </script>
+
 <!--SIGNUP_JS--><!--/SIGNUP_JS-->
 <script src="/scroll.js" defer></script>
 </body>
