@@ -346,7 +346,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   function frame() {
     ticking = false;
     const r = book.getBoundingClientRect(), vh = sticky.offsetHeight || innerHeight, total = r.height - vh;
-    if (!open.dataset.ld && r.top < vh * 3 && r.bottom > -vh) { open.dataset.ld = 1; open.querySelectorAll("img").forEach((im) => { im.draggable = false; if (im.dataset.src) im.src = im.dataset.src; }); }   // the pages load only as the scene nears
+    if (!open.dataset.ld && r.top < vh * 3 && r.bottom > -vh) { open.dataset.ld = 1; open.querySelectorAll("img").forEach((im) => { im.draggable = false; if (im.dataset.src) im.src = im.dataset.src; if (im.decode) im.decode().catch(() => {}); }); }   // the pages load only as the scene nears
     if (r.bottom < -vh * .5 || r.top > vh * 1.5) return;
     const p = total > 0 ? clamp(-r.top / total) : 0;
     const W = bk.offsetWidth, w0 = open.offsetWidth, a = ease(seg(p, T0, T1)), b = ease(seg(p, T2, T3)), close = a * (1 - b);

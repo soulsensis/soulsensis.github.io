@@ -452,7 +452,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     } }
     // inside: the cover opens on a real spread, the book flicks to each later stop and rests there, then the last right page comes close enough to read, and scrolls
     { const { p, near } = prog(inside, vh); if (near) {
-      if (!open.dataset.ld) { open.dataset.ld = 1; open.querySelectorAll("img[data-src]").forEach((im) => { im.src = im.dataset.src; }); }   // the later pages load only as the scene nears
+      if (!open.dataset.ld) { open.dataset.ld = 1; open.querySelectorAll("img[data-src]").forEach((im) => { im.src = im.dataset.src; if (im.decode) im.decode().catch(() => {}); }); }   // the later pages load only as the scene nears
       const W = open.offsetWidth, w0 = Math.min(vw * .4, vh * .28, 300), o = ease(seg(p, OPEN0, OPEN1)), z = ease(seg(p, ZOOM0, ZOOM0 + .12)), pan = seg(p, ZOOM0 + .14, .97), N = leaves.length;
       leaves.forEach((L, i) => { let t = o; if (i) { const g = Math.floor((i - 1) / FL), j = (i - 1) % FL, q = seg(p, fw[g][0], fw[g][1]), st = j * .16; t = ease(seg(q, st, st + .36)); }
         L.style.transform = `translateZ(${lerp((N - i) * E, (i + 1) * E, t).toFixed(2)}px) rotateY(${(-180 * t).toFixed(2)}deg)`; });
