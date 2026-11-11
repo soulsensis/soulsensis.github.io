@@ -62,6 +62,8 @@
 <script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));</script>
 <script>/* came from YouTube (?src=yt, yt-short, yt-essay): lead with the letters, not another subscribe ask */
 try { if (/[?&]src=yt/.test(location.search)) document.documentElement.classList.add("from-yt"); } catch (e) {}</script>
+<script>/* the scroll scene (the book) is pinned only when motion is wanted and sticky works; without this class the page is plain, readable blocks */
+try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!/[?&]still/.test(location.search)&&window.CSS&&CSS.supports("position","sticky")&&"requestAnimationFrame" in window)document.documentElement.classList.add("fx")}catch(e){}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="alternate" type="application/rss+xml" title="soulsensis essays" href="https://soulsensis.com/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
@@ -69,9 +71,14 @@ try { if (/[?&]src=yt/.test(location.search)) document.documentElement.classList
 <style>
 /* 11 Nov 2026 (author: "make the website more narrower, more a blog style, it is too wide - we arent apple ... add a
    soulsensis spin"). The front page of a journal: one 640 px column set left, serif for everything that is said,
-   Montserrat only for the name and small labels, thin geometry as an ornament, one crimson point. Nothing is pinned
-   and nothing moves but a link's colour. */
-:root { --ground: #000; --ink: #F5F2EA; --muted: #a29e96; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D;
+   Montserrat only for the name and small labels, thin geometry as an ornament, one crimson point.
+   11 Nov 2026, later (author: "u changed a lot by removing the scrolling animations ... Before it felt premium";
+   "im not sure about the narrow marjins"): the journal stays and the motion comes back inside it. What is read keeps
+   a 680 px measure; the logo's geometry and the book have a stage of up to 1080 px. The logo draws itself, his lines
+   light as they are reached (scroll.js), and one scene is pinned: the book shows its spine, turns to face you, opens
+   and flicks to three chapters. No blur, no capsules, nothing hidden to be revealed. */
+:root { --spine: 0.1007; /* the book's depth over its cover width: written by the build (site.shape_book) */
+  --ground: #000; --ink: #F5F2EA; --muted: #a29e96; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -81,14 +88,19 @@ a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
 .skip { position: absolute; left: -9999px; } .skip:focus { left: 12px; top: 12px; background: var(--ink); color: #000; padding: 8px 12px; z-index: 30; font-family: var(--sans); }
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
-.wrap { max-width: 640px; margin: 0 auto; }
+.wrap { max-width: 680px; margin: 0 auto; }
+.stage { position: relative; max-width: 1080px; margin: 0 auto; }
 .label { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
 /* a section opens on a hairline with a short crimson tick at its left end: a ruled page */
-section, header.open { padding-block: clamp(40px, 7vw, 64px); }
+section, header.top { padding-block: clamp(40px, 7vw, 64px); }
 section .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgba(245,242,234,.16); }
 section .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
-header.open { padding-top: clamp(44px, 9vw, 88px); }
+header.top { padding-top: clamp(44px, 9vw, 88px); }
 .logo { width: 92px; height: 92px; display: block; margin: 0 0 30px -4px; }
+/* on a wide screen the logo is the page's one large drawing, in the right of the stage, in line as thin as on the phone */
+@media (min-width: 960px) { header.top .stage { display: grid; align-items: center; min-height: 400px; } header.top .wrap { width: 100%; }
+  .logo { --s: min(360px, 30vw); position: absolute; right: 0; top: 50%; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0; }
+  .logo g g { stroke-width: .2; } .logo g > circle { stroke-width: .32; } header.top .sub { max-width: 19em; } header.top .what { max-width: 26em; } }
 h1 { margin: 0; font-weight: 400; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; letter-spacing: -.012em; text-wrap: balance; }
 .sub { margin: 16px 0 0; font-style: italic; font-size: clamp(20px, 3.4vw, 24px); line-height: 1.4; color: #ddd9cf; }
 .what { margin: 18px 0 0; font-size: 18px; line-height: 1.6; color: #c9c5bc; max-width: 34em; }
@@ -114,6 +126,10 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(27px, 4.6vw, 34px); line-heig
 .entry b { display: block; font-weight: 400; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; transition: color .2s; }
 .entry p { margin: 8px 0 0; font-size: 17px; line-height: 1.55; color: #b9b5ab; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .entry:hover b { color: #fff; }
+#stand { overflow: hidden; overflow: clip; }
+.flower { position: absolute; z-index: -1; top: 6px; right: -170px; width: 300px; height: 300px; opacity: .34; pointer-events: none; }
+.flower g g { stroke-width: .26; } .flower g > circle { stroke-width: .4; }
+@media (min-width: 960px) { .flower { right: -290px; width: 380px; height: 380px; opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .32; } }
 .stand { margin: 20px 0 0; padding: 0; list-style: none; }
 .stand li { padding: 16px 0; border-top: 1px solid var(--line); } .stand li:first-child { border-top: 0; padding-top: 0; }
 .stand b { display: block; font-weight: 400; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
@@ -122,28 +138,79 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(27px, 4.6vw, 34px); line-heig
 .said blockquote { margin: 0; padding: 16px 0; border-top: 1px solid var(--line); font-style: italic; font-size: 19px; line-height: 1.5; color: #ddd9cf; }
 .said blockquote:first-child { border-top: 0; padding-top: 0; }
 figure { margin: 0; } figcaption { margin-top: 10px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
-.book { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 26px; align-items: center; margin-top: 20px; }
-.book img { border: 1px solid #1c1c21; }
-.book p { margin: 10px 0 0; font-size: 18px; line-height: 1.55; color: #c9c5bc; }
-.book p.fine { margin-top: 12px; font-size: 13px; color: var(--muted); }
+/* the book. With no script or with reduced motion: the cover, flat, beside its words. */
+#book .stage { display: grid; grid-template-columns: 132px minmax(0, 1fr); column-gap: 26px; align-items: center; max-width: 680px; }
+#book .stage > .wrap { grid-column: 1 / -1; width: 100%; margin-bottom: 20px; }
+.scene3d { display: block; }
+.bk { display: block; position: relative; aspect-ratio: 2 / 3; }
+.bk img, .opn img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
+.bk img.front { width: 100%; height: 100%; border: 1px solid #1c1c21; }
+.bk .f:not(.front), .opn, .bknote { display: none; }
+.bk-copy p { margin: 10px 0 0; font-size: 18px; line-height: 1.55; color: #c9c5bc; }
+.bk-copy p.fine { margin-top: 12px; font-size: 13px; color: var(--muted); }
+@media (max-width: 440px) { #book .stage { grid-template-columns: 96px minmax(0, 1fr); column-gap: 18px; } }
+/* the one pinned scene (10 Nov's, in the journal's manner): the book shows its spine, turns to face you, opens and flicks to three
+   chapters. A book is laid out at its closest size and only scaled down; the light on a face is a black sheet, never a filter. */
+@media (min-height: 540px) {
+.fx #book.pin { padding-block: 0; height: 430vh; height: 430svh; }
+.fx .pin .sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.fx #book.pin .stage { display: block; max-width: 1080px; height: 100%; --w0: min(40vw, 27svh, 240px); --k: 1.35; --top: max(13svh, calc(50svh - var(--w0) * .75 - 120px)); }
+.fx #book.pin .stage > .wrap { position: absolute; left: 0; right: 0; top: 6svh; margin: 0 auto; }
+.fx .pin .scene3d { position: absolute; left: 0; right: 0; top: var(--top); height: calc(var(--w0) * 1.5); perspective: 2200px; cursor: grab; touch-action: pan-y; }
+.fx .pin .scene3d.held { cursor: grabbing; }
+.fx .pin .bk { --w: calc(var(--w0) * var(--k)); --d: calc(var(--w) * var(--spine)); position: absolute; left: 50%; top: 50%; width: var(--w); margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); scale: .74; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(var(--rx, -5deg)) rotateY(var(--ry, -26deg)); will-change: transform; }
+.fx .pin .bk .f { display: block; position: absolute; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.fx .pin .bk img.f { width: 100%; height: 100%; object-fit: cover; background: #0b0b0d; border: 0; }
+.fx .pin .bk .front { inset: 0; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; }
+.fx .pin .bk img.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg); }
+.fx .pin .bk .edge { top: .5%; bottom: .5%; right: calc(var(--d) / -2); width: var(--d); transform: rotateY(90deg); background: repeating-linear-gradient(90deg, #f1ede3 0 1px, #d3cec2 1px 2px, #e6e1d6 2px 3px); box-shadow: inset 0 0 10px rgba(0,0,0,.28); }
+.fx .pin .bk .sh { background: #000; pointer-events: none; }
+.fx .pin .bk .sh.front { transform: translateZ(calc(var(--d) / 2 + .3px)); opacity: calc(1 - var(--lf, 1)); }
+.fx .pin .bk .sh.spine { top: 0; left: calc(var(--d) / -2); width: var(--d); height: 100%; transform: rotateY(-90deg) translateZ(.3px); opacity: calc(1 - var(--ls, .8)); }
+.fx .pin .bk .gl { pointer-events: none; transform: translateZ(calc(var(--d) / 2 + .6px)); inset: 0; border-radius: 1px 3px 3px 1px; background: linear-gradient(104deg, transparent 34%, rgba(255,255,255,.13) 47%, rgba(255,255,255,.03) 55%, transparent 68%) var(--gx, 50%) 0 / 320% 100% no-repeat; opacity: var(--lf, 1); }
+.fx .pin .bk .top { left: 0; right: .5%; top: calc(var(--d) / -2); height: var(--d); transform: rotateX(90deg); background: repeating-linear-gradient(0deg, #ece7dc 0 1px, #cdc8bb 1px 2px); }
+.fx .pin .bk .bot { left: 0; right: .5%; bottom: calc(var(--d) / -2); height: var(--d); transform: rotateX(-90deg); background: #b9b4a8; }
+.fx .pin .opn { --w: var(--w0); --e: calc(var(--w) * .0632 * var(--spine)); display: block; visibility: hidden; position: absolute; left: 50%; top: 50%; width: var(--w); aspect-ratio: 2 / 3; margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); transform-style: preserve-3d; -webkit-transform-style: preserve-3d; will-change: transform; }
+.opn .pg, .opn .leaf, .opn .leaf > * { position: absolute; inset: 0; }
+.opn .pg { background: #fff; box-shadow: var(--e) 0 0 #ebe8e0, calc(var(--e) * 2) calc(var(--e) * .5) 0 #dedad1, calc(var(--e) * 3) var(--e) 0 #d2cec5; }
+.opn .pg::after, .opn .lf-back::after, .opn .leaf.fl .lf-front::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.13), rgba(0,0,0,.03) 4%, transparent 9%); }
+.opn .lf-back::after { background: linear-gradient(270deg, rgba(0,0,0,.13), rgba(0,0,0,.03) 4%, transparent 9%); }
+.opn img { width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.opn img:not([src]) { visibility: hidden; }
+.opn .leaf { transform-origin: left center; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
+.opn .leaf > * { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.opn .lf-front { background: #0b0b0d; border-radius: 1px 3px 3px 1px; }
+.opn .lf-back { transform: rotateY(180deg); background: #fff; box-shadow: calc(var(--e) * -1) 0 0 #ebe8e0, calc(var(--e) * -2) calc(var(--e) * .5) 0 #dedad1, calc(var(--e) * -3) var(--e) 0 #d2cec5; }
+.opn .leaf.fl .lf-front { background: #fff; border-radius: 0; }
+.opn .leaf.fl .lf-back { box-shadow: none; }
+.opn .lines::before { content: ""; position: absolute; inset: 13% 14% 12%; background: repeating-linear-gradient(180deg, rgba(17,16,19,.1) 0 calc(var(--w) * .013), transparent 0 calc(var(--w) * .034)); }
+.fx .pin .bknote { display: block; position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 20px); margin: 0; text-align: center; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.fx .pin .bk-copy { position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 62px); max-width: 680px; margin: 0 auto; }
+}
+/* a wide screen: the book in the left of the stage, its words beside it */
+@media (min-width: 960px) and (min-height: 540px) {
+.fx #book.pin .stage { --w0: min(22vw, 30svh, 250px); --k: 1.7; --top: calc(50svh - var(--w0) * .75); }
+.fx .pin .scene3d, .fx .pin .bknote { right: 46%; }
+.fx .pin .bknote { top: calc(50svh + var(--w0) * .75 * var(--k) + 18px); }
+.fx .pin .bk-copy { left: 60%; top: 50%; translate: 0 -50%; margin: 0; }
+}
 .btn { display: inline-flex; align-items: center; min-height: 46px; margin-top: 16px; padding: 0 22px; border-radius: 4px; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; }
 .btn.primary { background: var(--ink); color: #000; }
 .fine { font-family: var(--sans); font-size: 13px; color: var(--muted); }
-@media (max-width: 440px) { .book { grid-template-columns: 96px minmax(0, 1fr); gap: 18px; } }
 .close .orn { width: 44px; height: 44px; display: block; margin-bottom: 20px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 <noscript><style>.answer[hidden]{display:block!important;margin-bottom:22px}.chips{display:none}</style></noscript>
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
-nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 640px; height: auto; min-height: 56px; margin: 0 auto; }
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
 .mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
 nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 @media (max-width: 560px) { nav.top .links a.far { display: none; } }
 body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
-body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 640px; margin: 0 auto; }
+body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 680px; margin: 0 auto; }
 body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
 body > footer a:hover { color: var(--ink); }
@@ -160,13 +227,13 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <!--/NAV-->
 
 <main id="top">
-  <header class="open g" id="hero"><div class="wrap">
-    <svg class="logo" viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
+  <header class="top g" id="hero"><div class="stage"><div class="wrap">
+    <svg class="logo" data-draw="load" data-turn viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
     <h1>Your soul knows best.</h1>
     <p class="sub">Listen to your soul. All it has wanted is to be heard.</p>
     <p class="what">Honest essays from one person still working it out. For anyone who feels stuck, rushed or half alive.</p>
     <p class="acts"><a class="more" href="essays.html">Read the essays</a><a class="more dim" href="book.html">The book</a></p>
-  </div></header>
+  </div></div></header>
 
   <section class="g" id="help" aria-labelledby="help-h"><div class="wrap">
     <p class="label">Will it help?</p>
@@ -177,14 +244,15 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 
   <section class="g" id="essays" aria-labelledby="essays-h"><div class="wrap">
     <p class="label">The essays</p>
-    <h2 id="essays-h">These essays help you connect with yourself as a soul. You have simply forgotten, and that's okay.</h2>
+    <h2 id="essays-h" data-lit>These essays help you connect with yourself as a soul. You have simply forgotten, and that's okay.</h2>
     <div class="entries"><!--LATEST--><a class="entry" href="/essays/blame-and-responsibility/"><time datetime="2026-11-10">10 November 2026</time><b>Blame and responsibility</b><p>The moment my daughter was born, blame became useless to me, not gradually, not philosophically, but immediately and practically, because I understood something I had not understood before: she would learn from watching me, and every pattern of self-blame, every loop of guilt, every inherited shame I had carried without questioning, she would absorb as the natural way a person moves through the world.</p></a><a class="entry" href="/essays/listen-to-your-soul/"><time datetime="2026-11-05">5 November 2026</time><b>Listen to your soul</b><p>Do you realise that your inner state strongly dictates your external environment? Why do some people who are brought up with nothing achieve millions?</p></a><a class="entry" href="/essays/you-do-not-get-what-you-want/"><time datetime="2026-11-01">1 November 2026</time><b>You do not get what you want</b><p>There are mornings I wake up underneath a crushing weight which I can&#x27;t seem to name nor quite shake.</p></a><a class="entry" href="/essays/step-away/"><time datetime="2026-10-31">31 October 2026</time><b>Step away</b><p>You need to be kind to yourself. Kindness to yourself is a very important skill set, and it requires you to understand that even if you might be doing things that you know you shouldn&#x27;t be doing, you keep that awareness.</p></a><a class="entry" href="/essays/born-to-be-fearless/"><time datetime="2026-10-30">30 October 2026</time><b>Born to be fearless</b><p>We were born to be fearless, to pursue the greatest things that are available to us, to pursue what is most meaningful to us.</p></a><a class="entry" href="/essays/the-receptiveness-i-was-waiting-for/"><time datetime="2026-10-29">29 October 2026</time><b>The receptiveness I was waiting for</b><p>There is a particular kind of tiredness that lives at the edge of a life that has not yet committed to itself. It is not the tiredness of the body.</p></a><!--/LATEST--></div>
     <p class="acts"><a class="more" href="essays.html">All <!--FACT_ESSAYS-->27<!--/FACT_ESSAYS--> essays</a><a class="more dim" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
   </div></section>
 
   <section class="g" id="stand" aria-labelledby="stand-h"><div class="wrap">
+    <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
     <h2 class="label" id="stand-h">What we stand for</h2>
-    <ul class="stand">
+    <ul class="stand" data-lit="lines">
       <li><b>Life is a process to be enjoyed.</b><span>When's your turn?</span></li>
       <li><b>Written by a human.</b><span>Every line is the author's own, most of it written by hand in a journal first.</span></li>
       <li><b>No name. No face.</b><span>The author stays soulsensis so nothing has to be left out.</span></li>
@@ -192,29 +260,36 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </ul>
   </div></section>
 
-  <section class="g" id="book" aria-labelledby="book-h"><div class="wrap">
-    <p class="label">The book</p>
-    <div class="book">
-      <a href="book.html" aria-label="The book: Your soul knows best"><img src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"></a>
-      <div>
-        <h2 id="book-h">Your soul knows best.</h2>
-        <p><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></p>
-        <a class="btn primary" href="book.html">See the book</a>
-        <!--BOOK_LINE--><p class="fine">The book is being finished.</p><!--/BOOK_LINE-->
-      </div>
+  <section class="pin g" id="book" aria-labelledby="book-h"><div class="sticky"><div class="stage">
+    <div class="wrap"><p class="label">The book</p></div>
+    <a class="scene3d" id="bookScene" href="book.html" draggable="false" aria-label="The book: Your soul knows best">
+      <div class="bk" id="homeBook"><img class="f front" src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" draggable="false" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f spine" src="book/spine.webp" width="272" height="4050" loading="lazy" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <div class="opn" id="open"><!--OPEN-->
+        <div class="pg"><img data-src="book/p243.webp" width="1920" height="2880" decoding="async" alt="Page 243 as printed. Chapter 99, The actuality of the soul."></div>
+        <div class="leaf mid"><div class="lf-front"><img data-src="book/p193.webp" width="1200" height="1800" decoding="async" alt="Page 193 as printed. Chapter 70, Where are you rushing to?."></div><div class="lf-back"><img data-src="book/p242.webp" width="1920" height="2880" decoding="async" alt="Page 242 as printed."></div></div>
+        <div class="leaf mid"><div class="lf-front"><img data-src="book/p19.webp" width="1200" height="1800" decoding="async" alt="Page 19 as printed. Chapter 2, We weren’t meant to be living the way we do."></div><div class="lf-back"><img data-src="book/p192.webp" width="1200" height="1800" decoding="async" alt="Page 192 as printed."></div></div>
+        <div class="leaf" id="leaf"><div class="lf-front"><img src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" alt=""></div><div class="lf-back"><img data-src="book/p18.webp" width="1200" height="1800" decoding="async" alt="Page 18 as printed."></div></div>
+      <!--/OPEN--></div>
+    </a>
+    <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
+    <div class="bk-copy">
+      <h2 id="book-h">Your soul knows best.</h2>
+      <p><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></p>
+      <a class="btn primary" href="book.html">See the book</a>
+      <!--BOOK_LINE--><p class="fine">The book is being finished.</p><!--/BOOK_LINE-->
     </div>
-  </div></section>
+  </div></div></section>
 
   <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
     <h2 class="label" id="readers-h">What readers have said</h2>
-    <figure><div class="said">
+    <figure><div class="said" data-lit="lines">
       <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“Very wholesome post to wake up to at the top of my feed. Thank you sir, well written and very encouraging.”</blockquote><blockquote>“This resonated with me as i have experienced this several times and I now welcome moments like this in my life and indeed somewhat chase them now.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote>
     </div><figcaption>From early readers of the essays</figcaption></figure>
   </div></section>
 
   <section class="g close" id="question"><div class="wrap">
-    <svg class="orn" viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
-    <h2>What's in the way for you right now?</h2>
+    <svg class="orn" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
+    <h2 data-lit>What's in the way for you right now?</h2>
     <p class="sub">Leave it here. I read every one.</p>
     <p class="acts"><a class="more" href="/question/">Leave your question</a><a class="more dim" href="/conversation/">A conversation</a><a class="more dim" href="/music/">The piano</a><a class="more dim" href="ask.html">Ask soulsensis, opening soon</a></p>
   </div></section>
@@ -237,6 +312,72 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     answers.forEach(function (a) { a.hidden = a.getAttribute("data-f") !== c.getAttribute("data-f"); });
   }); });
   if (/[?&]src=yt/.test(location.search)) document.querySelectorAll('[data-cta="yt"]').forEach(function (a) { a.hidden = true; });
+})();
+</script>
+<script>
+// the book's scene (10 Nov 2026, brought back 11 Nov): it shows its spine, turns to face you, opens on a real spread and flicks to each
+// later stop. Scroll drives it; a drag turns the closed book too. Without .fx, sticky or the pages, the cover simply lies flat.
+(() => {
+  const root = document.documentElement, $ = (id) => document.getElementById(id);
+  const book = $("book"), sticky = book.querySelector(".sticky"), scene = $("bookScene"), bk = $("homeBook"), open = $("open"), leaf = $("leaf"), note = $("bookNote");
+  scene.addEventListener("dragstart", (e) => e.preventDefault());            // a drag never picks the cover up as a picture
+  if (!root.classList.contains("fx") || !leaf || getComputedStyle(sticky).position !== "sticky") { book.classList.remove("pin"); return; }
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const ease = (t) => t * t * (3 - 2 * t);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const rad = (d) => d * Math.PI / 180;
+  const light = (ry) => { bk.style.setProperty("--lf", (.5 + .5 * Math.max(0, Math.cos(rad(ry + 18)))).toFixed(3)); bk.style.setProperty("--ls", (.5 + .5 * Math.max(0, Math.sin(rad(ry + 10)))).toFixed(3));
+    bk.style.setProperty("--gx", (clamp((ry + 70) / 110) * 100).toFixed(1) + "%"); };   // the band of light crosses the cover as it turns
+  ["front", "spine", "gl"].forEach((c) => { const s = document.createElement("span"); s.className = c === "gl" ? "f gl" : "f sh " + c; s.setAttribute("aria-hidden", "true"); bk.append(s); });
+  bk.querySelectorAll("img").forEach((im) => { im.loading = "eager"; });
+  // the leaves in turning order: the cover, then for each later stop a short flick. The first leaf's face is the page being left, the last leaf's back the page arrived at.
+  const FL = 5, E = .5, leaves = [leaf], flicks = [];
+  [...open.querySelectorAll(".leaf.mid")].reverse().forEach((m) => {
+    const f = m.querySelector(".lf-front"), b = m.querySelector(".lf-back"), blank = (c) => { const s = document.createElement("div"); s.className = c + " lines"; return s; };
+    for (let j = 0; j < FL; j++) { const L = document.createElement("div"); L.className = "leaf fl"; L.append(j ? blank("lf-front") : f, j < FL - 1 ? blank("lf-back") : b); open.append(L); leaves.push(L); }
+    m.remove(); flicks.push(0);
+  });
+  const T0 = .03, T1 = .17, T2 = .23, T3 = .36, O0 = .41, O1 = .52, F0 = .56, F1 = .96, slot = (F1 - F0) / Math.max(1, flicks.length);
+  const fw = flicks.map((_, k) => [F0 + k * slot + .02, F0 + (k + 1) * slot - .05]);
+  const heads = (note.dataset.heads || "").split("|").filter(Boolean), wide = matchMedia("(min-width: 960px)");
+  let spin = 0, held = false, moved = 0, lastX = 0, back = 0, ticking = false;
+
+  function frame() {
+    ticking = false;
+    const r = book.getBoundingClientRect(), vh = sticky.offsetHeight || innerHeight, total = r.height - vh;
+    if (!open.dataset.ld && r.top < vh * 3 && r.bottom > -vh) { open.dataset.ld = 1; open.querySelectorAll("img").forEach((im) => { im.draggable = false; if (im.dataset.src) im.src = im.dataset.src; }); }   // the pages load only as the scene nears
+    if (r.bottom < -vh * .5 || r.top > vh * 1.5) return;
+    const p = total > 0 ? clamp(-r.top / total) : 0;
+    const W = bk.offsetWidth, w0 = open.offsetWidth, a = ease(seg(p, T0, T1)), b = ease(seg(p, T2, T3)), close = a * (1 - b);
+    const ry = (b > 0 ? lerp(90, 0, b) : lerp(-26, 90, a)) + spin * (1 - seg(p, T3, O0));
+    bk.style.setProperty("--ry", ry.toFixed(2) + "deg"); bk.style.setProperty("--rx", (-5 * (1 - Math.max(a, b))).toFixed(2) + "deg"); light(ry);
+    bk.style.scale = lerp(w0 / W, 1, close).toFixed(4);                       // close on the spine, never above the size it is laid out at
+    note.style.translate = wide.matches ? `0 ${(-(W - w0) * .75 * (1 - close)).toFixed(1)}px` : "none";   // the note stays just under the book as it comes close and goes back
+    bk.style.translate = wide.matches ? "none" : `0 ${(-(W - w0) * .75 * close).toFixed(1)}px`;   // on a phone the spine rises clear of the words under it
+    // the turned book gives way to the same cover lying flat, which opens
+    const sw = seg(p, T3, T3 + .02), gone = seg(p, T3 + .02, T3 + .035);
+    open.style.visibility = sw > 0 ? "visible" : "hidden"; open.style.opacity = sw.toFixed(3);
+    bk.style.opacity = (1 - gone).toFixed(3); bk.style.visibility = gone >= 1 ? "hidden" : "visible";
+    const o = ease(seg(p, O0, O1)), N = leaves.length;
+    leaves.forEach((L, i) => { let t = o; if (i) { const g = Math.floor((i - 1) / FL), j = (i - 1) % FL, q = seg(p, fw[g][0], fw[g][1]), st = j * .16; t = ease(seg(q, st, st + .36)); }
+      L.style.transform = `translateZ(${lerp((N - i) * E, (i + 1) * E, t).toFixed(2)}px) rotateY(${(-180 * t).toFixed(2)}deg)`; });
+    open.style.transform = `translate3d(${(w0 / 2 * o).toFixed(1)}px, 0, 0)`;
+    // the note under the book says what is being looked at: the front, the spine, then the chapter the book rests on
+    let k = 0; while (k < fw.length && p > (fw[k][0] + fw[k][1]) / 2) k++;
+    const txt = p < O0 + .05 ? (ry > 38 && ry < 132 ? "The spine" : "The front") : (heads[k] || "");
+    if (note.textContent !== txt) note.textContent = txt;
+  }
+  const ask = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
+  addEventListener("scroll", ask, { passive: true }); addEventListener("resize", ask); addEventListener("load", ask); frame();
+
+  // in the hand: a drag turns the closed book; let go and it comes back to where the scroll has it
+  const home = () => { if (held) return; spin *= .88; if (Math.abs(spin) < .3) spin = 0; frame(); if (spin) back = requestAnimationFrame(home); };
+  scene.addEventListener("pointerdown", (e) => { if (e.button) return; held = true; moved = 0; lastX = e.clientX; cancelAnimationFrame(back); if (e.pointerType === "mouse") { e.preventDefault(); try { scene.setPointerCapture(e.pointerId); } catch (_) {} } scene.classList.add("held"); });
+  scene.addEventListener("pointermove", (e) => { if (!held) return; const dx = e.clientX - lastX; lastX = e.clientX; moved += Math.abs(dx); if (moved > 4) { try { scene.setPointerCapture(e.pointerId); } catch (_) {} spin += dx * .55; frame(); } });
+  const drop = () => { if (!held) return; held = false; scene.classList.remove("held"); if (spin) back = requestAnimationFrame(home); };
+  scene.addEventListener("pointerup", drop); scene.addEventListener("pointercancel", drop);
+  scene.addEventListener("click", (e) => { if (moved > 4) e.preventDefault(); });   // a turn is not a tap on the link
 })();
 </script>
 <!--SIGNUP_JS--><!--/SIGNUP_JS-->

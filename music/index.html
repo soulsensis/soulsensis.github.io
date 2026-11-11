@@ -33,7 +33,7 @@ html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a { color: inherit; }
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
-.wrap { max-width: 640px; margin: 0 auto; }
+.wrap { max-width: 680px; margin: 0 auto; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: 16px; top: -60px; z-index: 30; padding: 10px 16px; border-radius: 4px; background: var(--ink); color: #000; font: 13px var(--sans); text-decoration: none; }
@@ -104,14 +104,14 @@ section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1
 <noscript><style>.draw *{stroke-dashoffset:0!important}.say span{opacity:1!important}.songs li{opacity:1!important}.player{display:none!important}.song{cursor:default}</style></noscript>
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: #000; border-bottom: 1px solid var(--line); font-family: var(--sans); }
-nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 640px; height: auto; min-height: 56px; margin: 0 auto; }
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
 .mark { display: flex; align-items: center; flex: none; gap: 10px; min-height: 44px; font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .24em; text-decoration: none; color: var(--ink); }
 nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
 @media (max-width: 560px) { nav.top .links a.far { display: none; } }
 body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
-body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 640px; margin: 0 auto; }
+body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 680px; margin: 0 auto; }
 body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
 body > footer a:hover { color: var(--ink); }
