@@ -368,9 +368,35 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       </div>
     </div>
     <!--NOTIFY--><div class="notify" id="notify">
-      <a class="btn pill" href="mailto:hello@soulsensis.com?subject=Tell%20me%20when%20the%20book%20is%20out">Tell me</a>
-      <p class="fine">It opens an email to hello@soulsensis.com. Send it as it is. One email back, from the author, the day the book is out.</p>
-      <!--EMAIL_LINE--><!-- 12 Nov 2026: the email line's HTML (another worker's snippet, handed over through the main chat) goes here; until then the email link above stays --><!--/EMAIL_LINE-->
+      <!--EMAIL_LINE--><style>
+.launch-line { display: grid; gap: 12px; max-width: 460px; }
+.launch-line .row { display: flex; gap: 10px; flex-wrap: wrap; }
+.launch-line input { flex: 1 1 200px; min-width: 0; font: inherit; font-size: 17px; padding: 14px 18px; border-radius: 40px; border: 1px solid var(--line, #2a2a31); background: transparent; color: inherit; }
+.launch-line input:focus-visible { outline: 2px solid #E63946; outline-offset: 2px; }
+.launch-line button { cursor: pointer; border: 0; font: inherit; }
+</style>
+      <form class="launch-line" method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/" id="launch-line">
+        <label class="fine" for="launch-email">One email from me, the day the book is out.</label>
+        <div class="row"><input id="launch-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email">
+        <button class="btn pill" type="submit">Tell me</button></div>
+        <p class="fine" id="launch-note" role="status" aria-live="polite"></p>
+      </form>
+      <p class="fine">Or <a href="mailto:hello@soulsensis.com?subject=Tell%20me%20when%20the%20book%20is%20out">send me an email</a> and I will tell you the same way.</p>
+      <script>
+(function () {
+  var f = document.getElementById("launch-line"), n = document.getElementById("launch-note");
+  if (!f || !window.fetch) return;                       // without script the form posts and the Worker answers with a page
+  f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var b = f.querySelector("button"); b.disabled = true;
+    fetch(f.action, { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: f.email.value }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { n.textContent = d.message; if (d.ok) f.reset(); b.disabled = false; })
+      .catch(function () { n.textContent = "That did not go through. Please try again."; b.disabled = false; });
+  });
+})();
+      </script><!--/EMAIL_LINE-->
     </div><!--/NOTIFY-->
     <p class="fine">Prices in Australian dollars unless marked. Amazon sets local prices in other countries.</p>
   </div></section>
