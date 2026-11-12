@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>soulsensis · Your soul knows best</title>
-<meta name="description" content="Honest essays from one person still working it out, for anyone who feels stuck, rushed or half alive. Written by a human.">
+<meta name="description" content="Your soul knows best. A book of essays to open at any page, one at a time, for the tiredness that comes from living a life that is not yours. Written by a human.">
 <link rel="canonical" href="https://soulsensis.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="soulsensis">
 <meta property="og:url" content="https://soulsensis.com/">
 <meta property="og:title" content="soulsensis · Your soul knows best">
-<meta property="og:description" content="Honest essays from one person still working it out. For anyone who feels stuck, rushed or half alive.">
+<meta property="og:description" content="Your soul knows best. A book of essays to open at any page, one at a time, for the tiredness that comes from living a life that is not yours. Written by a human.">
 <meta property="og:image" content="https://soulsensis.com/book-og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The cover of Your soul knows best, by soulsensis, beside its title">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="soulsensis · Your soul knows best">
-<meta name="twitter:description" content="Honest essays from one person still working it out. For anyone who feels stuck, rushed or half alive.">
+<meta name="twitter:description" content="Your soul knows best. A book of essays to open at any page, one at a time, for the tiredness that comes from living a life that is not yours. Written by a human.">
 <meta name="twitter:image" content="https://soulsensis.com/book-og.jpg">
 <script type="application/ld+json">
 {
@@ -27,7 +27,7 @@
    "@id": "https://soulsensis.com/#site",
    "name": "soulsensis",
    "url": "https://soulsensis.com/",
-   "description": "Honest essays from one person still working it out. For anyone who feels stuck, rushed or half alive.",
+   "description": "Your soul knows best. A book of essays to open at any page, one at a time, for the tiredness that comes from living a life that is not yours. Written by a human.",
    "inLanguage": "en",
    "publisher": { "@id": "https://soulsensis.com/#author" }
   },
@@ -102,10 +102,27 @@ header.top { padding-block: clamp(56px, 12vw, 120px) clamp(40px, 7vw, 72px); }
 .hero-book { display: none; }
 @media (min-width: 960px) { header.top .stage { display: grid; align-items: center; min-height: 520px; } header.top .wrap { width: 100%; max-width: none; }
   header.top .lines { max-width: 30em; } header.top h1 { max-width: 11em; }
-  .hero-book { display: block; position: absolute; right: 40px; top: 50%; width: min(300px, 24vw); margin: 0; translate: 0 -50%; rotate: 3deg; }
+  .hero-book { display: block; position: absolute; right: 40px; margin: 0; top: 50%; width: min(300px, 24vw); margin: 0; translate: 0 -50%; rotate: 3deg; }
   .hero-book img { width: 100%; border: 1px solid #1c1c21; border-radius: 1px 3px 3px 1px; box-shadow: 0 40px 80px -20px rgba(0,0,0,.9), 0 0 0 1px rgba(245,242,234,.04); }
   .hero-book::after { content: ""; position: absolute; left: 8%; right: 8%; bottom: -34px; height: 30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.9), transparent); } }
-@media (max-width: 959px) { header.top { padding-top: clamp(40px, 9vw, 72px); } .logo { width: 60px; height: 60px; margin-bottom: 26px; } }
+/* a phone (12 Nov, the night round): the cover stands above his line, so the first screen shows what is sold; the bar already carries the mark */
+@media (max-width: 959px) { header.top { padding-top: clamp(28px, 7vw, 56px); } .logo { display: none; }
+  .hero-book { display: block; width: clamp(96px, 27vw, 132px); margin: 0 0 26px; rotate: -2deg; }
+  .hero-book img { width: 100%; border: 1px solid #2a2a31; border-radius: 1px 3px 3px 1px; box-shadow: 0 24px 48px -16px rgba(0,0,0,.95), 0 0 0 1px rgba(245,242,234,.06), 0 0 40px rgba(245,242,234,.05); } }
+/* his sentences and the joins, one idea a section */
+.say p { margin: 22px 0 0; font-size: clamp(19px, 2.6vw, 22px); line-height: 1.55; color: #c9c5bc; }
+.say p.his { color: var(--ink); font-style: italic; }
+.say .btn { margin-top: 30px; }
+#you h2, #how h2 { font-size: clamp(28px, 4.6vw, 40px); line-height: 1.18; }
+/* the three ways in: thin line drawings, one word each, as a plain app bar (12 Nov) */
+#ways { padding-block: clamp(48px, 8vw, 88px); }
+.icons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 6px 0 0; }
+.icon { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px 4px 14px; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: border-color .2s; }
+.icon:hover { border-top-color: var(--heart); }
+.icon svg { width: 40px; height: 40px; }
+.icon b { font: 500 15px var(--sans); letter-spacing: .02em; }
+.icon span { font-size: 16px; line-height: 1.45; color: #b9b5ab; }
+@media (max-width: 520px) { .icon span { font-size: 14px; } .icon svg { width: 34px; height: 34px; } }
 h1 { margin: 0; font-weight: 400; font-size: clamp(42px, 7.4vw, 68px); line-height: 1.04; letter-spacing: -.02em; color: var(--grey); text-wrap: balance; }
 h1 em { font-style: italic; color: var(--ink); }
 .lines { margin: 22px 0 0; font-family: var(--sans); font-size: 16px; line-height: 1.65; color: var(--grey); max-width: 34em; }
@@ -134,17 +151,17 @@ h1 em { font-style: italic; color: var(--ink); }
 .film img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .film .play { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: rgba(11,11,13,.72); border: 1px solid rgba(245,242,234,.5); }
 .film .play::after { content: ""; position: absolute; left: 26px; top: 21px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent var(--ink); }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 28px); align-items: end; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 28px); align-items: start; }
 .pp { margin: 0; } .pp img { width: 100%; border-radius: 2px; } .pp.cover img { border: 1px solid #1c1c21; }
 .pp figcaption { margin-top: 10px; font-family: var(--sans); font-size: 12px; line-height: 1.45; color: var(--muted); }
 /* the sections after: his sentence as the heading, one picture, one thing said */
 h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-height: 1.1; letter-spacing: -.015em; text-wrap: balance; }
 .ask { margin: 22px 0 0; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.4; color: #c9c5bc; }
-#who { overflow: hidden; overflow: clip; }
-#who .wrap { position: relative; }
+#you { overflow: hidden; overflow: clip; }
+#you .wrap { position: relative; }
 .flower { position: absolute; z-index: -1; top: -40px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
-.flower g g { stroke-width: .26; } .flower g > circle { stroke-width: .4; }
-@media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .32; } #who h2, #who .ask { max-width: 540px; } }
+.flower g g { stroke-width: .26; } .flower g > circle { stroke-width: .3; }
+@media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .23; } #you h2, #you p { max-width: 540px; } }
 /* what are you carrying: plain words to choose from, answered in the essay's own first sentence */
 .chips { display: flex; flex-wrap: wrap; gap: 2px 18px; margin: 14px 0 0; }
 .chip { position: relative; min-height: 44px; padding: 0; border: 0; background: none; color: #b9b5ab; font: 400 17px var(--serif); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; transition: color .2s, text-decoration-color .2s; }
@@ -273,12 +290,22 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 
 <main id="top">
   <header class="top g" id="hero"><div class="stage"><div class="wrap">
-    <svg class="logo" data-draw="load" data-turn viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
+    <svg class="logo" data-draw="load" data-turn viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
+    <a class="hero-book" href="book.html" tabindex="-1" aria-hidden="true"><img src="book/front.webp" width="1350" height="2025" fetchpriority="high" decoding="async" alt=""></a>
     <h1>Your soul <em>knows best.</em></h1>
     <p class="lines"><b>Listen to your soul.</b> All it has wanted is to be heard.</p>
-    <p class="lines">Honest essays from one person still working it out. For anyone who feels <b>stuck, rushed or half alive.</b></p>
+    <p class="lines"><b>There is a particular kind of tiredness that comes from living a life that is not yours.</b> If you have not picked up a book in ages, start with this one.</p>
     <div class="cta"><a class="btn pill" href="book.html">See the book</a></div>
-  </div><a class="hero-book" href="book.html" tabindex="-1" aria-hidden="true"><img src="book/front.webp" width="1350" height="2025" decoding="async" alt=""></a></div></header>
+  </div></div></header>
+
+  <section class="g say" id="you" aria-labelledby="you-h"><div class="wrap">
+    <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
+    <p class="label">Your day</p>
+    <h2 id="you-h" data-lit>Most of us spend our days moving between enclosures, the office, the bedroom, the car, and we call that a life.</h2>
+    <p>Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me, watching everyone else appear further along, better positioned, more accomplished, measuring my progress against theirs as if we were running the same race.</p>
+    <p>There is a version of you that you have been reaching for, and there is a version of you that you have been performing, and the distance between the two is where the tiredness lives.</p>
+    <p>It settles in quietly, over years, and one morning you wake up and realise you have been carrying it the whole time.</p>
+  </div></section>
 
   <section class="g" id="show" aria-label="See it for yourself"><div class="wrap">
     <div class="tabs" role="tablist" aria-label="See it for yourself">
@@ -287,32 +314,40 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <button class="tab" type="button" role="tab" id="t-watch" aria-controls="p-watch" aria-selected="false">Watch</button>
     </div>
     <div class="panels">
-      <div class="panel" role="tabpanel" id="p-book" aria-labelledby="t-book"><!--TAB_BOOK--><div class="pair"><figure class="pp cover"><img src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" alt="The cover of Your soul knows best"><figcaption>The cover</figcaption></figure><figure class="pp"><img src="book/p19.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 19 as printed."><figcaption>Chapter 2, We weren’t meant to be living the way we do, as printed</figcaption></figure></div><p class="acts"><a class="more" href="/book.html#inside">Look inside</a></p><!--/TAB_BOOK--></div>
-      <div class="panel" role="tabpanel" id="p-read" aria-labelledby="t-read"><!--TAB_READ--><article class="sheet"><p class="kind">An essay · 2 min read</p><h3>Half alive, half dead</h3><div class="prose"><p>There&#x27;s a state a lot of people live in without ever naming it. You&#x27;re not really living, but you&#x27;re not dying either. You&#x27;re half alive and half dead.</p><p>No one is here to tell you how to live. That&#x27;s number one. You need to decide for yourself exactly how you want to live, and know that your decision dictates exactly how your life turns out. Because the way you live strongly influences the thoughts you have about yourself.</p></div><p class="acts"><a class="more" href="/essays/half-alive-half-dead/">Read the essay</a><a class="more dim" href="/essays.html">All 27 essays</a></p></article><!--/TAB_READ--></div>
+      <div class="panel" role="tabpanel" id="p-book" aria-labelledby="t-book"><!--TAB_BOOK--><div class="pair"><figure class="pp"><img src="book/p18.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 18 as printed."><figcaption>Page 18</figcaption></figure><figure class="pp"><img src="book/p19.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 19 as printed."><figcaption>Chapter 2, We weren’t meant to be living the way we do, as printed</figcaption></figure></div><p class="acts"><a class="more" href="/book.html#inside">Look inside</a></p><!--/TAB_BOOK--></div>
+      <div class="panel" role="tabpanel" id="p-read" aria-labelledby="t-read"><!--TAB_READ--><article class="sheet"><p class="kind">An essay · 3 min read</p><h3>Listen to your soul</h3><div class="prose"><p>Do you realise that your inner state strongly dictates your external environment? Why do some people who are brought up with nothing achieve millions? Such individuals change their inner state, which must be done first, before their external reality &quot;catches up&quot; to their inner state. It&#x27;s just, usually, being brought up with nothing means one&#x27;s inner state is aligned with lack &amp; sadness which is hard to see when one is in it, unless their awareness is strong enough to make changes to see a different truth. We are so enmeshed in society&#x27;s consumeristic regime that we don&#x27;t recognise the impact it has on people&#x27;s inner state.</p><p>From constant digital consumption availed to society in mass through phones, people are lethargic &amp; full from consumption that production &amp; creativity get suppressed &amp; people wonder why they are sad.</p></div><p class="acts"><a class="more" href="/essays/listen-to-your-soul/">Read the essay</a><a class="more dim" href="/essays.html">All 27 essays</a></p></article><!--/TAB_READ--></div>
       <div class="panel" role="tabpanel" id="p-watch" aria-labelledby="t-watch"><!--TAB_WATCH--><a class="film" href="/essays/where-are-you-rushing-to/"><img src="/film/where-are-you-rushing-to.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="The film&#39;s picture: Where are you rushing to?"><span class="play" aria-hidden="true"></span></a><p class="kind">A film, narrated</p><h3>Where are you rushing to?</h3><p class="acts"><a class="more" href="/essays/where-are-you-rushing-to/">Watch it</a><a class="more dim" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p><!--/TAB_WATCH--></div>
     </div>
   </div></section>
 
-  <section class="g" id="who" aria-labelledby="who-h"><div class="wrap">
-    <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".62" stroke-opacity=".8"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".98"/></g><circle r="1.9" fill="#E63946"/></svg>
-    <p class="label">Who it is for</p>
-    <h2 id="who-h" data-lit>Sit still enough to hear it.</h2>
-    <p class="ask">What are you carrying?</p>
-    <div class="chips" id="feelings" role="group" aria-label="Choose how you feel"><!--FEEL_CHIPS--><button type="button" class="chip on" data-f="stuck" aria-pressed="true">Stuck</button><button type="button" class="chip" data-f="rushed" aria-pressed="false">Rushed</button><button type="button" class="chip" data-f="half-alive" aria-pressed="false">Half alive</button><button type="button" class="chip" data-f="not-enough" aria-pressed="false">Not enough</button><button type="button" class="chip" data-f="hurting" aria-pressed="false">Hurting</button><button type="button" class="chip" data-f="tired" aria-pressed="false">Tired</button><button type="button" class="chip" data-f="lost" aria-pressed="false">Lost</button><button type="button" class="chip" data-f="peace" aria-pressed="false">Ready for peace</button><!--/FEEL_CHIPS--></div>
-    <div class="answers" id="answers" aria-live="polite"><!--FEEL_ANSWERS--><div class="answer on" data-f="stuck"><blockquote>We were born to be fearless, to pursue the greatest things that are available to us, to pursue what is most meaningful to us.</blockquote><p class="from">Born to be fearless</p><p class="acts"><a class="more" href="/essays/born-to-be-fearless/">Read it</a><a class="more dim" href="/essays.html#stuck">9 essays for this</a></p></div><div class="answer" data-f="rushed" hidden><blockquote>Everyone feels rushed, but no one is asking: where are you rushing to?</blockquote><p class="from">Where are you rushing to?</p><p class="acts"><a class="more" href="/essays/where-are-you-rushing-to/">Read it</a><a class="more dim" href="/essays.html#rushed">5 essays for this</a></p></div><div class="answer" data-f="half-alive" hidden><blockquote>There&#x27;s a state a lot of people live in without ever naming it.</blockquote><p class="from">Half alive, half dead</p><p class="acts"><a class="more" href="/essays/half-alive-half-dead/">Read it</a><a class="more dim" href="/essays.html#half-alive">2 essays for this</a></p></div><div class="answer" data-f="not-enough" hidden><blockquote>Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me.</blockquote><p class="from">Perception is key</p><p class="acts"><a class="more" href="/essays/perception-is-key/">Read the opening</a><a class="more dim" href="/essays.html#not-enough">5 essays for this</a></p></div><div class="answer" data-f="hurting" hidden><blockquote>There are mornings I wake up underneath a crushing weight which I can&#x27;t seem to name nor quite shake.</blockquote><p class="from">You do not get what you want</p><p class="acts"><a class="more" href="/essays/you-do-not-get-what-you-want/">Read it</a><a class="more dim" href="/essays.html#hurting">6 essays for this</a></p></div><div class="answer" data-f="tired" hidden><blockquote>You need to be kind to yourself.</blockquote><p class="from">Step away</p><p class="acts"><a class="more" href="/essays/step-away/">Read it</a><a class="more dim" href="/essays.html#tired">4 essays for this</a></p></div><div class="answer" data-f="lost" hidden><blockquote>Do you realise that your inner state strongly dictates your external environment?</blockquote><p class="from">Listen to your soul</p><p class="acts"><a class="more" href="/essays/listen-to-your-soul/">Read it</a><a class="more dim" href="/essays.html#lost">6 essays for this</a></p></div><div class="answer" data-f="peace" hidden><blockquote>Somewhere between one tree and the next, something opens.</blockquote><p class="from">The walk: the alignment</p><p class="acts"><a class="more" href="/essays/the-walk-the-alignment/">Read the opening</a><a class="more dim" href="/essays.html#peace">4 essays for this</a></p></div><!--/FEEL_ANSWERS--></div>
+  <section class="g say" id="how" aria-labelledby="how-h"><div class="wrap">
+    <p class="label">How to read it</p>
+    <h2 id="how-h" data-lit><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></h2>
+    <p>Each piece stands alone, so you can read one in a few minutes and put the book down until tomorrow.</p>
+    <p class="his">The whole point of my essays, at the end of the day, is to help people feel better.</p>
+    <p class="his">It is fine to be a bit lost every now and then.</p>
   </div></section>
 
-  <section class="g" id="talk" aria-labelledby="talk-h"><div class="wrap">
-    <p class="label">Talk to soulsensis</p>
-    <h2 id="talk-h" data-lit>What's in the way for you right now?</h2>
-    <p class="ask">Leave it here. I read every one.</p>
-    <div class="ways">
-      <a class="way" href="/question/"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="2.4"><circle r="40"/></g><circle r="5" fill="#E63946"/></svg><h3>Leave your question</h3><p>Some become essays and videos, so others carrying the same thing can read the answer.</p><span class="price">Free, always.</span><span class="go">Leave a question</span></a>
-      <a class="way" href="/conversation/"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="2.4"><circle cx="-16" r="30"/><circle cx="16" r="30"/></g><circle r="5" fill="#E63946"/></svg><h3>Hear the truth, said with care.</h3><p>Your friends don't always tell you the truth. They love you, and they don't want to hurt you or lose you.</p><span class="price">60 minutes, one to one · A$300</span><span class="go">Book a conversation</span></a>
-      <a class="way" href="ask.html"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#F5F2EA" stroke-width="2.4"><circle cx="-22" r="16"/><circle r="16"/><circle cx="22" r="16"/></g></svg><h3>Tell me what's going on.</h3><p>Private by design: no name or email, your chats are encrypted, nobody reads them, and you can delete everything in one tap.</p><span class="price">A$5 a month · opening soon</span><span class="go">Ask soulsensis, opening soon</span></a>
-    </div>
+  <section class="g say" id="wrote" aria-labelledby="wrote-h"><div class="wrap">
+    <p class="label">Who wrote it</p>
+    <h2 id="wrote-h" data-lit>Written under a pen name.</h2>
+    <p>I write as soulsensis so that nothing about work, family or my own mistakes has to be held back.</p>
+    <p class="his">I am building something that is meant to serve as a lighthouse for lost souls, and yet I carry a level of thinking that turns against me without permission, thoughts that attack when everything is going well.</p>
+    <p>Every line is my own, most of it written by hand in a journal first.</p>
   </div></section>
 
+  <section class="g say" id="price" aria-labelledby="price-h"><div class="wrap">
+    <p class="label">The price</p>
+    <h2 id="price-h" data-lit><!--PRICE_HEAD-->A$4.99 on Kindle. A$24.99 in paperback.<!--/PRICE_HEAD--></h2>
+    <p>The Kindle edition reads on any phone or Kindle; the paperback is 6 by 9 inches.</p>
+    <!--PRICE_LINE--><p>On Amazon soon.</p><!--/PRICE_LINE-->
+    <a class="btn pill" href="book.html">See the book</a>
+  </div></section>
+
+  <section class="g" id="ways" aria-labelledby="ways-h"><div class="wrap">
+    <h2 class="label" id="ways-h">Read, ask or talk</h2>
+    <div class="icons"><!--WAYS--><a class="icon" href="/book.html"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 14.5C19.5 11.6 13 11 7.5 12v24c5.5-1 12-.4 16.5 2.5 4.5-2.9 11-3.5 16.5-2.5V12c-5.5-1-12-.4-16.5 2.5Z"/><path d="M24 14.5v24"/><circle cx="24" cy="41.5" r="1.1" fill="#E63946" stroke="none"/></svg><b>book</b><span>Sample pages and the two editions.</span></a><a class="icon" href="/ask.html"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="7.5" y="13" width="33" height="22" rx="2.5"/><path d="M8.5 14.5 24 26.5l15.5-12"/><circle cx="24" cy="26.5" r="1.1" fill="#E63946" stroke="none"/></svg><b>ask</b><span>Your question, answered in writing.</span></a><a class="icon" href="/conversation/"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10.5h17a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H17l-5.5 4.5v-4.5H10a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3Z"/><path d="M33.5 18H38a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-1.5v4.5L31 33h-8a3 3 0 0 1-3-3v-1"/><circle cx="18.5" cy="18" r="1.1" fill="#E63946" stroke="none"/></svg><b>talk</b><span>A conversation with me, one to one.</span></a><!--/WAYS--></div>
+  </div></section>
   <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
     <h2 class="label" id="readers-h">What readers have said</h2>
     <figure><div class="said" data-lit="lines">
@@ -333,10 +368,10 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </a>
     <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
     <div class="bk-copy">
-      <h2 id="book-h">Feel at home again.</h2>
-      <p><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></p>
+      <h2 id="book-h">All I had to do was sit still enough to hear it.</h2>
+      <p>On Kindle and in paperback.</p>
       <a class="btn pill" href="book.html">See the book</a>
-      <!--BOOK_LINE--><p class="fine">The book is being finished.</p><!--/BOOK_LINE-->
+      <!--BOOK_LINE--><!--/BOOK_LINE-->
     </div>
   </div></div></section>
 </main>

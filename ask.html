@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ask soulsensis</title>
-<meta name="description" content="Talk to an AI version of the soulsensis writer, built from years of the writer's own words. Tell it what's going on; it names the real problem and tells you straight what to do. Private by design.">
+<meta name="description" content="Two ways to ask soulsensis: one question answered in writing by the author, A$19; or AI answers from the published essays, labelled as AI, A$5 a month.">
 <link rel="canonical" href="https://soulsensis.com/ask.html">
 <!--ASK_ROBOTS--><meta name="robots" content="noindex"><!--/ASK_ROBOTS-->
 <!--ASK_API--><meta name="ask-api" content=""><!--/ASK_API-->
@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="soulsensis">
 <meta property="og:url" content="https://soulsensis.com/ask.html">
 <meta property="og:title" content="Ask soulsensis">
-<meta property="og:description" content="Tell it what's going on. It names the real problem and tells you straight what to do. No name, no email, nobody reads your chats.">
+<meta property="og:description" content="One question answered in writing by the author, A$19. Or AI answers from the published essays, labelled as AI, A$5 a month.">
 <meta property="og:image" content="https://soulsensis.com/book-og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#000000">
@@ -27,7 +27,7 @@ try{if(document.querySelector('meta[name="ask-api"]').content)document.documentE
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <style>
-:root { --ground: #000; --raised: #0e0e12; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D; --them: #16161b;
+:root { --ground: #0b0b0d; --raised: #131317; --ink: #F5F2EA; --muted: #9d998f; --line: #24242a; --heart: #E63946; --heart-fill: #D9303D; --them: #16161b;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
 @font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
@@ -120,7 +120,7 @@ html:not(.fx) .phone { height: auto; } html:not(.fx) .phone .log { -webkit-mask-
 .phone .ss + .them { margin-top: .6em; }
 .phone .them { align-self: flex-end; max-width: 88%; margin: 0; background: var(--them); border: 1px solid var(--line); border-radius: 1.2em 1.2em .3em 1.2em; padding: .7em 1em; line-height: 1.45; }
 .phone .ss { margin: 0; font-family: var(--serif); font-size: 1.14em; line-height: 1.5; }
-.phone .who { display: block; margin-bottom: .4em; font-family: var(--sans); font-size: max(12px, .7em); letter-spacing: .3em; text-transform: uppercase; color: var(--heart); }
+.phone .who { display: block; margin-bottom: .4em; font-family: var(--sans); font-size: max(12px, .7em); letter-spacing: .3em; text-transform: uppercase; color: #c9c5bc; }
 .phone .listen { display: none; margin: 0; font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 1.14em; }
 .phone .listen::after { content: ""; display: inline-block; width: .4em; height: .4em; margin-left: .5em; border-radius: 50%; background: var(--heart); vertical-align: middle; animation: pulse 1.2s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .2; transform: scale(.7); } }
@@ -178,7 +178,7 @@ section.flow { padding-block: clamp(72px, 10vw, 140px); }
 @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .msg.them { align-self: flex-end; background: var(--them); border: 1px solid var(--line); border-radius: 18px 18px 4px 18px; padding: 11px 16px; font-size: 16px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
 .msg.ss { align-self: flex-start; font-family: var(--serif); font-size: 19px; line-height: 1.65; white-space: pre-wrap; max-width: 60ch; overflow-wrap: anywhere; }
-.msg.ss .who { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--heart); display: block; margin-bottom: 6px; }
+.msg.ss .who { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: #c9c5bc; display: block; margin-bottom: 6px; }
 .thinking { color: var(--muted); font-style: italic; }
 .thinking::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-radius: 50%; background: var(--heart); vertical-align: middle; animation: pulse 1.2s ease-in-out infinite; }
 form.send { position: sticky; bottom: 0; background: linear-gradient(transparent, var(--ground) 18%); padding: 14px 0 calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 10px; align-items: flex-end; }
@@ -216,6 +216,37 @@ button:disabled { opacity: .5; cursor: default; }
   .draw *, .rise, .msg, .phone *, .thinking::after { transition: none !important; animation: none !important; }
   .draw * { stroke-dashoffset: 0 !important; } .rise { opacity: 1 !important; transform: none !important; } .dot { opacity: 1; }
 }
+
+/* 12 Nov 2026 (night): two offers side by side, the brand's thin line icons, nothing clinical */
+#offers .offers { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 30px auto 0; max-width: 1000px; text-align: left; }
+@media (min-width: 760px) { #offers .offers { grid-template-columns: 1fr 1fr; } }
+.offer { display: flex; flex-direction: column; gap: 10px; padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: var(--raised); }
+.offer svg { width: 44px; height: 44px; }
+.offer .kind { margin: 0; font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+.offer h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.2; }
+.offer p { margin: 0; font-size: 16px; line-height: 1.55; color: #c9c5bc; }
+.offer .price { font-size: 18px; color: var(--ink); }
+.offer .facts { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.offer .soon { margin-top: auto; font-size: 14px; color: var(--muted); }
+.offer .more { margin-top: auto; }
+#offers .plain { max-width: 640px; margin: 22px auto 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
+
+/* one question's form and the AI label (12 Nov 2026) */
+.oq { text-align: left; }
+.oq label { font-family: var(--sans); font-size: 14px; color: var(--ink); margin-bottom: -6px; }
+.oq textarea { border-radius: 4px; min-height: 160px; }
+.oq input { border-radius: 4px; flex: none; }
+.oq b { color: var(--ink); font-weight: 500; }
+.card.oq { border-color: #3a3a42; }
+.linkish { background: none; border: 0; padding: 0; min-height: 0; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; display: inline; }
+.oq-q { margin: 0; padding: 12px 16px; border-left: 2px solid var(--heart); color: #d9d5cc; font-family: var(--serif); font-size: 17px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+.oq-ref { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--sans) !important; font-size: 15px !important; }
+.oq-ref code { font: 500 17px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em; color: var(--ink); padding: 8px 10px; border: 1px solid #3a3a42; border-radius: 4px; }
+.read { margin: 12px 0 0 !important; font-family: var(--sans) !important; font-size: 14px !important; white-space: normal; }
+.read a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .phone .thread > :nth-child(n+4) { display: none; } }
+.ai-label { margin: 10px 0 0 !important; font-family: var(--sans) !important; font-size: 12px !important; line-height: 1.5 !important; color: var(--muted) !important; letter-spacing: .02em; }
+.vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 <noscript><style>.rise{opacity:1!important;transform:none!important}.draw *{stroke-dashoffset:0!important}.dot{opacity:1!important}</style></noscript>
 <style id="journal">
@@ -322,36 +353,56 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </div>
     <div class="copy" id="heroCopy">
       <p class="eyebrow rise">Ask soulsensis</p>
-      <h1 class="rise">Tell me what's going on.</h1>
-      <p class="sub rise">An AI version of the writer, built from years of the writer's own words.</p>
+      <h1 class="rise">Your question, <em>answered in writing.</em></h1>
+      <p class="sub rise">Write to me for a reply I write myself, or ask an AI that answers only from the published essays.</p>
       <!--ASK_STATE--><p class="price-line rise">Opening soon.</p><!--/ASK_STATE-->
       <p class="acts rise" style="margin:0;justify-content:flex-start"><a class="more" href="#how">See how it answers</a><a class="more dim wait-only" href="/question/">Leave your question</a></p>
     </div>
   </header>
 
+  <section class="flow g" id="offers" aria-labelledby="offers-h"><div class="wrap center">
+    <h2 class="rise" id="offers-h">Two ways to ask.</h2>
+    <div class="offers">
+      <article class="offer rise" id="one-question"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="7.5" y="13" width="33" height="22" rx="2.5"/><path d="M8.5 14.5 24 26.5l15.5-12"/><circle cx="24" cy="26.5" r="1.1" fill="#E63946" stroke="none"/></svg>
+        <p class="kind">Written by me</p>
+        <h3>One question</h3>
+        <p>Send one question about what is going on for you, and I answer it myself, in writing, as carefully as I would write an essay.</p>
+        <p class="price">A$19, once</p>
+        <ul class="facts"><li>One question, one written answer, by email.</li><li>Read by me and no one else; never published.</li><li>No AI writes it.</li></ul>
+        <!--ONE_QUESTION--><a class="btn red live-oq" href="#write" hidden>Write your question</a><span class="soon wait-oq">Opening soon</span><!--/ONE_QUESTION-->
+      </article>
+      <article class="offer rise" id="ai-answers"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 14.5C19.5 11.6 13 11 7.5 12v24c5.5-1 12-.4 16.5 2.5 4.5-2.9 11-3.5 16.5-2.5V12c-5.5-1-12-.4-16.5 2.5Z"/><path d="M24 14.5v24M11.5 18.5h8M11.5 23h8M28.5 18.5h8M28.5 23h5"/><circle cx="24" cy="41.5" r="1.1" fill="#E63946" stroke="none"/></svg>
+        <p class="kind">Made by AI, never by me</p>
+        <h3>AI answers from the essays</h3>
+        <p>Ask whenever you need to, up to the monthly limit. Every answer is drawn by AI from the published essays, never written by me, and always marked as AI.</p>
+        <p class="price">A$5 a month</p>
+        <ul class="facts"><li>3 questions free, then up to 60 answers a month.</li><li>No name or email; nobody reads your chats.</li><li>Cancel any time.</li></ul>
+        <!--AI_ANSWERS--><a class="btn red live-only" href="#talk">Ask the essays</a><span class="soon wait-only">Opening soon</span><!--/AI_ANSWERS-->
+      </article>
+    </div>
+  </div></section>
+
+
   <section class="pin calm say g" id="sayPin" style="--len:2.3" aria-label="What it does"><div class="sticky">
-    <p id="say">I'll tell you what I think the real problem is, what I'd do about it, and why.</p>
+    <p id="say">It answers from the published essays, and names the essay.</p>
   </div></section>
 
   <section class="pin how g" id="how" style="--len:12" aria-labelledby="how-h"><div class="sticky">
     <div class="how-copy" id="howCopy">
-      <h2 id="how-h">It names the real problem.</h2>
-      <p class="sub">And tells you straight what to do. Three real answers from its testing.</p>
+      <h2 id="how-h">Answers from the essays.</h2>
+      <p class="sub">Sample answers: each quotes the essays, links the one it draws on, and is marked as AI.</p>
       <a class="more wait-only" href="/question/">Leave your question</a>
     </div>
     <div class="scene3d">
-      <div class="phone" id="phone" role="img" aria-label="Three conversations on a phone, each a real answer from testing. Someone writes what is going on; soulsensis names the real problem, says what it would do, and why.">
+      <div class="phone" id="phone" role="img" aria-label="Two questions on a phone, each answered by AI from the published essays, naming the essay and marked as AI.">
         <div class="bar" aria-hidden="true"><svg viewBox="-64 -64 128 128"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75" data-seed></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</div>
         <div class="log" aria-hidden="true"><div class="thread" id="thread">
-          <p class="them">I game 5-6 hours every night after the kids go to bed. Wife says Im checked out. She is probably right. I just feel like its the only time that belongs to me. How do I fix this without giving up the one thing I enjoy?</p>
-          <p class="listen">Listening…</p>
-          <div class="ss"><span class="who">soulsensis</span><p>Your wife's right, and so are you, and that's the knot. That block after bedtime is the only hour of the day nobody's asking you for anything, so you've loaded all your rest into it, and six hours of gaming doesn't rest you, it just stops you feeling the day. Meanwhile she's sitting in the next room feeling like she lives with a ghost.</p><p>You don't have to kill the gaming. Tonight, set a hard stop at 10:30 and sit with her for the first hour after the kids are down instead, phones and screens off, asking how she's actually going and hearing the whole answer without fixing it. Then you game guilt-free, because the time with her is banked first and the stop time means you're not hiding in it.</p><p>Do that every night this week and watch what happens to the gaming. When you're not using it to shut the day out, three hours will feel like plenty, and what you do with that time is yours.</p><p>Start tonight, kids down, 10:30 on the clock.</p></div>
-          <p class="them">Grading till midnight, then up with my toddler. I feel like I'm failing both my students and my kid. I tried a bath last week and thought about all the things I should be doing the whole time. How do I actually relax?</p>
-          <p class="listen">Listening…</p>
-          <div class="ss"><span class="who">soulsensis</span><p>The bath failed because you were sitting in it with a prosecutor. Relaxing was never the problem. You can't switch off while a voice keeps reading you the charges, and "failing both" is that voice talking, not a fact. You're up late marking and up early with a kid. That's two people depending on you and not enough hours. It's a squeeze, not a failure.</p><p>So stop trying to relax and decide where the line is. Pick a hard stop for marking, say 10:30pm, and when the timer goes, whatever's unmarked stays unmarked. Write tomorrow's first three scripts on a sticky note so the pile stops chasing you into the bathroom. Your head holds on to unfinished things because nothing told it they were parked.</p><p>Then, for ten minutes after the stop, do something with your hands and no screen: dishes, folding, stretching on the floor. Not a bath yet. A bath is too much empty room when your head's still loud, and the hands give it somewhere to land.</p><p>Try that tonight, hard stop at 10:30, sticky note written, ten minutes of dishes before bed.</p></div>
-          <p class="them">I've been into spirituality, meditation, manifesting, all of it. But lately it feels like I'm just lying to myself and nothing actually changes. Is this stuff real or am I kidding myself?</p>
-          <p class="listen">Listening…</p>
-          <div class="ss"><span class="who">soulsensis</span><p>Some of it's real and some of it's you kidding yourself, and you probably already know which is which. The stuff that works is the stuff that changes how you see things: sitting still without reaching for your phone, noticing a feeling without feeding it. The stuff that doesn't is when it turns into a replacement for doing anything. If you're meditating or manifesting and your actual days look identical, it's become a nicer way to wait.</p><p>Spirituality that can't touch your real life is just a hobby with good branding. A lot of people run it as a second, more flattering identity, and underneath it they're still avoiding the one thing they know they should do.</p><p>So pick the one real-world thing you've been circling, the conversation, the application, the thing you'd do for free, and do the smallest piece of it for ten minutes. Then sit still for ten minutes after, and watch how different that sit feels when something actually moved. You'll learn more from that one swap than from another month of practising on its own.</p><p>Do it tomorrow morning, before you open anything else.</p></div>
+          <p class="them">I feel like I am always rushing and never arriving anywhere.</p>
+          <p class="listen">Reading the essays…</p>
+          <div class="ss"><span class="who">soulsensis AI</span><p>You are not the only one, and the rush itself may be the thing to question. In “Where are you rushing to?” the writer puts it plainly: “Everyone feels rushed, but no one is asking: where are you rushing to?” Going faster does not fix the feeling of never arriving. “Acceleration only gets you to a place faster. It does not mean you are happier. It just means you will have another goal sooner.”</p><p>So try the small thing the essay suggests. “Tomorrow morning, before you pick up your phone, before the first goal of the day, ask yourself one thing: where am I rushing to?” If you cannot answer it, that is your sign to slow down until you can.</p><p class="read">Read the essay: <a href="/essays/where-are-you-rushing-to/">“Where are you rushing to?”</a></p><p class="ai-label">AI answer, drawn from the essays; not written by soulsensis.</p></div>
+          <p class="them">Why do I never get what I want?</p>
+          <p class="listen">Reading the essays…</p>
+          <div class="ss"><span class="who">soulsensis AI</span><p>“You get who you are” turns your question around: “you get who you are, not what you want. We never get what we want. Because wanting implies lack of having.” So the shift it suggests is to start with your state, not the thing: “If you had the money, how would you feel? Relaxed and more giving? Certainly.” Begin feeling and acting that way now.</p><p>“You do not get what you want” adds why waiting for someone to fix it does not work: “growth is in the process and cannot be offloaded to an external entity.” Ask yourself who you would be if you already had what you want, and be that person in one small way today.</p><p class="read">Read the essay: <a href="/essays/you-get-who-you-are/">“You get who you are”</a></p><p class="ai-label">AI answer, drawn from the essays; not written by soulsensis.</p></div>
         </div></div>
         <div class="field" aria-hidden="true"><span id="pField">What's going on?</span><i><svg viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
       </div>
@@ -370,8 +421,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <h2 class="rise">Straight, like a friend.</h2>
     <div class="tiles">
       <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle cx="-22" r="16" pathLength="1"/><circle r="16" pathLength="1"/><circle cx="22" r="16" pathLength="1"/></g></svg><h3>3 questions free.</h3><p>After that it's A$5 a month. Cancel any time.</p></div>
-      <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="44" pathLength="1"/><circle r="30" pathLength="1"/><circle r="16" pathLength="1"/></g></svg><h3>It remembers.</h3><p>Up to 150 answers a month, and it remembers what you've told it.</p></div>
-      <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle cx="-14" r="30" pathLength="1"/><circle cx="14" r="30" pathLength="1"/></g></svg><h3>Honest about being an AI.</h3><p>An AI trained on one writer's way of seeing things. Not therapy.</p></div>
+      <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle r="44" pathLength="1"/><circle r="30" pathLength="1"/><circle r="16" pathLength="1"/></g></svg><h3>It remembers.</h3><p>Up to 60 answers a month. It remembers what you have told it, kept under your private account code, not your name.</p></div>
+      <div class="tile rise"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g class="draw" fill="none" stroke="#F5F2EA" stroke-width="2"><circle cx="-14" r="30" pathLength="1"/><circle cx="14" r="30" pathLength="1"/></g></svg><h3>Made by AI, and it says so.</h3><p>Every answer is made by AI from the published essays, and marked as AI.</p></div>
     </div>
   </div></section>
 
@@ -386,8 +437,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       </div>
       <div id="log" class="live-only" aria-live="polite">
         <section class="card" id="welcome">
-          <h3>Tell me what's going on.</h3>
-          <p>I'll listen, ask if I need to, then tell you what I think the real problem is, what I'd do about it, and why. Straight, like a friend who isn't scared to tell you the truth.</p>
+          <h3>Ask the essays.</h3>
+          <p>Write what is going on. An AI answers from the published essays only, names the essay it draws on, and marks every answer as AI.</p>
           <p class="fine">Private by design: no name or email, your chats are encrypted, nobody reads them, and you can delete everything in one tap. Your first 3 questions are free; after that it's A$5 a month.</p>
           <div class="row"><button type="button" class="red" id="start">Start talking</button><button type="button" class="ghost" id="have">I have an account code</button></div>
           <div class="row" id="recoverRow" hidden><label for="rc" class="vh">Account code</label><input id="rc" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" autocomplete="off" autocapitalize="characters" spellcheck="false"><button type="button" id="recover">Continue</button></div>
@@ -407,8 +458,35 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         </div>
       </div>
       <form class="send live-only" id="f" hidden><label for="q" class="vh">What's going on?</label><textarea id="q" rows="1" placeholder="What's going on?" maxlength="4000"></textarea><button id="send" type="submit" class="red">Send</button></form>
-      <div class="tools live-only"><span id="left"></span><button type="button" class="ghost" id="code2" hidden>My code</button><button type="button" class="ghost" id="del" hidden>Delete everything</button></div>
-      <p class="fine"><b>This is not therapy</b>, and not medical, legal or financial advice. It's an AI trained on one writer's way of seeing things, honest about being an AI. If you're in danger or thinking about ending your life, please don't wait for a chatbot: call <b>000</b> (Australia), <b>911</b> (US), <b>999</b> (UK), <b>112</b> (Europe), or a crisis line now: Lifeline <b>13 11 14</b>, <b>988</b> (US, call or text), Samaritans <b>116 123</b> (UK and Ireland).</p>
+      <div class="tools live-only"><span id="left"></span><button type="button" class="ghost" id="code2" hidden>My account code</button><button type="button" class="ghost" id="del" hidden>Delete everything</button></div>
+      <p class="fine"><b>This is not therapy</b>, and not medical, legal or financial advice. It is an AI that answers only from the published essays and says so on every answer. If you're in danger or thinking about ending your life, please don't wait for a chatbot: call <b>000</b> (Australia), <b>911</b> (US), <b>999</b> (UK), <b>112</b> (Europe), or a crisis line now: Lifeline <b>13 11 14</b>, <b>988</b> (US, call or text), Samaritans <b>116 123</b> (UK and Ireland).</p>
+    </div>
+  </div></section>
+
+  <section class="flow g" id="write" aria-labelledby="write-h" hidden><div class="wrap center">
+    <p class="eyebrow rise">One question</p>
+    <h2 class="rise" id="write-h">Your one question.</h2>
+    <div class="talk rise">
+      <form class="card oq" id="oqForm" novalidate>
+        <label for="oqQ">Your question</label>
+        <textarea id="oqQ" rows="6" maxlength="3000" required placeholder="What is going on, and what would you like to ask?"></textarea>
+        <label for="oqE">Where the answer goes</label>
+        <input id="oqE" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="you@example.com">
+        <input id="oqW" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="fine">Your question and email are kept encrypted until payment is through, then read by me and no one else, and never published. The payment page sees a reference number, not your question.</p>
+        <!--HIS_WORDS:refunds--><!--HIS_WORDS:reply_time-->
+        <p id="oqErr" class="err" role="alert" hidden></p>
+        <div class="row"><button type="submit" class="red" id="oqGo">Save and go to payment</button></div>
+      </form>
+      <section class="card oq" id="oqDone" hidden aria-live="polite">
+        <h3>Saved. One step left.</h3>
+        <blockquote class="oq-q" id="oqShow"></blockquote>
+        <p>One written answer from me, by email to <b id="oqTo"></b>. Pay to send the question; it reaches me as soon as the payment is through.</p>
+        <div class="row"><a class="btn red" id="oqPay" target="_blank" rel="noopener">Pay A$19</a><button type="button" class="ghost" id="oqEdit">Change it</button></div>
+        <p class="oq-ref">Your reference, if you write to me about it: <code id="oqRef"></code> <button type="button" class="ghost" id="oqCopy">Copy</button></p>
+        <p class="fine" id="oqVia">Payment is on Stripe's own secure checkout page, which sees the reference, not your question. If it is not paid within two days, the question is deleted. <button type="button" class="linkish" id="oqDel">Delete it now</button></p>
+        <!--HIS_WORDS:reply_time-->
+      </section>
     </div>
   </div></section>
 
@@ -526,7 +604,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 // the build from links.json "ask_api" (never a query string, never local storage); empty means Ask is not open yet.
 (() => {
   const API = document.querySelector('meta[name="ask-api"]').content;
-  if (!/^https:\/\/[a-z0-9.-]+$/.test(API)) return;
+  if (!/^(https:\/\/[a-z0-9.-]+|http:\/\/127\.0\.0\.1:\d+)$/.test(API)) return;
   const $ = (id) => document.getElementById(id);
   let code = null;
   try { code = localStorage.getItem("ss_code"); } catch {}
@@ -534,7 +612,19 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   const api = (p, body) => fetch(API + "/api/" + p, { method: body === undefined ? "GET" : "POST", headers: { "content-type": "application/json", ...(code ? { authorization: "Bearer " + code } : {}) }, body: body === undefined ? undefined : JSON.stringify(body) });
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const show = (d) => d.scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" });
-  function add(cls, text) { const d = document.createElement("div"); d.className = "msg " + cls; if (cls === "ss") { const w = document.createElement("span"); w.className = "who"; w.textContent = "soulsensis"; d.append(w); const b = document.createElement("div"); b.textContent = text; d.append(b); } else d.textContent = text; $("log").append(d); show(d); return d; }
+  function add(cls, text) { const d = document.createElement("div"); d.className = "msg " + cls; if (cls === "ss") { const w = document.createElement("span"); w.className = "who"; w.textContent = "soulsensis AI"; d.append(w); const b = document.createElement("div"); d.append(b); const l = document.createElement("p"); l.className = "ai-label"; l.textContent = LABEL; d.append(l); body(b, text); } else d.textContent = text; $("log").append(d); show(d); return d; }
+  const LABEL = "AI answer, drawn from the essays; not written by soulsensis.";
+  // the Worker ends every answer with the label; it is shown once, as its own line under the answer
+  function body(b, text) {
+    b.textContent = "";
+    const curly = (s) => s.replace(/"([^"\n]*)"/g, (_, q) => "\u201c" + q + "\u201d").replace(/(\w)'(\w)/g, (_, a, b) => a + "\u2019" + b);
+    const parts = String(text).split(LABEL).join("").trim().split("\n\n");
+    parts.forEach((para, i) => {
+      const m = para.match(/^Read the essay: "(.+)" soulsensis\.com(\/essays\/[a-z0-9-]+\/)$/);
+      if (m) { const r = document.createElement("p"); r.className = "read"; r.append("Read the essay: "); const a = document.createElement("a"); a.href = m[2]; a.textContent = "\u201c" + m[1] + "\u201d"; r.append(a); b.append(r); }
+      else b.append((i ? "\n\n" : "") + curly(para));
+    });
+  }
   function ready(past = []) { $("welcome").hidden = true; $("codeCard").hidden = true; $("f").hidden = false; $("del").hidden = false; $("code2").hidden = false; if (!past.length) $("starters").hidden = false; past.forEach((m) => add(m.role === "user" ? "them" : "ss", m.content)); $("q").focus({ preventScroll: true }); }
   function left(n, plan) { $("left").textContent = plan === "member" ? `${n} answers left this month` : `${Math.max(0, n)} free question${n === 1 ? "" : "s"} left`; }
   function err(el, msg) { el.textContent = msg; el.hidden = !msg; }
@@ -543,34 +633,28 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   function paywall(url) {
     if (paying) return; paying = true;
     const c = document.createElement("section"); c.className = "card";
-    c.innerHTML = `<h3>Keep talking for A$5 a month</h3><p>That covers up to 150 answers a month, and I'll remember what you've told me. Cancel any time. The checkout only knows your private account number, never your name.</p>
-      <div class="row"><a class="btn red" target="_blank" rel="noopener">Become a member</a><button type="button" class="ghost" id="paid">I've paid</button></div>
-      <p class="fine">Paid on another device, or the payment didn't link up? Paste the licence key from your Lemon Squeezy receipt:</p>
-      <div class="row"><label for="lic" class="vh">Licence key</label><input id="lic" placeholder="Licence key" autocomplete="off" spellcheck="false"><button type="button" id="licb">Use key</button></div><p class="err" id="lerr" role="alert" hidden></p>`;
+    c.innerHTML = `<h3>Keep asking for A$5 a month</h3><p>Your 3 free answers are used. Become a member for up to 60 AI answers a month from the essays; your question stays in the box and is answered as soon as you are in. Cancel any time.</p>
+      <div class="row"><a class="btn red" target="_blank" rel="noopener">Become a member, A$5 a month</a><button type="button" class="ghost" id="paid">I have paid: check again</button></div>
+      <p class="fine">Payment is on Stripe's own secure checkout page. It knows your private account number, not your questions.</p><p class="err" id="lerr" role="alert" hidden></p>`;
     const a = c.querySelector("a"); if (url) a.href = url; else { a.textContent = "Membership opens soon"; a.removeAttribute("href"); }
-    $("log").append(c); show(c);
-    c.querySelector("#paid").addEventListener("click", async () => { const m = await (await api("me")).json().catch(() => ({})); if (m.plan === "member") { c.remove(); paying = false; left(m.left, m.plan); add("ss", "Thanks for backing this. Go on, what's going on?"); } else err(c.querySelector("#lerr"), "Not through yet. Give it a minute, or paste your licence key below."); });
-    c.querySelector("#licb").addEventListener("click", async () => {
-      const r = await api("licence", { key: c.querySelector("#lic").value.trim() }); const j = await r.json().catch(() => ({}));
-      if (r.ok) { c.remove(); paying = false; const m = await (await api("me")).json().catch(() => ({})); left(m.left, m.plan); add("ss", "You're in. What's going on?"); }
-      else err(c.querySelector("#lerr"), j.error || "That key didn't work.");
-    });
+    $("log").append(c); $("send").disabled = true; show(c);
+    c.querySelector("#paid").addEventListener("click", async () => { const m = await (await api("me")).json().catch(() => ({})); if (m.plan === "member") { c.remove(); paying = false; $("send").disabled = false; left(m.left, m.plan); } else err(c.querySelector("#lerr"), "Not through yet. Give it a minute and press it again."); });
   }
 
   async function ask(text) {
     if (!text.trim() || $("send").disabled) return;
-    $("starters").hidden = true; add("them", text); $("q").value = ""; $("q").style.height = ""; $("send").disabled = true;
-    const d = add("ss", "Listening…"), body = d.lastChild; body.className = "thinking";
+    $("starters").hidden = true; const them = add("them", text); $("q").value = ""; $("q").style.height = ""; $("send").disabled = true;
+    const d = add("ss", "Reading the essays…"), bodyEl = d.children[1]; bodyEl.className = "thinking"; bodyEl.textContent = "Reading the essays…";
     try {
       const r = await api("chat", { message: text });
       if (!r.ok) {
         const j = await r.json().catch(() => ({}));
-        if (r.status === 402) { d.remove(); paywall(j.checkout); }
-        else if (r.status === 429 && j.error === "cap") { body.className = ""; body.textContent = "That's the month's answers used up. They come back on the 1st."; }
-        else if (r.status === 429) { body.className = ""; body.textContent = "Slow down a little. Try again in a bit."; }
-        else if (r.status === 503) { body.className = ""; body.textContent = "I'm paused for a bit. Come back later today."; }
-        else if (r.status === 401) { store(null); body.className = ""; body.textContent = "That code isn't recognised any more. Reload to start fresh."; }
-        else { body.className = "thinking"; body.textContent = "That didn't come through. Send it again in a moment."; }
+        if (r.status === 402) { d.remove(); them.remove(); $("q").value = text; paywall(j.checkout); }
+        else if (r.status === 429 && j.error === "cap") { bodyEl.className = ""; bodyEl.textContent = "That's the month's answers used up. They come back on the 1st."; }
+        else if (r.status === 429) { bodyEl.className = ""; bodyEl.textContent = "Slow down a little. Try again in a bit."; }
+        else if (r.status === 503) { bodyEl.className = ""; bodyEl.textContent = "I'm paused for a bit. Come back later today."; }
+        else if (r.status === 401) { store(null); bodyEl.className = ""; bodyEl.textContent = "That code isn't recognised any more. Reload to start fresh."; }
+        else { bodyEl.className = "thinking"; bodyEl.textContent = "That didn't come through. Send it again in a moment."; }
         return;
       }
       // The answer streams as server-sent events: delta (text), replace (a rewritten answer), done, error.
@@ -583,22 +667,22 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
           const ev = (part.match(/^event: (.*)$/m) || [])[1], data = (part.match(/^data: (.*)$/m) || [])[1];
           if (!ev || !data) continue;
           const j = JSON.parse(data);
-          if (ev === "delta") { shown += j.t; body.className = ""; body.textContent = shown; }
-          else if (ev === "replace") { shown = j.t; body.className = ""; body.textContent = shown; }
+          if (ev === "delta") { shown += j.t; bodyEl.className = ""; body(bodyEl, shown); }
+          else if (ev === "replace") { shown = j.t; bodyEl.className = ""; body(bodyEl, shown); }
           else if (ev === "done") left(j.left, j.plan);
-          else if (ev === "error") { body.className = "thinking"; body.textContent = j.error === "busy" ? "Lots of people are talking right now. Try again in a minute." : "That didn't come through. Send it again in a moment."; }
+          else if (ev === "error") { bodyEl.className = "thinking"; bodyEl.textContent = j.error === "busy" ? "Lots of people are talking right now. Try again in a minute." : "That didn't come through. Send it again in a moment."; }
           d.scrollIntoView({ block: "nearest", behavior: "auto" });
         }
       }
-      if (!shown && body.className !== "thinking") { body.className = "thinking"; body.textContent = "That didn't come through. Send it again in a moment."; }
-    } catch { body.className = "thinking"; body.textContent = "No connection. Check your internet and send it again."; }
-    finally { $("send").disabled = false; $("q").focus({ preventScroll: true }); }
+      if (!shown && bodyEl.className !== "thinking") { bodyEl.className = "thinking"; bodyEl.textContent = "That didn't come through. Send it again in a moment."; }
+    } catch { bodyEl.className = "thinking"; bodyEl.textContent = "No connection. Check your internet and send it again."; }
+    finally { $("send").disabled = paying; $("q").focus({ preventScroll: true }); }
   }
 
   $("start").addEventListener("click", async () => {
     err($("werr"), ""); $("start").disabled = true;
     try {
-      const r = await api("signup"); const j = await r.json().catch(() => ({}));
+      const r = await api("signup", {}); const j = await r.json().catch(() => ({}));
       if (!r.ok || !j.code) throw new Error(j.error || "no");
       store(j.code); $("code").textContent = j.code; $("welcome").hidden = true; $("codeCard").hidden = false; left(3, "free");
     } catch (e) { err($("werr"), /slow down/.test(e.message) ? "Too many new accounts from here today. Try again tomorrow." : "Couldn't start. Check your connection and try again."); }
@@ -628,6 +712,47 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     if (!code) return;
     try { const r = await api("me"); const m = await r.json(); if (r.ok && m.signedIn) { left(m.left, m.plan); ready(m.past || []); } else store(null); } catch {}
   })();
+})();
+</script>
+
+<script>
+// one question (A$19, written by me): the form posts to the Worker, which stores it sealed and returns a reference and
+// the payment page's address. Off until the Worker says it is open; the card then shows "Write your question".
+(() => {
+  const API = document.querySelector('meta[name="ask-api"]').content;
+  if (!/^(https:\/\/[a-z0-9.-]+|http:\/\/127\.0\.0\.1:\d+)$/.test(API)) return;
+  const $ = (id) => document.getElementById(id), t0 = Date.now();
+  fetch(API + "/api/health").then((r) => r.json()).then((h) => {
+    if (!h.one_question) return;
+    $("write").hidden = false;
+    document.querySelectorAll(".live-oq").forEach((e) => (e.hidden = false));
+    document.querySelectorAll(".wait-oq").forEach((e) => (e.hidden = true));
+  }).catch(() => {});
+  const err = (m) => { $("oqErr").textContent = m; $("oqErr").hidden = !m; };
+  let ref = "";
+  const drop = () => ref ? fetch(API + "/api/one-question/delete", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ref }) }).catch(() => {}) : null;
+  // change it: the saved copy is deleted and the form comes back with the words still in it; delete it: gone, form empty
+  $("oqCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(ref); $("oqCopy").textContent = "Copied"; } catch { $("oqCopy").textContent = "Select and copy it"; } });
+  $("oqEdit").addEventListener("click", () => { drop(); ref = ""; $("oqDone").hidden = true; $("oqForm").hidden = false; $("oqQ").focus(); });
+  $("oqDel").addEventListener("click", () => { drop(); ref = ""; $("oqQ").value = ""; $("oqE").value = ""; $("oqDone").hidden = true; $("oqForm").hidden = false; err("Deleted. Nothing of it is kept."); });
+  $("oqForm").addEventListener("submit", async (e) => {
+    e.preventDefault(); err(""); $("oqGo").disabled = true;
+    try {
+      const r = await fetch(API + "/api/one-question", { method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ question: $("oqQ").value, email: $("oqE").value, website: $("oqW").value, ms: Date.now() - t0 }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) { err(j.error === "slow down" ? "Too many tries from here today. Try again tomorrow." : j.error || "That did not go through. Try again in a moment."); return; }
+      $("oqRef").textContent = j.ref;
+      const q = $("oqQ").value.trim(); $("oqShow").textContent = q.length > 280 ? q.slice(0, 280) + "…" : q; $("oqTo").textContent = $("oqE").value.trim();
+      const pay = $("oqPay");
+      if (j.checkout) pay.href = j.checkout; else { pay.removeAttribute("href"); pay.textContent = "Payment opens soon"; }
+      const via = { stripe: "Stripe", lemonsqueezy: "Lemon Squeezy" }[j.provider];
+      if (via && j.checkout) pay.textContent = "Pay A$19 with " + via;
+      ref = j.ref;
+      $("oqForm").hidden = true; $("oqDone").hidden = false; $("oqDone").scrollIntoView({ block: "nearest" });
+    } catch { err("No connection. Check your internet and try again."); }
+    finally { $("oqGo").disabled = false; }
+  });
 })();
 </script>
 </body>
