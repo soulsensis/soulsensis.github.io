@@ -226,6 +226,7 @@ button:disabled { opacity: .5; cursor: default; }
 .offer h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.2; }
 .offer p { margin: 0; font-size: 16px; line-height: 1.55; color: #c9c5bc; }
 .offer .price { font-size: 18px; color: var(--ink); }
+.offer .promise { color: var(--ink); }   /* his own two lines (13 Nov 2026): when the reply comes, and the refund */
 .offer .facts { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: var(--muted); }
 .offer .soon { margin-top: auto; font-size: 14px; color: var(--muted); }
 .offer .more { margin-top: auto; }
@@ -368,6 +369,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         <h3>One question</h3>
         <p>Send one question about what is going on for you, and I answer it myself, in writing, as carefully as I would write an essay.</p>
         <p class="price">A$19, once</p>
+        <p class="promise">I reply within seven days. If I cannot answer your question, you are refunded in full.</p>
         <ul class="facts"><li>One question, one written answer, by email.</li><li>Read by me and no one else; never published.</li><li>No AI writes it.</li></ul>
         <!--ONE_QUESTION--><a class="btn red live-oq" href="#write" hidden>Write your question</a><span class="soon wait-oq">Opening soon</span><!--/ONE_QUESTION-->
       </article>
@@ -474,7 +476,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         <input id="oqE" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="you@example.com">
         <input id="oqW" class="vh" tabindex="-1" autocomplete="off" aria-hidden="true">
         <p class="fine">Your question and email are kept encrypted until payment is through, then read by me and no one else, and never published. The payment page sees a reference number, not your question.</p>
-        <!--HIS_WORDS:refunds--><!--HIS_WORDS:reply_time-->
+        <p class="fine">I reply within seven days. If I cannot answer your question, you are refunded in full.</p>
         <p id="oqErr" class="err" role="alert" hidden></p>
         <div class="row"><button type="submit" class="red" id="oqGo">Save and go to payment</button></div>
       </form>
@@ -485,7 +487,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         <div class="row"><a class="btn red" id="oqPay" target="_blank" rel="noopener">Pay A$19</a><button type="button" class="ghost" id="oqEdit">Change it</button></div>
         <p class="oq-ref">Your reference, if you write to me about it: <code id="oqRef"></code> <button type="button" class="ghost" id="oqCopy">Copy</button></p>
         <p class="fine" id="oqVia">Payment is on Stripe's own secure checkout page, which sees the reference, not your question. If it is not paid within two days, the question is deleted. <button type="button" class="linkish" id="oqDel">Delete it now</button></p>
-        <!--HIS_WORDS:reply_time-->
+        <p class="fine">I reply within seven days. If I cannot answer your question, you are refunded in full.</p>
       </section>
     </div>
   </div></section>

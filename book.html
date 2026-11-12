@@ -43,7 +43,7 @@
     { "@type": "Question", "name": "Why is the author anonymous?", "acceptedAnswer": { "@type": "Answer", "text": "So the writing can stay honest. The essays describe real mornings, real jobs and real shame, and a name would mean softening them. The author stays soulsensis so nothing has to be left out." } },
     { "@type": "Question", "name": "How long is the book?", "acceptedAnswer": { "@type": "Answer", "text": "It is being finished as one larger book, with the author's journals added, so the length and the contents may change. Written to be read slowly and returned to." } },
     { "@type": "Question", "name": "Is it a self-help book?", "acceptedAnswer": { "@type": "Answer", "text": "No steps, no hacks, no morning routine. It is one person thinking honestly from inside their own life. It is not medical or psychological advice." } },
-    { "@type": "Question", "name": "Can I read some of it first?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pages from the book are shown on this page as printed, and the essays the book grew from are free on the site and narrated on YouTube." } }
+    { "@type": "Question", "name": "Can I read some of it first?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pages from the book are shown on this page as printed, and the essays the book grew from are narrated on YouTube." } }
    ]
   }
  ]
@@ -58,6 +58,8 @@
 <script>/* the scroll scenes (10 Nov 2026, docs/specs/site-apple-scroll.md): the open pages are pinned only when motion is wanted and sticky works; without this class the page is plain, readable blocks.
    11 Nov, the iPhone look (shims/phone_check.py): a phone on its side is 343 px tall and the open book lay on its own heading, so a window under 540 px tall gets the plain page, as the home page's scene already does */
 try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&matchMedia("(min-height: 540px)").matches&&!/[?&]still/.test(location.search)&&window.CSS&&CSS.supports("position","sticky")&&"requestAnimationFrame" in window)document.documentElement.classList.add("fx")}catch(e){}</script>
+<script>/* the bar's button waits while an ask of the page's own is on screen (as the page opens, the first screen's field is): set before the first paint, kept true by the script at the foot */
+try{if("IntersectionObserver" in window)document.documentElement.classList.add("ask-on")}catch(e){}</script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" as="image" href="book/front.webp">
@@ -98,8 +100,8 @@ img { display: block; max-width: 100%; }
 
 /* type: the journal's one scale */
 h1, h2, h3 { margin: 0; font-weight: 400; letter-spacing: -.008em; text-wrap: balance; }
-h1 { font-size: clamp(42px, 7.4vw, 64px); line-height: 1.04; letter-spacing: -.02em; color: var(--grey); }
-h1 em { font-style: italic; color: var(--ink); }
+h1 { font-size: clamp(42px, 7.4vw, 64px); line-height: 1.04; letter-spacing: -.02em; color: var(--ink); }   /* 13 Nov 2026: full bone white, as the home page's line; a dimmed title strained the eyes at night */
+h1 em { font-style: italic; }
 h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; }
 h3 { font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
 .eyebrow { margin: 0 0 14px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
@@ -115,6 +117,27 @@ h3 { font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
 .price-line { margin: 0; font-family: var(--sans); font-size: 14px; line-height: 1.5; color: var(--muted); }
 .price-line a { display: inline-block; padding: 12px 0; margin: -12px 0; color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
 .lnav { display: none; }   /* the book's own bar left on 11 Nov; its markup stays, for the sale switch's Buy link */
+/* the site's bar on this page (13 Nov 2026, as on the home page: two white buttons in the first screen read as insistent): its
+   button waits its turn, shown only while no ask of the page's own (the first screen's field, the one under the formats) is on
+   screen (html.ask-on, set in the head and kept true by the script at the foot). Where the page moves, the bar follows the reader
+   so the button is there when its turn comes, and steps aside for the open pages, which fill the screen. */
+.fx body > nav.top { position: sticky; top: 0; z-index: 20; transition: translate .3s ease; }
+.fx.at-scene body > nav.top { translate: 0 -101%; }
+body > nav.top .links a.pill { max-width: 280px; overflow: hidden; transition: background .2s, max-width .35s ease, padding .35s ease, margin .35s ease; }
+.ask-on body > nav.top .links a.pill { visibility: hidden; max-width: 0; min-width: 0; margin-left: 0; padding-inline: 0; transition: max-width .35s ease, padding .35s ease, margin .35s ease, visibility 0s .35s; }
+/* the email field, in the first screen and under the formats (13 Nov 2026: a button that jumped to the foot of the page hid
+   the field behind an extra tap). One list, the launch line's. */
+.tell { width: 100%; max-width: 460px; }
+.tell .row { display: flex; flex-wrap: wrap; gap: 10px; }
+.tell input { flex: 1 1 140px; min-width: 0; min-height: 50px; padding: 0 20px; border: 1px solid rgba(245,242,234,.38); border-radius: 40px; background: var(--raised); color: var(--ink); font: 400 17px var(--serif); }
+.tell input::placeholder { color: var(--muted); opacity: 1; }
+.tell input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tell button { flex: none; border: 0; cursor: pointer; }
+.tell button:disabled { cursor: default; }
+@media (max-width: 360px) { .tell .btn.pill { padding: 0 20px; } }   /* the smallest phone: the field and its button stay on one line */
+.tell .fine { margin-top: 12px; }
+.tell .back:empty, .tell.done .row, .tell.done .note { display: none; }
+.tell.done .back { margin: 0; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.45; color: var(--ink); }
 
 /* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
 section.flow { padding-block: clamp(40px, 7vw, 64px); }
@@ -148,6 +171,7 @@ section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1
 /* 12 Nov 2026: with no motion (reduced motion, ?still, a short window) the hero book is its front cover, flat: an engine
    that does not hide a turned-away face (WebKit on Windows) drew the back cover through it, mirrored */
 html:not(.fx) .bk { transform: none; } html:not(.fx) .bk .f:not(.front) { display: none; }
+html:not(.fx) .bk .front { box-shadow: 0 0 0 1px #2a2a31, 0 0 40px rgba(245,242,234,.05); }   /* 13 Nov 2026: lying still, the black cover has an edge to be seen by, as the home page's has */
 .bk img.f { width: 100%; height: 100%; object-fit: cover; background: #0b0b0d; }
 .bk .front { inset: 0; transform: translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; }
 .bk .back { inset: 0; transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); border-radius: 1px 3px 3px 1px; }
@@ -164,8 +188,11 @@ html:not(.fx) .bk { transform: none; } html:not(.fx) .bk .f:not(.front) { displa
 .bk .bot { left: 0; right: .5%; bottom: calc(var(--d) / -2); height: var(--d); transform: rotateX(-90deg); background: #b9b4a8; }
 
 /* from the back cover: its first line set large, the rest as it is printed */
-#about .hook { margin: 0 0 18px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
-#about .reading + .reading { margin-top: 12px; }
+#about .hook, #read .hook { margin: 0 0 18px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
+#about .reading + .reading, #read .reading + .reading { margin-top: 12px; }
+/* 13 Nov 2026: the open pages are pictures of the print, too small to read on a phone until their scene brings one close, and
+   never close where nothing moves; so the page the book first rests on also opens here as text, in bone on the ground */
+#read .reading { font-size: clamp(18px, 2.6vw, 20px); line-height: 1.65; color: var(--ink); text-wrap: pretty; }
 #about, #feel { overflow: hidden; overflow: clip; }
 /* the logo's geometry in the margin: on a phone a faint quarter at the page's edge; on a wide screen it ends on the stage's edge and no line of the back's runs under it */
 .flower { position: absolute; z-index: -1; top: 6px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
@@ -197,6 +224,7 @@ html:not(.fx) .bk { transform: none; } html:not(.fx) .bk .f:not(.front) { displa
 .open .lf-back { transform: rotateY(180deg); background: #fff; box-shadow: calc(var(--e) * -1) 0 0 #ebe8e0, calc(var(--e) * -2) calc(var(--e) * .5) 0 #dedad1, calc(var(--e) * -3) var(--e) 0 #d2cec5; }
 /* the leaves between the stops: with no script they lie closed under the first spread; with it they flick */
 .open .leaf.mid { --open: 0deg; }
+html:not(.fx) .open .leaf.mid .lf-back { display: none; }   /* 13 Nov 2026: an engine that does not hide a turned-away face drew this blank back over the right-hand page, so the still book showed an empty page */
 .open .leaf.mid .lf-front, .open .leaf.fl .lf-front { background: #fff; border-radius: 0; box-shadow: none; }
 .open .leaf.fl .lf-back { box-shadow: none; }
 .open .leaf.mid .lf-front::after, .open .leaf.fl .lf-front::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.13), rgba(0,0,0,.03) 4%, transparent 9%); }
@@ -231,7 +259,7 @@ figcaption { margin-top: 10px; font-family: var(--sans); font-size: 12px; color:
 .format .where::before { content: "· "; }
 #formats .wrap > .fine { margin-top: 20px; }
 /* a way to be told when the book is out: one email to the author, who writes back himself. No list, no service. */
-.notify { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 10px; padding-top: 26px; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
+.notify { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 10px; padding-top: 26px; border-top: 1px solid var(--line); scroll-margin-top: 84px; }
 
 .faq { margin-top: 14px; }
 .faq details { border-top: 1px solid var(--line); }
@@ -294,7 +322,12 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <p class="eyebrow">The book</p>
       <h1>Your soul <em>knows best.</em></h1>
       <p class="sub">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
-      <!--BUY_HERO--><div class="ctas"><a class="btn pill" href="#notify">Be told the day it is out</a></div><p class="price-line"><!--HERO_PRICE-->A$4.99 on Kindle, A$24.99 in paperback.<!--/HERO_PRICE--> The book is being finished.</p><!--/BUY_HERO-->
+      <!--BUY_HERO--><p class="price-line"><!--HERO_PRICE-->A$4.99 on Kindle, A$24.99 in paperback.<!--/HERO_PRICE--> The book is being finished.</p>
+      <form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
+        <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me</button></div>
+        <p class="fine note">One email from me, the day the book is out.</p>
+        <p class="fine back" role="status" aria-live="polite"></p>
+      </form><!--/BUY_HERO-->
       <a class="more" href="#inside">Look inside</a>
     </div>
     <div class="stage" id="heroStage">
@@ -330,6 +363,14 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 18 and 19, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
   </div></section>
 
+  <section class="flow g" id="read" aria-labelledby="read-h"><div class="wrap">
+    <p class="eyebrow" id="read-h">From the book</p>
+    <!-- the opening of the page the open book first rests on, word for word as printed; tests/test_site_landing.py holds it to that page -->
+    <p class="hook">We weren’t meant to be living the way we do. Yet so many of us feel we don’t have a choice.</p>
+    <p class="reading">But we have choices, and we make decisions all the time, every day. Why bother questioning otherwise?</p>
+    <p class="reading">Life can be lived deliberately and consciously, with you as an active participant in your life choices. You see, when a human is subject to specific pathways in life, such as going to school, getting a degree, going to college, then doing unfulfilling work for the rest of life, that human struggles to know what to do when the path doesn’t seem to work, and begins to question the very efficacy of the system.</p>
+  </div></section>
+
   <section class="flow g" id="feel" aria-label="What the book is for"><div class="wrap" data-lit="lines">
     <h2>Feel at home again.</h2>
     <p class="sub">You are not alone in this life.</p>
@@ -347,7 +388,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <details><summary>Why is the author anonymous?</summary><p>So the writing can stay honest. The essays describe real mornings, real jobs and real shame, and a name would mean softening them. The author stays soulsensis so nothing has to be left out.</p></details>
       <details><summary>How long is the book?</summary><p>It is being finished as one larger book, with the author's journals added, so the length and the contents may change. Written to be read slowly and returned to.</p></details>
       <details><summary>Is it a self-help book?</summary><p>No steps, no hacks, no morning routine. It is one person thinking honestly from inside their own life. It is not medical or psychological advice; if you are struggling, please talk to a doctor, a counsellor or a crisis line.</p></details>
-      <details><summary>Can I read some of it first?</summary><p>Yes. Pages from the book are above, as printed, and the <a href="essays.html">essays the book grew from</a> are free on this site and <a href="https://www.youtube.com/@soulsensis" rel="noopener">read aloud on YouTube</a>.</p></details>
+      <details><summary>Can I read some of it first?</summary><p>Yes. Pages from the book are above, as printed, and the essays the book grew from are <a href="https://www.youtube.com/@soulsensis" rel="noopener">read aloud on YouTube</a>.</p></details>
       <!--ONSALE--><details><summary>Is the book on sale yet?</summary><p>Not yet. It goes on sale when it is done.</p></details><!--/ONSALE-->
     </div>
   </div></section>
@@ -368,35 +409,11 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       </div>
     </div>
     <!--NOTIFY--><div class="notify" id="notify">
-      <!--EMAIL_LINE--><style>
-.launch-line { display: grid; gap: 12px; max-width: 460px; }
-.launch-line .row { display: flex; gap: 10px; flex-wrap: wrap; }
-.launch-line input { flex: 1 1 200px; min-width: 0; font: inherit; font-size: 17px; padding: 14px 18px; border-radius: 40px; border: 1px solid var(--line, #2a2a31); background: transparent; color: inherit; }
-.launch-line input:focus-visible { outline: 2px solid #E63946; outline-offset: 2px; }
-.launch-line button { cursor: pointer; border: 0; font: inherit; }
-</style>
-      <form class="launch-line" method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/" id="launch-line">
-        <label class="fine" for="launch-email">One email from me, the day the book is out.</label>
-        <div class="row"><input id="launch-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email">
-        <button class="btn pill" type="submit">Tell me</button></div>
-        <p class="fine" id="launch-note" role="status" aria-live="polite"></p>
+      <!--EMAIL_LINE--><form class="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
+        <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
+        <p class="fine back" role="status" aria-live="polite"></p>
       </form>
-      <p class="fine">Or <a href="mailto:hello@soulsensis.com?subject=Tell%20me%20when%20the%20book%20is%20out">send me an email</a> and I will tell you the same way.</p>
-      <script>
-(function () {
-  var f = document.getElementById("launch-line"), n = document.getElementById("launch-note");
-  if (!f || !window.fetch) return;                       // without script the form posts and the Worker answers with a page
-  f.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var b = f.querySelector("button"); b.disabled = true;
-    fetch(f.action, { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: f.email.value }) })
-      .then(function (r) { return r.json(); })
-      .then(function (d) { n.textContent = d.message; if (d.ok) f.reset(); b.disabled = false; })
-      .catch(function () { n.textContent = "That did not go through. Please try again."; b.disabled = false; });
-  });
-})();
-      </script><!--/EMAIL_LINE-->
+      <p class="fine">Or <a href="mailto:hello@soulsensis.com?subject=Tell%20me%20when%20the%20book%20is%20out">send me an email</a> and I will tell you the same way.</p><!--/EMAIL_LINE-->
     </div><!--/NOTIFY-->
     <p class="fine">Prices in Australian dollars unless marked. Amazon sets local prices in other countries.</p>
   </div></section>
@@ -461,6 +478,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     ticking = false;
     const vh = probe.offsetHeight || innerHeight, vw = root.clientWidth, y = scrollY;   // the pinned box is the viewport the scenes live in
     if (!fx) return;
+    { const r = inside.getBoundingClientRect(); root.classList.toggle("at-scene", r.top < 64 && r.bottom > 64); }   // the bar steps aside while the open pages have the screen
     // the paper arrives as a sheet with round corners and squares up as it fills the screen; it leaves the same way
     { const r = inside.getBoundingClientRect(), a = clamp(r.top / vh), b = clamp((vh - r.bottom) / vh);
       inside.style.clipPath = a > 0 || b > 0 ? `inset(0 ${(a * 5 + b * 5).toFixed(2)}% round ${(a * 44).toFixed(0)}px ${(a * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px)` : "none"; }
@@ -517,6 +535,35 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   // each reader sees their own money first: Australian dollars at home, US dollars elsewhere
   { let au = true; try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; au = !tz || /^Australia\/|^Pacific\/Auckland$/.test(tz); } catch (_) {}
     document.querySelectorAll("#pick .price").forEach((p) => { if (!au && p.dataset.us) p.innerHTML = `${p.dataset.us}<small>${p.dataset.au}</small>`; }); }
+})();
+</script>
+<script>
+// the email field (the first screen's, and the one under the formats): one address to the launch line. Without script the form
+// posts itself and the line answers with a page of its own.
+(function () {
+  if (!window.fetch) return;
+  [].forEach.call(document.querySelectorAll("form.tell"), function (f) {
+    var back = f.querySelector(".back"), b = f.querySelector("button");
+    f.addEventListener("submit", function (e) {
+      e.preventDefault(); b.disabled = true;
+      fetch(f.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: f.email.value }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { back.textContent = d.message; if (d.ok) f.classList.add("done"); b.disabled = false; })
+        .catch(function () { back.textContent = "That did not go through. Please try again."; b.disabled = false; });
+    });
+  });
+})();
+// the bar's button waits its turn: it shows only while no ask of the page's own is on screen
+(function () {
+  var root = document.documentElement, on = [];
+  if (!("IntersectionObserver" in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { var i = on.indexOf(e.target); if (e.isIntersecting && i < 0) on.push(e.target); else if (!e.isIntersecting && i >= 0) on.splice(i, 1); });
+    root.classList.toggle("ask-on", on.length > 0);
+  });
+  var asks = document.querySelectorAll("[data-ask]");
+  [].forEach.call(asks, function (a) { io.observe(a); });
+  if (!asks.length) root.classList.remove("ask-on");            // on sale: no field on the page, the bar's button is simply there
 })();
 </script>
 <script>
