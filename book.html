@@ -58,8 +58,6 @@
 <script>/* the scroll scenes (10 Nov 2026, docs/specs/site-apple-scroll.md): the open pages are pinned only when motion is wanted and sticky works; without this class the page is plain, readable blocks.
    11 Nov, the iPhone look (shims/phone_check.py): a phone on its side is 343 px tall and the open book lay on its own heading, so a window under 540 px tall gets the plain page, as the home page's scene already does */
 try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&matchMedia("(min-height: 540px)").matches&&!/[?&]still/.test(location.search)&&window.CSS&&CSS.supports("position","sticky")&&"requestAnimationFrame" in window)document.documentElement.classList.add("fx")}catch(e){}</script>
-<script>/* the bar's button waits while an ask of the page's own is on screen (as the page opens, the first screen's field is): set before the first paint, kept true by the script at the foot */
-try{if("IntersectionObserver" in window)document.documentElement.classList.add("ask-on")}catch(e){}</script>
 
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" as="image" href="book/front.webp">
@@ -127,14 +125,15 @@ body > nav.top .links a.pill { max-width: 280px; overflow: hidden; transition: b
 .ask-on body > nav.top .links a.pill { visibility: hidden; max-width: 0; min-width: 0; margin-left: 0; padding-inline: 0; transition: max-width .35s ease, padding .35s ease, margin .35s ease, visibility 0s .35s; }
 /* the email field, in the first screen and under the formats (13 Nov 2026: a button that jumped to the foot of the page hid
    the field behind an extra tap). One list, the launch line's. */
-.tell { width: 100%; max-width: 460px; }
+.tell { width: 100%; max-width: 500px; }
 .tell .row { display: flex; flex-wrap: wrap; gap: 10px; }
-.tell input { flex: 1 1 140px; min-width: 0; min-height: 50px; padding: 0 20px; border: 1px solid rgba(245,242,234,.38); border-radius: 40px; background: var(--raised); color: var(--ink); font: 400 17px var(--serif); }
+.tell input { flex: 1 1 150px; min-width: 0; min-height: 50px; padding: 0 20px; border: 1px solid rgba(245,242,234,.38); border-radius: 40px; background: var(--raised); color: var(--ink); font: 400 17px var(--serif); }
 .tell input::placeholder { color: var(--muted); opacity: 1; }
 .tell input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .tell button { flex: none; border: 0; cursor: pointer; }
 .tell button:disabled { cursor: default; }
-@media (max-width: 360px) { .tell .btn.pill { padding: 0 20px; } }   /* the smallest phone: the field and its button stay on one line */
+@media (max-width: 599px) { .tell input, .tell button { flex: 1 1 100%; } }   /* a phone: the field takes the full width, its button stands under it and says what it does */
+#read .tell { margin-top: 26px; } #read .tell .note { margin: 0 0 14px; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
 .tell .fine { margin-top: 12px; }
 .tell .back:empty, .tell.done .row, .tell.done .note { display: none; }
 .tell.done .back { margin: 0; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.45; color: var(--ink); }
@@ -225,6 +224,8 @@ html:not(.fx) .bk .front { box-shadow: 0 0 0 1px #2a2a31, 0 0 40px rgba(245,242,
 .open .lf-back { transform: rotateY(180deg); background: #fff; box-shadow: calc(var(--e) * -1) 0 0 #ebe8e0, calc(var(--e) * -2) calc(var(--e) * .5) 0 #dedad1, calc(var(--e) * -3) var(--e) 0 #d2cec5; }
 /* the leaves between the stops: with no script they lie closed under the first spread; with it they flick */
 .open .leaf.mid { --open: 0deg; }
+html:not(.fx) .paper { background: none; color: inherit; color-scheme: dark; }   /* 13 Nov 2026, the review: lying still, a full-width bright sheet glared at night */
+html:not(.fx) .paper .eyebrow, html:not(.fx) .paper .fine { color: var(--muted); }
 html:not(.fx) .open .leaf.mid .lf-back { display: none; }   /* 13 Nov 2026: an engine that does not hide a turned-away face drew this blank back over the right-hand page, so the still book showed an empty page */
 .open .leaf.mid .lf-front, .open .leaf.fl .lf-front { background: #fff; border-radius: 0; box-shadow: none; }
 .open .leaf.fl .lf-back { box-shadow: none; }
@@ -323,12 +324,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <p class="eyebrow">The book</p>
       <h1>Your soul <em>knows best.</em></h1>
       <p class="sub">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
-      <!--BUY_HERO--><p class="price-line"><!--HERO_PRICE-->A$4.99 on Kindle, A$24.99 in paperback.<!--/HERO_PRICE--> The book is being finished.</p>
-      <form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
-        <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me</button></div>
-        <p class="fine note">One email from me, the day the book is out.</p>
-        <p class="fine back" role="status" aria-live="polite"></p>
-      </form><!--/BUY_HERO-->
+      <!--BUY_HERO--><!--/BUY_HERO-->
       <a class="more" href="#inside">Look inside</a>
     </div>
     <div class="stage" id="heroStage">
@@ -337,6 +333,18 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <p class="turn" id="turnHint" aria-hidden="true">Drag to turn</p>
     </div>
   </header>
+
+  <section class="flow g" id="read" aria-labelledby="read-h"><div class="wrap">
+    <p class="eyebrow">From the book</p>
+    <!-- a paragraph of the piece the back cover's lines come from, word for word as the book prints it; tests/test_site_landing.py holds it to the launch file -->
+    <h2 id="read-h">The receptiveness I was waiting for</h2>
+    <p class="reading">The honest truth is that I have spent years choosing wanting rather than being the person I want to be. Wanting is a softer place than becoming, and the mind knows this. The mind will negotiate, postpone, reframe. It will tell you that the conditions are not yet right, that the moment is not yet ripe, that the other person, the other circumstance, the other version of you must first arrive. None of it is true. The conditions are never right. The moment is the only moment. And the person who has to arrive is the one already standing here.</p>
+    <!--ASK_READ--><form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
+      <p class="note">One email from me, the day the book is out.</p>
+      <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
+      <p class="fine back" role="status" aria-live="polite"></p>
+    </form><!--/ASK_READ-->
+  </div></section>
 
   <section class="flow g" id="about" aria-labelledby="about-h"><div class="wrap">
     <p class="eyebrow" id="about-h">On the back</p>
@@ -364,13 +372,6 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 18 and 19, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
   </div></section>
 
-  <section class="flow g" id="read" aria-labelledby="read-h"><div class="wrap">
-    <p class="eyebrow">From the book</p>
-    <!-- a paragraph of the piece the back cover's lines come from, word for word as the book prints it; tests/test_site_landing.py holds it to the launch file -->
-    <h2 id="read-h">The receptiveness I was waiting for</h2>
-    <p class="reading">The honest truth is that I have spent years choosing wanting rather than being the person I want to be. Wanting is a softer place than becoming, and the mind knows this. The mind will negotiate, postpone, reframe. It will tell you that the conditions are not yet right, that the moment is not yet ripe, that the other person, the other circumstance, the other version of you must first arrive. None of it is true. The conditions are never right. The moment is the only moment. And the person who has to arrive is the one already standing here.</p>
-  </div></section>
-
   <section class="flow g" id="feel" aria-label="What the book is for"><div class="wrap" data-lit="lines">
     <h2>Feel at home again.</h2>
     <p class="sub">You are not alone in this life.</p>
@@ -382,20 +383,20 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   </div></section>
 
   <section class="flow g" id="faq"><div class="wrap">
-    <h2>Before you buy.</h2>
+    <h2>Questions.</h2>
     <div class="faq">
-      <details><summary>Was this written by a human?</summary><p>Yes. Every line is the author's own, most of it written by hand in a journal first.</p></details>
       <details><summary>Why is the author anonymous?</summary><p>So the writing can stay honest. The essays describe real mornings, real jobs and real shame, and a name would mean softening them. The author stays soulsensis so nothing has to be left out.</p></details>
       <details><summary>How long is the book?</summary><p>It is being finished as one larger book, with the author's journals added, so the length and the contents may change. Written to be read slowly and returned to.</p></details>
       <details><summary>Is it a self-help book?</summary><p>No steps, no hacks, no morning routine. It is one person thinking honestly from inside their own life. It is not medical or psychological advice; if you are struggling, please talk to a doctor, a counsellor or a crisis line.</p></details>
       <details><summary>Can I read some of it first?</summary><p>Yes. Pages from the book are above, as printed, and the essays the book grew from are <a href="https://www.youtube.com/@soulsensis" rel="noopener">read aloud on YouTube</a>.</p></details>
+      <details><summary>Was this written by a human?</summary><p>Yes. Every line is the author's own, most of it written by hand in a journal first.</p></details>
       <!--ONSALE--><details><summary>Is the book on sale yet?</summary><p>Not yet. It goes on sale when it is done.</p></details><!--/ONSALE-->
     </div>
   </div></section>
 
   <section class="flow g" id="formats"><div class="wrap">
     <p class="eyebrow">Formats</p>
-    <h2>Choose how you want to read it.</h2>
+    <h2>Two ways to read it.</h2>
     <div class="formats" id="pick">
       <div class="format" id="paperback">
         <h3>Paperback</h3><p class="price" data-au="A$24.99" data-us="US$14.99">A$24.99<small>US$14.99</small></p>
@@ -409,6 +410,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       </div>
     </div>
     <!--NOTIFY--><div class="notify" id="notify">
+      <p class="reading">The book is being finished.</p>
       <!--EMAIL_LINE--><form class="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
         <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
         <p class="fine back" role="status" aria-live="polite"></p>

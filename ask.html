@@ -292,6 +292,9 @@ button, .btn, .card, .tile, .format, .chip, .answer, .tell input { border-radius
 .hero .price-line { margin: 0; font-family: var(--sans); font-size: 13px; color: var(--muted); }
 .how-copy h2 { font-size: clamp(27px, 4.6vw, 34px); } .how-copy .sub { font-size: 18px; }
 html:not(.live) #facts, html:not(.live) #private { display: none; }   /* prices and promises wait until Ask is open */
+#sayPin { display: none; }   /* 13 Nov 2026, the review: this line stood alone and was said again by the heading under it */
+html:not(.fx) .phone .field { display: none; }   /* lying still, the sample's field and red arrow looked pressable and were not */
+.close .btn { margin-top: 10px; }
 .how-copy .more { margin-top: 4px; }
 /* one site (second critic round): the home page's column, title size and warm-white button */
 .wrap, nav.gnav .wrap, footer .wrap, .fx .pin.calm .sticky { max-width: 680px; }
@@ -411,6 +414,13 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </div>
   </div></section>
 
+  <section class="flow g"><div class="wrap center close">
+    <svg viewBox="-64 -64 128 128" aria-hidden="true"><g class="draw" data-mark fill="none" stroke="#F5F2EA" stroke-width=".9"></g><circle r="16" fill="#E63946" fill-opacity=".3"/><circle r="3.2" fill="#E63946"/></svg>
+    <p class="slogan rise">Your soul knows best.</p>
+    <p class="sub rise">Listen to your soul. All it has wanted is to be heard.</p>
+    <a class="btn pill rise" href="book.html">See the book</a>
+  </div></section>
+
   <section class="pin calm feel g" id="private" style="--len:4.4" aria-label="Private by design"><div class="sticky">
     <svg class="flower" viewBox="-340 -340 680 680" aria-hidden="true"><g class="draw scrub" data-flower fill="none" stroke="#F5F2EA" stroke-width="1"></g></svg>
     <p class="word">No name.</p>
@@ -433,7 +443,6 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <h2 class="rise" id="talk-h">What's going on?</h2>
     <div class="talk rise">
       <div class="card wait-only" id="waiting">
-        <h3>Opening soon.</h3>
         <p>Leave it here. I read every one.</p>
         <p class="acts" style="justify-content:flex-start"><a class="more" href="/question/">Leave your question</a><a class="more dim" href="essays.html">Read the essays</a></p>
       </div>
@@ -461,7 +470,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       </div>
       <form class="send live-only" id="f" hidden><label for="q" class="vh">What's going on?</label><textarea id="q" rows="1" placeholder="What's going on?" maxlength="4000"></textarea><button id="send" type="submit" class="red">Send</button></form>
       <div class="tools live-only"><span id="left"></span><button type="button" class="ghost" id="code2" hidden>My account code</button><button type="button" class="ghost" id="del" hidden>Delete everything</button></div>
-      <p class="fine"><b>This is not therapy</b>, and not medical, legal or financial advice. It is an AI that answers only from the published essays and says so on every answer. If you're in danger or thinking about ending your life, please don't wait for a chatbot: call <b>000</b> (Australia), <b>911</b> (US), <b>999</b> (UK), <b>112</b> (Europe), or a crisis line now: Lifeline <b>13 11 14</b>, <b>988</b> (US, call or text), Samaritans <b>116 123</b> (UK and Ireland).</p>
+      <p class="fine"><b>This is not therapy</b>, and not medical, legal or financial advice. The AI option answers only from the published essays and says so on every answer. If you're in danger or thinking about ending your life, please don't wait for a chatbot: call <b>000</b> (Australia), <b>911</b> (US), <b>999</b> (UK), <b>112</b> (Europe), or a crisis line now: Lifeline <b>13 11 14</b>, <b>988</b> (US, call or text), Samaritans <b>116 123</b> (UK and Ireland).</p>
     </div>
   </div></section>
 
@@ -490,13 +499,6 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         <p class="fine">I reply within seven days. If I cannot answer your question, you are refunded in full.</p>
       </section>
     </div>
-  </div></section>
-
-  <section class="flow g"><div class="wrap center close">
-    <svg viewBox="-64 -64 128 128" aria-hidden="true"><g class="draw" data-mark fill="none" stroke="#F5F2EA" stroke-width=".9"></g><circle r="16" fill="#E63946" fill-opacity=".3"/><circle r="3.2" fill="#E63946"/></svg>
-    <p class="slogan rise">Your soul knows best.</p>
-    <p class="sub rise">Listen to your soul. All it has wanted is to be heard.</p>
-    <a class="more rise" href="book.html">The book</a>
   </div></section>
 </main>
 

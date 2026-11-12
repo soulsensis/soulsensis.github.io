@@ -144,15 +144,15 @@ h1 em { font-style: italic; } header.top h1 { font-size: clamp(31px, 5.2vw, 52px
 .btn.pill { margin: 0; }
 /* the page's one ask is the email field itself, in the first screen and again beside the book at the foot (13 Nov 2026:
    a button to another page hid the field behind an extra tap). The same list as the book page's field. */
-.tell { width: 100%; max-width: 440px; margin: 30px 0 0; scroll-margin-top: 100vh; }   /* a jump to the field shows the whole first screen */
+.tell { width: 100%; max-width: 500px; margin: 30px 0 0; scroll-margin-top: 100vh; }   /* a jump to the field shows the whole first screen */
 .buy { margin: 30px 0 0; }   /* once the book is on sale the build sets the store button where each field stood */
 .tell .row { display: flex; flex-wrap: wrap; gap: 10px; }
-.tell input { flex: 1 1 140px; min-width: 0; min-height: 50px; padding: 0 20px; border: 1px solid rgba(245,242,234,.38); border-radius: 999px; background: var(--raised); color: var(--ink); font: 400 17px var(--serif); }
+.tell input { flex: 1 1 150px; min-width: 0; min-height: 50px; padding: 0 20px; border: 1px solid rgba(245,242,234,.38); border-radius: 999px; background: var(--raised); color: var(--ink); font: 400 17px var(--serif); }
 .tell input::placeholder { color: var(--muted); opacity: 1; }
 .tell input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .tell button { flex: none; border: 0; cursor: pointer; }
 .tell button:disabled { cursor: default; }
-@media (max-width: 360px) { .tell .btn.pill { padding: 0 20px; } }   /* the smallest phone: the field and its button stay on one line */
+@media (max-width: 599px) { .tell input, .tell button { flex: 1 1 100%; } }   /* a phone: the field takes the full width, its button stands under it and says what it does */
 .tell .fine { margin: 12px 0 0; line-height: 1.5; }
 .tell .back:empty, .tell.done .row, .tell.done .note { display: none; }
 .tell.done .back { margin: 0; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.45; color: var(--ink); }
@@ -161,7 +161,7 @@ h1 em { font-style: italic; } header.top h1 { font-size: clamp(31px, 5.2vw, 52px
    is the book's quiet voice, the headline's own, and no link in the middle of the page leads off it. */
 #show { padding-block: 0 clamp(72px, 12vw, 128px); }
 .passage p { margin: 22px 0 0; font-size: clamp(19px, 2.6vw, 22px); line-height: 1.65; color: var(--ink); text-wrap: pretty; }
-.passage p.dek { font-style: italic; color: #c9c5bc; }   /* the piece's own line under its title, as printed */
+.passage p.from { margin-top: 20px; font: 500 12px var(--sans); letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }   /* the piece's title signs the passage */
 .acts { display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 20px 0 0; }
 .more { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
 .more.dim { color: #c9c5bc; text-decoration-color: #4a4a52; } .more:hover { color: #fff; }
@@ -223,6 +223,7 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
   html:not(.fx) #book .stage, #book:not(.pin) .stage { display: block; }
   html:not(.fx) #book .scene3d, #book:not(.pin) .scene3d { width: 150px; margin: 0 auto 30px; }
   html:not(.fx) #book .tell, #book:not(.pin) .tell { max-width: none; }
+  html:not(.fx) #book .bk, #book:not(.pin) .bk { rotate: -3deg; }
 }
 /* the one pinned scene (10 Nov's, in the journal's manner): the book shows its spine, turns to face you, opens and flicks to three
    chapters. A book is laid out at its closest size and only scaled down; the light on a face is a black sheet, never a filter. */
@@ -273,7 +274,9 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
 
 #book h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; letter-spacing: -.008em; }
 #book .tell, #book .buy { margin-top: 0; }
-#book .tell .note { margin: 10px 0 16px; font-size: clamp(16px, 4.3vw, 18px); }   /* one line on a phone, so the field under it stays clear of the screen's foot */
+#book .tell .note { margin: 10px 0 0; font-size: clamp(16px, 4.3vw, 18px); }
+#book .tell .row { margin-top: 16px; }
+@media (max-height: 620px) { .fx #book.pin .tell .note { display: none; } }   /* a short phone, the book's scene: the button already says it, and the field stays clear of the screen's foot */
 .fine { font-family: var(--sans); font-size: 13px; color: var(--muted); }
 .bk-copy .fine { margin: 12px 0 0; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
@@ -323,7 +326,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <h1>There is a particular kind of tiredness that comes from living a life <em>that is not yours.</em></h1>
     <p class="lines">Essays for when you are ready to stop performing and sit still enough to hear yourself.</p>
     <!--ASK_HERO--><form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
-      <div class="row"><input id="tell-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me</button></div>
+      <div class="row"><input id="tell-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
       <p class="fine note">One email from me, the day the book is out.</p>
       <p class="fine back" role="status" aria-live="polite"></p>
     </form><!--/ASK_HERO-->
@@ -338,11 +341,13 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 
   <section class="g say" id="show" aria-labelledby="show-h"><div class="wrap">
     <p class="label">From the book</p>
-    <h2 id="show-h" data-lit>The lighthouse does not try to shine</h2>
-    <!-- the piece the headline comes from: its own line under the title, then its opening after that first sentence, word for word as the book prints it; tests/test_site_landing.py holds it to the launch file -->
+    <h2 id="show-h" data-lit>On the tiredness of performing a life rather than living it.</h2>
+    <!-- the piece the headline comes from: its own line as the heading, then its opening after that first sentence, word for word as the book prints it (set here in three paragraphs); tests/test_site_landing.py holds it to the launch file -->
     <div class="passage">
-      <p class="dek">On the tiredness of performing a life rather than living it.</p>
-      <p>It is not the tiredness of physical work, nor the sharper tiredness that arrives at the end of a long day. It is slower and more insidious, a spiritual burn that corrodes the edges of a life from the inside out. For some, it is felt as a persistent sense that something is wrong without ever being able to name what. For others, it arrives as a quieter disappointment, an accumulating sadness that the life being lived does not resemble the life being sensed beneath it. The sensation goes by different names in different vocabularies, but the underlying geometry is always the same. There is a version of you that you have been reaching for, and there is a version of you that you have been performing, and the distance between the two is where the tiredness lives.</p>
+      <p>It is not the tiredness of physical work, nor the sharper tiredness that arrives at the end of a long day. It is slower and more insidious, a spiritual burn that corrodes the edges of a life from the inside out.</p>
+      <p>For some, it is felt as a persistent sense that something is wrong without ever being able to name what. For others, it arrives as a quieter disappointment, an accumulating sadness that the life being lived does not resemble the life being sensed beneath it.</p>
+      <p>The sensation goes by different names in different vocabularies, but the underlying geometry is always the same. There is a version of you that you have been reaching for, and there is a version of you that you have been performing, and the distance between the two is where the tiredness lives.</p>
+      <p class="from">The lighthouse does not try to shine</p>
     </div>
   </div></section>
 
@@ -375,7 +380,6 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   </div></section>
 
   <section class="pin g" id="book" aria-labelledby="book-h"><div class="sticky"><div class="stage">
-    <div class="wrap"><p class="label">The book</p></div>
     <a class="scene3d" id="bookScene" href="book.html" draggable="false" aria-label="The book: Your soul knows best">
       <div class="bk" id="homeBook"><img class="f front" src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" draggable="false" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f spine" src="book/spine.webp" width="272" height="4050" loading="lazy" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
       <div class="opn" id="open"><!--OPEN-->
@@ -391,7 +395,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <!--PRICE_LINE--><!--/PRICE_LINE-->
       <!--ASK_FOOT--><form class="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
         <p class="note">One email from me, the day the book is out.</p>
-        <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me</button></div>
+        <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
         <p class="fine back" role="status" aria-live="polite"></p>
       </form><!--/ASK_FOOT-->
       <!--BOOK_LINE--><!--/BOOK_LINE-->
