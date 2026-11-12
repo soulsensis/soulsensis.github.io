@@ -107,7 +107,7 @@ header.top { padding-block: clamp(56px, 12vw, 120px) clamp(40px, 7vw, 72px); }
   .hero-book::after { content: ""; position: absolute; left: 8%; right: 8%; bottom: -34px; height: 30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.9), transparent); } }
 /* a phone (12 Nov, the night round): the cover stands above his line, so the first screen shows what is sold; the bar already carries the mark */
 @media (max-width: 959px) { header.top { padding-top: clamp(28px, 7vw, 56px); } .logo { display: none; }
-  .hero-book { display: block; width: clamp(96px, 27vw, 132px); margin: 0 0 26px; rotate: -2deg; }
+  header.top .wrap { display: flex; flex-direction: column; align-items: flex-start; } header.top .logo { order: -1; } .hero-book { display: block; order: 9; width: clamp(150px, 44vw, 196px); margin: 34px 0 0 6px; rotate: -3deg; }
   .hero-book img { width: 100%; border: 1px solid #2a2a31; border-radius: 1px 3px 3px 1px; box-shadow: 0 24px 48px -16px rgba(0,0,0,.95), 0 0 0 1px rgba(245,242,234,.06), 0 0 40px rgba(245,242,234,.05); } }
 /* his sentences and the joins, one idea a section */
 .say p { margin: 22px 0 0; font-size: clamp(19px, 2.6vw, 22px); line-height: 1.55; color: #c9c5bc; }
@@ -185,7 +185,7 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
 /* readers: their own words, two a row on a wide screen */
 .said { display: grid; grid-template-columns: 1fr; gap: 0 40px; margin: 26px 0 0; }
 @media (min-width: 760px) { #readers .wrap { max-width: 1080px; } .said { grid-template-columns: 1fr 1fr; } }
-.said blockquote { margin: 0; padding: 20px 0; border-top: 1px solid var(--line); font-style: italic; font-size: clamp(20px, 2.6vw, 23px); line-height: 1.45; color: #ddd9cf; }
+.said cite { display: block; margin-top: 10px; font-style: normal; font-family: inherit; font-size: 12px; letter-spacing: .12em; text-transform: lowercase; color: var(--grey); } .said blockquote { margin: 0; padding: 20px 0; border-top: 1px solid var(--line); font-style: italic; font-size: clamp(20px, 2.6vw, 23px); line-height: 1.45; color: #ddd9cf; }
 figure { margin: 0; } figcaption { margin-top: 14px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
 /* the book. With no script or with reduced motion: the cover, flat, beside its words. */
 #book .stage { display: grid; grid-template-columns: 132px minmax(0, 1fr); column-gap: 26px; align-items: center; max-width: 680px; }
@@ -284,7 +284,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#show">Skip to the reading</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/book.html">See the book</a></div>
+  <div class="links"><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/book.html#notify">Tell me the day it is out</a></div>
 </div></nav>
 <!--/NAV-->
 
@@ -294,27 +294,20 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <a class="hero-book" href="book.html" tabindex="-1" aria-hidden="true"><img src="book/front.webp" width="1350" height="2025" fetchpriority="high" decoding="async" alt=""></a>
     <p class="label">A book of essays by soulsensis</p>
     <h1>There is a particular kind of tiredness that comes from living a life <em>that is not yours.</em></h1>
-    <p class="lines"><b>You feel it when the noise stops.</b> And you keep moving anyway.</p>
-    <div class="cta"><a class="btn pill" href="book.html">Be told the day it is out</a></div>
+    <p class="lines"><b>Essays for when you are ready to stop performing</b> and sit still enough to hear yourself.</p>
+    <div class="cta"><a class="btn pill" href="book.html">Tell me the day it is out</a></div>
   </div></div></header>
 
   <section class="g say" id="you" aria-labelledby="you-h"><div class="wrap">
     <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
     <h2 id="you-h" data-lit>We tend to numb ourselves from our soul, thinking it is the right thing to do.</h2>
-    <p>Most of us spend our days moving between enclosures, the office, the bedroom, the car.</p>
-    <p>And we call that a life.</p>
-  </div></section>
-
-  <section class="g say" id="cost" aria-labelledby="cost-h"><div class="wrap">
-    <h2 id="cost-h" data-lit>It delays our growth and pushes us further away from our own truths.</h2>
-    <p>Further from our own goals.</p>
+    <p>It delays our growth and pushes us further away from our own truths.</p>
     <p>And then we say that is our fate.</p>
   </div></section>
 
   <section class="g say" id="turn" aria-labelledby="turn-h"><div class="wrap">
     <h2 id="turn-h" data-lit>It is not fate.</h2>
-    <p>It is what happens in a system devoid of spiritual connection.</p>
-    <p>In a society where people forget that they are their own soul.</p>
+    <p>It is what happens when you spend years listening to everyone except yourself.</p>
     <p class="his">Listen to your soul. All it has wanted is to be heard.</p>
   </div></section>
 
@@ -323,22 +316,16 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <h2 id="how-h" data-lit>Your soul knows best.</h2>
     <p><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></p>
     <p>Each piece stands alone, so you can read one in a few minutes and put the book down until tomorrow.</p>
-    <p class="his">The whole point of my essays, at the end of the day, is to help people feel better.</p>
   </div></section>
 
-  <section class="g" id="show" aria-label="See it for yourself"><div class="wrap">
-    <div class="tabs" role="tablist" aria-label="See it for yourself">
-      <button class="tab" type="button" role="tab" id="t-book" aria-controls="p-book" aria-selected="true">The book</button>
-      <button class="tab" type="button" role="tab" id="t-watch" aria-controls="p-watch" aria-selected="false">Watch</button>
-    </div>
-    <div class="panels">
-      <div class="panel" role="tabpanel" id="p-book" aria-labelledby="t-book"><!--TAB_BOOK--><div class="pair"><figure class="pp"><img src="book/p18.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 18 as printed."><figcaption>Page 18</figcaption></figure><figure class="pp"><img src="book/p19.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 19 as printed."><figcaption>Chapter 2, We weren’t meant to be living the way we do, as printed</figcaption></figure></div><p class="acts"><a class="more" href="/book.html#inside">Look inside</a></p><!--/TAB_BOOK--></div>
-      <div class="panel" role="tabpanel" id="p-watch" aria-labelledby="t-watch"><!--TAB_WATCH--><!--/TAB_WATCH--></div>
-    </div>
+  <section class="g say" id="show" aria-labelledby="show-h"><div class="wrap">
+    <p class="label">From the book</p>
+    <h2 id="show-h" data-lit>We weren’t meant to be living the way we do. Most of us feel it. And most of us feel we don’t have a choice.</h2>
+    <div class="panels"><div class="panel" id="p-book"><!--TAB_BOOK--><div class="pair"><figure class="pp"><img src="book/p18.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 18 as printed."><figcaption>Page 18</figcaption></figure><figure class="pp"><img src="book/p19.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 19 as printed."><figcaption>We weren’t meant to be living the way we do, as printed</figcaption></figure></div><p class="acts"><a class="more" href="/book.html#inside">Look inside</a></p><!--/TAB_BOOK--></div></div>
   </div></section>
 
   <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
-    <h2 class="label" id="readers-h">What readers have said</h2>
+    <h2 class="label" id="readers-h">What early readers say</h2>
     <figure><div class="said" data-lit="lines">
       <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote>
     </div><figcaption>From early readers of the essays</figcaption></figure>
@@ -365,9 +352,9 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </a>
     <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
     <div class="bk-copy">
-      <h2 id="book-h">All I had to do was sit still enough to hear it.</h2>
+      <h2 id="book-h">Sit still enough to hear what your soul has been trying to tell you.</h2>
       <!--PRICE_LINE--><p>On Amazon soon.</p><!--/PRICE_LINE-->
-      <a class="btn pill" href="book.html">Be told the day it is out</a>
+      <a class="btn pill" href="book.html">Tell me the day it is out</a>
       <!--BOOK_LINE--><!--/BOOK_LINE-->
     </div>
   </div></div></section>
