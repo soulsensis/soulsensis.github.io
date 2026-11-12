@@ -103,11 +103,12 @@ h1 { margin: 0; font-weight: 400; font-size: clamp(31px, 5.2vw, 52px); line-heig
 h1 em { font-style: italic; }
 h2 { margin: 0; font-weight: 400; font-size: clamp(24px, 3.6vw, 34px); line-height: 1.25; letter-spacing: -.01em; text-wrap: balance; }
 p { text-wrap: pretty; }
-/* 1. the first screen: his line, the line under it, and a thin red line that points into the passage below it */
+/* 1. the first screen: his line and the line under it, the passage straight after (round two: the red line and the dot at the close
+   read as stray pixels; the cover's red heart is the page's one accent) */
 header.top { padding-block: 32px 0; }
+header.top .lines { margin-bottom: 4px; }
 .logo { display: none; }
 .lines { margin: 16px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.53; color: var(--ink); max-width: 30em; }
-.rule { display: block; width: 1px; height: 28px; margin: 28px 0 0; background: var(--heart); }
 @media (min-width: 960px) { header.top { padding-block: 112px 0; } .logo { display: block; width: 64px; height: 64px; margin: 0 0 30px -4px; } header.top h1 { max-width: 13em; } .lines { font-size: 20px; } }
 /* 2. the passage: the voice before any ask */
 #show { padding-top: 28px; border-top: 0; }
@@ -120,9 +121,8 @@ header.top { padding-block: 32px 0; }
 .cover img { width: 100%; border: 1px solid #24242a; border-radius: 1px 3px 3px 1px; box-shadow: 0 28px 56px -18px rgba(0,0,0,.95), 0 0 0 1px rgba(245,242,234,.05); }
 #how h2 { margin-top: 8px; }
 #how p { margin: 14px 0 0; font-size: 16px; line-height: 1.56; color: #d9d5cc; }
-.toc { list-style: none; margin: 24px 0 0; padding: 0; }
-.toc li { padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.6; color: var(--ink); }
-.toc li:last-child { border-bottom: 1px solid var(--line); }
+.toc { list-style: none; margin: 22px 0 0; padding: 0 0 0 16px; border-left: 1px solid #3a3a42; }   /* round two: rows between rules read as a menu to tap; a plain list, as a contents page sets it */
+.toc li { padding: 3px 0; font-size: 15px; font-style: italic; line-height: 1.6; color: #d9d5cc; }
 @media (min-width: 760px) { #how .wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); column-gap: 56px; align-items: start; } .cover { margin: 0; } }
 /* the field: full width on a phone, its button under it and saying what it does */
 .tell { width: 100%; max-width: 500px; margin: 28px 0 0; }
@@ -160,9 +160,8 @@ header.top { padding-block: 32px 0; }
 #wrote { border-top: 0; padding-top: 0; }
 #wrote p { margin: 14px 0 0; font-size: 16px; line-height: 1.56; color: #d9d5cc; }
 @media (min-width: 760px) { .said blockquote { font-size: 20px; } }
-/* 6. the close. Where nothing moves it is words and the field alone (the cover stood upright above); where the page
+/* 6. the close. Where nothing moves it is its line and the field alone (the cover stood upright above); where the page
    moves, the book's scene turns that cover and opens it to its pages before the same words */
-.dot { display: block; width: 4px; height: 4px; margin: 0 0 16px; border-radius: 50%; background: var(--heart); }
 #book .stage { max-width: 680px; }
 .scene3d, .bknote { display: none; }
 .bk { display: block; position: relative; aspect-ratio: 2 / 3; }
@@ -208,7 +207,6 @@ header.top { padding-block: 32px 0; }
 .opn .lines::before { content: ""; position: absolute; inset: 13% 14% 12%; background: repeating-linear-gradient(180deg, rgba(17,16,19,.1) 0 calc(var(--w) * .013), transparent 0 calc(var(--w) * .034)); }
 .fx .pin .bknote { display: block; position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 20px); margin: 0; text-align: center; text-wrap: balance; font-size: 13px; color: var(--muted); }
 .fx .pin .bk-copy { position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 78px); max-width: 680px; margin: 0 auto; }
-.fx .pin .dot { display: none; }
 }
 /* a wide screen: the book in the left of the stage, its words beside it */
 @media (min-width: 960px) and (min-height: 540px) {
@@ -264,7 +262,6 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <p class="label">A book of essays by soulsensis</p>
     <h1>There is a particular kind of tiredness that comes from living a life <em>that is not yours.</em></h1>
     <p class="lines">Essays for when you are ready to stop performing and sit still enough to hear yourself.</p>
-    <span class="rule" aria-hidden="true"></span>
   </div></div></header>
 
   <section class="g" id="show" aria-labelledby="show-h"><div class="wrap">
@@ -299,12 +296,13 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 
   <section class="g" id="you" aria-labelledby="you-h"><div class="wrap">
     <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
-    <!-- one of the book's shorter pieces, whole, word for word as the book prints it (page 226); tests/test_site_landing.py holds it to the launch file -->
+    <!-- one of the book's shorter pieces, its first two paragraphs word for word as the book prints them (page 133); tests/test_site_landing.py holds it to the launch file.
+         Round two of the 9.5 page (13 Nov 2026): the first pick read as stiff beside the passage; this one speaks to the reader, on the page's own theme -->
     <article class="piece" aria-labelledby="piece-h">
-      <p class="label">A shorter piece</p>
-      <h3 id="piece-h">Mind the gap</h3>
-      <p>When the mind becomes an incessant stream of thoughts, an individual must break its flow with a gap in thinking. Perpetual rumination does not yield fruitful results. Pausing to focus on the breath proves useful as it creates these gaps in thinking.</p>
-      <p>It is not possible to pay close attention to the breath whilst consciously thinking another thought simultaneously. Creating these gaps of thinking helps to ease the mind, and, like a computer reboot, helps the mind reset itself from all the programs it is running.</p>
+      <p class="label">From a shorter piece</p>
+      <h3 id="piece-h">On meaningful lives</h3>
+      <p>Meaning is derived from within. There is no other source for you to focus on. Other sources only serve as inspiration. Your life’s work is to figure out who you are. And who you are depends on what desires come up when you look within, into your soul.</p>
+      <p>How beautiful is this? There isn’t some roadmap you must follow, or other people’s expectations you must adhere to. You can set the rules for your life based on your intrinsic desires.</p>
     </article>
     <!-- 13 Nov 2026: two sections became these four lines, all his words -->
     <h2 id="you-h" data-lit>We tend to numb ourselves, thinking it is the right thing to do.</h2>
@@ -339,7 +337,6 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </a>
     <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
     <div class="bk-copy">
-      <span class="dot" aria-hidden="true"></span>
       <h2 id="book-h">All I had to do was sit still enough to hear it.</h2>
       <!--PRICE_LINE--><!--/PRICE_LINE-->
       <!--ASK_FOOT--><form class="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
