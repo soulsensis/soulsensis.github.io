@@ -191,7 +191,8 @@ html:not(.fx) .bk .front { box-shadow: 0 0 0 1px #2a2a31, 0 0 40px rgba(245,242,
 #about .hook, #read .hook { margin: 0 0 18px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
 #about .reading + .reading, #read .reading + .reading { margin-top: 12px; }
 /* 13 Nov 2026: the open pages are pictures of the print, too small to read on a phone until their scene brings one close, and
-   never close where nothing moves; so the page the book first rests on also opens here as text, in bone on the ground */
+   never close where nothing moves; so one passage of the book stands here as text, in bone on the ground */
+#read h2 { margin-bottom: 16px; }
 #read .reading { font-size: clamp(18px, 2.6vw, 20px); line-height: 1.65; color: var(--ink); text-wrap: pretty; }
 #about, #feel { overflow: hidden; overflow: clip; }
 /* the logo's geometry in the margin: on a phone a faint quarter at the page's edge; on a wide screen it ends on the stage's edge and no line of the back's runs under it */
@@ -364,11 +365,10 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   </div></section>
 
   <section class="flow g" id="read" aria-labelledby="read-h"><div class="wrap">
-    <p class="eyebrow" id="read-h">From the book</p>
-    <!-- the opening of the page the open book first rests on, word for word as printed; tests/test_site_landing.py holds it to that page -->
-    <p class="hook">We weren’t meant to be living the way we do. Yet so many of us feel we don’t have a choice.</p>
-    <p class="reading">But we have choices, and we make decisions all the time, every day. Why bother questioning otherwise?</p>
-    <p class="reading">Life can be lived deliberately and consciously, with you as an active participant in your life choices. You see, when a human is subject to specific pathways in life, such as going to school, getting a degree, going to college, then doing unfulfilling work for the rest of life, that human struggles to know what to do when the path doesn’t seem to work, and begins to question the very efficacy of the system.</p>
+    <p class="eyebrow">From the book</p>
+    <!-- a paragraph of the piece the back cover's lines come from, word for word as the book prints it; tests/test_site_landing.py holds it to the launch file -->
+    <h2 id="read-h">The receptiveness I was waiting for</h2>
+    <p class="reading">The honest truth is that I have spent years choosing wanting rather than being the person I want to be. Wanting is a softer place than becoming, and the mind knows this. The mind will negotiate, postpone, reframe. It will tell you that the conditions are not yet right, that the moment is not yet ripe, that the other person, the other circumstance, the other version of you must first arrive. None of it is true. The conditions are never right. The moment is the only moment. And the person who has to arrive is the one already standing here.</p>
   </div></section>
 
   <section class="flow g" id="feel" aria-label="What the book is for"><div class="wrap" data-lit="lines">

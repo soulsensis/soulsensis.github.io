@@ -140,8 +140,7 @@ header.top { padding-block: clamp(56px, 12vw, 120px) clamp(40px, 7vw, 72px); }
 h1 { margin: 0; font-weight: 400; font-size: clamp(42px, 7.4vw, 68px); line-height: 1.04; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }
 h1 em { font-style: italic; } header.top h1 { font-size: clamp(31px, 5.2vw, 52px); line-height: 1.1; max-width: 15em; }
 .lines { margin: 22px 0 0; font-family: var(--sans); font-size: 16px; line-height: 1.65; color: var(--ink); max-width: 34em; }
-.lines + .lines { margin-top: 6px; }
-.lines b { font-weight: 500; }
+.lines + .lines { margin-top: 6px; }   /* one weight (13 Nov 2026, the second review: a bold half under the italic line crowded the eye) */
 .btn.pill { margin: 0; }
 /* the page's one ask is the email field itself, in the first screen and again beside the book at the foot (13 Nov 2026:
    a button to another page hid the field behind an extra tap). The same list as the book page's field. */
@@ -158,9 +157,11 @@ h1 em { font-style: italic; } header.top h1 { font-size: clamp(31px, 5.2vw, 52px
 .tell .back:empty, .tell.done .row, .tell.done .note { display: none; }
 .tell.done .back { margin: 0; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.45; color: var(--ink); }
 /* a taste of the book that can be read where it stands (13 Nov 2026: the two white page pictures glared at night and were
-   too small to read on a phone): a piece's own opening as printed, in bone on the ground */
+   too small to read on a phone): one passage as printed, in bone on the ground. The second review the same day: the passage
+   is the book's quiet voice, the headline's own, and no link in the middle of the page leads off it. */
 #show { padding-block: 0 clamp(72px, 12vw, 128px); }
-.passage p { margin: 22px 0 0; font-size: clamp(19px, 2.6vw, 21px); line-height: 1.65; color: var(--ink); text-wrap: pretty; }
+.passage p { margin: 22px 0 0; font-size: clamp(19px, 2.6vw, 22px); line-height: 1.65; color: var(--ink); text-wrap: pretty; }
+.passage p.dek { font-style: italic; color: #c9c5bc; }   /* the piece's own line under its title, as printed */
 .acts { display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 20px 0 0; }
 .more { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
 .more.dim { color: #c9c5bc; text-decoration-color: #4a4a52; } .more:hover { color: #fff; }
@@ -196,7 +197,15 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
    swipe, and who they are is said once, in the heading (13 Nov 2026: the swiped row cut a line mid-word, and the heading and
    the caption said the same thing) */
 .said { display: grid; grid-template-columns: 1fr; gap: 0 40px; margin: 22px 0 0; }
-@media (min-width: 760px) { #readers .wrap { max-width: 1080px; } .said { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 760px) { #readers .wrap { max-width: 1080px; } .said { grid-template-columns: 1fr 1fr; } .said.three { grid-template-columns: repeat(3, 1fr); } }
+/* the second review, 13 Nov 2026: fourteen in a column were a wall of italics; three lead, and the other eleven wait behind one small line */
+.more-said { border-top: 1px solid var(--line); }
+.more-said summary { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 4px; cursor: pointer; list-style: none; font: 500 12px var(--sans); letter-spacing: .16em; text-transform: lowercase; color: var(--muted); transition: color .2s; }
+.more-said summary::-webkit-details-marker { display: none; }
+.more-said summary::after { content: "+"; font-weight: 300; font-size: 17px; letter-spacing: 0; }
+.more-said[open] summary::after { content: "\2212"; }
+.more-said summary:hover { color: var(--ink); }
+.more-said .said { margin-top: 0; }
 .said blockquote { margin: 0; padding: 18px 0; border-top: 1px solid var(--line); font-style: italic; font-size: clamp(19px, 2.6vw, 23px); line-height: 1.45; color: #ddd9cf; }
 /* the book. With no script or with reduced motion: the cover, flat, beside its words. */
 #book .stage { display: grid; grid-template-columns: 132px minmax(0, 1fr); column-gap: 26px; align-items: center; max-width: 680px; }
@@ -208,7 +217,13 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
 .bk .f:not(.front), .opn, .bknote { display: none; }
 .bk-copy p { margin: 10px 0 0; font-size: 18px; line-height: 1.55; color: #c9c5bc; }
 .bk-copy p.fine { margin-top: 12px; font-size: 13px; color: var(--muted); }
-@media (max-width: 440px) { #book .stage { grid-template-columns: 96px minmax(0, 1fr); column-gap: 18px; } }
+/* a phone with no motion (13 Nov 2026, the second review: the cover beside a narrow two-row field was cramped): the cover stands
+   centred above its words, and the field takes the column's full width */
+@media (max-width: 599px) {
+  html:not(.fx) #book .stage, #book:not(.pin) .stage { display: block; }
+  html:not(.fx) #book .scene3d, #book:not(.pin) .scene3d { width: 150px; margin: 0 auto 30px; }
+  html:not(.fx) #book .tell, #book:not(.pin) .tell { max-width: none; }
+}
 /* the one pinned scene (10 Nov's, in the journal's manner): the book shows its spine, turns to face you, opens and flicks to three
    chapters. A book is laid out at its closest size and only scaled down; the light on a face is a black sheet, never a filter. */
 @media (min-height: 540px) {
@@ -257,7 +272,8 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
 .btn { display: inline-flex; align-items: center; min-height: 46px; margin-top: 16px; padding: 0 22px; border-radius: 4px; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; }
 
 #book h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; letter-spacing: -.008em; }
-#book .tell, #book .buy { margin-top: 16px; }
+#book .tell, #book .buy { margin-top: 0; }
+#book .tell .note { margin: 10px 0 16px; font-size: clamp(16px, 4.3vw, 18px); }   /* one line on a phone, so the field under it stays clear of the screen's foot */
 .fine { font-family: var(--sans); font-size: 13px; color: var(--muted); }
 .bk-copy .fine { margin: 12px 0 0; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
@@ -305,7 +321,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <a class="hero-book" href="book.html" tabindex="-1" aria-hidden="true"><img src="book/front.webp" width="1350" height="2025" fetchpriority="high" decoding="async" alt=""></a>
     <p class="label">A book of essays by soulsensis</p>
     <h1>There is a particular kind of tiredness that comes from living a life <em>that is not yours.</em></h1>
-    <p class="lines"><b>Essays for when you are ready to stop performing</b> and sit still enough to hear yourself.</p>
+    <p class="lines">Essays for when you are ready to stop performing and sit still enough to hear yourself.</p>
     <!--ASK_HERO--><form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
       <div class="row"><input id="tell-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me</button></div>
       <p class="fine note">One email from me, the day the book is out.</p>
@@ -322,20 +338,24 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 
   <section class="g say" id="show" aria-labelledby="show-h"><div class="wrap">
     <p class="label">From the book</p>
-    <h2 id="show-h" data-lit>Where are you rushing to?</h2>
-    <!-- the piece's opening, word for word as the book prints it (the page the book page stops on); tests/test_site_landing.py holds it to that page -->
+    <h2 id="show-h" data-lit>The lighthouse does not try to shine</h2>
+    <!-- the piece the headline comes from: its own line under the title, then its opening after that first sentence, word for word as the book prints it; tests/test_site_landing.py holds it to the launch file -->
     <div class="passage">
-      <p>Everyone feels rushed, but no one is asking: where are you rushing to? I think one of the most important things in life is to be able to slow down. Our world is moving too fast. We’re trying to hit different milestones all at the same time, and everything needs to be done yesterday. So where are you rushing to? What are you rushing for? Where are you going, and why are you going in that direction?</p>
-      <p>I get so used to the dopamine of reaching a goal that I forget the importance of patience, and of knowing that you aren’t really going anywhere, even if you accelerate yourself by a massive amount. Acceleration only gets you to a place faster. It does not mean you are happier. It just means you will have another goal sooner.</p>
+      <p class="dek">On the tiredness of performing a life rather than living it.</p>
+      <p>It is not the tiredness of physical work, nor the sharper tiredness that arrives at the end of a long day. It is slower and more insidious, a spiritual burn that corrodes the edges of a life from the inside out. For some, it is felt as a persistent sense that something is wrong without ever being able to name what. For others, it arrives as a quieter disappointment, an accumulating sadness that the life being lived does not resemble the life being sensed beneath it. The sensation goes by different names in different vocabularies, but the underlying geometry is always the same. There is a version of you that you have been reaching for, and there is a version of you that you have been performing, and the distance between the two is where the tiredness lives.</p>
     </div>
-    <p class="acts"><a class="more" href="/book.html#inside">Look inside</a></p>
   </div></section>
 
   <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
     <h2 class="label" id="readers-h">What early readers of the essays say</h2>
-    <div class="said" data-lit="lines">
-      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote><blockquote>“From what book is this?”</blockquote><blockquote>“Gorgeous writing.”</blockquote><blockquote>“…a magnificent writer.”</blockquote><blockquote>“Just what I needed to hear.”</blockquote><blockquote>“This resonated with me…”</blockquote><blockquote>“Thanks for these words.”</blockquote><blockquote>“Thank you. I needed something like this.”</blockquote><blockquote>“I thoroughly enjoyed reading this.”</blockquote><blockquote>“I am still hurt but I feel at peace.”</blockquote><blockquote>“The last sentence… damn.”</blockquote>
+    <div class="said three" data-lit="lines">
+      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“I am still hurt but I feel at peace.”</blockquote>
     </div>
+    <details class="more-said"><summary>Eleven more</summary>
+      <div class="said">
+        <blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote><blockquote>“From what book is this?”</blockquote><blockquote>“Gorgeous writing.”</blockquote><blockquote>“…a magnificent writer.”</blockquote><blockquote>“Just what I needed to hear.”</blockquote><blockquote>“This resonated with me…”</blockquote><blockquote>“Thanks for these words.”</blockquote><blockquote>“Thank you. I needed something like this.”</blockquote><blockquote>“I thoroughly enjoyed reading this.”</blockquote><blockquote>“The last sentence… damn.”</blockquote>
+      </div>
+    </details>
   </div></section>
 
   <section class="g say" id="you" aria-labelledby="you-h"><div class="wrap">
@@ -368,8 +388,9 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
     <div class="bk-copy">
       <h2 id="book-h">All I had to do was sit still enough to hear it.</h2>
-      <!--PRICE_LINE--><p>On Amazon soon.</p><!--/PRICE_LINE-->
+      <!--PRICE_LINE--><!--/PRICE_LINE-->
       <!--ASK_FOOT--><form class="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
+        <p class="note">One email from me, the day the book is out.</p>
         <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me</button></div>
         <p class="fine back" role="status" aria-live="polite"></p>
       </form><!--/ASK_FOOT-->
