@@ -120,7 +120,7 @@ html:not(.fx) .phone { height: auto; } html:not(.fx) .phone .log { -webkit-mask-
 .phone .ss + .them { margin-top: .6em; }
 .phone .them { align-self: flex-end; max-width: 88%; margin: 0; background: var(--them); border: 1px solid var(--line); border-radius: 1.2em 1.2em .3em 1.2em; padding: .7em 1em; line-height: 1.45; }
 .phone .ss { margin: 0; font-family: var(--serif); font-size: 1.14em; line-height: 1.5; }
-.phone .who { display: block; margin-bottom: .4em; font-family: var(--sans); font-size: max(12px, .7em); letter-spacing: .3em; text-transform: uppercase; color: #c9c5bc; }
+.phone .who { display: block; margin-bottom: .4em; font-family: var(--sans); font-size: max(12px, .7em); letter-spacing: .08em; text-transform: none; color: #c9c5bc; }
 .phone .listen { display: none; margin: 0; font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 1.14em; }
 .phone .listen::after { content: ""; display: inline-block; width: .4em; height: .4em; margin-left: .5em; border-radius: 50%; background: var(--heart); vertical-align: middle; animation: pulse 1.2s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .2; transform: scale(.7); } }
@@ -178,7 +178,7 @@ section.flow { padding-block: clamp(72px, 10vw, 140px); }
 @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .msg.them { align-self: flex-end; background: var(--them); border: 1px solid var(--line); border-radius: 18px 18px 4px 18px; padding: 11px 16px; font-size: 16px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
 .msg.ss { align-self: flex-start; font-family: var(--serif); font-size: 19px; line-height: 1.65; white-space: pre-wrap; max-width: 60ch; overflow-wrap: anywhere; }
-.msg.ss .who { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: #c9c5bc; display: block; margin-bottom: 6px; }
+.msg.ss .who { font-family: var(--sans); font-size: 12px; letter-spacing: .08em; text-transform: none; color: #c9c5bc; display: block; margin-bottom: 6px; }
 .thinking { color: var(--muted); font-style: italic; }
 .thinking::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-radius: 50%; background: var(--heart); vertical-align: middle; animation: pulse 1.2s ease-in-out infinite; }
 form.send { position: sticky; bottom: 0; background: linear-gradient(transparent, var(--ground) 18%); padding: 14px 0 calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 10px; align-items: flex-end; }
@@ -240,11 +240,11 @@ button:disabled { opacity: .5; cursor: default; }
 .oq b { color: var(--ink); font-weight: 500; }
 .card.oq { border-color: #3a3a42; }
 .linkish { background: none; border: 0; padding: 0; min-height: 0; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; display: inline; }
-.oq-q { margin: 0; padding: 12px 16px; border-left: 2px solid var(--heart); color: #d9d5cc; font-family: var(--serif); font-size: 17px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+.oq-q { margin: 0; padding: 12px 16px; border-left: 2px solid rgba(245,242,234,.3); color: #d9d5cc; font-family: var(--serif); font-size: 17px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
 .oq-ref { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--sans) !important; font-size: 15px !important; }
 .oq-ref code { font: 500 17px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em; color: var(--ink); padding: 8px 10px; border: 1px solid #3a3a42; border-radius: 4px; }
 .read { margin: 12px 0 0 !important; font-family: var(--sans) !important; font-size: 14px !important; white-space: normal; }
-.read a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 4px; }
+.read a { color: var(--ink); text-decoration: underline; text-decoration-color: rgba(245,242,234,.5); text-underline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) { .phone .thread > :nth-child(n+4) { display: none; } }
 .ai-label { margin: 10px 0 0 !important; font-family: var(--sans) !important; font-size: 12px !important; line-height: 1.5 !important; color: var(--muted) !important; letter-spacing: .02em; }
 .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -264,12 +264,12 @@ h3 { font-size: clamp(21px, 3.2vw, 24px); line-height: 1.25; }
 .center { text-align: left; align-items: flex-start; }
 .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: lowercase; }
 .sub { font-family: var(--serif); font-style: italic; }
-.more { font-family: var(--serif); font-size: 18px; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.more { font-family: var(--serif); font-size: 18px; text-decoration: underline; text-decoration-color: rgba(245,242,234,.5); text-decoration-thickness: 1px; text-underline-offset: 6px; }
 .more::after { content: none; } .more.dim { text-decoration-color: #4a4a52; }
 button, .btn, .card, .tile, .format, .chip, .answer, .tell input { border-radius: 4px; }
 .flow { padding-block: clamp(40px, 7vw, 64px); }
 .flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid rgba(245,242,234,.16); }
-.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+.flow > .wrap::before { content: none; }
 .tiles { grid-template-columns: 1fr; gap: 0; margin-top: 20px; }
 .tile { padding: 18px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; }
 .tile:first-child { border-top: 0; } .tile::before { content: none; } .tile svg { width: 32px; height: 32px; margin: 2px 0 0; grid-row: span 2; }
@@ -278,7 +278,7 @@ button, .btn, .card, .tile, .format, .chip, .answer, .tell input { border-radius
 /* scenes taken off the pin: they read as plain blocks in the column */
 .fx .pin.calm { height: auto; padding-block: clamp(40px, 7vw, 64px); padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 .fx .pin.calm .sticky { position: relative; top: auto; height: auto; overflow: visible; display: block; max-width: 680px; margin: 0 auto; padding: 26px 0 0; border-top: 1px solid rgba(245,242,234,.16); text-align: left; }
-.fx .pin.calm .sticky::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+.fx .pin.calm .sticky::before { content: none; }
 .fx .pin.calm svg.flower { display: none; }
 .say p, .fx .say p { max-width: none; margin: 0; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; text-wrap: pretty; }
 .fx .pin.calm.say p span { opacity: 1 !important; }
@@ -301,9 +301,20 @@ html:not(.fx) .phone .field { display: none; }   /* lying still, the sample's fi
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 h1, .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; }
 .btn.primary, .btn.red, button.red { background: var(--ink); color: #000; } .btn.primary:hover, .btn.red:hover, button.red:hover { box-shadow: none; background: #fff; }
-.btn.quiet { border: 0; background: none; padding: 0; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
+.btn.quiet { border: 0; background: none; padding: 0; color: var(--ink); font: 400 17px var(--serif); text-decoration: underline; text-decoration-color: rgba(245,242,234,.5); text-underline-offset: 6px; }
 .hero .copy { max-width: 680px; }
 .talk { margin-left: 0; } .card { background: none; padding: 22px 0 0; border: 0; border-top: 1px solid var(--line); }
+
+/* 13 Nov 2026, the frozen rubric (docs/specs/site-rubric-2026-11-13.md), what fits a page that offers two ways to ask: readers
+   and who wrote it before the book, the book shown by its cover, red only in the mark and the cover, the short footer */
+#readers .label, #wrote .label { margin: 0 0 14px; font-family: var(--serif); font-size: 13px; font-weight: 400; letter-spacing: .06em; text-transform: lowercase; color: var(--muted); }
+.said { display: grid; grid-template-columns: 1fr; margin: 4px 0 0; text-align: left; }
+.said blockquote { margin: 0; padding: 16px 0; border-top: 1px solid rgba(245,242,234,.16); font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.53; color: #ddd9cf; }
+.said blockquote:last-child { border-bottom: 1px solid rgba(245,242,234,.16); }
+#wrote h2 { margin: 0 0 4px; font-size: clamp(24px, 3.6vw, 34px); line-height: 1.25; text-align: left; }
+#wrote .plain { margin: 12px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.56; color: #d9d5cc; text-align: left; }
+#readers .wrap, #wrote .wrap { text-align: left; max-width: 680px; }
+.close .cover { display: block; width: 220px; height: auto; margin: 0 auto 18px; border-radius: 2px; box-shadow: 0 0 0 1px #2a2a31, 0 0 40px rgba(245,242,234,.05); }
 </style>
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
@@ -337,7 +348,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#talk">Skip to the conversation</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/book.html">See the book</a></div>
+  <div class="links"><a class="far" href="/conversation/">A conversation</a></div>
 </div></nav>
 <!--/NAV-->
 <div class="lnav g" id="lnav"><div class="wrap">
@@ -414,8 +425,20 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </div>
   </div></section>
 
+  <section class="flow g" id="readers" aria-labelledby="readers-h"><div class="wrap">
+    <h2 class="label" id="readers-h">What early readers of the essays say</h2>
+    <div class="said"><blockquote>“i really needed this today, as someone who overthinks far too much and sometimes needs to think about life as a whole and not only what's happening in the moment.”</blockquote><blockquote>“It's hard to maintain this perspective though, when you're just trekking along and can't see anything but the trees around you and the small section of path in front of you. At least we can all keep reminding each other of the truth, like you did for me now.”</blockquote><blockquote>“This resonated with me as i have experienced this several times and I now welcome moments like this in my life and indeed somewhat chase them now.”</blockquote></div>
+  </div></section>
+
+  <section class="flow g" id="wrote" aria-labelledby="wrote-h"><div class="wrap">
+    <p class="label">Who wrote it</p>
+    <h2 id="wrote-h">I write as soulsensis, so nothing has to be held back.</h2>
+    <p class="plain">Not work, not family, not my own mistakes.</p>
+    <p class="plain">Every line is my own, most of it written by hand in a journal first.</p>
+  </div></section>
+
   <section class="flow g"><div class="wrap center close">
-    <svg viewBox="-64 -64 128 128" aria-hidden="true"><g class="draw" data-mark fill="none" stroke="#F5F2EA" stroke-width=".9"></g><circle r="16" fill="#E63946" fill-opacity=".3"/><circle r="3.2" fill="#E63946"/></svg>
+    <img class="cover" src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it">
     <p class="slogan rise">Your soul knows best.</p>
     <p class="sub rise">Listen to your soul. All it has wanted is to be heard.</p>
     <a class="btn pill rise" href="book.html">See the book</a>
@@ -502,10 +525,9 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   </div></section>
 </main>
 
-<!--FOOTER--><footer class="g"><div class="wrap">
+<!--FOOTER--><footer class="g quiet"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
-  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html#ask">Privacy</a><a href="/terms.html">Terms</a></span>
+  <span class="links"><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html#ask">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Not therapy. In danger or thinking about ending your life? Call 000 (AU), 911 (US), 999 (UK), 112 (EU), or Lifeline 13 11 14, 988 (US), Samaritans 116 123.</p>
 </div></footer>
 <!--/FOOTER-->

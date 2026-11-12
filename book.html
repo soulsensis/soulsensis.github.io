@@ -106,7 +106,7 @@ h3 { font-size: clamp(21px, 3.4vw, 25px); line-height: 1.25; }
 .sub { margin: 0; font-style: italic; font-size: clamp(20px, 3.4vw, 24px); line-height: 1.4; color: #ddd9cf; }
 .reading { margin: 0; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
 .fine { margin: 0; font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
-.more, .btn.quiet { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
+.more, .btn.quiet { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; color: var(--ink); text-decoration: underline; text-decoration-color: rgba(245,242,234,.5); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
 .more:hover, .btn.quiet:hover { color: #fff; }
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 4px; background: var(--ink); color: #000; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; transition: background .2s; }
 .btn:hover { background: #fff; }
@@ -141,7 +141,7 @@ body > nav.top .links a.pill { max-width: 280px; overflow: hidden; transition: b
 /* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
 section.flow { padding-block: clamp(40px, 7vw, 64px); }
 section.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
-section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
+section.flow > .wrap::before { content: none; }   /* 13 Nov 2026 (the frozen rubric): red only in the emblem and the cover; the rules are bone */
 
 /* the head of the page: the words, then the book itself, set left in the column, to be turned in the hand */
 .hero { overflow: hidden; padding-block: clamp(44px, 9vw, 88px) 0; }
@@ -193,7 +193,7 @@ html:not(.fx) .bk .front { box-shadow: 0 0 0 1px #2a2a31, 0 0 40px rgba(245,242,
    never close where nothing moves; so one passage of the book stands here as text, in bone on the ground */
 #read h2 { margin-bottom: 16px; }
 #read .reading { font-size: clamp(18px, 2.6vw, 20px); line-height: 1.65; color: var(--ink); text-wrap: pretty; }
-#about, #feel { overflow: hidden; overflow: clip; }
+#feel { overflow: hidden; overflow: clip; }   /* #about holds the book to turn: a clip there flattens its six faces */
 /* the logo's geometry in the margin: on a phone a faint quarter at the page's edge; on a wide screen it ends on the stage's edge and no line of the back's runs under it */
 .flower { position: absolute; z-index: -1; top: 6px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
 @media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g { stroke-width: .2; } #about .hook, #about .reading { max-width: 540px; } }
@@ -277,6 +277,33 @@ figcaption { margin-top: 10px; font-family: var(--sans); font-size: 12px; color:
 .close .orn { display: block; width: 44px; height: 44px; margin-bottom: 20px; }
 .close .slogan { margin: 0 0 12px; font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; letter-spacing: -.008em; }
 .close .more { margin-top: 12px; }
+
+/* 13 Nov 2026, the frozen rubric (docs/specs/site-rubric-2026-11-13.md): the first screen is his two lines alone; the book to
+   turn stands with its counts, six titles and the first field; where nothing moves the inside pages (too small to read on a
+   phone, a bright sheet at night) give way to the passage already above */
+.hero h1 { font-size: clamp(31px, 5.2vw, 52px); line-height: 1.19; letter-spacing: -.015em; max-width: 15em; }
+.hero .sub { font-style: normal; font-size: 18px; line-height: 1.55; color: var(--ink); max-width: 30em; }
+@media (max-width: 959px) { .hero { box-sizing: border-box; min-height: max(min(calc(100svh - 72px), 724px), 520px); display: flex; flex-direction: column; justify-content: flex-end; padding-block: 24px 96px; } }
+@media (min-width: 960px) { .hero { display: block; max-width: none; padding-block: 112px 72px; } .hero-copy { margin: 0 auto; padding-right: 0; } }
+#about .stage { --bw: 220px; justify-items: center; height: calc(var(--bw) * 1.5 + 56px); max-width: none; margin: 0 auto 20px; padding-left: 0; }
+#about .floor { left: 50% !important; }
+#about .inv .reading + .reading { margin-top: 12px; }
+#about .inv h2 { margin-bottom: 14px; }
+.toc { margin: 22px 0 0; padding: 2px 0 2px 18px; border-left: 1px solid var(--rule); list-style: none; }
+.toc li { margin: 0; font-style: italic; font-size: 17px; line-height: 1.85; color: #d9d5cc; }
+#about .tell { margin-top: 28px; } #about .tell .note { margin: 0 0 14px; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
+@media (min-width: 960px) { #about .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 56px; align-items: start; } #about .stage { --bw: 240px; grid-column: 1; grid-row: 1; width: calc(var(--bw) + 60px); margin: 0; } #about .inv { grid-column: 2; grid-row: 1; } }
+#feel .hook { margin: 0 0 14px; font-size: clamp(22px, 3.6vw, 27px); line-height: 1.4; max-width: 30em; }
+#feel .reading { max-width: 34em; }
+.said { display: grid; grid-template-columns: 1fr; margin: 4px 0 0; }
+.said blockquote { margin: 0; padding: 16px 0; border-top: 1px solid var(--rule); font-style: italic; font-size: 17px; line-height: 1.53; color: #ddd9cf; }
+.said blockquote:last-child { border-bottom: 1px solid var(--rule); }
+#readers h2.eyebrow { margin-bottom: 16px; }
+#wrote h2 { margin-bottom: 4px; } #wrote .reading { margin-top: 12px; font-size: 17px; }
+#notify h2 { margin: 0; } #notify .sub { margin: 6px 0 22px; } #notify .note { margin: 0 0 14px; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
+html:not(.fx) #inside { display: none; }
+html:not(.fx) #about .more { display: none; }   /* the link goes where its pages go */
+#about .more { margin-top: 14px; }
 </style>
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
@@ -310,7 +337,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#formats">Skip to the formats</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="far" href="/conversation/">A conversation</a><a class="pill" href="#notify">Tell me</a></div>
+  <div class="links"><a class="far" href="/conversation/">A conversation</a></div>
 </div></nav>
 <!--/NAV-->
 <div class="lnav g" id="lnav"><div class="wrap">
@@ -321,39 +348,45 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <main id="top">
   <header class="hero g">
     <div class="hero-copy">
-      <p class="eyebrow">The book</p>
-      <h1>Your soul <em>knows best.</em></h1>
-      <p class="sub">There is a particular kind of tiredness that comes from living a life that is not yours.</p>
+      <h1>There is a particular kind of tiredness that comes from living a life that is not yours.</h1>
+      <p class="sub">Contentment was never about the absence of difficulty. All I had to do was sit still enough to hear it.</p>
       <!--BUY_HERO--><!--/BUY_HERO-->
-      <a class="more" href="#inside">Look inside</a>
-    </div>
-    <div class="stage" id="heroStage">
-      <div class="floor" aria-hidden="true"></div>
-      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" fetchpriority="high" draggable="false" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" loading="lazy" draggable="false" alt=""><img class="f spine" src="book/spine.webp" width="272" height="4050" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
-      <p class="turn" id="turnHint" aria-hidden="true">Drag to turn</p>
     </div>
   </header>
 
   <section class="flow g" id="read" aria-labelledby="read-h"><div class="wrap">
     <p class="eyebrow">From the book</p>
-    <!-- a paragraph of the piece the back cover's lines come from, word for word as the book prints it; tests/test_site_landing.py holds it to the launch file -->
+    <!-- the piece the back cover's lines come from, a run of its page 27 word for word as the book prints it (set in four short
+         paragraphs, none over eight phone lines); tests/test_site_landing.py holds it to the launch file -->
     <h2 id="read-h">The receptiveness I was waiting for</h2>
-    <p class="reading">The honest truth is that I have spent years choosing wanting rather than being the person I want to be. Wanting is a softer place than becoming, and the mind knows this. The mind will negotiate, postpone, reframe. It will tell you that the conditions are not yet right, that the moment is not yet ripe, that the other person, the other circumstance, the other version of you must first arrive. None of it is true. The conditions are never right. The moment is the only moment. And the person who has to arrive is the one already standing here.</p>
-    <!--ASK_READ--><form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
+    <p class="reading">The person waits for the partner to soften. The professional waits for the institution to validate. The writer waits for the audience to confirm that what they are writing is worth writing. And in each case, the waiting is the failure.</p>
+    <p class="reading">The thing waited for cannot arrive while the waiter is still waiting, because waiting is the posture of someone who has not yet accepted themselves. I have thought about this for a long time.</p>
+    <p class="reading">The honest truth is that I have spent years choosing wanting rather than being the person I want to be. Wanting is a softer place than becoming, and the mind knows this. The mind will negotiate, postpone, reframe.</p>
+    <p class="reading">It will tell you that the conditions are not yet right, that the moment is not yet ripe, that the other person, the other circumstance, the other version of you must first arrive. None of it is true. The conditions are never right. The moment is the only moment. And the person who has to arrive is the one already standing here.</p>
+  </div></section>
+
+  <section class="flow g" id="about" aria-labelledby="about-h"><div class="wrap">
+    <div class="stage" id="heroStage">
+      <div class="floor" aria-hidden="true"></div>
+      <div class="bk" id="heroBook"><img class="f front" src="book/front.webp" width="1350" height="2025" fetchpriority="high" draggable="false" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f back" src="book/back.webp" width="1350" height="2025" decoding="async" loading="lazy" draggable="false" alt=""><img class="f spine" src="book/spine.webp" width="272" height="4050" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <p class="turn" id="turnHint" aria-hidden="true">Drag to turn</p>
+    </div>
+    <div class="inv">
+      <p class="eyebrow">The book</p>
+      <h2 id="about-h">Your soul <em>knows best.</em></h2>
+      <p class="reading"><!--COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/COUNTS--></p>
+      <p class="reading">Each piece stands alone, so you can read one in a few minutes and put the book down until tomorrow.</p>
+      <!-- six of the book's essays, their titles as its contents page prints them, in the book's order (the home page shows six others) -->
+      <ol class="toc" aria-label="Six of the essays">
+        <li>We weren’t meant to be living the way we do</li><li>You do not get what you want</li><li>The receptiveness I was waiting for</li><li>The utility of pain</li><li>Seasons come and go</li><li>The actuality of the soul</li>
+      </ol>
+      <a class="more" href="#inside">Look inside</a>
+      <!--ASK_READ--><form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
       <p class="note">One email from me, the day the book is out.</p>
       <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
       <p class="fine back" role="status" aria-live="polite"></p>
     </form><!--/ASK_READ-->
-  </div></section>
-
-  <section class="flow g" id="about" aria-labelledby="about-h"><div class="wrap">
-    <p class="eyebrow" id="about-h">On the back</p>
-    <svg class="flower" data-draw viewBox="-64 -64 128 128" aria-hidden="true"><g data-mark fill="none" stroke="#F5F2EA" stroke-width=".28"></g><circle r="1.9" fill="#E63946"/></svg>
-    <p class="hook" id="say" data-lit>Listen to your soul. All it has wanted is to be heard.</p>
-    <p class="reading">It is not the tiredness of the body. It is the tiredness of waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is.</p>
-    <p class="reading">Contentment was never about the absence of difficulty.</p>
-    <p class="reading">All I had to do was sit still enough to hear it.</p>
-    <p class="reading"><!--COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/COUNTS--></p>
+    </div>
   </div></section>
 
   <section class="pin inside paper g" id="inside" style="--len:6.4" aria-labelledby="inside-h"><div class="sticky">
@@ -372,14 +405,23 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <!--NOTE--><p class="fine in-note" id="inNote" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul" data-last="Page 243, as printed. Paperback, 6 × 9 inches.">Pages 18 and 19, as printed. Paperback, 6 × 9 inches.</p><!--/NOTE-->
   </div></section>
 
-  <section class="flow g" id="feel" aria-label="What the book is for"><div class="wrap" data-lit="lines">
-    <h2>Feel at home again.</h2>
-    <p class="sub">You are not alone in this life.</p>
+  <section class="flow g" id="feel" aria-label="On the back"><div class="wrap" data-lit="lines">
+    <svg class="flower" data-draw viewBox="-64 -64 128 128" aria-hidden="true"><g data-mark fill="none" stroke="#F5F2EA" stroke-width=".28"></g><circle r="1.9" fill="#E63946"/></svg>
+    <p class="eyebrow">On the back</p>
+    <p class="hook" id="say" data-lit>Listen to your soul. All it has wanted is to be heard.</p>
+    <p class="reading">It is not the tiredness of the body. It is the tiredness of waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is.</p>
   </div></section>
 
   <section class="flow g" id="readers" aria-labelledby="praise-h"><div class="wrap">
-    <h2 id="praise-h">What readers have said.</h2>
-    <figure><div class="said" data-lit="lines"><blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote></div><figcaption>From early readers of the essays</figcaption></figure>
+    <h2 class="eyebrow" id="praise-h">What early readers of the essays say</h2>
+    <div class="said" data-lit="lines"><blockquote>“I’m struggling with letting go of my past for various reasons. It’s not easy but I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward. I’m sad today. My past is haunting me but your post was encouraging.”</blockquote><blockquote>“It’s funny, because back then I was so focused on my future and what I wanted to accomplish, that I never truly appreciated the small moments I had with my loved ones. All I find myself with now are my thoughts of what could’ve been.”</blockquote><blockquote>“This is making me feel a little better. I did something terrible a few days ago. I've already apologized to the people I affected, but I still feel horrible.”</blockquote></div>
+  </div></section>
+
+  <section class="flow g" id="wrote" aria-labelledby="wrote-h"><div class="wrap">
+    <p class="eyebrow">Who wrote it</p>
+    <h2 id="wrote-h">I write as soulsensis, so nothing has to be held back.</h2>
+    <p class="reading">Not work, not family, not my own mistakes.</p>
+    <p class="reading">Every line is my own, most of it written by hand in a journal first.</p>
   </div></section>
 
   <section class="flow g" id="faq"><div class="wrap">
@@ -410,22 +452,23 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       </div>
     </div>
     <!--NOTIFY--><div class="notify" id="notify">
-      <p class="reading">The book is being finished.</p>
+      <h2>Feel at home again.</h2>
+      <p class="sub">You are not alone in this life.</p>
+      <p class="note">One email from me, the day the book is out.</p>
       <!--EMAIL_LINE--><form class="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
         <div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
         <p class="fine back" role="status" aria-live="polite"></p>
       </form>
-      <p class="fine">Or <a href="mailto:hello@soulsensis.com?subject=Tell%20me%20when%20the%20book%20is%20out">send me an email</a> and I will tell you the same way.</p><!--/EMAIL_LINE-->
+      <!--/EMAIL_LINE-->
     </div><!--/NOTIFY-->
     <p class="fine">Prices in Australian dollars unless marked. Amazon sets local prices in other countries.</p>
   </div></section>
 
 </main>
 
-<!--FOOTER--><footer class="g"><div class="wrap">
+<!--FOOTER--><footer class="g quiet"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
-  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
+  <span class="links"><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
 </div></footer>
 <!--/FOOTER-->
@@ -473,7 +516,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   light(heroBook, -26);
   // the hero book in the hand (10 Nov 2026): a drag or the arrow keys turn it all the way round, it keeps a little of the push, then settles on its front or its back
   let spin = 0, vel = 0, held = false, hoverX = 0, hoverY = 0, settle = 0;
-  const heroAngle = () => -26 + spin + scrollY * .035 + (spin ? 0 : hoverX * 30);
+  let drift = 0;
+  const heroAngle = () => -26 + spin + drift + (spin ? 0 : hoverX * 30);
   const heroPaint = () => { const ry = heroAngle(); heroBook.style.setProperty("--ry", ry.toFixed(2) + "deg"); heroBook.style.setProperty("--rx", (-5 - (spin ? 0 : hoverY * 10)).toFixed(1) + "deg"); light(heroBook, ry); };
 
   function frame() {
@@ -485,7 +529,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     { const r = inside.getBoundingClientRect(), a = clamp(r.top / vh), b = clamp((vh - r.bottom) / vh);
       inside.style.clipPath = a > 0 || b > 0 ? `inset(0 ${(a * 5 + b * 5).toFixed(2)}% round ${(a * 44).toFixed(0)}px ${(a * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px ${(b * 44).toFixed(0)}px)` : "none"; }
     // hero: the book turns a little as the page leaves
-    if (y < vh * 1.4) heroPaint();
+    { const sr = stage.getBoundingClientRect(); if (sr.bottom > -vh * .4 && sr.top < vh * 1.4) { drift = (vh / 2 - (sr.top + sr.height / 2)) * .035; heroPaint(); } }
     // the book's own bar says where you are
     { const at = (el) => { const r = el.getBoundingClientRect(); return r.top < vh * .5 && r.bottom > vh * .5; };
       lnavLinks.forEach(([a, el]) => { if (at(el)) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }
