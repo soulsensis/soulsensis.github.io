@@ -71,17 +71,13 @@ try{if("IntersectionObserver" in window)document.documentElement.classList.add("
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <style>
-/* 12 Nov 2026 (author: "update ss website to look like eden and professional again - i dont like the blog look anymore -
-   we want premium feel and sales focused"; "we need the website as a landing sales page ... its the rule"). The study:
-   docs/specs/eden-koe-sell-like-crazy-study.md section 1, taken as a manner, never a template. A near-black ground and
-   one idea a screen. The hero is his own line in the serif, one phrase in white italic, two grey lines with the phrases
-   that matter in white, ONE white pill (the book), the same pill small at the top right. Under it, tabs that show the
-   real thing: an essay as its page sets it, a film's own picture, the book's cover and a printed page. Then sections
-   whose headings are his sentences, each saying something the others do not, ending on the book. No dated list of
-   entries (the blog look he no longer wants), no piano. What is read keeps its 680 px measure; the logo and the book
-   keep their stage of up to 1080 px and their motion (scroll.js, the book's pinned scene). */
+/* 13 Nov 2026, the page Google's top model would score 9.5 (docs/specs/site-to-nine-five-2026-11-13.md; its answer in
+   full in Z:/soulsensis-work/site-nine-five-2026-11-13/spec-home.txt), built whole rather than fault by fault: the voice
+   before the ask. The first screen is his line and a thin red line pointing into a passage of the book; then the book,
+   upright, with six of its essays and the first field; one whole short piece and his four lines; three reader lines and
+   who wrote it; the close and its field. Serif throughout; the wordmark alone keeps Montserrat. The bar scrolls away. */
 :root { --spine: 0.1007; /* the book's depth over its cover width: written by the build (site.shape_book) */
-  --ground: #0b0b0d; --ink: #F5F2EA; --grey: #8f8b84; --muted: #a29e96; --line: #24242a; --raised: #131317; --heart: #E63946; --heart-fill: #D9303D;
+  --ground: #0b0b0d; --ink: #F5F2EA; --grey: #8f8b84; --muted: #a29e96; --line: #1f1f24; --raised: #111114; --heart: #E63946; --heart-fill: #D9303D;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif; color-scheme: dark; }
 @font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
 @font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
@@ -91,148 +87,98 @@ body { margin: 0; background: var(--ground); color: var(--ink); font-family: var
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
-.skip { position: absolute; left: -9999px; } .skip:focus { left: 12px; top: 12px; background: var(--ink); color: #000; padding: 8px 12px; z-index: 30; font-family: var(--sans); }
+.skip { position: absolute; left: -9999px; } .skip:focus { left: 12px; top: 12px; background: var(--ink); color: #000; padding: 8px 12px; z-index: 30; }
 .g { padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 .wrap { max-width: 680px; margin: 0 auto; }
 .stage { position: relative; max-width: 1080px; margin: 0 auto; }
-.label { margin: 0 0 16px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }
-/* the bar on this page (13 Nov 2026, the review of the whole page: two white buttons in the first screen read as insistent): its button
-   waits its turn, shown only while no ask of the page's own (the first screen's field, the last screen's) is on screen
-   (html.ask-on, set in the head and kept true by the script at the foot). Where the page moves, the bar follows the reader
-   so the button is there when its turn comes, and steps aside for the book's scene, which fills the screen and carries its own field. */
-.fx body > nav.top { position: sticky; top: 0; z-index: 20; transition: translate .3s ease; }
-.fx.at-book body > nav.top { translate: 0 -101%; }
+.label { margin: 0 0 12px; font-family: var(--serif); font-size: 13px; font-weight: 400; letter-spacing: .06em; text-transform: lowercase; color: var(--muted); }
+/* the bar scrolls away with the page and carries no ask while the book waits. Once it is on sale its button is the store,
+   and that button waits while a store button of the page's own is on screen (html.ask-on, kept by the script at the foot) */
 body > nav.top .links a.pill { max-width: 280px; overflow: hidden; transition: background .2s, max-width .35s ease, padding .35s ease, margin .35s ease; }
 .ask-on body > nav.top .links a.pill { visibility: hidden; max-width: 0; min-width: 0; margin-left: 0; padding-inline: 0; transition: max-width .35s ease, padding .35s ease, margin .35s ease, visibility 0s .35s; }   /* it takes no room while it waits, so the bar's last link rests on the edge */
-section { padding-block: clamp(72px, 12vw, 128px); }
-/* the hero: his line, large and quiet; one phrase in white italic */
-header.top { padding-block: clamp(56px, 12vw, 120px) clamp(40px, 7vw, 72px); }
-.logo { width: 76px; height: 76px; display: block; margin: 0 0 34px -4px; }
-/* the book itself beside his line on a wide screen: what is sold is seen in the first second (12 Nov, both judges) */
-.hero-book { display: none; }
-@media (min-width: 960px) { header.top .stage { display: grid; align-items: center; min-height: 520px; } header.top .wrap { width: 100%; max-width: none; }
-  header.top .lines { max-width: 30em; } header.top h1 { max-width: 11em; }
-  .hero-book { display: block; position: absolute; right: 40px; margin: 0; top: 50%; width: min(300px, 24vw); margin: 0; translate: 0 -50%; rotate: 3deg; }
-  .hero-book img { width: 100%; border: 1px solid #1c1c21; border-radius: 1px 3px 3px 1px; box-shadow: 0 40px 80px -20px rgba(0,0,0,.9), 0 0 0 1px rgba(245,242,234,.04); }
-  .hero-book::after { content: ""; position: absolute; left: 8%; right: 8%; bottom: -34px; height: 30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.9), transparent); } }
-/* a phone (12 Nov, the night round): the cover stands above his line, so the first screen shows what is sold; the bar already carries the mark */
-@media (max-width: 959px) { header.top { padding-top: clamp(28px, 7vw, 56px); } .logo { display: none; }
-  header.top .wrap { display: flex; flex-direction: column; align-items: flex-start; } header.top .logo { order: -1; } .hero-book { display: block; order: 9; width: clamp(150px, 44vw, 196px); margin: 34px 0 0 6px; rotate: -3deg; }
-  .hero-book img { width: 100%; border: 1px solid #2a2a31; border-radius: 1px 3px 3px 1px; box-shadow: 0 24px 48px -16px rgba(0,0,0,.95), 0 0 0 1px rgba(245,242,234,.06), 0 0 40px rgba(245,242,234,.05); } }
-/* his sentences and the joins, one idea a section */
-.say p { margin: 22px 0 0; font-size: clamp(19px, 2.6vw, 22px); line-height: 1.55; color: #c9c5bc; }
-.say p.his { color: var(--ink); font-style: italic; }
-.say p.label { margin: 0 0 16px; font-size: 12px; line-height: 1.5; color: var(--muted); }   /* a label is the same small label in every section */
-.say .btn { margin-top: 30px; }
-#you h2, #how h2 { font-size: clamp(28px, 4.6vw, 40px); line-height: 1.18; }
-#you h2.turn { margin-top: clamp(44px, 8vw, 72px); }   /* the turn: the same section, a breath lower */
-/* the three ways in: thin line drawings, one word each, as a plain app bar (12 Nov) */
-#ways { padding-block: clamp(48px, 8vw, 88px); }
-.icons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 6px 0 0; }
-.icon { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px 4px 14px; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: border-color .2s; }
-.icon:hover { border-top-color: var(--heart); }
-.icon svg { width: 40px; height: 40px; }
-.icon b { font: 500 15px var(--sans); letter-spacing: .02em; }
-.icon span { font-size: 16px; line-height: 1.45; color: #b9b5ab; }
-@media (max-width: 520px) { .icon span { font-size: 14px; } .icon svg { width: 34px; height: 34px; } }
-/* 13 Nov 2026 (the review of the whole page: a dimmed headline strains the eyes on a dark screen late at night): his line
-   and the line under it are full bone white; the italic alone carries the stress */
-h1 { margin: 0; font-weight: 400; font-size: clamp(42px, 7.4vw, 68px); line-height: 1.04; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }
-h1 em { font-style: italic; } header.top h1 { font-size: clamp(31px, 5.2vw, 52px); line-height: 1.1; max-width: 15em; }
-.lines { margin: 22px 0 0; font-family: var(--sans); font-size: 16px; line-height: 1.65; color: var(--ink); max-width: 34em; }
-.lines + .lines { margin-top: 6px; }   /* one weight (13 Nov 2026, the second review: a bold half under the italic line crowded the eye) */
-.btn.pill { margin: 0; }
-/* the page's one ask is the email field itself, in the first screen and again beside the book at the foot (13 Nov 2026:
-   a button to another page hid the field behind an extra tap). The same list as the book page's field. */
-.tell { width: 100%; max-width: 500px; margin: 30px 0 0; scroll-margin-top: 100vh; }   /* a jump to the field shows the whole first screen */
-.buy { margin: 30px 0 0; }   /* once the book is on sale the build sets the store button where each field stood */
+/* one rhythm: a section ends 56 px under its last line on a phone, and a hairline parts it from the next */
+main > section { padding-block: 48px 56px; border-top: 1px solid var(--line); }
+@media (min-width: 760px) { main > section { padding-block: 88px 96px; } }
+h1 { margin: 0; font-weight: 400; font-size: clamp(31px, 5.2vw, 52px); line-height: 1.19; letter-spacing: -.015em; color: var(--ink); text-wrap: balance; max-width: 15em; }
+h1 em { font-style: italic; }
+h2 { margin: 0; font-weight: 400; font-size: clamp(24px, 3.6vw, 34px); line-height: 1.25; letter-spacing: -.01em; text-wrap: balance; }
+p { text-wrap: pretty; }
+/* 1. the first screen: his line, the line under it, and a thin red line that points into the passage below it */
+header.top { padding-block: 32px 0; }
+.logo { display: none; }
+.lines { margin: 16px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.53; color: var(--ink); max-width: 30em; }
+.rule { display: block; width: 1px; height: 28px; margin: 28px 0 0; background: var(--heart); }
+@media (min-width: 960px) { header.top { padding-block: 112px 0; } .logo { display: block; width: 64px; height: 64px; margin: 0 0 30px -4px; } header.top h1 { max-width: 13em; } .lines { font-size: 20px; } }
+/* 2. the passage: the voice before any ask */
+#show { padding-top: 28px; border-top: 0; }
+#show h2 { margin-top: 10px; }
+.passage p { margin: 18px 0 0; font-size: 17px; line-height: 1.59; color: var(--ink); }
+.passage p:first-child { margin-top: 20px; }
+@media (min-width: 760px) { #show { padding-top: 40px; } .passage p { font-size: 20px; } }
+/* 3. the book, upright, with six of its essays and the first field */
+.cover { display: block; width: 220px; margin: 0 auto 28px; }
+.cover img { width: 100%; border: 1px solid #24242a; border-radius: 1px 3px 3px 1px; box-shadow: 0 28px 56px -18px rgba(0,0,0,.95), 0 0 0 1px rgba(245,242,234,.05); }
+#how h2 { margin-top: 8px; }
+#how p { margin: 14px 0 0; font-size: 16px; line-height: 1.56; color: #d9d5cc; }
+.toc { list-style: none; margin: 24px 0 0; padding: 0; }
+.toc li { padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.6; color: var(--ink); }
+.toc li:last-child { border-bottom: 1px solid var(--line); }
+@media (min-width: 760px) { #how .wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); column-gap: 56px; align-items: start; } .cover { margin: 0; } }
+/* the field: full width on a phone, its button under it and saying what it does */
+.tell { width: 100%; max-width: 500px; margin: 28px 0 0; }
+.buy { margin: 28px 0 0; }   /* once the book is on sale the build sets the store button where each field stood */
 .tell .row { display: flex; flex-wrap: wrap; gap: 10px; }
-.tell input { flex: 1 1 150px; min-width: 0; min-height: 50px; padding: 0 20px; border: 1px solid rgba(245,242,234,.38); border-radius: 999px; background: var(--raised); color: var(--ink); font: 400 17px var(--serif); }
+.tell input { flex: 1 1 150px; min-width: 0; min-height: 50px; padding: 0 20px; border: 1px solid rgba(245,242,234,.38); border-radius: 999px; background: var(--raised); color: var(--ink); font: 400 16px var(--serif); }
 .tell input::placeholder { color: var(--muted); opacity: 1; }
 .tell input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .tell button { flex: none; border: 0; cursor: pointer; }
 .tell button:disabled { cursor: default; }
+.tell .btn.pill, .buy .btn.pill { min-height: 50px; font: 500 16px var(--serif); letter-spacing: 0; }
 @media (max-width: 599px) { .tell input, .tell button { flex: 1 1 100%; } }   /* a phone: the field takes the full width, its button stands under it and says what it does */
-.tell .fine { margin: 12px 0 0; line-height: 1.5; }
+.fine { font-family: var(--serif); font-size: 14px; line-height: 1.5; color: var(--muted); }
+.tell .fine { margin: 12px 0 0; }
 .tell .back:empty, .tell.done .row, .tell.done .note { display: none; }
-.tell.done .back { margin: 0; font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.45; color: var(--ink); }
-/* a taste of the book that can be read where it stands (13 Nov 2026: the two white page pictures glared at night and were
-   too small to read on a phone): one passage as printed, in bone on the ground. The second review the same day: the passage
-   is the book's quiet voice, the headline's own, and no link in the middle of the page leads off it. */
-#show { padding-block: 0 clamp(72px, 12vw, 128px); }
-.passage p { margin: 22px 0 0; font-size: clamp(19px, 2.6vw, 22px); line-height: 1.65; color: var(--ink); text-wrap: pretty; }
-.passage p.from { margin-top: 20px; font: 500 12px var(--sans); letter-spacing: .16em; text-transform: lowercase; color: var(--muted); }   /* the piece's title signs the passage */
-.acts { display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 20px 0 0; }
-.more { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color .2s; }
-.more.dim { color: #c9c5bc; text-decoration-color: #4a4a52; } .more:hover { color: #fff; }
-/* the sections after: his sentence as the heading, one picture, one thing said */
-h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-height: 1.1; letter-spacing: -.015em; text-wrap: balance; }
-.ask { margin: 22px 0 0; font-size: clamp(21px, 3.4vw, 25px); line-height: 1.4; color: #c9c5bc; }
+.tell.done .back { margin: 0; font-style: italic; font-size: 19px; line-height: 1.45; color: var(--ink); }
+/* 4. a second taste: one whole short piece, then his four lines */
 #you { overflow: hidden; overflow: clip; }
 #you .wrap { position: relative; }
-.flower { position: absolute; z-index: -1; top: -40px; right: -214px; width: 300px; height: 300px; opacity: .15; pointer-events: none; }
+.piece { margin: 0 0 48px; padding: 24px; border: 1px solid #242428; border-radius: 4px; background: var(--raised); }
+.piece h3 { margin: 0; font-weight: 400; font-size: 20px; line-height: 1.3; }
+.piece p { margin: 14px 0 0; font-size: 17px; line-height: 1.59; color: var(--ink); }
+.piece p.label { margin: 0 0 10px; font-size: 13px; color: var(--muted); }
+#you-h { font-size: clamp(22px, 3.2vw, 30px); line-height: 1.32; }
+#you > .wrap > p { margin: 16px 0 0; font-size: 17px; line-height: 1.53; color: #d9d5cc; }
+#you > .wrap > p.his { color: var(--ink); font-style: italic; }
+#you h2.turn { margin-top: 16px; font-size: clamp(24px, 3.6vw, 34px); }
+.flower { position: absolute; z-index: -1; bottom: -60px; right: -190px; width: 280px; height: 280px; opacity: .14; pointer-events: none; }
 .flower g g { stroke-width: .26; } .flower g > circle { stroke-width: .3; }
 @media (min-width: 960px) { .flower { --s: min(320px, 26vw); right: calc((min(1080px, 100vw - 44px) - 680px) / -2); width: var(--s); height: var(--s); opacity: .7; } .flower g g { stroke-width: .2; } .flower g > circle { stroke-width: .23; } #you h2, #you p { max-width: 540px; } }
-/* what are you carrying: plain words to choose from, answered in the essay's own first sentence */
-.chips { display: flex; flex-wrap: wrap; gap: 2px 18px; margin: 14px 0 0; }
-.chip { position: relative; min-height: 44px; padding: 0; border: 0; background: none; color: #b9b5ab; font: 400 17px var(--serif); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; transition: color .2s, text-decoration-color .2s; }
-.chip:hover { color: var(--ink); } .chip.on { color: var(--ink); text-decoration-color: var(--heart); }
-.chip::after { content: ""; position: absolute; inset: 0 -9px; }   /* a finger's width without moving a word */
-.answers { margin-top: 18px; min-height: 11em; }
-.answer { padding-left: 20px; border-left: 1px solid var(--heart); } .answer[hidden] { display: none; }
-.answer blockquote { margin: 0; font-size: clamp(21px, 3.4vw, 26px); line-height: 1.42; text-wrap: pretty; }
-.answer .from { margin: 14px 0 0; font-family: var(--sans); font-size: 13px; color: var(--muted); }
-.answer .acts { margin-top: 6px; }
-/* the three ways to talk: one card each, one drawing each */
-.ways { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 34px 0 0; }
-@media (min-width: 760px) { #talk .wrap { max-width: 1080px; } .ways { grid-template-columns: repeat(3, 1fr); } #talk h2, #talk .ask { max-width: 680px; } }
-.way { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--raised); text-decoration: none; transition: border-color .2s; }
-.way:hover { border-color: #3a3a42; }
-.way svg { width: 44px; height: 44px; margin-bottom: 8px; }
-.way h3 { margin: 0; font-weight: 400; font-size: 23px; line-height: 1.25; }
-.way p { margin: 0; font-size: 17px; line-height: 1.55; color: #b9b5ab; }
-.way .price { margin-top: auto; padding-top: 8px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
-.way .go { font-size: 17px; text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 6px; }
-/* readers: their own words, one under another at the column's full width on a phone, two a row on a wide screen; never a row to
-   swipe, and who they are is said once, in the heading (13 Nov 2026: the swiped row cut a line mid-word, and the heading and
-   the caption said the same thing) */
-.said { display: grid; grid-template-columns: 1fr; gap: 0 40px; margin: 22px 0 0; }
-@media (min-width: 760px) { #readers .wrap { max-width: 1080px; } .said { grid-template-columns: 1fr 1fr; } .said.three { grid-template-columns: repeat(3, 1fr); } }
-/* the second review, 13 Nov 2026: fourteen in a column were a wall of italics; three lead, and the other eleven wait behind one small line */
-.more-said { border-top: 1px solid var(--line); }
-.more-said summary { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 4px; cursor: pointer; list-style: none; font: 500 12px var(--sans); letter-spacing: .16em; text-transform: lowercase; color: var(--muted); transition: color .2s; }
-.more-said summary::-webkit-details-marker { display: none; }
-.more-said summary::after { content: "+"; font-weight: 300; font-size: 17px; letter-spacing: 0; }
-.more-said[open] summary::after { content: "\2212"; }
-.more-said summary:hover { color: var(--ink); }
-.more-said .said { margin-top: 0; }
-.said blockquote { margin: 0; padding: 18px 0; border-top: 1px solid var(--line); font-style: italic; font-size: clamp(19px, 2.6vw, 23px); line-height: 1.45; color: #ddd9cf; }
-/* the book. With no script or with reduced motion: the cover, flat, beside its words. */
-#book .stage { display: grid; grid-template-columns: 132px minmax(0, 1fr); column-gap: 26px; align-items: center; max-width: 680px; }
-#book .stage > .wrap { grid-column: 1 / -1; width: 100%; margin-bottom: 20px; }
-.scene3d { display: block; }
+/* 5. three readers, then who wrote it */
+.said { display: grid; grid-template-columns: 1fr; margin: 4px 0 0; }
+.said blockquote { margin: 0; padding: 16px 0; border-top: 1px solid var(--line); font-style: italic; font-size: 17px; line-height: 1.53; color: #ddd9cf; }
+.said blockquote:last-child { border-bottom: 1px solid var(--line); }
+#wrote { border-top: 0; padding-top: 0; }
+#wrote p { margin: 14px 0 0; font-size: 16px; line-height: 1.56; color: #d9d5cc; }
+@media (min-width: 760px) { .said blockquote { font-size: 20px; } }
+/* 6. the close. Where nothing moves it is words and the field alone (the cover stood upright above); where the page
+   moves, the book's scene turns that cover and opens it to its pages before the same words */
+.dot { display: block; width: 4px; height: 4px; margin: 0 0 16px; border-radius: 50%; background: var(--heart); }
+#book .stage { max-width: 680px; }
+.scene3d, .bknote { display: none; }
 .bk { display: block; position: relative; aspect-ratio: 2 / 3; }
 .bk img, .opn img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
-.bk img.front { width: 100%; height: 100%; border: 1px solid #1c1c21; }
-.bk .f:not(.front), .opn, .bknote { display: none; }
-.bk-copy p { margin: 10px 0 0; font-size: 18px; line-height: 1.55; color: #c9c5bc; }
-.bk-copy p.fine { margin-top: 12px; font-size: 13px; color: var(--muted); }
-/* a phone with no motion (13 Nov 2026, the second review: the cover beside a narrow two-row field was cramped): the cover stands
-   centred above its words, and the field takes the column's full width */
-@media (max-width: 599px) {
-  html:not(.fx) #book .stage, #book:not(.pin) .stage { display: block; }
-  html:not(.fx) #book .scene3d, #book:not(.pin) .scene3d { width: 150px; margin: 0 auto 30px; }
-  html:not(.fx) #book .tell, #book:not(.pin) .tell { max-width: none; }
-  html:not(.fx) #book .bk, #book:not(.pin) .bk { rotate: -3deg; }
-}
+.bk .f:not(.front), .opn { display: none; }
+#book h2 { font-size: clamp(24px, 3.6vw, 34px); line-height: 1.29; }
+#book .tell, #book .buy { margin-top: 12px; }
+#book .tell .note { margin: 0; font-size: 15px; color: #d9d5cc; }
+#book .tell .row { margin-top: 20px; }
 /* the one pinned scene (10 Nov's, in the journal's manner): the book shows its spine, turns to face you, opens and flicks to three
    chapters. A book is laid out at its closest size and only scaled down; the light on a face is a black sheet, never a filter. */
 @media (min-height: 540px) {
 .fx #book.pin { padding-block: 0; height: 430vh; height: 430svh; }
 .fx .pin .sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-.fx #book.pin .stage { display: block; max-width: 1080px; height: 100%; --w0: min(40vw, 27svh, 240px, calc((94svh - 340px) / 1.5));   /* the last term: on a short phone (an SE in Safari shows 548 px) the book gives way so the button and the line under it stay on the screen */ --k: 1.22; --top: max(calc(6svh + 62px), calc(50svh - var(--w0) * .75 - 120px)); }   /* 11 Nov, the iPhone look (shims/phone_check.py): the book starts a clear line under its label; at 13svh the open pages touched "the book" on a small phone, and at 1.35 the spine, close, rose through the rule over the label to 10 px from the top of the screen */
-.fx #book.pin .stage > .wrap { position: absolute; left: 0; right: 0; top: 6svh; margin: 0 auto; }
-.fx .pin .scene3d { position: absolute; left: 0; right: 0; top: var(--top); height: calc(var(--w0) * 1.5); perspective: 2200px; cursor: grab; touch-action: pan-y; }
+.fx #book.pin .stage { display: block; max-width: 1080px; height: 100%; --w0: min(40vw, 27svh, 240px, calc((94svh - 340px) / 1.5)); --k: 1.22; --top: max(calc(6svh + 62px), calc(50svh - var(--w0) * .75 - 120px)); }   /* on a short phone (an SE in Safari shows 548 px) the book gives way so the button and the line under it stay on the screen */
+.fx .pin .scene3d { display: block; position: absolute; left: 0; right: 0; top: var(--top); height: calc(var(--w0) * 1.5); perspective: 2200px; cursor: grab; touch-action: pan-y; }
 .fx .pin .scene3d.held { cursor: grabbing; }
 .fx .pin .bk { --w: calc(var(--w0) * var(--k)); --d: calc(var(--w) * var(--spine)); position: absolute; left: 50%; top: 50%; width: var(--w); margin: calc(var(--w) * -.75) 0 0 calc(var(--w) * -.5); scale: .74; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(var(--rx, -5deg)) rotateY(var(--ry, -26deg)); will-change: transform; }
 .fx .pin .bk .f { display: block; position: absolute; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
@@ -260,8 +206,9 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
 .opn .leaf.fl .lf-front { background: #fff; border-radius: 0; }
 .opn .leaf.fl .lf-back { box-shadow: none; }
 .opn .lines::before { content: ""; position: absolute; inset: 13% 14% 12%; background: repeating-linear-gradient(180deg, rgba(17,16,19,.1) 0 calc(var(--w) * .013), transparent 0 calc(var(--w) * .034)); }
-.fx .pin .bknote { display: block; position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 20px); margin: 0; text-align: center; text-wrap: balance; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.fx .pin .bknote { display: block; position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 20px); margin: 0; text-align: center; text-wrap: balance; font-size: 13px; color: var(--muted); }
 .fx .pin .bk-copy { position: absolute; left: 0; right: 0; top: calc(var(--top) + var(--w0) * 1.5 + 78px); max-width: 680px; margin: 0 auto; }
+.fx .pin .dot { display: none; }
 }
 /* a wide screen: the book in the left of the stage, its words beside it */
 @media (min-width: 960px) and (min-height: 540px) {
@@ -270,18 +217,11 @@ h2 { margin: 0; font-weight: 400; font-size: clamp(32px, 5.6vw, 48px); line-heig
 .fx .pin .bknote { top: calc(50svh + var(--w0) * .75 * var(--k) + 18px); }
 .fx .pin .bk-copy { left: 60%; top: 50%; translate: 0 -50%; margin: 0; }
 }
-.btn { display: inline-flex; align-items: center; min-height: 46px; margin-top: 16px; padding: 0 22px; border-radius: 4px; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; }
-
-#book h2 { font-size: clamp(27px, 4.6vw, 34px); line-height: 1.18; letter-spacing: -.008em; }
-#book .tell, #book .buy { margin-top: 0; }
-#book .tell .note { margin: 10px 0 0; font-size: clamp(16px, 4.3vw, 18px); }
-#book .tell .row { margin-top: 16px; }
-@media (max-height: 620px) { .fx #book.pin .tell .note { display: none; } }   /* a short phone, the book's scene: the button already says it, and the field stays clear of the screen's foot */
-.fine { font-family: var(--sans); font-size: 13px; color: var(--muted); }
-.bk-copy .fine { margin: 12px 0 0; }
+@media (max-height: 620px) { .fx #book.pin .tell .note { display: none; } }   /* a short phone, the book's scene: the button already says it */
+body > footer.quiet, body > footer.quiet * { font-family: var(--serif); }   /* the short footer (site.quiet_footer), in the page's one face */
+body > footer.quiet .links a { display: inline-flex; align-items: center; min-height: 44px; }   /* a finger's width */
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
-<noscript><style>.answer[hidden]{display:block!important;margin-bottom:22px}.chips{display:none}</style></noscript>
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
 nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
@@ -314,32 +254,20 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#show">Skip to the reading</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="far" href="/conversation/">A conversation</a><a class="pill" href="#tell">Tell me the day it is out</a></div>
+  <div class="links"><a class="far" href="/conversation/">A conversation</a></div>
 </div></nav>
 <!--/NAV-->
 
 <main id="top">
   <header class="top g" id="hero"><div class="stage"><div class="wrap">
     <svg class="logo" data-draw="load" data-turn viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
-    <a class="hero-book" href="book.html" tabindex="-1" aria-hidden="true"><img src="book/front.webp" width="1350" height="2025" fetchpriority="high" decoding="async" alt=""></a>
     <p class="label">A book of essays by soulsensis</p>
     <h1>There is a particular kind of tiredness that comes from living a life <em>that is not yours.</em></h1>
     <p class="lines">Essays for when you are ready to stop performing and sit still enough to hear yourself.</p>
-    <!--ASK_HERO--><form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
-      <div class="row"><input id="tell-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
-      <p class="fine note">One email from me, the day the book is out.</p>
-      <p class="fine back" role="status" aria-live="polite"></p>
-    </form><!--/ASK_HERO-->
+    <span class="rule" aria-hidden="true"></span>
   </div></div></header>
 
-  <section class="g say" id="how" aria-labelledby="how-h"><div class="wrap">
-    <p class="label">The book</p>
-    <h2 id="how-h" data-lit>Your soul knows best.</h2>
-    <p><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></p>
-    <p>Each piece stands alone, so you can read one in a few minutes and put the book down until tomorrow.</p>
-  </div></section>
-
-  <section class="g say" id="show" aria-labelledby="show-h"><div class="wrap">
+  <section class="g" id="show" aria-labelledby="show-h"><div class="wrap">
     <p class="label">From the book</p>
     <h2 id="show-h" data-lit>On the tiredness of performing a life rather than living it.</h2>
     <!-- the piece the headline comes from: its own line as the heading, then its opening after that first sentence, word for word as the book prints it (set here in three paragraphs); tests/test_site_landing.py holds it to the launch file -->
@@ -347,24 +275,37 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <p>It is not the tiredness of physical work, nor the sharper tiredness that arrives at the end of a long day. It is slower and more insidious, a spiritual burn that corrodes the edges of a life from the inside out.</p>
       <p>For some, it is felt as a persistent sense that something is wrong without ever being able to name what. For others, it arrives as a quieter disappointment, an accumulating sadness that the life being lived does not resemble the life being sensed beneath it.</p>
       <p>The sensation goes by different names in different vocabularies, but the underlying geometry is always the same. There is a version of you that you have been reaching for, and there is a version of you that you have been performing, and the distance between the two is where the tiredness lives.</p>
-      <p class="from">The lighthouse does not try to shine</p>
     </div>
   </div></section>
 
-  <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
-    <h2 class="label" id="readers-h">What early readers of the essays say</h2>
-    <div class="said three" data-lit="lines">
-      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“I am still hurt but I feel at peace.”</blockquote>
+  <section class="g" id="how" aria-labelledby="how-h"><div class="wrap">
+    <a class="cover" href="book.html" aria-label="The book: Your soul knows best"><img src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"></a>
+    <div>
+      <p class="label">The book</p>
+      <h2 id="how-h" data-lit>Your soul knows best.</h2>
+      <p><!--BOOK_COUNTS-->34 essays and 79 shorter pieces. Open it anywhere.<!--/BOOK_COUNTS--></p>
+      <p>Each piece stands alone, so you can read one in a few minutes and put the book down until tomorrow.</p>
+      <!-- six of the book's essays, their titles as its contents page prints them, in the book's order -->
+      <ol class="toc" aria-label="Six of the essays">
+        <li>The receptiveness I was waiting for</li><li>Half alive, half dead</li><li>The currency of attention</li><li>The lighthouse does not try to shine</li><li>Where are you rushing to?</li><li>The cage only holds because you believe it does</li>
+      </ol>
+      <!--ASK_HERO--><form class="tell" id="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
+        <div class="row"><input id="tell-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="btn pill" type="submit">Tell me the day it is out</button></div>
+        <p class="fine note">One email from me, the day the book is out.</p>
+        <p class="fine back" role="status" aria-live="polite"></p>
+      </form><!--/ASK_HERO-->
     </div>
-    <details class="more-said"><summary>Eleven more</summary>
-      <div class="said">
-        <blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote><blockquote>“From what book is this?”</blockquote><blockquote>“Gorgeous writing.”</blockquote><blockquote>“…a magnificent writer.”</blockquote><blockquote>“Just what I needed to hear.”</blockquote><blockquote>“This resonated with me…”</blockquote><blockquote>“Thanks for these words.”</blockquote><blockquote>“Thank you. I needed something like this.”</blockquote><blockquote>“I thoroughly enjoyed reading this.”</blockquote><blockquote>“The last sentence… damn.”</blockquote>
-      </div>
-    </details>
   </div></section>
 
-  <section class="g say" id="you" aria-labelledby="you-h"><div class="wrap">
+  <section class="g" id="you" aria-labelledby="you-h"><div class="wrap">
     <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
+    <!-- one of the book's shorter pieces, whole, word for word as the book prints it (page 226); tests/test_site_landing.py holds it to the launch file -->
+    <article class="piece" aria-labelledby="piece-h">
+      <p class="label">A shorter piece</p>
+      <h3 id="piece-h">Mind the gap</h3>
+      <p>When the mind becomes an incessant stream of thoughts, an individual must break its flow with a gap in thinking. Perpetual rumination does not yield fruitful results. Pausing to focus on the breath proves useful as it creates these gaps in thinking.</p>
+      <p>It is not possible to pay close attention to the breath whilst consciously thinking another thought simultaneously. Creating these gaps of thinking helps to ease the mind, and, like a computer reboot, helps the mind reset itself from all the programs it is running.</p>
+    </article>
     <!-- 13 Nov 2026: two sections became these four lines, all his words -->
     <h2 id="you-h" data-lit>We tend to numb ourselves, thinking it is the right thing to do.</h2>
     <p>And then we say that is our fate.</p>
@@ -372,7 +313,14 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <p class="his">Listen to your soul. All it has wanted is to be heard.</p>
   </div></section>
 
-  <section class="g say" id="wrote" aria-labelledby="wrote-h"><div class="wrap">
+  <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
+    <h2 class="label" id="readers-h">What early readers of the essays say</h2>
+    <div class="said" data-lit="lines">
+      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“I am still hurt but I feel at peace.”</blockquote>
+    </div>
+  </div></section>
+
+  <section class="g" id="wrote" aria-labelledby="wrote-h"><div class="wrap">
     <p class="label">Who wrote it</p>
     <h2 id="wrote-h" data-lit>I write as soulsensis, so nothing has to be held back.</h2>
     <p>Not work, not family, not my own mistakes.</p>
@@ -381,7 +329,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 
   <section class="pin g" id="book" aria-labelledby="book-h"><div class="sticky"><div class="stage">
     <a class="scene3d" id="bookScene" href="book.html" draggable="false" aria-label="The book: Your soul knows best">
-      <div class="bk" id="homeBook"><img class="f front" src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" draggable="false" alt="The cover of Your soul knows best, by soulsensis: black, a flower of life in fine white line with a red centre, the title beneath it"><img class="f spine" src="book/spine.webp" width="272" height="4050" loading="lazy" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
+      <div class="bk" id="homeBook"><img class="f front" src="book/front.webp" width="1350" height="2025" loading="lazy" decoding="async" draggable="false" alt=""><img class="f spine" src="book/spine.webp" width="272" height="4050" loading="lazy" decoding="async" draggable="false" alt=""><span class="f edge" aria-hidden="true"></span><span class="f top" aria-hidden="true"></span><span class="f bot" aria-hidden="true"></span></div>
       <div class="opn" id="open"><!--OPEN-->
         <div class="pg"><img data-src="book/p243.webp" width="1920" height="2880" decoding="async" alt="Page 243 as printed. Chapter 99, The actuality of the soul."></div>
         <div class="leaf mid"><div class="lf-front"><img data-src="book/p193.webp" width="1200" height="1800" decoding="async" alt="Page 193 as printed. Chapter 70, Where are you rushing to?."></div><div class="lf-back"><img data-src="book/p242.webp" width="1920" height="2880" decoding="async" alt="Page 242 as printed."></div></div>
@@ -391,6 +339,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </a>
     <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
     <div class="bk-copy">
+      <span class="dot" aria-hidden="true"></span>
       <h2 id="book-h">All I had to do was sit still enough to hear it.</h2>
       <!--PRICE_LINE--><!--/PRICE_LINE-->
       <!--ASK_FOOT--><form class="tell" data-ask method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/">
@@ -403,10 +352,9 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   </div></div></section>
 </main>
 
-<!--FOOTER--><footer class="g"><div class="wrap">
+<!--FOOTER--><footer class="g quiet"><div class="wrap">
   <span>soulsensis · written by a human</span>
-  <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/ask.html">Ask soulsensis</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
-  <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="https://open.spotify.com/show/7uWEI6jnPHD0EsbisHtXGx" rel="noopener">Podcast</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
+  <span class="links"><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
 </div></footer>
 <!--/FOOTER-->
@@ -444,17 +392,6 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     e.preventDefault(); window.scrollTo({ top: 0, behavior: calm ? "auto" : "smooth" });
     try { field.focus({ preventScroll: true }); } catch (x) { field.focus(); }
   });
-})();
-</script>
-<script>
-// a feeling, answered: the word chosen shows that feeling's essay, in its own first sentence
-(function () {
-  var chips = [].slice.call(document.querySelectorAll("#feelings .chip")), answers = [].slice.call(document.querySelectorAll("#answers .answer"));
-  chips.forEach(function (c) { c.addEventListener("click", function () {
-    chips.forEach(function (o) { var on = o === c; o.classList.toggle("on", on); o.setAttribute("aria-pressed", on); });
-    answers.forEach(function (a) { a.hidden = a.getAttribute("data-f") !== c.getAttribute("data-f"); });
-  }); });
-  if (/[?&]src=yt/.test(location.search)) document.querySelectorAll('[data-cta="yt"]').forEach(function (a) { a.hidden = true; });
 })();
 </script>
 <script>
