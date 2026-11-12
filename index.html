@@ -124,7 +124,7 @@ header.top { padding-block: clamp(56px, 12vw, 120px) clamp(40px, 7vw, 72px); }
 .icon span { font-size: 16px; line-height: 1.45; color: #b9b5ab; }
 @media (max-width: 520px) { .icon span { font-size: 14px; } .icon svg { width: 34px; height: 34px; } }
 h1 { margin: 0; font-weight: 400; font-size: clamp(42px, 7.4vw, 68px); line-height: 1.04; letter-spacing: -.02em; color: var(--grey); text-wrap: balance; }
-h1 em { font-style: italic; color: var(--ink); }
+h1 em { font-style: italic; color: var(--ink); } header.top h1 { font-size: clamp(31px, 5.2vw, 52px); line-height: 1.1; max-width: 15em; }
 .lines { margin: 22px 0 0; font-family: var(--sans); font-size: 16px; line-height: 1.65; color: var(--grey); max-width: 34em; }
 .lines + .lines { margin-top: 6px; }
 .lines b { font-weight: 500; color: var(--ink); }
@@ -292,30 +292,34 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   <header class="top g" id="hero"><div class="stage"><div class="wrap">
     <svg class="logo" data-draw="load" data-turn viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
     <a class="hero-book" href="book.html" tabindex="-1" aria-hidden="true"><img src="book/front.webp" width="1350" height="2025" fetchpriority="high" decoding="async" alt=""></a>
-    <h1>Your soul <em>knows best.</em></h1>
-    <p class="lines"><b>Listen to your soul.</b> All it has wanted is to be heard.</p>
-    <p class="lines"><b>There is a particular kind of tiredness that comes from living a life that is not yours.</b> If you have not picked up a book in ages, start with this one.</p>
-    <div class="cta"><a class="btn pill" href="book.html">See the book</a></div>
+    <h1>There is a particular kind of tiredness that comes from living a life <em>that is not yours.</em></h1>
+    <p class="lines"><b>Your soul knows best.</b> Listen to your soul. All it has wanted is to be heard.</p>
+    <p class="lines">If you have not picked up a book in ages, start with this one. On Amazon soon.</p>
+    <div class="cta"><a class="btn pill" href="book.html">Be told the day it is out</a></div>
   </div></div></header>
+
+  <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
+    <h2 class="label" id="readers-h">What readers have said</h2>
+    <figure><div class="said" data-lit="lines">
+      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote>
+    </div><figcaption>From early readers of the essays</figcaption></figure>
+  </div></section>
 
   <section class="g say" id="you" aria-labelledby="you-h"><div class="wrap">
     <svg class="flower" data-draw viewBox="-62 -62 124 124" aria-hidden="true"><circle r="13" fill="#E63946" fill-opacity=".22"/><g fill="none" stroke="#F5F2EA"><g stroke-width=".58" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width=".67"/></g><circle r="1.9" fill="#E63946"/></svg>
     <p class="label">Your day</p>
     <h2 id="you-h" data-lit>Most of us spend our days moving between enclosures, the office, the bedroom, the car, and we call that a life.</h2>
-    <p>Like most people, I scrolled through LinkedIn and Instagram and felt the dread wash over me, watching everyone else appear further along, better positioned, more accomplished, measuring my progress against theirs as if we were running the same race.</p>
-    <p>There is a version of you that you have been reaching for, and there is a version of you that you have been performing, and the distance between the two is where the tiredness lives.</p>
-    <p>It settles in quietly, over years, and one morning you wake up and realise you have been carrying it the whole time.</p>
   </div></section>
 
   <section class="g" id="show" aria-label="See it for yourself"><div class="wrap">
     <div class="tabs" role="tablist" aria-label="See it for yourself">
-      <button class="tab" type="button" role="tab" id="t-book" aria-controls="p-book" aria-selected="true">The book</button>
-      <button class="tab" type="button" role="tab" id="t-read" aria-controls="p-read" aria-selected="false">Read</button>
+      <button class="tab" type="button" role="tab" id="t-read" aria-controls="p-read" aria-selected="true">Read</button>
+      <button class="tab" type="button" role="tab" id="t-book" aria-controls="p-book" aria-selected="false">The book</button>
       <button class="tab" type="button" role="tab" id="t-watch" aria-controls="p-watch" aria-selected="false">Watch</button>
     </div>
     <div class="panels">
       <div class="panel" role="tabpanel" id="p-book" aria-labelledby="t-book"><!--TAB_BOOK--><div class="pair"><figure class="pp"><img src="book/p18.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 18 as printed."><figcaption>Page 18</figcaption></figure><figure class="pp"><img src="book/p19.webp" width="1200" height="1800" loading="lazy" decoding="async" alt="Page 19 as printed."><figcaption>Chapter 2, We weren’t meant to be living the way we do, as printed</figcaption></figure></div><p class="acts"><a class="more" href="/book.html#inside">Look inside</a></p><!--/TAB_BOOK--></div>
-      <div class="panel" role="tabpanel" id="p-read" aria-labelledby="t-read"><!--TAB_READ--><article class="sheet"><p class="kind">An essay · 3 min read</p><h3>Listen to your soul</h3><div class="prose"><p>Do you realise that your inner state strongly dictates your external environment? Why do some people who are brought up with nothing achieve millions? Such individuals change their inner state, which must be done first, before their external reality &quot;catches up&quot; to their inner state. It&#x27;s just, usually, being brought up with nothing means one&#x27;s inner state is aligned with lack &amp; sadness which is hard to see when one is in it, unless their awareness is strong enough to make changes to see a different truth. We are so enmeshed in society&#x27;s consumeristic regime that we don&#x27;t recognise the impact it has on people&#x27;s inner state.</p><p>From constant digital consumption availed to society in mass through phones, people are lethargic &amp; full from consumption that production &amp; creativity get suppressed &amp; people wonder why they are sad.</p></div><p class="acts"><a class="more" href="/essays/listen-to-your-soul/">Read the essay</a><a class="more dim" href="/essays.html">All 27 essays</a></p></article><!--/TAB_READ--></div>
+      <div class="panel" role="tabpanel" id="p-read" aria-labelledby="t-read"><!--TAB_READ--><article class="sheet"><p class="kind">An essay · 3 min read</p><h3>Listen to your soul</h3><div class="prose"><p>Do you realise that your inner state strongly dictates your external environment? Why do some people who are brought up with nothing achieve millions? Such individuals change their inner state, which must be done first, before their external reality &quot;catches up&quot; to their inner state. It&#x27;s just, usually, being brought up with nothing means one&#x27;s inner state is aligned with lack &amp; sadness which is hard to see when one is in it, unless their awareness is strong enough to make changes to see a different truth. We are so enmeshed in society&#x27;s consumeristic regime that we don&#x27;t recognise the impact it has on people&#x27;s inner state.</p><p>From constant digital consumption availed to society in mass through phones, people are lethargic &amp; full from consumption that production &amp; creativity get suppressed &amp; people wonder why they are sad.</p></div><p class="acts"><a class="more" href="/essays/listen-to-your-soul/">Read the essay</a></p></article><!--/TAB_READ--></div>
       <div class="panel" role="tabpanel" id="p-watch" aria-labelledby="t-watch"><!--TAB_WATCH--><a class="film" href="/essays/where-are-you-rushing-to/"><img src="/film/where-are-you-rushing-to.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="The film&#39;s picture: Where are you rushing to?"><span class="play" aria-hidden="true"></span></a><p class="kind">A film, narrated</p><h3>Where are you rushing to?</h3><p class="acts"><a class="more" href="/essays/where-are-you-rushing-to/">Watch it</a><a class="more dim" data-cta="yt" href="https://www.youtube.com/channel/UCHQ-k2maRoiSGeigcAmoyUA?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p><!--/TAB_WATCH--></div>
     </div>
   </div></section>
@@ -332,27 +336,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <p class="label">Who wrote it</p>
     <h2 id="wrote-h" data-lit>Written under a pen name.</h2>
     <p>I write as soulsensis so that nothing about work, family or my own mistakes has to be held back.</p>
-    <p class="his">I am building something that is meant to serve as a lighthouse for lost souls, and yet I carry a level of thinking that turns against me without permission, thoughts that attack when everything is going well.</p>
     <p>Every line is my own, most of it written by hand in a journal first.</p>
-  </div></section>
-
-  <section class="g say" id="price" aria-labelledby="price-h"><div class="wrap">
-    <p class="label">The price</p>
-    <h2 id="price-h" data-lit><!--PRICE_HEAD-->A$4.99 on Kindle. A$24.99 in paperback.<!--/PRICE_HEAD--></h2>
-    <p>The Kindle edition reads on any phone or Kindle; the paperback is 6 by 9 inches.</p>
-    <!--PRICE_LINE--><p>On Amazon soon.</p><!--/PRICE_LINE-->
-    <a class="btn pill" href="book.html">See the book</a>
-  </div></section>
-
-  <section class="g" id="ways" aria-labelledby="ways-h"><div class="wrap">
-    <h2 class="label" id="ways-h">Read, ask or talk</h2>
-    <div class="icons"><!--WAYS--><a class="icon" href="/book.html"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 14.5C19.5 11.6 13 11 7.5 12v24c5.5-1 12-.4 16.5 2.5 4.5-2.9 11-3.5 16.5-2.5V12c-5.5-1-12-.4-16.5 2.5Z"/><path d="M24 14.5v24"/><circle cx="24" cy="41.5" r="1.1" fill="#E63946" stroke="none"/></svg><b>book</b><span>Sample pages and the two editions.</span></a><a class="icon" href="/ask.html"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="7.5" y="13" width="33" height="22" rx="2.5"/><path d="M8.5 14.5 24 26.5l15.5-12"/><circle cx="24" cy="26.5" r="1.1" fill="#E63946" stroke="none"/></svg><b>ask</b><span>Your question, answered in writing.</span></a><a class="icon" href="/conversation/"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10.5h17a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H17l-5.5 4.5v-4.5H10a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3Z"/><path d="M33.5 18H38a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-1.5v4.5L31 33h-8a3 3 0 0 1-3-3v-1"/><circle cx="18.5" cy="18" r="1.1" fill="#E63946" stroke="none"/></svg><b>talk</b><span>A conversation with me, one to one.</span></a><!--/WAYS--></div>
-  </div></section>
-  <section class="g" id="readers" aria-labelledby="readers-h"><div class="wrap">
-    <h2 class="label" id="readers-h">What readers have said</h2>
-    <figure><div class="said" data-lit="lines">
-      <blockquote>“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”</blockquote><blockquote>“Your words really… gave me a great sense of relief. Very soothing.”</blockquote><blockquote>“This actually got to me this morning… thank you.”</blockquote><blockquote>“…I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward.”</blockquote>
-    </div><figcaption>From early readers of the essays</figcaption></figure>
   </div></section>
 
   <section class="pin g" id="book" aria-labelledby="book-h"><div class="sticky"><div class="stage">
@@ -369,8 +353,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <!--BOOK_NOTE--><p class="bknote" id="bookNote" aria-hidden="true" data-heads="Chapter 2 · We weren’t meant to be living the way we do|Chapter 70 · Where are you rushing to?|Chapter 99 · The actuality of the soul">The front</p><!--/BOOK_NOTE-->
     <div class="bk-copy">
       <h2 id="book-h">All I had to do was sit still enough to hear it.</h2>
-      <p>On Kindle and in paperback.</p>
-      <a class="btn pill" href="book.html">See the book</a>
+      <!--PRICE_LINE--><p>On Amazon soon.</p><!--/PRICE_LINE-->
+      <a class="btn pill" href="book.html">Be told the day it is out</a>
       <!--BOOK_LINE--><!--/BOOK_LINE-->
     </div>
   </div></div></section>
