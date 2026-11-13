@@ -38,12 +38,15 @@ nav.top .links a.pill { min-height: 44px; margin-left: 10px; padding: 0 18px; bo
 nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: #fff; color: #0b0b0d; }
 .btn.pill, a.pill-lg { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 28px; border-radius: 999px; background: var(--ink, #F5F2EA); color: #0b0b0d; font-family: var(--sans); font-size: 15px; font-weight: 500; text-decoration: none; transition: background .2s; }
 .btn.pill:hover, a.pill-lg:hover { background: #fff; }
-@media (max-width: 400px) { nav.top .links a:not(.pill) { display: none; } nav.top .links a.pill { margin-left: 0; padding: 0 16px; } }
+/* 13 Nov 2026 evening: one bar on every page; a phone keeps the book and the button, the conversation folds away first */
+@media (max-width: 400px) { nav.top .links a { padding: 0 6px; } nav.top .links a.pill { margin-left: 4px; padding: 0 14px; } .mark { gap: 8px; letter-spacing: .18em; } }
+@media (max-width: 340px) { nav.top .links a.nbk { display: none; } }
 /* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
    geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
 @media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }
 body > footer { border-top: 1px solid var(--line); padding-block: 30px calc(40px + env(safe-area-inset-bottom, 0px)); font-family: var(--sans); font-size: 13px; line-height: 1.5; color: var(--muted); }
 body > footer .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 680px; margin: 0 auto; }
+@media (min-width: 960px) { body > footer .wrap { max-width: 1080px; } }   /* 13 Nov 2026 evening: after the 680 rule, so the stage width wins (it never did) */
 body > footer .links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 body > footer a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; transition: color .2s; }
 body > footer a:hover { color: var(--ink); }
