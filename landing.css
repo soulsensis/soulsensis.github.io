@@ -1,0 +1,282 @@
+/* soulsensis: the home page's and the book page's one stylesheet (14 Nov 2026, docs/specs/site-build-2026-11-14.md).
+   Made by soulsensis/site_landing.py's markup. The rules it is held to: operators/skills/web-design/SKILL.md.
+   Black 60, bone 30, crimson 10 at most; the one crimson thing on a screen is the action, its label black.
+   Motion: CSS scroll timelines only, transform and opacity only, inside reduced-motion "no-preference", a window at least
+   540 px tall and a browser that has scroll timelines. Everywhere else every scene is the same page, whole and still. */
+:root { --spine: 0.1007; /* the book's depth over its cover width: written by the build (site.shape_book) */
+  --ground: #0b0b0d; --ink: #F5F2EA; --soft: #d9d5cc; --muted: #a29e96; --line: #1f1f24; --raised: #111114; --heart: #E63946;
+  --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif;
+  --wall: #131210; color-scheme: dark;
+  --turn-len: 2.5; --open-len: 3; --said-len: 2.5; --shelf-len: 2; }
+@media (min-width: 900px) { :root { --turn-len: 3; --open-len: 3.5; --said-len: 3; --shelf-len: 2.4; } }
+/* the black cover chosen: the page's ground turns to bone so the black book stands out (his words, 13 Nov: "the page
+   background switches for contrast when a colour is picked") */
+html:has(#cv-black:checked) { --ground: #F5F2EA; --ink: #0b0b0d; --soft: #2b2a27; --muted: #5d5a54; --line: #dcd7cc; --raised: #ebe7dd; --wall: #e9e4d8; color-scheme: light; }
+[data-cv="black"] { display: none; }
+html:has(#cv-black:checked) [data-cv="white"] { display: none; }
+html:has(#cv-black:checked) [data-cv="black"] { display: block; }
+html:has(#cv-black:checked) nav.top .links a.pill { background: var(--ink); color: var(--ground); }
+html:has(#cv-black:checked) nav.top .links { color: var(--muted); }
+html:has(#cv-black:checked) [stroke="#F5F2EA"] { stroke: var(--ink); }   /* the logo's lines are drawn in bone: on the bone ground they take the ink */
+
+@font-face { font-family: "Montserrat Fallback"; src: local("Arial"); size-adjust: 111%; ascent-override: 87%; descent-override: 23%; line-gap-override: 0%; }
+@font-face { font-family: "Source Serif Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 107%; descent-override: 34%; line-gap-override: 0%; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: clip;
+  transition: background-color .3s ease-out, color .3s ease-out; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+.skip { position: absolute; left: -9999px; } .skip:focus { left: 12px; top: 12px; background: var(--ink); color: var(--ground); padding: 8px 12px; z-index: 30; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.g { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.stage { max-width: 1200px; margin: 0 auto; }
+.read { max-width: 680px; }
+.label { margin: 0 0 14px; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: .06em; color: var(--muted); }
+h1, h2 { margin: 0; font-weight: 400; text-wrap: balance; }
+h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -.012em; }
+p { text-wrap: pretty; }
+main > section:not(.scene):not(.hero) { padding-block: 88px; }
+@media (min-width: 900px) { main > section:not(.scene):not(.hero) { padding-block: 144px; } }
+
+/* the action: crimson, its label black (4.5 to 1 and better), 48 px tall; on a mouse it lifts 2 px */
+.act-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 30px; border: 0; border-radius: 999px;
+  background: var(--heart); color: #000; font: 500 16px var(--sans); letter-spacing: .01em; text-decoration: none; cursor: pointer; transition: transform .15s ease-out, box-shadow .15s ease-out; }
+.more { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 7px; }
+@media (hover: hover) and (pointer: fine) {
+  .act-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px -10px rgba(230,57,70,.7); }
+  .more { text-decoration: none; background: linear-gradient(var(--heart), var(--heart)) 0 calc(100% - 9px) / 100% 1px no-repeat; transition: background-size .15s ease-out; }
+  .more:hover { background-size: 0 1px; background-position: 100% calc(100% - 9px); }
+  .shelf .vol:hover .b3d { translate: 0 -8px; }
+}
+
+/* ---------------------------------------------------------------- 1. the first screen */
+.hero { padding-block: 14px 40px; }
+.hero .stage { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.hero .cover { display: block; }
+.hero .cover img { height: min(46svh, 104vw); width: auto; max-width: none; border-radius: 1px 3px 3px 1px;
+  box-shadow: 0 26px 50px -22px rgba(0,0,0,.95), 0 0 0 1px rgba(128,124,118,.18); }
+.hero .lean { display: block; perspective: 1600px; }
+.hero .copy { margin-top: 4px; max-width: 560px; }
+.hero .cover-col { display: flex; flex-direction: column; align-items: center; }
+.hero .label { margin: 0 0 6px; }
+.hero h1 { font-size: 34px; line-height: 1.1; letter-spacing: -.02em; }
+.hero .line { margin: 10px auto 0; max-width: 21em; font-size: 19px; line-height: 1.45; color: var(--soft); }
+.hero .buyrow { margin: 14px 0 16px; }
+.price { margin: 0; font: 400 13px var(--sans); letter-spacing: .02em; color: var(--muted); }
+.hero .act-btn { width: 100%; max-width: 350px; }
+.proof { display: none; }
+.swatch { display: flex; justify-content: center; gap: 4px; margin: 4px 0 0; padding: 0; border: 0; }
+.swatch .dot { position: relative; display: grid; place-items: center; width: 34px; height: 44px; cursor: pointer; }
+.swatch input { position: absolute; inset: 0; margin: 0; appearance: none; -webkit-appearance: none; background: none; border: 0; cursor: pointer; }
+.swatch span { width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(128,124,118,.7); transition: box-shadow .15s ease-out; }
+.swatch .white span { background: #ECE7DA; } .swatch .black span { background: #0B0A09; }
+.swatch input:checked + span { box-shadow: 0 0 0 2px var(--ground), 0 0 0 3.5px var(--ink); }
+.swatch input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 5px; }
+@media (min-width: 900px) {
+  .hero { display: flex; align-items: center; min-height: min(calc(100svh - 57px), 960px); padding-block: 32px 48px; }
+  .hero > .stage { flex: 1; display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 560px); justify-content: center; column-gap: clamp(56px, 7vw, 120px); align-items: center; text-align: left; }
+  .hero .cover img { height: min(640px, calc(100svh - 160px)); min-height: 550px; }
+  .hero .lean img { transform: rotateY(calc(-8deg + var(--lx, 0) * 6deg)) rotateX(calc(var(--ly, 0) * -4deg)); transform-origin: 40% 50%; transition: transform .15s ease-out; }
+  .hero .copy { margin: 0; }
+  .hero .label { font-size: 14px; margin-bottom: 14px; }
+  .hero h1 { font-size: 76px; line-height: 1.04; }
+  .hero .line { margin: 22px 0 0; font-size: 22px; max-width: 22em; }
+  .hero .buyrow { margin: 26px 0 18px; }
+  .swatch { margin-top: 18px; }
+  .price { font-size: 14px; }
+  .hero .act-btn { width: auto; min-width: 240px; }
+  .proof { display: block; margin: 26px 0 0; font-size: 17px; font-style: italic; line-height: 1.5; color: var(--soft); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero .copy { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .hero .cover { animation: rise 1s cubic-bezier(.2,.7,.2,1) .08s both; }
+}
+@keyframes rise { from { opacity: .5; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
+
+/* ---------------------------------------------------------------- the books drawn in 3D (the turn and the shelf) */
+.b3d { --w: min(52vw, 30svh, 300px); --h: calc(var(--w) * 1.5); --d: calc(var(--w) * var(--spine)); position: relative; display: flex; gap: 14px; justify-content: center; }
+.b3d .face { position: relative; height: var(--h); }
+.b3d .face img { height: 100%; width: auto; max-width: none; }
+.b3d .fr { width: var(--w); box-shadow: 0 24px 50px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(128,124,118,.18); }
+.b3d .sp { width: var(--d); overflow: hidden; box-shadow: 0 0 0 1px rgba(128,124,118,.18); }
+.b3d .sp img { width: 100%; height: 100%; object-fit: cover; }
+.b3d .sp::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.28), rgba(255,255,255,.07) 45%, rgba(0,0,0,.3)); }
+.b3d .bk { display: none; background: #ECE7DA; }
+html:has(#cv-black:checked) .b3d .bk { background: #0B0A09; }
+
+/* ---------------------------------------------------------------- the scenes, still (the page for everyone first) */
+.scene { padding-block: 88px; }
+.scene .pin { max-width: 1200px; margin: 0 auto; }
+.scene .label { text-align: center; }
+.turn .pin { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+.backlines { max-width: 620px; text-align: center; }
+.bl { margin: 18px 0 0; font-size: clamp(21px, 2.6vw, 30px); line-height: 1.35; color: var(--ink); }
+.bl:last-child { font-style: italic; }
+.open .book-open { display: grid; grid-template-columns: 1fr; gap: 40px; justify-items: center; margin-top: 8px; }
+.open .stop { margin: 0; width: min(78vw, 360px); }
+.open .stop .pg.l, .open .leaf { display: none; }
+.open .pg img { width: 100%; box-shadow: 0 18px 40px -22px rgba(0,0,0,.9); }
+.open figcaption { margin-top: 14px; font: 400 13px var(--sans); color: var(--muted); text-align: center; }
+.open .after { margin-top: 40px; text-align: center; }
+.count { margin: 0; font-size: clamp(24px, 3.4vw, 36px); line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
+@media (min-width: 900px) { .open .book-open { grid-template-columns: repeat(3, minmax(0, 300px)); justify-content: center; gap: 48px; } .open .stop { width: auto; } }
+.said .quotes { display: grid; gap: 0; max-width: 780px; margin: 8px auto 0; }
+.said blockquote { margin: 0; padding: 24px 0; border-top: 1px solid var(--line); font-style: italic; font-size: 20px; line-height: 1.5; color: var(--soft); }
+.shelf .pin { display: flex; flex-direction: column; align-items: center; gap: 44px; }
+.wall { position: relative; width: min(100%, 720px); padding: 44px 20px 0; border-radius: 4px;
+  background: radial-gradient(60% 75% at 30% 40%, rgba(255,226,180,.16), transparent 70%), var(--wall); }
+.row { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: clamp(18px, 4vw, 44px); }
+.vol { position: relative; display: flex; flex-direction: column; align-items: center; }
+.shelf .b3d { --w: min(25vw, 150px); gap: 0; transition: translate .15s ease-out; }
+.shelf .b3d .sp, .shelf .b3d .bk { display: none; }
+.vol .num { position: absolute; bottom: -34px; font: 500 13px var(--sans); color: var(--muted); }
+.v0 .num { color: var(--ink); }
+.v1 .fr, .v2 .fr { box-shadow: none; border: 1px dashed rgba(190,184,172,.8); background: rgba(128,124,118,.07); }
+.board { height: 14px; margin: 0 -20px; border-radius: 0 0 3px 3px; background: linear-gradient(#4a3a2e, #2b2119); box-shadow: 0 18px 30px -16px rgba(0,0,0,.9); }
+html:has(#cv-black:checked) .board { background: linear-gradient(#b89f86, #8c7360); }
+.close { text-align: center; padding-top: 22px; }
+.close h2 { max-width: 16em; margin: 0 auto; }
+.close .sub { margin: 12px 0 0; font-size: 19px; font-style: italic; color: var(--soft); }
+.close .price { margin: 18px 0 20px; }
+.tell { width: 100%; max-width: 520px; margin: 0 auto; }
+.tell .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.tell input { flex: 1 1 200px; min-height: 48px; padding: 0 20px; border: 1px solid var(--muted); border-radius: 999px; background: var(--raised); color: var(--ink); font: 400 16px var(--serif); }
+.tell .note, .fine { margin: 0 0 12px; font-size: 15px; color: var(--muted); }
+
+/* the shelf in 3D on a desktop: each book a box seen a little from the side, the board a surface in perspective */
+@media (min-width: 900px) {
+  .wall { padding-top: 70px; perspective: 1400px; }
+  .shelf .b3d { --w: min(15vw, 190px); transform-style: preserve-3d; transform: rotateY(24deg); }
+  .shelf .b3d .face { position: absolute; top: 0; }
+  .shelf .b3d { width: var(--w); height: var(--h); }
+  .shelf .b3d .fr { left: 0; transform: translateZ(calc(var(--d) / 2)); }
+  .shelf .b3d .sp { display: block; left: calc(50% - var(--d) / 2); transform: rotateY(-90deg) translateZ(calc(var(--w) / 2)); }
+  .v1 .sp, .v2 .sp { border: 1px dashed rgba(190,184,172,.8); background: rgba(128,124,118,.07); box-shadow: none; }
+  .v1 .sp::after, .v2 .sp::after { display: none; }
+  .board { height: 18px; transform-origin: top; }
+  .board::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 56px; transform-origin: bottom; transform: rotateX(72deg);
+    background: linear-gradient(#3a2d23, #4a3a2e); }
+  html:has(#cv-black:checked) .board::before { background: linear-gradient(#a58c74, #b89f86); }
+  .board { position: relative; }
+}
+
+
+/* ---------------------------------------------------------------- the sections that are read (not scenes) */
+.wrap { max-width: 680px; margin: 0 auto; }
+.reading { margin: 14px 0 0; font-size: clamp(18px, 2.4vw, 20px); line-height: 1.62; color: var(--soft); }
+.flow h2 { margin-bottom: 8px; }
+.for .two { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 8px; }
+.for .two p { margin: 0; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.38; color: var(--ink); }
+@media (min-width: 900px) { .for .two { grid-template-columns: 1fr 1fr; gap: 72px; } }
+details.passage { margin-top: 44px; }
+details.passage summary, .faq summary { display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; list-style: none; font-size: 18px; }
+details.passage summary { display: inline-flex; text-decoration: underline; text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 7px; }
+details summary::-webkit-details-marker { display: none; }
+details.passage summary::after, .faq summary::after { content: "+"; font-family: var(--sans); font-weight: 300; font-size: 22px; line-height: 1; color: var(--muted); }
+details[open] > summary::after { content: "\2212"; }
+details.passage .text { max-width: 680px; padding-top: 6px; }
+details.passage .text p { margin: 18px 0 0; font-size: 19px; line-height: 1.62; color: var(--soft); }
+details.passage .text .from, .faq p { font-size: 15px; color: var(--muted); }
+.faq details { border-top: 1px solid var(--line); padding: 6px 0; } .faq details:last-child { border-bottom: 1px solid var(--line); }
+.faq summary { justify-content: space-between; } .faq p { margin: 4px 0 16px; font-size: 17px; line-height: 1.55; color: var(--soft); }
+.who .stage { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center; }
+.who .mark-art { width: 160px; height: 160px; opacity: .85; }
+.who p.l { margin: 18px 0 0; font-size: 19px; line-height: 1.56; color: var(--soft); }
+@media (min-width: 900px) { .who .stage { grid-template-columns: 320px minmax(0, 1fr); gap: 104px; } .who .mark-art { width: 300px; height: 300px; } }
+.mark-art .ink { stroke: var(--ink); }
+.formats { margin-top: 20px; }
+.format { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 16px; padding: 20px 0; border-top: 1px solid var(--line); }
+.format h3 { margin: 0; font-weight: 400; font-size: clamp(21px, 3.4vw, 25px); }
+.format .price { font: 400 clamp(21px, 3.4vw, 25px) var(--serif); color: var(--ink); white-space: nowrap; }
+.format .price small { margin-left: 8px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.format > p:not(.price), .format .act { grid-column: 1 / -1; }
+.format > p:not(.price) { margin: 0; font-size: 17px; line-height: 1.55; color: var(--soft); }
+.format .act { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.format .tag { font: 500 13px var(--sans); color: var(--ink); }
+.format .where::before { content: "· "; }
+#formats .fine { margin-top: 20px; font-family: var(--sans); font-size: 13px; }
+
+/* ---------------------------------------------------------------- the scenes, moving */
+@media (prefers-reduced-motion: no-preference) and (min-height: 540px) {
+@supports (animation-timeline: view()) {
+  .scene { height: calc(var(--len) * 100svh); padding-block: 0; }
+  .scene .pin { position: sticky; top: 0; height: 100svh; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; overflow: clip; }
+  .scene .pin > * { grid-area: 1 / 1; }
+  .scene .pin > .label { align-self: start; margin-top: 9svh; }
+  .turn { view-timeline: --turn block; }
+  .open { view-timeline: --open block; }
+  .said { view-timeline: --said block; }
+  .shelf { view-timeline: --shelf block; }
+
+  /* 1. the turn: front, spine (book zero), the book fades as it turns away, then the back's lines light one by one */
+  .turn .pin { perspective: 1500px; gap: 0; }
+  .turn .b3d { width: var(--w); height: var(--h); gap: 0; transform-style: preserve-3d; animation: turn linear both; animation-timeline: --turn; animation-range: contain 0% contain 100%; }
+  .turn .b3d .face { position: absolute; top: 0; left: 0; backface-visibility: hidden; }
+  .turn .b3d .fr { transform: translateZ(calc(var(--d) / 2)); }
+  .turn .b3d .sp { left: calc(50% - var(--d) / 2); transform: rotateY(-90deg) translateZ(calc(var(--w) / 2)); }
+  .turn .b3d .bk { display: block; width: var(--w); transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); }
+  @keyframes turn { 0% { transform: rotateX(3deg) rotateY(-16deg); } 38%, 52% { transform: rotateX(0deg) rotateY(90deg) scale(1.08); }
+    66%, 100% { transform: rotateY(150deg) scale(.96); } }
+  .turn .b3d .face { animation: bookfade linear both; animation-timeline: --turn; animation-range: contain 0% contain 100%; }
+  @keyframes bookfade { 0%, 52% { opacity: 1; } 65%, 100% { opacity: 0; } }
+  .turn .backlines { align-self: center; }
+  .turn .backlines .label { opacity: 0; animation: lit linear both; animation-timeline: --turn; animation-range: contain 67% contain 71%; }
+  .turn .bl { opacity: 0; animation: lit linear both; animation-timeline: --turn; animation-range: contain calc(69% + var(--i) * 7%) contain calc(74% + var(--i) * 7%); }
+  @keyframes lit { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+
+  /* 2. the book opens, rests on three stops one at a time, then the counts arrive under it */
+  .open .book-open { display: grid; grid-template-columns: 1fr; gap: 0; margin: 0; perspective: 2200px; }
+  .open .stop { grid-area: 1 / 1; display: flex; width: min(70vw, 42svh); }
+  .open .stop .pg { flex: 1 1 0; }
+  .open figcaption { position: absolute; top: 100%; left: 0; right: 0; }
+  .open .stop { position: relative; }
+  .open .leaf { display: block; grid-area: 1 / 1; justify-self: end; width: min(70vw, 42svh); position: relative; transform-style: preserve-3d; transform-origin: 0 50%;
+    animation: leaf linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
+  .open .lf { animation: out1 linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
+  .open .lf { position: absolute; inset: 0; backface-visibility: hidden; }
+  .open .lf.f { position: relative; }
+  .open .lf.f img { width: 100%; height: auto; }
+  .open .lf.b { display: none; transform: rotateY(180deg); }
+  .open .lf.b img { width: 100%; }
+  .open .s1 { animation: out1 linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
+  .open .s1 figcaption { animation: cap1 linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
+  .open .s2 { animation: mid2 linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
+  .open .s3 { animation: in3 linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
+  .open .after { align-self: end; margin: 0 0 5svh; animation: lit linear both; animation-timeline: --open; animation-range: contain 82% contain 90%; }
+  @keyframes leaf { 0%, 6% { transform: rotateY(0deg); } 24%, 100% { transform: rotateY(-180deg); } }
+  @keyframes out1 { 0%, 37% { opacity: 1; } 40%, 100% { opacity: 0; } }
+  @keyframes cap1 { 0%, 22% { opacity: 0; } 26%, 100% { opacity: 1; } }
+  @keyframes mid2 { 0%, 42% { opacity: 0; } 45%, 62% { opacity: 1; } 65%, 100% { opacity: 0; } }
+  @keyframes in3 { 0%, 67% { opacity: 0; } 70%, 100% { opacity: 1; } }
+  .open .s1 .pg.r img, .open .leaf { will-change: transform; }
+  @media (min-width: 900px) {
+    .open .stop { width: min(64vw, 70svh); }
+    .open .stop .pg.l { display: block; }
+    .open .s1 .pg.l { visibility: hidden; }          /* the leaf's back lands there: page 18 is drawn once */
+    .open .leaf { width: calc(min(64vw, 70svh) / 2); }
+    .open .lf.b { display: block; }
+    .open .book-open { animation: shift linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
+    @keyframes shift { 0%, 6% { translate: -25% 0; } 24%, 100% { translate: 0 0; } }
+  }
+
+  /* 3. the readers: one line at a time, each gone before the next is a tenth in; the last one stays */
+  .said .quotes { grid-area: 1 / 1; display: grid; max-width: 760px; margin: 0; }
+  .said blockquote { grid-area: 1 / 1; align-self: center; padding: 0 4px; border: 0; font-size: clamp(21px, 2.6vw, 30px); line-height: 1.4; color: var(--ink); text-align: center;
+    opacity: 0; animation: say linear both; animation-timeline: --said;
+    animation-range: contain calc(var(--i) * 100% / var(--n)) contain calc((var(--i) + 1) * 100% / var(--n)); }
+  .said blockquote.last { animation-name: say-last; }
+  @keyframes say { 0% { opacity: 0; translate: 0 14px; } 22%, 74% { opacity: 1; translate: 0 0; } 96%, 100% { opacity: 0; translate: 0 -14px; } }
+  @keyframes say-last { 0% { opacity: 0; translate: 0 14px; } 22%, 100% { opacity: 1; translate: 0 0; } }
+
+  /* 4. the shelf: book zero comes to its place, the two to come are drawn in outline, then the close holds */
+  .shelf .pin { gap: 0; align-content: center; grid-template: auto auto / minmax(0, 1fr); }
+  .shelf .pin > * { grid-area: auto; }
+  .shelf .v0 { animation: arrive linear both; animation-timeline: --shelf; animation-range: contain 0% contain 40%; }
+  .shelf .v1, .shelf .v2 { animation: lit linear both; animation-timeline: --shelf; animation-range: contain 30% contain 48%; }
+  .shelf .close { animation: lit linear both; animation-timeline: --shelf; animation-range: contain 50% contain 66%; }
+  .shelf .close:focus-within { opacity: 1 !important; }
+  @keyframes arrive { from { opacity: 0; translate: 30vw 0; } 60% { opacity: 1; } to { opacity: 1; translate: 0 0; } }
+}}
