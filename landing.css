@@ -122,9 +122,10 @@ html:has(#cv-black:checked) .b3d .bk { background: #0B0A09; }
 .open figcaption { margin-top: 14px; font: 400 13px var(--sans); color: var(--muted); text-align: center; }
 .open .after { margin-top: 40px; text-align: center; }
 .count { margin: 0; font-size: clamp(24px, 3.4vw, 36px); line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
-@media (min-width: 900px) { .open .book-open { grid-template-columns: repeat(3, minmax(0, 300px)); justify-content: center; gap: 48px; } .open .stop { width: auto; } }
+@media (min-width: 900px) { .open .book-open { grid-template-columns: repeat(var(--stops, 3), minmax(0, 300px)); justify-content: center; gap: 48px; } .open .stop { width: auto; } }
 .said .quotes { display: grid; gap: 0; max-width: 780px; margin: 8px auto 0; }
 .said blockquote { margin: 0; padding: 24px 0; border-top: 1px solid var(--line); font-style: italic; font-size: 20px; line-height: 1.5; color: var(--soft); }
+.said cite { display: block; margin-top: 10px; font: 400 13px var(--sans); font-style: normal; color: var(--muted); }
 .shelf .pin { display: flex; flex-direction: column; align-items: center; gap: 44px; }
 .wall { position: relative; width: min(100%, 720px); padding: 44px 20px 0; border-radius: 4px;
   background: radial-gradient(60% 75% at 30% 40%, rgba(255,226,180,.16), transparent 70%), var(--wall); }
@@ -254,6 +255,10 @@ details.passage .text .from, .faq p { font-size: 15px; color: var(--muted); }
   @keyframes cap1 { 0%, 22% { opacity: 0; } 26%, 100% { opacity: 1; } }
   @keyframes mid2 { 0%, 42% { opacity: 0; } 45%, 62% { opacity: 1; } 65%, 100% { opacity: 0; } }
   @keyframes in3 { 0%, 67% { opacity: 0; } 70%, 100% { opacity: 1; } }
+  /* two stops (landing.json open_stops): the first rests to the middle, then the last; one at a time, no empty stretch */
+  .open .two .s1 { animation-name: out2; } .open .two .s3 { animation-name: in2; }
+  @keyframes out2 { 0%, 50% { opacity: 1; } 53%, 100% { opacity: 0; } }
+  @keyframes in2 { 0%, 55% { opacity: 0; } 58%, 100% { opacity: 1; } }
   .open .s1 .pg.r img, .open .leaf { will-change: transform; }
   @media (min-width: 900px) {
     .open .stop { width: min(64vw, 70svh); }
