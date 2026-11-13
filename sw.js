@@ -1,8 +1,8 @@
 // soulsensis app (14 Nov 2026, docs/specs/app-2026-11-14.md): pages come fresh from the network when online; the app's
 // start page, the book and anything read before also open offline. A page never read offline falls back to the app.
-const C = "ss-v2";
+const C = "ss-v3";
 const CORE = ["/app/", "/book.html", "/site.css", "/landing.css", "/fonts/fonts.css", "/manifest.webmanifest",
-  "/app-192.png", "/apple-touch-icon.png", "/book/colours/front-white.webp"];
+  "/app-192.png", "/apple-touch-icon.png", "/book/3d/front-white.webp", "/book-3d.jpg"];
 self.addEventListener("install", (e) => {
   // one missing file never stops the app installing: each is cached on its own
   e.waitUntil(caches.open(C).then((c) => Promise.all(CORE.map((u) => c.add(u).catch(() => null)))).then(() => self.skipWaiting()));
