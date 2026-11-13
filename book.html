@@ -10,14 +10,14 @@
 <meta property="og:site_name" content="soulsensis">
 <meta property="og:url" content="https://soulsensis.com/book.html">
 <meta property="og:title" content="Your soul knows best">
-<meta property="og:description" content="Essays to open anywhere. Feel at home again. Written by a human.">
+<meta property="og:description" content="Sit still enough to hear it. Feel at home again. Written by a human.">
 <meta property="og:image" content="https://soulsensis.com/book-og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The cover of Your soul knows best beside its title, on black">
 <meta property="book:author" content="https://soulsensis.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Your soul knows best">
-<meta name="twitter:description" content="Essays to open anywhere. Feel at home again. Written by a human.">
+<meta name="twitter:description" content="Sit still enough to hear it. Feel at home again. Written by a human.">
 <meta name="twitter:image" content="https://soulsensis.com/book-og.jpg">
 <script type="application/ld+json">
 {
@@ -27,7 +27,7 @@
    "@type": "Book",
    "@id": "https://soulsensis.com/book.html#book",
    "name": "Your soul knows best",
-   "alternativeHeadline": "Essays to open anywhere",
+   "alternativeHeadline": "Sit still enough to hear it",
    "url": "https://soulsensis.com/book.html",
    "image": "https://soulsensis.com/book-cover.jpg",
    "author": { "@type": "Person", "name": "soulsensis", "url": "https://soulsensis.com/" },
@@ -52,6 +52,9 @@
 <meta name="theme-color" content="#000000">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/launch/launch-750x1334.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/launch/launch-828x1792.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1125x2436.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1242x2688.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1170x2532.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1179x2556.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1206x2622.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1284x2778.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1290x2796.png"><link rel="apple-touch-startup-image" media="screen and (device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/launch/launch-1320x2868.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="soulsensis">
 <script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));</script>
@@ -59,7 +62,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" as="image" href="book/colours/front-white.webp" fetchpriority="high">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/landing.css?v=4da0c0c1">
+<link rel="stylesheet" href="/landing.css?v=b2aa937c">
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
 nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
@@ -67,7 +70,15 @@ nav.top .wrap { display: flex; justify-content: space-between; align-items: cent
 nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
-@media (max-width: 560px) { nav.top .links a.far { display: none; } }
+/* 14 Nov 2026 (Antigravity's site plan P7): a phone keeps every link of the bar. The mark and the button hold the first
+   row; the book and the conversation take a second, short row under them, so nothing folds away. */
+@media (max-width: 560px) {
+  nav.top .wrap { flex-wrap: wrap; row-gap: 0; justify-content: flex-start; }
+  nav.top .wrap::after { content: ""; order: 1; flex-basis: 100%; }
+  nav.top .links { display: contents; }
+  nav.top .wrap .links a.pill { order: 1; margin-left: auto; }
+  nav.top .wrap .links a.nbk, nav.top .wrap .links a.far { order: 2; min-height: 40px; padding: 0 16px 0 0; justify-content: flex-start; }
+}
 /* 12 Nov 2026 (author: "a landing sales page ... premium feel and sales focused"): the bar's one button, white, at its right: the book */
 nav.top .links a.pill { min-height: 44px; margin-left: 10px; padding: 0 18px; border-radius: 999px; background: var(--ink, #F5F2EA); color: #0b0b0d; font-weight: 500; position: relative; transition: background .2s; }
 nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: #fff; color: #0b0b0d; }
@@ -75,7 +86,6 @@ nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: #
 .btn.pill:hover, a.pill-lg:hover { background: #fff; }
 /* 13 Nov 2026 evening: one bar on every page; a phone keeps the book and the button, the conversation folds away first */
 @media (max-width: 400px) { nav.top .links a { padding: 0 6px; } nav.top .links a.pill { margin-left: 4px; padding: 0 14px; } .mark { gap: 8px; letter-spacing: .18em; } }
-@media (max-width: 340px) { nav.top .links a.nbk { display: none; } }
 /* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
    geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
 @media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }
@@ -104,7 +114,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
      turning book fades to nothing before the back's lines arrive; the walk checks no two layers of words meet. -->
 <main id="top">
   <!--HERO--><section class="hero g" aria-labelledby="hero-h"><div class="stage">
-    <div class="cover-col"><div class="cover"><span class="lean"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1800" fetchpriority="high" decoding="async" draggable="false" alt="The white cover of Your soul knows best, by soulsensis: the title in black serif type above a flower of life drawn in fine black line with a red centre"><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1800" loading="lazy" decoding="async" draggable="false" alt="The black cover of Your soul knows best, by soulsensis: the title in white serif type above a flower of life drawn in fine white line with a red centre"></span></div><fieldset class="swatch" aria-label="The cover"><label class="dot white"><input type="radio" name="cover" id="cv-white" value="white" checked aria-label="White cover"><span aria-hidden="true"></span></label><label class="dot black"><input type="radio" name="cover" id="cv-black" value="black" aria-label="Black cover"><span aria-hidden="true"></span></label></fieldset></div>
+    <div class="cover-col"><div class="cover"><span class="lean"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1920" fetchpriority="high" decoding="async" draggable="false" alt="The bone cover of Your soul knows best, by soulsensis: the title and the line Sit still enough to hear it in black serif type, above a large flower of life drawn in black line with a red centre"><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1920" loading="lazy" decoding="async" draggable="false" alt="The black cover of Your soul knows best, by soulsensis: the title and the line Sit still enough to hear it in bone serif type, above a large flower of life drawn in bone line with a red centre"></span></div><fieldset class="swatch" aria-label="The cover"><label class="dot white"><input type="radio" name="cover" id="cv-white" value="white" checked aria-label="Bone cover"><span aria-hidden="true"></span></label><label class="dot black"><input type="radio" name="cover" id="cv-black" value="black" aria-label="Black cover"><span aria-hidden="true"></span></label></fieldset></div>
     <div class="copy">
       <h1 id="hero-h">Everyone feels rushed, but no one is asking: where are you rushing to?</h1>
       <p class="line">A book from seven years of journals, for when you need to feel okay.</p>
@@ -114,7 +124,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     </div>
   </div></section><!--/HERO-->
   <!--TURN--><section class="scene turn g" aria-labelledby="turn-h" style="--len:var(--turn-len)"><div class="pin">
-    <div class="b3d" aria-hidden="true"><div class="face fr"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1800" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1800" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face sp"><img data-cv="white" src="book/colours/spine-white.webp" width="121" height="1800" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/spine-black.webp" width="121" height="1800" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face bk"></div></div>
+    <div class="b3d" aria-hidden="true"><div class="face fr"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1920" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1920" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face sp"><img data-cv="white" src="book/colours/spine-white.webp" width="142" height="1920" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/spine-black.webp" width="142" height="1920" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face bk"></div></div>
     <div class="backlines"><h2 class="label" id="turn-h">On the back</h2><p class="bl" style="--i:0">There is a particular kind of tiredness that comes from living a life that is not yours.</p><p class="bl" style="--i:1">It is not the tiredness of the body. It is the tiredness of waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is.</p><p class="bl" style="--i:2">Contentment was never about the absence of difficulty.</p><p class="bl" style="--i:3">All I had to do was sit still enough to hear it.</p></div>
   </div></section><!--/TURN-->
   <section class="flow g" id="read" aria-labelledby="read-h"><div class="wrap">
@@ -130,12 +140,12 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 
   <!--OPEN--><section class="scene open g" id="inside" aria-labelledby="inside-h" style="--len:var(--open-len)"><div class="pin">
     <h2 class="label" id="inside-h">Inside the book</h2>
-    <div class="book-open two" style="--stops:2"><figure class="stop s1"><div class="pg l"><img src="book/p192.webp" width="1200" height="1800" loading="lazy" decoding="async" data-words alt="Page 192 as printed."></div><div class="pg r"><img src="book/p193.webp" width="1200" height="1800" loading="lazy" decoding="async" data-words alt="Page 193 as printed. Chapter 70, Where are you rushing to?."></div><figcaption>Chapter 70 · Where are you rushing to?</figcaption></figure><figure class="stop s3"><div class="pg l"><img src="book/p242.webp" width="1920" height="2880" loading="lazy" decoding="async" data-words alt="Page 242 as printed."></div><div class="pg r"><img src="book/p243.webp" width="1920" height="2880" loading="lazy" decoding="async" data-words alt="Page 243 as printed. Chapter 99, The actuality of the soul."></div><figcaption>Chapter 99 · The actuality of the soul</figcaption></figure><div class="leaf" aria-hidden="true"><div class="lf f"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1800" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1800" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="lf b"><img src="book/p192.webp" width="1200" height="1800" loading="lazy" decoding="async" data-words alt=""></div></div></div>
+    <div class="book-open two" style="--stops:2"><figure class="stop s1"><div class="pg l"><img src="book/p192.webp" width="1200" height="1800" loading="lazy" decoding="async" data-words alt="Page 192 as printed."></div><div class="pg r"><img src="book/p193.webp" width="1200" height="1800" loading="lazy" decoding="async" data-words alt="Page 193 as printed. Chapter 70, Where are you rushing to?."></div><figcaption>Chapter 70 · Where are you rushing to?</figcaption></figure><figure class="stop s3"><div class="pg l"><img src="book/p242.webp" width="1920" height="2880" loading="lazy" decoding="async" data-words alt="Page 242 as printed."></div><div class="pg r"><img src="book/p243.webp" width="1920" height="2880" loading="lazy" decoding="async" data-words alt="Page 243 as printed. Chapter 99, The actuality of the soul."></div><figcaption>Chapter 99 · The actuality of the soul</figcaption></figure><div class="leaf" aria-hidden="true"><div class="lf f"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1920" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1920" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="lf b"><img src="book/p192.webp" width="1200" height="1800" loading="lazy" decoding="async" data-words alt=""></div></div></div>
     <div class="after"><p class="count">34 essays and 79 shorter pieces. Open it anywhere.</p><!--FIRST_CHAPTER--></div>
   </div></section><!--/OPEN-->
-  <!--SAID--><section class="scene said g" aria-labelledby="said-h" style="--len:var(--said-len);--n:3"><div class="pin">
+  <!--SAID--><section class="said g" aria-labelledby="said-h"><div class="stage">
     <h2 class="label" id="said-h">What readers wrote on the original online posts, years before the book</h2>
-    <div class="quotes"><blockquote style="--i:0" class="">“I’m struggling with letting go of my past for various reasons. It’s not easy but I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward. I’m sad today. My past is haunting me but your post was encouraging.”<cite>Anonymous reader, on an early online post</cite></blockquote><blockquote style="--i:1" class="">“It’s funny, because back then I was so focused on my future and what I wanted to accomplish, that I never truly appreciated the small moments I had with my loved ones. All I find myself with now are my thoughts of what could’ve been.”<cite>Anonymous reader, on an early online post</cite></blockquote><blockquote style="--i:2" class="last">“This is making me feel a little better. I did something terrible a few days ago. I&#x27;ve already apologized to the people I affected, but I still feel horrible.”<cite>Anonymous reader, on an early online post</cite></blockquote></div>
+    <div class="quotes"><blockquote>“I’m struggling with letting go of my past for various reasons. It’s not easy but I’m glad there are people like you in this world to encourage me to look ahead and keep moving forward. I’m sad today. My past is haunting me but your post was encouraging.”<cite>Anonymous reader, on an early online post</cite></blockquote><blockquote>“It’s funny, because back then I was so focused on my future and what I wanted to accomplish, that I never truly appreciated the small moments I had with my loved ones. All I find myself with now are my thoughts of what could’ve been.”<cite>Anonymous reader, on an early online post</cite></blockquote><blockquote>“This is making me feel a little better. I did something terrible a few days ago. I&#x27;ve already apologized to the people I affected, but I still feel horrible.”<cite>Anonymous reader, on an early online post</cite></blockquote></div>
   </div></section><!--/SAID-->
   <section class="flow g" id="wrote" aria-labelledby="wrote-h"><div class="wrap">
     <p class="label">Who wrote it</p>
@@ -162,7 +172,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <div class="formats" id="pick">
       <div class="format" id="paperback">
         <h3>Paperback</h3><p class="price" data-au="A$24.99" data-us="US$14.99">A$24.99<small>US$14.99</small></p>
-        <p>6 × 9 inches, matte cover, printed by Amazon and posted to you. The one to leave on the bedside table and lend.</p>
+        <p>6 × 9 inches, matte cover, posted to you. The one to leave on the bedside table and lend.</p>
         <div class="act"><!--BUY_PAPERBACK--><span class="tag" data-soon-tag>Coming soon</span><!--/BUY_PAPERBACK--><span class="where">Amazon</span></div>
       </div>
       <div class="format" id="kindle">
@@ -175,7 +185,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
   </div></section>
 
   <!--SHELF--><section class="scene shelf g" id="notify" aria-labelledby="shelf-h" style="--len:var(--shelf-len)"><div class="pin">
-    <div class="wall"><div class="row" role="img" aria-label="Book zero on a shelf, with room for the books that follow it"><div class="vol v0"><div class="b3d"><div class="face fr"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1800" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1800" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face sp"><img data-cv="white" src="book/colours/spine-white.webp" width="121" height="1800" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/spine-black.webp" width="121" height="1800" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face bk"></div></div><span class="num" aria-hidden="true">0</span></div><div class="vol v1"><div class="b3d" aria-hidden="true"><div class="face fr"></div><div class="face sp"></div></div><span class="num" aria-hidden="true">1</span></div><div class="vol v2"><div class="b3d" aria-hidden="true"><div class="face fr"></div><div class="face sp"></div></div><span class="num" aria-hidden="true">2</span></div></div><div class="board" aria-hidden="true"></div></div>
+    <div class="wall"><div class="row" role="img" aria-label="Book zero on a shelf, with room for the books that follow it"><div class="vol v0"><div class="b3d"><div class="face fr"><img data-cv="white" src="book/colours/front-white.webp" width="1200" height="1920" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/front-black.webp" width="1200" height="1920" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face sp"><img data-cv="white" src="book/colours/spine-white.webp" width="142" height="1920" loading="lazy" decoding="async" draggable="false" alt=""><img data-cv="black" src="book/colours/spine-black.webp" width="142" height="1920" loading="lazy" decoding="async" draggable="false" alt=""></div><div class="face bk"></div></div><span class="num" aria-hidden="true">0</span></div><div class="vol v1"><div class="b3d" aria-hidden="true"><div class="face fr"></div><div class="face sp"></div></div><span class="num" aria-hidden="true">1</span></div><div class="vol v2"><div class="b3d" aria-hidden="true"><div class="face fr"></div><div class="face sp"></div></div><span class="num" aria-hidden="true">2</span></div></div><div class="board" aria-hidden="true"></div></div>
     <div class="close">
       <h2 id="shelf-h">Feel at home again.</h2>
       <p class="sub">You are not alone in this life.</p>

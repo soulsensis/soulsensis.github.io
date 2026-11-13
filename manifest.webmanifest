@@ -1,11 +1,12 @@
 {
+ "id": "/app/",
  "name": "soulsensis",
  "short_name": "soulsensis",
- "description": "Essays on the way home to contentment and inner peace. Read by topic, every day.",
- "start_url": "/?app=1",
+ "description": "Today's reading, the book, the newest film and a question, one tap from your home screen.",
+ "start_url": "/app/?utm_source=homescreen",
  "scope": "/",
  "display": "standalone",
- "background_color": "#000000",
+ "background_color": "#0B0B0D",
  "theme_color": "#000000",
  "orientation": "portrait",
  "icons": [
@@ -28,16 +29,16 @@
  ],
  "shortcuts": [
   {
-   "name": "Today's essay",
-   "url": "/?app=1#today"
-  },
-  {
-   "name": "Read by topic",
-   "url": "/essays.html"
+   "name": "Today's reading",
+   "url": "/app/#today"
   },
   {
    "name": "The book",
-   "url": "/book.html"
+   "url": "/book.html?utm_source=app"
+  },
+  {
+   "name": "Ask a question",
+   "url": "/question/"
   }
  ]
 }

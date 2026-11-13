@@ -32,7 +32,15 @@ nav.top .wrap { display: flex; justify-content: space-between; align-items: cent
 nav.top .links { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #c9c5bc; }
 nav.top .links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; text-decoration: none; white-space: nowrap; transition: color .2s; }
 nav.top .links a:hover, nav.top .links a[aria-current] { color: var(--ink); }
-@media (max-width: 560px) { nav.top .links a.far { display: none; } }
+/* 14 Nov 2026 (Antigravity's site plan P7): a phone keeps every link of the bar. The mark and the button hold the first
+   row; the book and the conversation take a second, short row under them, so nothing folds away. */
+@media (max-width: 560px) {
+  nav.top .wrap { flex-wrap: wrap; row-gap: 0; justify-content: flex-start; }
+  nav.top .wrap::after { content: ""; order: 1; flex-basis: 100%; }
+  nav.top .links { display: contents; }
+  nav.top .wrap .links a.pill { order: 1; margin-left: auto; }
+  nav.top .wrap .links a.nbk, nav.top .wrap .links a.far { order: 2; min-height: 40px; padding: 0 16px 0 0; justify-content: flex-start; }
+}
 /* 12 Nov 2026 (author: "a landing sales page ... premium feel and sales focused"): the bar's one button, white, at its right: the book */
 nav.top .links a.pill { min-height: 44px; margin-left: 10px; padding: 0 18px; border-radius: 999px; background: var(--ink, #F5F2EA); color: #0b0b0d; font-weight: 500; position: relative; transition: background .2s; }
 nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: #fff; color: #0b0b0d; }
@@ -40,7 +48,6 @@ nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: #
 .btn.pill:hover, a.pill-lg:hover { background: #fff; }
 /* 13 Nov 2026 evening: one bar on every page; a phone keeps the book and the button, the conversation folds away first */
 @media (max-width: 400px) { nav.top .links a { padding: 0 6px; } nav.top .links a.pill { margin-left: 4px; padding: 0 14px; } .mark { gap: 8px; letter-spacing: .18em; } }
-@media (max-width: 340px) { nav.top .links a.nbk { display: none; } }
 /* 11 Nov 2026, the critics' round: on a wide screen the bar and the footer are as wide as the stage (1080 px), so the logo's
    geometry and the book sit inside the page's frame; what is read keeps its 680 px measure, centred under it */
 @media (min-width: 960px) { nav.top .wrap, body > footer .wrap { max-width: 1080px; } }

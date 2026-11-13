@@ -7,8 +7,8 @@
   --ground: #0b0b0d; --ink: #F5F2EA; --soft: #d9d5cc; --muted: #a29e96; --line: #1f1f24; --raised: #111114; --heart: #E63946;
   --sans: "Montserrat", "Montserrat Fallback", "Helvetica Neue", Arial, sans-serif; --serif: "Source Serif 4", "Source Serif Fallback", Georgia, serif;
   --wall: #131210; color-scheme: dark;
-  --turn-len: 2.5; --open-len: 3; --said-len: 2.5; --shelf-len: 2; }
-@media (min-width: 900px) { :root { --turn-len: 3; --open-len: 3.5; --said-len: 3; --shelf-len: 2.4; } }
+  --turn-len: 2.5; --open-len: 3; --shelf-len: 2; }
+@media (min-width: 900px) { :root { --turn-len: 3; --open-len: 3.5; --shelf-len: 2.4; } }
 /* the black cover chosen: the page's ground turns to bone so the black book stands out (his words, 13 Nov: "the page
    background switches for contrast when a colour is picked") */
 html:has(#cv-black:checked) { --ground: #F5F2EA; --ink: #0b0b0d; --soft: #2b2a27; --muted: #5d5a54; --line: #dcd7cc; --raised: #ebe7dd; --wall: #e9e4d8; color-scheme: light; }
@@ -72,7 +72,7 @@ main > section:not(.scene):not(.hero) { padding-block: 88px; }
 .swatch .dot { position: relative; display: grid; place-items: center; width: 34px; height: 44px; cursor: pointer; }
 .swatch input { position: absolute; inset: 0; margin: 0; appearance: none; -webkit-appearance: none; background: none; border: 0; cursor: pointer; }
 .swatch span { width: 16px; height: 24px; border-radius: 1px 3px 3px 1px; box-shadow: 0 0 0 1px rgba(128,124,118,.7); transition: box-shadow .15s ease-out; }
-.swatch .white span { background: #ECE7DA; } .swatch .black span { background: #0B0A09; }
+.swatch .white span { background: #EDE8DC; } .swatch .black span { background: #1B1A19; }
 .swatch input:checked + span { box-shadow: 0 0 0 2px var(--ground), 0 0 0 3.5px var(--ink); }
 .swatch input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 5px; }
 @media (min-width: 900px) {
@@ -97,15 +97,16 @@ main > section:not(.scene):not(.hero) { padding-block: 88px; }
 @keyframes rise { from { opacity: .5; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
 
 /* ---------------------------------------------------------------- the books drawn in 3D (the turn and the shelf) */
-.b3d { --w: min(52vw, 30svh, 300px); --h: calc(var(--w) * 1.5); --d: calc(var(--w) * var(--spine)); position: relative; display: flex; gap: 14px; justify-content: center; }
+.b3d { --w: min(52vw, 30svh, 300px); --h: calc(var(--w) * 1.6);   /* the v5 cover's own 5:8 */
+  --d: calc(var(--w) * var(--spine)); position: relative; display: flex; gap: 14px; justify-content: center; }
 .b3d .face { position: relative; height: var(--h); }
 .b3d .face img { height: 100%; width: auto; max-width: none; }
 .b3d .fr { width: var(--w); box-shadow: 0 24px 50px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(128,124,118,.18); }
 .b3d .sp { width: var(--d); overflow: hidden; box-shadow: 0 0 0 1px rgba(128,124,118,.18); }
 .b3d .sp img { width: 100%; height: 100%; object-fit: cover; }
 .b3d .sp::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.28), rgba(255,255,255,.07) 45%, rgba(0,0,0,.3)); }
-.b3d .bk { display: none; background: #ECE7DA; }
-html:has(#cv-black:checked) .b3d .bk { background: #0B0A09; }
+.b3d .bk { display: none; background: #EDE8DC; }
+html:has(#cv-black:checked) .b3d .bk { background: #1B1A19; }
 
 /* ---------------------------------------------------------------- the scenes, still (the page for everyone first) */
 .scene { padding-block: 88px; }
@@ -123,9 +124,11 @@ html:has(#cv-black:checked) .b3d .bk { background: #0B0A09; }
 .open .after { margin-top: 40px; text-align: center; }
 .count { margin: 0; font-size: clamp(24px, 3.4vw, 36px); line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
 @media (min-width: 900px) { .open .book-open { grid-template-columns: repeat(var(--stops, 3), minmax(0, 300px)); justify-content: center; gap: 48px; } .open .stop { width: auto; } }
+/* the readers (14 Nov 2026, Antigravity's plan P6): stacked and still, read at the reader's own pace */
+.said .label { text-align: center; }
 .said .quotes { display: grid; gap: 0; max-width: 780px; margin: 8px auto 0; }
 .said blockquote { margin: 0; padding: 24px 0; border-top: 1px solid var(--line); font-style: italic; font-size: 20px; line-height: 1.5; color: var(--soft); }
-.said cite { display: block; margin-top: 10px; font: 400 13px var(--sans); font-style: normal; color: var(--muted); }
+.said cite { display: block; margin-top: 12px; font: 400 14px var(--sans); font-style: normal; color: var(--soft); opacity: .78; }   /* 7 to 1 and better on either ground */
 .shelf .pin { display: flex; flex-direction: column; align-items: center; gap: 44px; }
 .wall { position: relative; width: min(100%, 720px); padding: 44px 20px 0; border-radius: 4px;
   background: radial-gradient(60% 75% at 30% 40%, rgba(255,226,180,.16), transparent 70%), var(--wall); }
@@ -172,6 +175,9 @@ html:has(#cv-black:checked) .board { background: linear-gradient(#b89f86, #8c736
 .wrap { max-width: 680px; margin: 0 auto; }
 .reading { margin: 14px 0 0; font-size: clamp(18px, 2.4vw, 20px); line-height: 1.62; color: var(--soft); }
 .flow h2 { margin-bottom: 8px; }
+/* chapter 68's first three sentences as text (14 Nov 2026, Antigravity's plan P1) */
+.for .lead-passage { max-width: 680px; margin: 8px 0 36px; }
+.for .lead-passage p { margin: 0; font-size: clamp(19px, 2.2vw, 22px); line-height: 1.62; color: var(--soft); }
 .for .two { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 8px; }
 .for .two p { margin: 0; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.38; color: var(--ink); }
 @media (min-width: 900px) { .for .two { grid-template-columns: 1fr 1fr; gap: 72px; } }
@@ -212,7 +218,6 @@ details.passage .text .from, .faq p { font-size: 15px; color: var(--muted); }
   .scene .pin > .label { align-self: start; margin-top: 9svh; }
   .turn { view-timeline: --turn block; }
   .open { view-timeline: --open block; }
-  .said { view-timeline: --said block; }
   .shelf { view-timeline: --shelf block; }
 
   /* 1. the turn: front, spine (book zero), the book fades as it turns away, then the back's lines light one by one */
@@ -269,15 +274,6 @@ details.passage .text .from, .faq p { font-size: 15px; color: var(--muted); }
     .open .book-open { animation: shift linear both; animation-timeline: --open; animation-range: contain 0% contain 100%; }
     @keyframes shift { 0%, 6% { translate: -25% 0; } 24%, 100% { translate: 0 0; } }
   }
-
-  /* 3. the readers: one line at a time, each gone before the next is a tenth in; the last one stays */
-  .said .quotes { grid-area: 1 / 1; display: grid; max-width: 760px; margin: 0; }
-  .said blockquote { grid-area: 1 / 1; align-self: center; padding: 0 4px; border: 0; font-size: clamp(21px, 2.6vw, 30px); line-height: 1.4; color: var(--ink); text-align: center;
-    opacity: 0; animation: say linear both; animation-timeline: --said;
-    animation-range: contain calc(var(--i) * 100% / var(--n)) contain calc((var(--i) + 1) * 100% / var(--n)); }
-  .said blockquote.last { animation-name: say-last; }
-  @keyframes say { 0% { opacity: 0; translate: 0 14px; } 22%, 74% { opacity: 1; translate: 0 0; } 96%, 100% { opacity: 0; translate: 0 -14px; } }
-  @keyframes say-last { 0% { opacity: 0; translate: 0 14px; } 22%, 100% { opacity: 1; translate: 0 0; } }
 
   /* 4. the shelf: book zero comes to its place, the two to come are drawn in outline, then the close holds */
   .shelf .pin { gap: 0; align-content: center; grid-template: auto auto / minmax(0, 1fr); }
