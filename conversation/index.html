@@ -30,7 +30,7 @@
 <link rel="alternate" type="application/rss+xml" title="soulsensis essays" href="https://soulsensis.com/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/site.css?v=7350d469">
+<link rel="stylesheet" href="/site.css?v=2cf3c47a">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebPage", "name": "A conversation · soulsensis", "url": "https://soulsensis.com/conversation/", "description": "Here, neither of us knows the other. There is nothing to lose, so you will hear the truth, said with care.", "inLanguage": "en", "isPartOf": {"@type": "WebSite", "@id": "https://soulsensis.com/#site", "name": "soulsensis", "url": "https://soulsensis.com/"}, "publisher": {"@id": "https://soulsensis.com/#author"}}, {"@context": "https://schema.org", "@type": "Service", "name": "A conversation", "url": "https://soulsensis.com/conversation/", "description": "Here, neither of us knows the other. There is nothing to lose, so you will hear the truth, said with care.", "serviceType": "One to one voice conversation", "provider": {"@id": "https://soulsensis.com/#author"}, "offers": {"@type": "Offer", "price": "75", "priceCurrency": "AUD", "url": "https://soulsensis.com/conversation/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://soulsensis.com/"}, {"@type": "ListItem", "position": 2, "name": "A conversation", "item": "https://soulsensis.com/conversation/"}]}]</script>
 <style>
 .conv { padding-top: clamp(40px, 7vw, 72px); }
@@ -44,6 +44,12 @@
 .conv .how { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
 .conv .alt { margin: 8px 0 0; }
 .conv .alt a { display: inline-flex; align-items: center; min-height: 44px; font: 400 17px var(--serif); color: var(--ink); text-decoration-color: var(--heart); text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.conv h2.label { margin: 30px 0 10px; font: 500 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: #a9a59c; }
+.conv .body { margin: 0 0 16px; font-family: var(--serif); font-size: 18px; line-height: 1.65; color: #d9d5cc; }
+.conv .rq { margin: 30px 0 6px; padding: 0 0 0 16px; border-left: 2px solid var(--heart); font: italic 400 18px/1.5 var(--serif); color: #e6e2d8; }
+.conv .rq cite { display: block; margin-top: 8px; font: normal 400 13px var(--sans); color: #a9a59c; }
+.conv .alt { display: flex; flex-wrap: wrap; gap: 0 24px; }
+.conv .how { color: #b9b5ac; }
 .conv .fine { margin: 26px 0 0; color: var(--muted); line-height: 1.6; font-size: 13px; }
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e155ba4216a34b21b859f42ce67b9078"}'></script>
@@ -52,21 +58,25 @@
 <a class="skip" href="#main">Skip to the reading</a>
 <nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Notify me</a></div>
+  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Book waitlist</a></div>
 </div></nav>
 <main id="main" class="conv g"><div class="col">
 <p class="label">A conversation</p>
 <h1>Hear the truth, said with care.</h1>
 <p class="says">Your friends don&#x27;t always tell you the truth. They love you, and they don&#x27;t want to hurt you or lose you. Here, neither of us knows the other. There is nothing to lose, so you will hear the truth, said with care, from someone who has lived it.</p>
+<h2 class="label">What happens in the 45 minutes</h2>
+<p class="body">You bring what is on your mind: a decision you keep putting off, a relationship you cannot read, a stretch where nothing feels right. You talk, I listen, and I tell you plainly what I see. No script, no pep talk, no judgement.</p>
+<p class="body">It is for anyone who wants an honest outside ear. It is not for quick fixes, or for someone who only wants to be agreed with.</p>
 <ul><li>45 minutes, one to one</li><li>By voice. No camera, no real names</li><li>A$75, booked and paid ahead</li></ul>
 <a class="btn primary" href="mailto:hello@soulsensis.com?subject=A%20conversation">Book a conversation</a>
-<p class="how">Send an email and you will get a time back.</p>
+<p class="how">How it works: email your time zone and a line on what you want to talk through. You get times back, pick one, and pay A$75 to confirm.</p>
 <p class="how">Move or cancel up to a day before and you get every cent back.</p>
-<p class="alt"><a href="/question/">Or leave a question, free</a></p>
-<p class="fine">This is a conversation, not therapy, legal or medical advice, and not crisis care. If you are in danger, call 000.</p>
+<blockquote class="rq">“It is so beautifully written, and hits deep to the core. Exactly what I needed to hear.”<cite>Anonymous reader, on an early online post</cite></blockquote>
+<p class="alt"><a href="/start/">Read how I write first</a> <a href="/question/">Or leave a question, free</a></p>
+<p class="fine">This is a conversation, not therapy, legal or medical advice, and not crisis care. If you are in danger, call your local emergency number.</p>
 </div></main>
 <footer class="g"><div class="wrap">
-  <span>soulsensis · written by a human</span>
+  <span class="who"><strong>soulsensis</strong> · written by a human<br>Essays from seven years of journals, for the tiredness of living a life that is not yours.</span>
   <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
   <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>

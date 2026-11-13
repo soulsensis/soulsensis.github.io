@@ -68,7 +68,7 @@
 <link rel="alternate" type="application/rss+xml" title="soulsensis essays" href="https://soulsensis.com/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/landing.css?v=b1f672bd">
+<link rel="stylesheet" href="/landing.css?v=1f13cfff">
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
 nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
@@ -104,6 +104,17 @@ body > footer a:hover { color: var(--ink); }
 body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
+/* 14 Nov 2026, the 9.5 loop (Hydrogen as the customer, every page): the bar's button is an outline, so the page's own
+   action is the one solid button on a screen; the footer says who this is, and on a phone its links sit in two even
+   columns instead of rows that orphan one word. */
+nav.top .links a.pill { background: transparent; color: var(--ink, #F5F2EA); box-shadow: inset 0 0 0 1px rgba(245, 242, 234, .7); }
+nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: var(--ink, #F5F2EA); color: #0b0b0d; }
+body > footer { color: #a9a59c; }
+body > footer .who { line-height: 1.6; } body > footer .who strong { font-weight: 500; color: var(--ink, #F5F2EA); }
+@media (max-width: 560px) {
+  body > footer .links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  body > footer .links a { min-height: 40px; }
+}
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e155ba4216a34b21b859f42ce67b9078"}'></script>
 </head>
@@ -111,7 +122,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#main">Skip to the book</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Notify me</a></div>
+  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Book waitlist</a></div>
 </div></nav>
 <!--/NAV-->
 <!-- 14 Nov 2026: the home page as a landing page for the book (docs/specs/site-build-2026-11-14.md). The first screen and
@@ -123,10 +134,10 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <div class="cover-col"><div class="cover"><img data-cv="white" src="book/3d/front-white.webp" width="1258" height="2000" fetchpriority="high" decoding="async" draggable="false" alt="The bone cover of Your soul knows best, by soulsensis: the title and the line Sit still enough to hear it in black serif type, above a large flower of life drawn in black line with a red centre"><img data-cv="black" src="book/3d/front-black.webp" width="1400" height="2000" loading="lazy" decoding="async" draggable="false" alt="The black cover of Your soul knows best, by soulsensis: the title and the line Sit still enough to hear it in bone serif type, above a large flower of life drawn in bone line with a red centre"></div><fieldset class="swatch" aria-label="The cover"><label class="dot white"><input type="radio" name="cover" id="cv-white" value="white" checked aria-label="Bone cover"><span aria-hidden="true"></span></label><label class="dot black"><input type="radio" name="cover" id="cv-black" value="black" aria-label="Black cover"><span aria-hidden="true"></span></label></fieldset></div>
     <div class="copy">
       <h1 id="hero-h">Everyone feels rushed, but no one is asking: where are you rushing to?</h1>
-      <p class="line">A book from seven years of journals, for when you need to feel okay.</p>
+      <p class="line">Essays for the tiredness of living a life that is not yours.</p>
       <p class="price buyrow">Paperback A$24.99 · Kindle A$4.99 · out soon</p>
       <a class="act-btn" href="/book.html#inside">Look inside</a>
-      <p class="proof">“…Exactly what I needed to hear.”</p>
+      <p class="proof">“…I was overthinking and spiraling as I was trying to go to sleep tonight and reading this brought me back down to earth.”<span class="by">Anonymous reader, on an early online post</span></p><a class="wait" href="#notify">Or join the waiting list</a>
     </div>
   </div></section><!--/HERO-->
   <!-- 14 Nov 2026 (Antigravity's site plan, P1): chapter 68 is read in its own order straight under the first screen: its
@@ -140,6 +151,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <p>For some, it is felt as a persistent sense that something is wrong without ever being able to name what.</p>
       <p>For others, it arrives as a quieter disappointment, an accumulating sadness that the life being lived does not resemble the life being sensed beneath it.</p>
     </div>
+    <!-- 14 Nov 2026, the 9.5 loop (Hydrogen: the page never names the pain in plain words): three moments, Claude's, for his review -->
+    <div class="when"><p class="label">Open it when</p><ul><li>your head will not slow down at night</li><li>your life looks fine and feels like someone else's</li><li>you keep waiting for the right moment to begin</li></ul></div>
     <details class="passage">
       <summary>Read the opening</summary>
       <div class="text">
@@ -185,7 +198,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 </main>
 
 <!--FOOTER--><footer class="g"><div class="wrap">
-  <span>soulsensis · written by a human</span>
+  <span class="who"><strong>soulsensis</strong> · written by a human<br>Essays from seven years of journals, for the tiredness of living a life that is not yours.</span>
   <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
   <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>

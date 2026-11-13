@@ -68,6 +68,7 @@
       if (!t) { ta.focus(); return; }
       render(box, pick(t));
     });
+    document.querySelectorAll(".chip").forEach(function (c) { c.addEventListener("click", function () { ta.value = c.textContent; ta.focus(); }); });
     document.querySelectorAll(".needs-js").forEach(function (n) { n.classList.remove("hid"); });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ready); else ready();

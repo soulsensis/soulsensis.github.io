@@ -30,7 +30,7 @@
 <link rel="alternate" type="application/rss+xml" title="soulsensis essays" href="https://soulsensis.com/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="soulsensis podcast" href="https://soulsensis.com/podcast/feed.xml">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/site.css?v=7350d469">
+<link rel="stylesheet" href="/site.css?v=2cf3c47a">
 <meta name="robots" content="noindex">
 <style>
 /* a page that stands alone (start, thanks, links): the journal's column with no bar, the name at the top */
@@ -51,7 +51,12 @@
 .links li a { display: block; padding: 18px 0; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); font: 400 clamp(21px, 3.4vw, 25px)/1.25 var(--serif); transition: color .2s; }
 .links li:first-child a { border-top: 0; }
 .links li a:hover { color: #fff; }
-.links li a small { display: block; margin-top: 5px; font: italic 400 15px/1.5 var(--serif); color: var(--muted); }
+.links li a { position: relative; padding-right: 34px; }
+.links li a::after { content: "\2192"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font: 400 20px var(--sans); color: var(--heart); }
+.links li a small { display: block; margin-top: 5px; font: 400 15px/1.5 var(--sans); color: #b9b5ac; }
+.links .intro { margin: 0 0 6px; font: 400 18px/1.55 var(--serif); color: #d9d5cc; max-width: 36ch; }
+.links .rq { margin: 22px 0 0; padding: 0 0 0 16px; border-left: 2px solid var(--heart); font: italic 400 18px/1.5 var(--serif); color: #e6e2d8; }
+.links .rq cite { display: block; margin-top: 8px; font: normal 400 13px var(--sans); color: #a9a59c; }
 .links .home { margin: 0; }
 .links .home a { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; color: var(--muted); text-underline-offset: 4px; }
 </style>
@@ -62,8 +67,10 @@
 <main id="main" class="solo links g"><div class="inner">
 <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
 <h1 class="bio">Your soul knows best.</h1>
-<ul><li><a class="first" href="https://youtu.be/NG-IXm-m2I4?utm_source=instagram&amp;utm_medium=bio&amp;utm_campaign=links" rel="noopener">Watch the newest essay<small>Blame and responsibility</small></a></li><li><a href="/essays/listen-to-your-soul/">Start here<small>Listen to your soul</small></a></li><li><a href="/book.html">The book<small>Your soul knows best</small></a></li><li><a href="/conversation/">A conversation<small>One to one, by voice</small></a></li><li><a href="/reading/">Free reading<small>Public domain books</small></a></li><li><a href="/question/#answered">Questions people ask</a></li><li><a href="https://www.youtube.com/@soulsensis?utm_source=instagram&amp;utm_medium=bio&amp;utm_campaign=links" rel="noopener">YouTube channel</a></li></ul>
-<p class="home"><a href="/">soulsensis.com</a></p>
+<p class="intro">Essays from seven years of journals, for the tiredness of living a life that is not yours. Written anonymously, so nothing is held back.</p>
+<ul><li><a class="first" href="https://youtu.be/NG-IXm-m2I4?utm_source=instagram&amp;utm_medium=bio&amp;utm_campaign=links" rel="noopener">Watch the newest essay<small>Blame and responsibility</small></a></li><li><a href="/essays/listen-to-your-soul/">Start here<small>New here? Read this one first: Listen to your soul</small></a></li><li><a href="/book.html">The book<small>Your soul knows best: seven years of journals, nearly finished. Read the first pages</small></a></li><li><a href="/conversation/">A conversation<small>45 minutes with me, one to one, by voice</small></a></li><li><a href="/reading/">Free reading<small>Two old books behind the essays, free to keep</small></a></li><li><a href="/question/#answered">Questions people ask<small>Answered from the essays, or leave your own</small></a></li><li><a href="https://www.youtube.com/@soulsensis?utm_source=instagram&amp;utm_medium=bio&amp;utm_campaign=links" rel="noopener">YouTube channel<small>The essays, narrated</small></a></li></ul>
+<blockquote class="rq">“Your words really… gave me a great sense of relief. Very soothing.”<cite>Anonymous reader, on an early online post</cite></blockquote>
+<p class="home"><a href="/">Everything else is at soulsensis.com</a></p>
 </div></main>
 <script src="/scroll.js" defer></script>
 </body>

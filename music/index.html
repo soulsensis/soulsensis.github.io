@@ -50,6 +50,7 @@ h1 { margin: 0; font-weight: 400; font-size: clamp(34px, 6vw, 48px); line-height
 
 header.open { padding-block: clamp(44px, 9vw, 88px) clamp(40px, 7vw, 64px); }
 /* the line about the music lights word by word as it is read past (his words, 10 Nov: all of it is improvised) */
+.say p.use { margin: 12px 0 0; font-size: 17px; color: var(--muted); }
 .say p { margin: 18px 0 0; font-size: 18px; line-height: 1.6; color: #c9c5bc; }
 .anim .say span { opacity: .3; transition: opacity .4s ease; }
 .anim .say span.lit { opacity: 1; }
@@ -57,12 +58,11 @@ header.open { padding-block: clamp(44px, 9vw, 88px) clamp(40px, 7vw, 64px); }
 /* a block opens on a hairline with a short crimson tick at its left end: a ruled page */
 section.flow { padding-bottom: clamp(48px, 8vw, 80px); }
 section.flow > .wrap { position: relative; padding-top: 26px; border-top: 1px solid var(--rule); }
-section.flow > .wrap::before { content: ""; position: absolute; left: 0; top: -1px; width: 22px; height: 1px; background: var(--heart); }
 
 /* the player: the ring on the left, the song and its line beside it */
 .player { display: grid; grid-template-columns: 208px minmax(0, 1fr); gap: 14px; align-items: center; }
 .disc { position: relative; width: 100%; aspect-ratio: 1; margin: -4% 0 -4% -12%; }
-@media (max-width: 520px) { .player { grid-template-columns: 1fr; gap: 6px; } .disc { width: 220px; } }
+@media (max-width: 520px) { .player { grid-template-columns: 1fr; gap: 6px; justify-items: center; text-align: center; } .disc { width: 220px; margin: 0 auto; } .side { width: 100%; } .now { align-items: center; } }
 .disc svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* 10 Nov 2026 (his ask): the flower of life rides the ring around the play button, clockwise, and stands still when the song is paused.
    The origin is 0 0 on purpose: in an SVG whose viewBox is centred, 50% 50% is the bottom right corner, which sent the flower out of view. */
@@ -140,6 +140,17 @@ body > footer a:hover { color: var(--ink); }
 body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
+/* 14 Nov 2026, the 9.5 loop (Hydrogen as the customer, every page): the bar's button is an outline, so the page's own
+   action is the one solid button on a screen; the footer says who this is, and on a phone its links sit in two even
+   columns instead of rows that orphan one word. */
+nav.top .links a.pill { background: transparent; color: var(--ink, #F5F2EA); box-shadow: inset 0 0 0 1px rgba(245, 242, 234, .7); }
+nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: var(--ink, #F5F2EA); color: #0b0b0d; }
+body > footer { color: #a9a59c; }
+body > footer .who { line-height: 1.6; } body > footer .who strong { font-weight: 500; color: var(--ink, #F5F2EA); }
+@media (max-width: 560px) {
+  body > footer .links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  body > footer .links a { min-height: 40px; }
+}
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e155ba4216a34b21b859f42ce67b9078"}'></script>
 </head>
@@ -147,7 +158,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#songs">Skip to the songs</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Notify me</a></div>
+  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Book waitlist</a></div>
 </div></nav>
 <!--/NAV-->
 
@@ -156,7 +167,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <p class="label">Music</p>
     <h1>The piano.</h1>
     <p class="sub">The music under the essays, on its own.</p>
-    <div class="say"><p id="say">Every piece is improvised. Unique to its moment. More to come.</p></div>
+    <div class="say"><p id="say">Every piece is improvised. Unique to its moment. More to come.</p>
+    <p class="use">Made for late nights, slow mornings, or four quiet minutes when your head is loud. Press play and do nothing else.</p></div>
   </div></header>
 
   <section class="flow g" id="songs" aria-label="The songs"><div class="wrap">
@@ -164,7 +176,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <div class="disc" id="disc">
         <svg viewBox="-340 -340 680 680" aria-hidden="true">
           <g fill="none" stroke="#F5F2EA"><circle r="222" stroke-width="1.4" opacity=".5"/></g>
-          <g class="orbit"><g transform="translate(0 -222) scale(.5)"><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="2" opacity=".8"></g><circle r="30" fill="#E63946" fill-opacity=".3"/><circle r="11" fill="#E63946"/></g></g>
+          <g class="orbit"><g transform="translate(0 -222) scale(.5)"><circle r="204" fill="#000"/><g class="draw" data-flower fill="none" stroke="#F5F2EA" stroke-width="2" opacity=".8"></g><circle r="30" fill="#E63946" fill-opacity=".3"/><circle r="11" fill="#E63946"/></g></g>
         </svg>
         <button class="big" id="big" type="button" aria-label="Play"><svg class="play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg><svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></svg></button>
       </div>
@@ -182,7 +194,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 </main>
 
 <!--FOOTER--><footer class="g"><div class="wrap">
-  <span>soulsensis · written by a human</span>
+  <span class="who"><strong>soulsensis</strong> · written by a human<br>Essays from seven years of journals, for the tiredness of living a life that is not yours.</span>
   <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
   <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>

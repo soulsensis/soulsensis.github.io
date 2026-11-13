@@ -231,7 +231,8 @@ button:disabled { opacity: .5; cursor: default; }
 .offer .price { font-size: 18px; color: var(--ink); }
 .offer .promise { color: var(--ink); }   /* his own two lines (13 Nov 2026): when the reply comes, and the refund */
 .offer .facts { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: var(--muted); }
-.offer .soon { margin-top: auto; font-size: 14px; color: var(--muted); }
+.offer .soon { margin-top: auto; font-size: 15px; color: #b9b5ac; }
+.offer .soon a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--heart); text-underline-offset: 4px; }   /* 14 Nov 2026: no dead end while it waits */
 .offer .more { margin-top: auto; }
 #offers .plain { max-width: 640px; margin: 22px auto 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
 
@@ -354,6 +355,17 @@ body > footer a:hover { color: var(--ink); }
 body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
+/* 14 Nov 2026, the 9.5 loop (Hydrogen as the customer, every page): the bar's button is an outline, so the page's own
+   action is the one solid button on a screen; the footer says who this is, and on a phone its links sit in two even
+   columns instead of rows that orphan one word. */
+nav.top .links a.pill { background: transparent; color: var(--ink, #F5F2EA); box-shadow: inset 0 0 0 1px rgba(245, 242, 234, .7); }
+nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: var(--ink, #F5F2EA); color: #0b0b0d; }
+body > footer { color: #a9a59c; }
+body > footer .who { line-height: 1.6; } body > footer .who strong { font-weight: 500; color: var(--ink, #F5F2EA); }
+@media (max-width: 560px) {
+  body > footer .links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  body > footer .links a { min-height: 40px; }
+}
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e155ba4216a34b21b859f42ce67b9078"}'></script>
 </head>
@@ -361,13 +373,13 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#talk">Skip to the conversation</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Notify me</a></div>
+  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Book waitlist</a></div>
 </div></nav>
 <!--/NAV-->
 <div class="lnav g" id="lnav"><div class="wrap">
   <a class="pname" href="#top">Ask soulsensis</a>
   <span class="readline" id="readline" aria-hidden="true"></span>
-  <div class="lright"><a class="far" href="#how">How it answers</a><a href="#private">Private</a><!--ASK_NAV--><a class="pill" href="#talk">Opening soon</a><!--/ASK_NAV--></div>
+  <div class="lright"><a class="far" href="#how">How it answers</a><a href="#private">Private</a><!--ASK_NAV--><a class="pill" href="/question/">Ask free now</a><!--/ASK_NAV--></div>
 </div></div>
 
 <main id="top">
@@ -383,8 +395,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <p class="eyebrow rise">Ask soulsensis</p>
       <h1 class="rise">Your question, <em>answered in writing.</em></h1>
       <p class="sub rise">Write to me for a reply I write myself, or ask an AI that answers only from the published essays.</p>
-      <!--ASK_STATE--><p class="price-line rise">Opening soon.</p><!--/ASK_STATE-->
-      <p class="acts rise" style="margin:0;justify-content:flex-start"><a class="more" href="#how">See how it answers</a><a class="more dim wait-only" href="/question/">Leave your question</a></p>
+      <!--ASK_STATE--><p class="price-line rise">Both open soon. Until then you can leave your question free, and I read every one.</p><!--/ASK_STATE-->
+      <p class="acts rise" style="margin:0;justify-content:flex-start"><a class="btn red wait-only" href="/question/">Leave your question, free</a><a class="more" href="#how">See how it answers</a></p>
     </div>
   </header>
 
@@ -398,7 +410,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         <p class="price">A$19, once</p>
         <p class="promise">I reply within seven days. If I cannot answer your question, you are refunded in full.</p>
         <ul class="facts"><li>One question, one written answer, by email.</li><li>Read by me and no one else; never published.</li><li>No AI writes it.</li></ul>
-        <!--ONE_QUESTION--><a class="btn red live-oq" href="#write" hidden>Write your question</a><span class="soon wait-oq">Opening soon</span><!--/ONE_QUESTION-->
+        <!--ONE_QUESTION--><a class="btn red live-oq" href="#write" hidden>Write your question</a><span class="soon wait-oq">Opening soon. <a href="/question/">Leave a question free now</a></span><!--/ONE_QUESTION-->
       </article>
       <article class="offer rise" id="ai-answers"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#F5F2EA" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 14.5C19.5 11.6 13 11 7.5 12v24c5.5-1 12-.4 16.5 2.5 4.5-2.9 11-3.5 16.5-2.5V12c-5.5-1-12-.4-16.5 2.5Z"/><path d="M24 14.5v24M11.5 18.5h8M11.5 23h8M28.5 18.5h8M28.5 23h5"/><circle cx="24" cy="41.5" r="1.1" fill="#E63946" stroke="none"/></svg>
         <p class="kind">Made by AI, never by me</p>
@@ -406,7 +418,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
         <p>Ask whenever you need to, up to the monthly limit. Every answer is drawn by AI from the published essays, never written by me, and always marked as AI.</p>
         <p class="price">A$5 a month</p>
         <ul class="facts"><li>3 questions free, then up to 60 answers a month.</li><li>No name or email; nobody reads your chats.</li><li>Cancel any time.</li></ul>
-        <!--AI_ANSWERS--><a class="btn red live-only" href="#talk">Ask the essays</a><span class="soon wait-only">Opening soon</span><!--/AI_ANSWERS-->
+        <!--AI_ANSWERS--><a class="btn red live-only" href="#talk">Ask the essays</a><span class="soon wait-only">Opening soon. <a href="/question/">Leave a question free now</a></span><!--/AI_ANSWERS-->
       </article>
     </div>
   </div></section>
@@ -539,7 +551,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 </main>
 
 <!--FOOTER--><footer class="g"><div class="wrap">
-  <span>soulsensis · written by a human</span>
+  <span class="who"><strong>soulsensis</strong> · written by a human<br>Essays from seven years of journals, for the tiredness of living a life that is not yours.</span>
   <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
   <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html#ask">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Not therapy. In danger or thinking about ending your life? Call 000 (AU), 911 (US), 999 (UK), 112 (EU), or Lifeline 13 11 14, 988 (US), Samaritans 116 123.</p>

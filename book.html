@@ -62,7 +62,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" as="image" href="book/3d/front-white.webp" fetchpriority="high">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/landing.css?v=b1f672bd">
+<link rel="stylesheet" href="/landing.css?v=1f13cfff">
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
 nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
@@ -98,6 +98,17 @@ body > footer a:hover { color: var(--ink); }
 body > footer .links a { position: relative; } body > footer .links a::after { content: ""; position: absolute; inset: 0 -5px; }
 body > footer .help { margin: 6px 0 0; line-height: 1.6; }
 body > footer .help a { display: inline; min-height: 0; text-decoration: underline; text-underline-offset: 3px; }
+/* 14 Nov 2026, the 9.5 loop (Hydrogen as the customer, every page): the bar's button is an outline, so the page's own
+   action is the one solid button on a screen; the footer says who this is, and on a phone its links sit in two even
+   columns instead of rows that orphan one word. */
+nav.top .links a.pill { background: transparent; color: var(--ink, #F5F2EA); box-shadow: inset 0 0 0 1px rgba(245, 242, 234, .7); }
+nav.top .links a.pill:hover, nav.top .links a.pill[aria-current] { background: var(--ink, #F5F2EA); color: #0b0b0d; }
+body > footer { color: #a9a59c; }
+body > footer .who { line-height: 1.6; } body > footer .who strong { font-weight: 500; color: var(--ink, #F5F2EA); }
+@media (max-width: 560px) {
+  body > footer .links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  body > footer .links a { min-height: 40px; }
+}
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e155ba4216a34b21b859f42ce67b9078"}'></script>
 </head>
@@ -105,7 +116,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#formats">Skip to the formats</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Notify me</a></div>
+  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Book waitlist</a></div>
 </div></nav>
 <!--/NAV-->
 <!-- 14 Nov 2026: the book page in the home page's skeleton (docs/specs/site-build-2026-11-14.md): the same first screen
@@ -117,7 +128,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <div class="cover-col"><div class="cover"><img data-cv="white" src="book/3d/front-white.webp" width="1258" height="2000" fetchpriority="high" decoding="async" draggable="false" alt="The bone cover of Your soul knows best, by soulsensis: the title and the line Sit still enough to hear it in black serif type, above a large flower of life drawn in black line with a red centre"><img data-cv="black" src="book/3d/front-black.webp" width="1400" height="2000" loading="lazy" decoding="async" draggable="false" alt="The black cover of Your soul knows best, by soulsensis: the title and the line Sit still enough to hear it in bone serif type, above a large flower of life drawn in bone line with a red centre"></div><fieldset class="swatch" aria-label="The cover"><label class="dot white"><input type="radio" name="cover" id="cv-white" value="white" checked aria-label="Bone cover"><span aria-hidden="true"></span></label><label class="dot black"><input type="radio" name="cover" id="cv-black" value="black" aria-label="Black cover"><span aria-hidden="true"></span></label></fieldset></div>
     <div class="copy">
       <h1 id="hero-h">Everyone feels rushed, but no one is asking: where are you rushing to?</h1>
-      <p class="line">A book from seven years of journals, for when you need to feel okay.</p>
+      <p class="line">Essays for the tiredness of living a life that is not yours.</p>
       <p class="price buyrow">Paperback A$24.99 · Kindle A$4.99 · out soon</p>
       <a class="act-btn" href="#inside">Look inside</a>
       
@@ -128,7 +139,8 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <div class="backlines"><h2 class="label" id="turn-h">On the back</h2><p class="bl" style="--i:0">There is a particular kind of tiredness that comes from living a life that is not yours.</p><p class="bl" style="--i:1">It is not the tiredness of the body. It is the tiredness of waiting for the right moment, the right reception, the right sign that one is finally allowed to be who one already is.</p><p class="bl" style="--i:2">Contentment was never about the absence of difficulty.</p><p class="bl" style="--i:3">All I had to do was sit still enough to hear it.</p></div>
   </div></section><!--/TURN-->
   <section class="flow g" id="read" aria-labelledby="read-h"><div class="wrap">
-    <p class="label">From the book</p>
+    <div class="when"><p class="label">Open it when</p><ul><li>your head will not slow down at night</li><li>your life looks fine and feels like someone else's</li><li>you keep waiting for the right moment to begin</li></ul></div>
+    <p class="label">From the book, as printed · a one-minute read</p>
     <!-- the piece the back cover's lines come from, a run of its page 27 word for word as the book prints it (set in four short
          paragraphs, none over eight phone lines); tests/test_site_landing.py holds it to the launch file -->
     <h2 id="read-h">The receptiveness I was waiting for</h2>
@@ -136,6 +148,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     <p class="reading">The thing waited for cannot arrive while the waiter is still waiting, because waiting is the posture of someone who has not yet accepted themselves. I have thought about this for a long time.</p>
     <p class="reading">The honest truth is that I have spent years choosing wanting rather than being the person I want to be. Wanting is a softer place than becoming, and the mind knows this. The mind will negotiate, postpone, reframe.</p>
     <p class="reading">It will tell you that the conditions are not yet right, that the moment is not yet ripe, that the other person, the other circumstance, the other version of you must first arrive. None of it is true. The conditions are never right. The moment is the only moment. And the person who has to arrive is the one already standing here.</p>
+    <!--IF_LANDED--><p class="if-landed">If that landed, the whole book is nearly finished. <a href="#notify">Join the waiting list</a></p><!--/IF_LANDED-->
   </div></section>
 
   <!--OPEN--><section class="scene open g" id="inside" aria-labelledby="inside-h" style="--len:var(--open-len)"><div class="pin">
@@ -196,7 +209,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 </main>
 
 <!--FOOTER--><footer class="g"><div class="wrap">
-  <span>soulsensis · written by a human</span>
+  <span class="who"><strong>soulsensis</strong> · written by a human<br>Essays from seven years of journals, for the tiredness of living a life that is not yours.</span>
   <span class="links"><a href="/book.html">The book</a><a href="/conversation/">A conversation</a><a href="/question/">Leave a question</a><a href="/reading/">Free reading</a></span>
   <span class="links"><a href="https://www.youtube.com/@soulsensis" rel="noopener">YouTube</a><a href="https://www.instagram.com/soulsensis/" rel="noopener">Instagram</a><a href="mailto:hello@soulsensis.com">hello@soulsensis.com</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></span>
   <p class="help">Struggling right now? <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a> lists free help where you live.</p>
