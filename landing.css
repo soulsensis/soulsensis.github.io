@@ -71,7 +71,7 @@ main > section:not(.scene):not(.hero) { padding-block: 88px; }
 .swatch { display: flex; justify-content: center; gap: 4px; margin: 4px 0 0; padding: 0; border: 0; }
 .swatch .dot { position: relative; display: grid; place-items: center; width: 34px; height: 44px; cursor: pointer; }
 .swatch input { position: absolute; inset: 0; margin: 0; appearance: none; -webkit-appearance: none; background: none; border: 0; cursor: pointer; }
-.swatch span { width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(128,124,118,.7); transition: box-shadow .15s ease-out; }
+.swatch span { width: 16px; height: 24px; border-radius: 1px 3px 3px 1px; box-shadow: 0 0 0 1px rgba(128,124,118,.7); transition: box-shadow .15s ease-out; }
 .swatch .white span { background: #ECE7DA; } .swatch .black span { background: #0B0A09; }
 .swatch input:checked + span { box-shadow: 0 0 0 2px var(--ground), 0 0 0 3.5px var(--ink); }
 .swatch input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 5px; }
