@@ -145,6 +145,9 @@ html:has(#cv-black:checked) .board { background: linear-gradient(#b89f86, #8c736
 .tell .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .tell input { flex: 1 1 200px; min-height: 48px; padding: 0 20px; border: 1px solid var(--muted); border-radius: 999px; background: var(--raised); color: var(--ink); font: 400 16px var(--serif); }
 .tell .note, .fine { margin: 0 0 12px; font-size: 15px; color: var(--muted); }
+.tell .back { margin: 12px 0 0; color: var(--ink); } .tell .back:empty { display: none; }
+.tell .what { margin: 12px 0 0; font-family: var(--sans); font-size: 13px; } .tell .what a { color: inherit; }
+.tell.done .row { display: none; }
 
 /* the shelf in 3D on a desktop: each book a box seen a little from the side, the board a surface in perspective */
 @media (min-width: 900px) {

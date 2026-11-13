@@ -59,7 +59,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preload" as="image" href="book/colours/front-white.webp" fetchpriority="high">
 <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link rel="stylesheet" href="/landing.css?v=0e23379b">
+<link rel="stylesheet" href="/landing.css?v=aa03c80f">
 <style id="shared">
 nav.top { position: static; padding-top: env(safe-area-inset-top, 0px); background: var(--ground, #0b0b0d); border-bottom: 1px solid var(--line); font-family: var(--sans); }
 nav.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 680px; height: auto; min-height: 56px; margin: 0 auto; }
@@ -95,7 +95,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
 <a class="skip" href="#formats">Skip to the formats</a>
 <!--NAV--><nav class="top g" aria-label="Main"><div class="wrap">
   <a class="mark" href="/" aria-label="soulsensis home"><svg width="28" height="28" viewBox="-64 -64 128 128" aria-hidden="true"><g fill="none" stroke="#F5F2EA"><g stroke-width="3.2" stroke-opacity=".75"><circle cx="0.00" cy="0.00" r="20"/><circle cx="20.00" cy="0.00" r="20"/><circle cx="10.00" cy="17.32" r="20"/><circle cx="-10.00" cy="17.32" r="20"/><circle cx="-20.00" cy="0.00" r="20"/><circle cx="-10.00" cy="-17.32" r="20"/><circle cx="10.00" cy="-17.32" r="20"/><circle cx="40.00" cy="0.00" r="20"/><circle cx="20.00" cy="34.64" r="20"/><circle cx="-20.00" cy="34.64" r="20"/><circle cx="-40.00" cy="0.00" r="20"/><circle cx="-20.00" cy="-34.64" r="20"/><circle cx="20.00" cy="-34.64" r="20"/><circle cx="30.00" cy="17.32" r="20"/><circle cx="0.00" cy="34.64" r="20"/><circle cx="-30.00" cy="17.32" r="20"/><circle cx="-30.00" cy="-17.32" r="20"/><circle cx="-0.00" cy="-34.64" r="20"/><circle cx="30.00" cy="-17.32" r="20"/></g><circle r="60" stroke-width="4.4"/></g><circle r="15" fill="#E63946" fill-opacity=".35"/><circle r="7" fill="#E63946"/></svg>soulsensis</a>
-  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a></div>
+  <div class="links"><a class="nbk" href="/book.html">The book</a><a class="far" href="/conversation/">A conversation</a><a class="pill" href="/#notify">Notify me</a></div>
 </div></nav>
 <!--/NAV-->
 <!-- 14 Nov 2026: the book page in the home page's skeleton (docs/specs/site-build-2026-11-14.md): the same first screen
@@ -180,7 +180,7 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
       <h2 id="shelf-h">Feel at home again.</h2>
       <p class="sub">You are not alone in this life.</p>
       <p class="price">Paperback A$24.99 · Kindle A$4.99 · out soon</p>
-      
+      <form class="tell" method="post" action="https://soulsensis-launch-line.launch-line.workers.dev/"><p class="note">Leave your email and I will write to you once, on the day the book is out.</p><div class="row"><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="Your email" aria-label="Your email"><button class="act-btn" type="submit">Tell me the day it is out</button></div><p class="fine back" role="status" aria-live="polite"></p><p class="fine what">That one email and nothing else. To be removed, write to hello@soulsensis.com and your address is deleted. <a href="/privacy.html#book-email">How it is kept</a></p></form>
     </div>
   </div></section><!--/SHELF-->
 </main>
@@ -222,6 +222,20 @@ body > footer .help a { display: inline; min-height: 0; text-decoration: underli
     lean.style.setProperty("--lx", Math.max(-1, Math.min(1, x * 2)).toFixed(3)); lean.style.setProperty("--ly", Math.max(-1, Math.min(1, y * 2)).toFixed(3));
   }, { passive: true });
   hero.addEventListener("pointerleave", function () { lean.style.setProperty("--lx", 0); lean.style.setProperty("--ly", 0); });
+})();
+</script><script>
+(function () {   // the email box (on only when landing.json says so): one address to the launch line
+  if (!window.fetch) return;
+  [].forEach.call(document.querySelectorAll("form.tell"), function (f) {
+    var back = f.querySelector(".back"), b = f.querySelector("button");
+    f.addEventListener("submit", function (e) {
+      e.preventDefault(); b.disabled = true;
+      fetch(f.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: f.email.value }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { back.textContent = d.message; if (d.ok) f.classList.add("done"); b.disabled = false; })
+        .catch(function () { back.textContent = "That did not go through. Please try again."; b.disabled = false; });
+    });
+  });
 })();
 </script><!--/LANDING_JS-->
 <!--SIGNUP_JS--><!--/SIGNUP_JS-->
