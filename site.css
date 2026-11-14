@@ -185,6 +185,34 @@ a.feel::after, .chip::after { content: ""; position: absolute; inset: -6px -11px
 .inbook img { width: 96px; height: auto; }   /* 14 Nov: the book in 3D on the page's own ground (book-3d.jpg) */
 .inbook h2 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
 .inbook p { margin: 0 0 16px; max-width: 60ch; color: var(--muted); font-size: 14px; line-height: 1.6; }
+/* 14 Nov 2026 evening: an opening of several paragraphs; its last lines soften (they are whole sentences, still readable),
+   three dots say it goes on; the film is the free way to the whole essay; the card's close is the launch line */
+.prose.opening.more > p:last-child { -webkit-mask-image: linear-gradient(#000 calc(100% - 5.5em), rgba(0,0,0,.4)); mask-image: linear-gradient(#000 calc(100% - 5.5em), rgba(0,0,0,.4)); }
+.prose.opening.long > p:first-child { font-size: 1em; line-height: 1.7; }
+.cont { margin: 6px 0 0; font-family: var(--serif); font-size: 22px; letter-spacing: .3em; color: var(--muted); }
+.whole { margin: clamp(30px, 5vw, 48px) 0 0; }
+.whole .label { margin: 0 0 12px; }
+.whole .video { margin-top: 0; }
+.whole + .next.near, .whole + .inbook, .cont + .inbook { margin-top: clamp(40px, 6vw, 64px); }
+.inbook.tellcard { grid-template-columns: 132px minmax(0, 1fr); align-items: start; gap: 26px; }
+.inbook.tellcard img { width: 132px; }
+.inbook.tellcard h2 { font-size: clamp(24px, 3.2vw, 30px); }
+.inbook.tellcard p { font-size: 15px; }
+.inbook .tell { max-width: 460px; margin: 4px 0 6px; }
+.inbook .tell .note { margin: 0 0 12px; font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--ink); }
+.inbook .tell .row { display: flex; flex-wrap: wrap; gap: 10px; }
+.inbook .tell input { flex: 1 1 200px; min-width: 0; min-height: 48px; padding: 0 20px; border: 1px solid var(--muted); border-radius: 999px; background: var(--raised); color: var(--ink); font: 400 16px var(--serif); }
+.inbook .tell .act-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--heart); color: #000; font: 500 15px var(--sans); cursor: pointer; transition: transform .15s ease-out; }
+.inbook .tell .back { margin: 12px 0 0; color: var(--ink); font-size: 15px; } .inbook .tell .back:empty { display: none; }
+.inbook .tell .what { margin: 10px 0 0; font: 400 13px/1.5 var(--sans); color: var(--muted); } .inbook .tell .what a { color: inherit; }
+.inbook .tell.done .row { display: none; }
+.inbook .acts { margin-top: 6px; }
+@media (hover: hover) and (pointer: fine) { .inbook .tell .act-btn:hover { transform: translateY(-2px); } }
+@media (max-width: 560px) {
+  .inbook.tellcard { grid-template-columns: 1fr; gap: 18px; }
+  .inbook.tellcard img { width: 120px; }
+  .inbook .tell .act-btn { width: 100%; }
+}
 
 /* the list: a journal's index. A row is a date, a title, two lines of the opening at most, one quiet tag */
 .topic { padding-block: clamp(40px, 6vw, 72px); scroll-margin-top: 20px; }
@@ -260,3 +288,30 @@ a.feel::after, .chip::after { content: ""; position: absolute; inset: -6px -11px
 .rq cite { display: block; margin-top: 8px; font: normal 400 13px var(--sans); color: #a9a59c; }
 .qask { margin: 26px 0 0; font: 400 18px/1.5 var(--serif); color: #d9d5cc; } .qask a { color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 5px; }
 .qlist li a { display: flex; justify-content: space-between; gap: 12px; } .qlist li a::after { content: "\2192"; color: var(--heart); flex: none; }
+
+/* the film on an opening page, in the page's own colours (14 Nov 2026 evening) */
+.video.qf { display: grid; align-content: end; gap: 6px; padding: clamp(18px, 4vw, 34px); text-decoration: none; background: radial-gradient(120% 90% at 85% 20%, #1c1b20, var(--raised) 60%); }
+.video.qf .qf-art { position: absolute; right: -8%; top: 50%; width: 62%; transform: translateY(-50%); opacity: .16; pointer-events: none; }
+.video.qf .qf-art svg { width: 100%; height: auto; display: block; }
+.video.qf .qf-t { position: relative; max-width: 70%; font: 400 clamp(24px, 4.4vw, 38px)/1.12 var(--serif); color: var(--ink); }
+.video.qf .qf-d { position: relative; font: 400 13px var(--sans); letter-spacing: .06em; color: var(--muted); }
+.video.qf .play { right: clamp(14px, 3vw, 28px); bottom: clamp(14px, 3vw, 28px); }
+/* one real reader's line inside the book's card */
+.inbook .rq { margin: 0 0 18px; padding-left: 16px; border-left: 1px solid var(--rule); }
+.inbook .rq blockquote { margin: 0; font: italic 400 17px/1.5 var(--serif); color: #ddd9cf; }
+.inbook .rq figcaption { margin-top: 6px; font-size: 12px; color: var(--muted); }
+.essay-head .qline.top { margin: 14px 0 0; font-size: 14px; } .essay-head .qline.top a { color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
+.cont + .inbook { margin-top: clamp(28px, 4vw, 40px); }
+/* 14 Nov evening, round 4: the card is a grid of three (cover, heading, body); on a phone the cover sits beside the heading */
+.inbook.tellcard { grid-template-columns: 132px minmax(0, 1fr); grid-template-areas: "img head" "img body"; align-items: start; row-gap: 10px; }
+.inbook.tellcard > img { grid-area: img; } .inbook.tellcard > h2 { grid-area: head; margin: 0; align-self: end; } .inbook.tellcard > .ib { grid-area: body; }
+@media (max-width: 560px) {
+  .inbook.tellcard { grid-template-columns: 76px minmax(0, 1fr); grid-template-areas: "img head" "body body"; column-gap: 18px; row-gap: 18px; }
+  .inbook.tellcard > img { width: 76px; } .inbook.tellcard > h2 { align-self: center; font-size: 24px; }
+}
+.inbook:not(.tellcard) { grid-template-columns: 96px minmax(0, 1fr); } .inbook:not(.tellcard) > h2 { grid-column: 2; } .inbook:not(.tellcard) > img { grid-row: span 2; } .inbook:not(.tellcard) > .ib { grid-column: 2; }
+.essay-head .meta { font-size: 13px; color: #b9b5ab; }
+.essay-head .qline.top { color: #b9b5ab; } .essay-head .qline.top b { font-weight: 400; color: var(--ink); }
+.bridge { margin: 4px 0 0; font: 400 17px/1.55 var(--serif); color: #d9d5cb; } .bridge a { color: var(--ink); text-decoration-color: var(--heart); text-underline-offset: 4px; }
+.bridge + .inbook { margin-top: clamp(28px, 4vw, 40px); }
+.whole .label { color: #d9d5cb; } .video.qf .qf-d { color: #cfcbc1; }
