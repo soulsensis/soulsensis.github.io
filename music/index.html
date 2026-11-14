@@ -151,6 +151,13 @@ body > footer .who { line-height: 1.6; } body > footer .who strong { font-weight
   body > footer .links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
   body > footer .links a { min-height: 40px; }
 }
+/* 15 Nov 2026 (the 9.5 loop: every cold judge of every page named the phone's two-row bar first): one row on a phone.
+   The mark, the book and the button stay; the conversation folds away first (his 13 Nov order) and stays in the footer. */
+@media (max-width: 560px) { nav.top .wrap { flex-wrap: nowrap; justify-content: space-between; } nav.top .wrap::after { content: none; }
+  nav.top .links { display: flex; } nav.top .wrap .links a.far { display: none; }
+  nav.top .wrap .links a.nbk { order: 0; min-height: 44px; padding: 0 8px; justify-content: center; } nav.top .wrap .links a.pill { order: 0; margin-left: 4px; padding: 0 14px; } }
+@media (max-width: 400px) { .mark { font-size: 13px; letter-spacing: .14em; } nav.top .wrap .links a.pill { padding: 0 12px; } }
+@media (max-width: 372px) { nav.top .wrap .links a.nbk { display: none; } }   /* the narrowest phones: the mark and the button */
 </style>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e155ba4216a34b21b859f42ce67b9078"}'></script>
 </head>

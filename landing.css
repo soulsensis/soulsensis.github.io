@@ -216,6 +216,16 @@ details.passage .text .from, .faq p { font-size: 15px; color: var(--muted); }
 .format .tag { font: 500 13px var(--sans); color: var(--ink); }
 .format .where::before { content: "· "; }
 #formats .fine { margin-top: 20px; font-family: var(--sans); font-size: 13px; }
+/* 15 Nov 2026 (the 9.5 loop, both cold judges on the home and the book page): the printed pages sit in the cover's bone,
+   not stark white; Look inside has no stray underline; the readers' heading says who wrote the lines once; on a phone the
+   flat cover keeps front, spine and back in one row and the still sections sit closer */
+.open .pg { position: relative; } .open .pg img { display: block; }
+.open .pg::after { content: ""; position: absolute; inset: 0; background: #EDE8DC; mix-blend-mode: multiply; pointer-events: none; }   /* a bone sheet over the page, never a filter */
+.open .after .more { text-decoration: none; }
+.said blockquote cite { display: none; }
+@media (max-width: 560px) { .turn .b3d { --w: min(40vw, 30svh); gap: 8px; flex-wrap: nowrap; }
+  .scene { padding-block: 56px; } main > section:not(.scene):not(.hero) { padding-block: 56px; } }
+
 
 /* ---------------------------------------------------------------- the scenes, moving */
 @media (prefers-reduced-motion: no-preference) and (min-height: 540px) {
