@@ -62,6 +62,8 @@ main > section:not(.scene):not(.hero) { padding-block: 88px; }
 .hero .label { margin: 0 0 6px; }
 .hero h1 { margin-top: 10px; font-size: 30px; line-height: 1.15; letter-spacing: -.015em; }
 .hero .line { margin: 10px auto 0; max-width: 21em; font-size: 17px; line-height: 1.45; color: var(--soft); }
+.hero .facts { margin: 12px 0 0; font: 400 13px var(--sans); letter-spacing: .02em; color: var(--muted); }   /* 14 Nov 2026: the book page's true counts */
+.hero[data-own] h1 { font-size: 34px; }
 .hero .buyrow { margin: 14px 0 16px; }
 .price { margin: 0; font: 400 13px var(--sans); letter-spacing: .02em; color: var(--muted); }
 .hero .act-btn { width: 100%; max-width: 350px; }
@@ -82,7 +84,9 @@ main > section:not(.scene):not(.hero) { padding-block: 88px; }
   .hero .copy { margin: 0; }
   .hero .label { font-size: 14px; margin-bottom: 14px; }
   .hero h1 { font-size: clamp(48px, 4vw, 58px); line-height: 1.08; }
+  .hero[data-own] h1 { font-size: clamp(56px, 4.8vw, 68px); }
   .hero .line { margin: 22px 0 0; font-size: 21px; max-width: 24em; }
+  .hero .facts { margin-top: 14px; font-size: 14px; }
   .hero .buyrow { margin: 26px 0 18px; }
   .swatch { margin-top: 18px; }
   .price { font-size: 14px; }
