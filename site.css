@@ -444,6 +444,9 @@ a.feel::after, .chip::after { content: ""; position: absolute; inset: -6px -11px
 /* 15 Nov, round 3: small labels lifted (every judge: dim on a phone); Begin here shows it is a link; two feelings in a crumb are told apart */
 .flist #essay-list .row .d, .flist #essay-list .row .d time, .flist #essay-list .row p, .fmore p { color: #c4c0b6; }
 .flist #essay-list .row .m small, .folio a.rest .s, .fmeta { color: #c9c5bb; }
-.flist .lead small::after, .fnext small::after { content: " 92"; }
-.kicker.crumb .feel + .feel::before { content: " b7"; margin-right: 8px; color: #6d6a63; }
+.flist .lead small::after, .fnext small::after { content: " →"; }
+.kicker.crumb .feel + .feel::before { content: "·"; margin-right: 8px; color: #6d6a63; }
 .flist #essay-list .row[hidden] { display: none; }   /* the list's grid rule outranked [hidden]: a filter hid nothing */
+.flist .moreo { display: none; }
+@media (max-width: 760px) { .flist #essay-list.foldo .row[data-late] { display: none; }
+  .flist .moreo:not([hidden]) { display: inline-flex; align-items: center; min-height: 48px; margin-top: 20px; padding: 0 22px; border: 1px solid var(--ink); border-radius: 999px; background: none; color: var(--ink); font: 400 15px var(--sans); cursor: pointer; } }
