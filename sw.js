@@ -11,6 +11,7 @@ self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then((ks) =
 self.addEventListener("fetch", (e) => {
   const u = new URL(e.request.url);
   if (e.request.method !== "GET" || u.origin !== location.origin) return;
+  if (u.pathname.startsWith("/podcast/audio/") || e.request.headers.has("range")) return;   // a read-out streams straight from the network, never cached
   e.respondWith(fetch(e.request).then((r) => { if (r.ok) { const copy = r.clone(); caches.open(C).then((c) => c.put(e.request, copy)); } return r; })
     .catch(() => caches.match(e.request, { ignoreSearch: true })
       .then((r) => r || (e.request.mode === "navigate" ? caches.match("/app/") : Response.error()))));
