@@ -440,3 +440,10 @@ a.feel::after, .chip::after { content: ""; position: absolute; inset: -6px -11px
 .folio a.rest.video:not([href]) { aspect-ratio: 16 / 9; overflow: hidden; }
 .folio .dek a { color: inherit; text-decoration: underline; text-decoration-color: #55524c; text-decoration-thickness: 1px; text-underline-offset: 6px; }
 @media (max-width: 560px) { .fmeta span:last-child:not(:first-child) { flex-basis: 100%; } .fmeta span:last-child:not(:first-child)::before { content: none; } }   /* a wrapped line never opens on a dot */
+.flist #essay-list .part { margin: 56px 0 16px; } .flist #essay-list .part + .row { border-top: 1px solid var(--ink); }
+/* 15 Nov, round 3: small labels lifted (every judge: dim on a phone); Begin here shows it is a link; two feelings in a crumb are told apart */
+.flist #essay-list .row .d, .flist #essay-list .row .d time, .flist #essay-list .row p, .fmore p { color: #c4c0b6; }
+.flist #essay-list .row .m small, .folio a.rest .s, .fmeta { color: #c9c5bb; }
+.flist .lead small::after, .fnext small::after { content: " 92"; }
+.kicker.crumb .feel + .feel::before { content: " b7"; margin-right: 8px; color: #6d6a63; }
+.flist #essay-list .row[hidden] { display: none; }   /* the list's grid rule outranked [hidden]: a filter hid nothing */
