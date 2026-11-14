@@ -445,7 +445,7 @@ a.feel::after, .chip::after { content: ""; position: absolute; inset: -6px -11px
 .flist #essay-list .row .d, .flist #essay-list .row .d time, .flist #essay-list .row p, .fmore p { color: #c4c0b6; }
 .flist #essay-list .row .m small, .folio a.rest .s, .fmeta { color: #c9c5bb; }
 .flist .lead small::after, .fnext small::after { content: " →"; }
-.kicker.crumb .feel + .feel::before { content: "·"; margin-right: 8px; color: #6d6a63; }
+.kicker.crumb .feel:not(:last-child)::after { content: "·"; margin-left: 8px; color: #6d6a63; }
 .flist #essay-list .row[hidden] { display: none; }   /* the list's grid rule outranked [hidden]: a filter hid nothing */
 .flist .moreo { display: none; }
 @media (max-width: 760px) { .flist #essay-list.foldo .row[data-late] { display: none; }
