@@ -417,9 +417,19 @@ a.feel::after, .chip::after { content: ""; position: absolute; inset: -6px -11px
 @media (max-width: 560px) { .flist .chip { min-height: 38px; padding: 0 13px; font-size: 15px; } .flist .qs a { padding: 13px 0; font-size: 18px; }
   .flist .qs a span { display: none; } .flist .qs { margin-top: 48px; } .flist .fall { margin-top: 56px; } .flist a.lead { display: block; margin-top: 40px; padding: 28px 0; }
   .flist .lead p { margin-top: 12px; font-size: 18px; } .flist .topics-head .lede { font-size: 18px; } }
+/* 14 Nov late (the phone list ran past two screens before its first essay): pills in three rows, three questions with
+   the essay each opens and the rest on a tap, tighter gaps between the groups */
+.flist .moreq { display: none; }
+.flist .qs a span { color: #c9c5bb; }
+@media (max-width: 560px) { .flist .chips { gap: 6px; margin-top: 24px; } .flist .chip { min-height: 34px; padding: 0 10px; font-size: 13px; }
+  .flist .chip::after { inset: -5px -1px; } .flist .find { margin-top: 14px; }
+  .flist .qs.fold .grid a:nth-child(n+4) { display: none; } .flist .qs.fold .grid a span { display: block; }
+  .flist .moreq:not([hidden]) { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; padding: 0; border: 0; background: none; color: var(--ink); font: 400 13px var(--sans); text-decoration: underline; text-decoration-color: #55524c; text-underline-offset: 5px; cursor: pointer; }
+  .flist a.lead { margin-top: 28px; padding: 24px 0; } .flist .qs { margin-top: 36px; } .flist .fall { margin-top: 36px; } }
 /* the play card is an a.video for its click-to-play script; it keeps its own shape until it plays */
 .folio a.rest.video { aspect-ratio: auto; width: auto; margin: 22px 0 0; border-radius: 14px; overflow: visible; }
 .folio a.rest.video .play { position: static; width: 52px; height: 52px; background: var(--heart); border: 0; }
 .folio a.rest.video .play::after { content: none; }
 .folio a.rest.video:not([href]) { aspect-ratio: 16 / 9; overflow: hidden; }
 .folio .dek a { color: inherit; text-decoration: underline; text-decoration-color: #55524c; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+@media (max-width: 560px) { .fmeta span:last-child:not(:first-child) { flex-basis: 100%; } .fmeta span:last-child:not(:first-child)::before { content: none; } }   /* a wrapped line never opens on a dot */
